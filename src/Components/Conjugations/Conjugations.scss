@@ -1,0 +1,41 @@
+.conjugationsContainer {
+  font-family: var(--arabic);
+  font-weight: 600;
+  font-size: 32px;
+  display: grid;
+  gap: 16px;
+
+  .person {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 300px;
+
+    p {
+      border: solid 2px var(--border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 8px;
+    }
+
+    &:not(.first) p {
+      &:nth-child(2n) {
+        margin-left: -2px;
+      }
+
+      &:nth-child(n + 3) {
+        margin-top: -2px;
+      }
+    }
+
+    &.first {
+      grid-template-columns: 1fr;
+
+      p {
+        &:nth-child(2) {
+          margin-top: -2px;
+        }
+      }
+    }
+  }
+}

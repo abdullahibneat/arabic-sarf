@@ -1,0 +1,46 @@
+.grid {
+  display: grid;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 32px;
+  color: var(--text-disabled);
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--border);
+
+  transition:
+    border-color 500ms,
+    color 500ms;
+
+  &:hover {
+    color: var(--text);
+    border-color: var(--border-active);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  h2 {
+    font-family: var(--arabic);
+    font-weight: 600;
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    .cell p {
+      flex: 1;
+    }
+  }
+}
