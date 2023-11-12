@@ -8,6 +8,7 @@
     "checkJs": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
+    "lib": ["WebWorker"],
 
     /* Preact Config */
     "jsx": "react-jsx",
