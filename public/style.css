@@ -1,0 +1,72 @@
+:root {
+  --background: #ffffff;
+  --text: #000000;
+  --text-secondary: #666666;
+  --text-disabled: #eaeaea;
+  --border: #eaeaea;
+  --border-active: #000000;
+  --arabic: 'Noto Sans Arabic', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1a1a;
+    --text: #cccccc;
+    --text-secondary: #b3b3b3;
+    --text-disabled: #666666;
+    --border: #333333;
+    --border-active: #ffffff;
+  }
+}
+
+::selection {
+  background-color: var(--text-disabled);
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  height: 100%;
+  background-color: var(--background);
+}
+
+html,
+body,
+#app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+body {
+  align-items: center;
+  padding: 32px;
+  color: var(--text);
+}
+
+#app {
+  max-width: 800px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  color: inherit;
+}
