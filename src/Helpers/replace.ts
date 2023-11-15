@@ -1,27 +1,39 @@
 const replace = <T extends Object>(
   obj: T,
-  searchValue: string,
-  replaceValue: string,
+  searchValue: string | RegExp,
+  replaceValue: Record<string, string | undefined>,
 ) => {
   const ret = JSON.parse(JSON.stringify(obj)) as T
 
   for (const key of Object.keys(ret)) {
-    if (!ret[key]) continue
+    const value = ret[key]
 
-    if (typeof ret[key] === 'string') {
-      ret[key] = ret[key].replaceAll(searchValue, replaceValue)
-      continue
-    }
+    if (!value) continue
 
-    if (Array.isArray(ret[key])) {
-      ret[key] = ret[key].map((item) =>
-        item.replaceAll(searchValue, replaceValue),
+    if (typeof value === 'string') {
+      ret[key] = value.replace(
+        searchValue,
+        (character) => replaceValue[character] || character,
       )
       continue
     }
 
-    if (typeof ret[key] === 'object') {
-      ret[key] = replace(ret[key], searchValue, replaceValue)
+    if (typeof value === 'object') {
+      ret[key] = replace(value, searchValue, replaceValue)
+    }
+
+    if (Array.isArray(value)) {
+      ret[key] = value.map((item: unknown) => {
+        if (typeof item === 'string')
+          return item.replace(
+            searchValue,
+            (character) => replaceValue[character] || character,
+          )
+        if (typeof item === 'object' && item)
+          return replace(item, searchValue, replaceValue)
+        return item
+      })
+      continue
     }
   }
 
