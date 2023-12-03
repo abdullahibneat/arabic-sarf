@@ -81,7 +81,7 @@ const Navbar = () => {
           <span>&rsaquo;</span>
 
           <select
-            value={verbForm === 'I' ? `I/${verbChapter}` : verbChapter}
+            value={verbForm === 'I' ? `I/${verbChapter}` : verbForm}
             onChange={goToChapter}
           >
             <optgroup label="مجرّد">
