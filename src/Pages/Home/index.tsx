@@ -1,6 +1,6 @@
 import { useLocation } from 'preact-iso'
 import { useMemo, useCallback } from 'preact/hooks'
-import { Grid, Page } from '../Components'
+import { Grid, Page } from '../../Components'
 
 const Home = () => {
   const location = useLocation()

@@ -1,10 +1,10 @@
 import { useLocation, useRoute } from 'preact-iso'
-import verbTypes from '../../data'
+import verbTypes from '../../../data'
 import { useMemo, useCallback } from 'preact/hooks'
-import asRomanNumeral from '../Helpers/asRomanNumeral'
-import Grid, { GridCell } from '../Components/Grid'
+import asRomanNumeral from '../../Helpers/asRomanNumeral'
+import Grid, { GridCell } from '../../Components/Grid'
 import { ComponentChildren } from 'preact'
-import { Page } from '../Components'
+import { Page } from '../../Components'
 
 const SelectChapter = () => {
   const location = useLocation()
