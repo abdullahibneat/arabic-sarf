@@ -19,7 +19,8 @@
     border-color 500ms,
     color 500ms;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: var(--text);
     border-color: var(--border-active);
   }
