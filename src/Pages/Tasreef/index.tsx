@@ -18,7 +18,7 @@ const Container = () => {
     if (isChapter(chapterOrForm)) return chapterOrForm
 
     return chapterOrForm?.[verbChapter]
-  }, [chapters, verbForm])
+  }, [chapters, verbForm, verbChapter])
 
   const form = useMemo(() => {
     if (!baseForm) return null
