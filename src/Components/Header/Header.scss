@@ -1,0 +1,12 @@
+.headerContainer {
+  display: flex;
+  align-items: center;
+  height: 80px;
+
+  a {
+    font-family: var(--arabic);
+    font-weight: 600;
+    font-size: 32px;
+    text-decoration: none;
+  }
+}
