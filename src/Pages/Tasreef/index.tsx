@@ -2,7 +2,7 @@ import { useRoute } from 'preact-iso'
 import { useMemo } from 'preact/hooks'
 import verbTypes from '../../../data'
 import { RomanNumeral } from '../../../data/types'
-import { Conjugations, SarfSagheer } from '../../Components'
+import { Conjugations, Page, SarfSagheer } from '../../Components'
 import { ComponentChildren } from 'preact'
 import { isChapter, replaceRoots } from '../../Helpers'
 import './Tasreef.scss'
@@ -31,11 +31,11 @@ const Container = () => {
   }, [baseForm])
 
   if (!form) {
-    return <div>Form not found</div>
+    return <Page>Form not found</Page>
   }
 
   return (
-    <div class="tasreefContainer">
+    <Page>
       <H1>{form.باب}</H1>
 
       <SarfSagheer archetype={form.archetype} />
@@ -66,7 +66,7 @@ const Container = () => {
           <Conjugations tasreef={form.conjugations.أمر} />
         </div>
       </div>
-    </div>
+    </Page>
   )
 }
 
@@ -97,9 +97,3 @@ const H2 = ({ children }: { children: ComponentChildren }) => (
     {children}
   </h2>
 )
-
-const isChapter = (
-  obj?: VerbChapter | Record<string, VerbChapter> | null,
-): obj is VerbChapter => {
-  return !!obj && 'باب' in obj
-}

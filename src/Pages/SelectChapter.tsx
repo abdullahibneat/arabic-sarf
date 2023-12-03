@@ -4,6 +4,7 @@ import { useMemo, useCallback } from 'preact/hooks'
 import asRomanNumeral from '../Helpers/asRomanNumeral'
 import Grid, { GridCell } from '../Components/Grid'
 import { ComponentChildren } from 'preact'
+import { Page } from '../Components'
 
 const SelectChapter = () => {
   const location = useLocation()
@@ -53,11 +54,11 @@ const SelectChapter = () => {
   )
 
   if (!chapters) {
-    return <div>Verb type not found</div>
+    return <Page>Verb type not found</Page>
   }
 
   return (
-    <div>
+    <Page>
       <div style={{ marginBottom: 32 }}>
         <H2>مجرّد</H2>
         <p style={{ marginBottom: 16 }}>
@@ -75,7 +76,7 @@ const SelectChapter = () => {
         </p>
         <Grid cells={mazidFih} onCellClick={handleCellClick} />
       </div>
-    </div>
+    </Page>
   )
 }
 

@@ -1,6 +1,6 @@
 import { useLocation } from 'preact-iso'
 import { useMemo, useCallback } from 'preact/hooks'
-import { Grid } from '../Components'
+import { Grid, Page } from '../Components'
 
 const Home = () => {
   const location = useLocation()
@@ -32,9 +32,9 @@ const Home = () => {
   )
 
   return (
-    <div style={{ height: 300 }}>
+    <Page style={{ height: 300 }}>
       <Grid cells={verbTypes} onCellClick={handleCellClick} />
-    </div>
+    </Page>
   )
 }
 
