@@ -1,10 +1,10 @@
 import { useRoute } from 'preact-iso'
 import { useMemo } from 'preact/hooks'
 import verbTypes from '../../../data'
-import { RomanNumeral, VerbChapter } from '../../../data/types'
+import { RomanNumeral } from '../../../data/types'
 import { Conjugations, SarfSagheer } from '../../Components'
 import { ComponentChildren } from 'preact'
-import { replaceRoots } from '../../Helpers'
+import { isChapter, replaceRoots } from '../../Helpers'
 import './Tasreef.scss'
 
 const Container = () => {
