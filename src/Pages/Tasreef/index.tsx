@@ -35,12 +35,15 @@ const Container = () => {
   }
 
   return (
-    <Page>
-      {verbForm === 'I' ? (
-        <H1>{form.archetype.ماضي.معروف}</H1>
-      ) : (
-        <H1>{`${verbForm} ${form.archetype.ماضي.معروف}`}</H1>
-      )}
+    <Page
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 64,
+        paddingTop: 32,
+      }}
+    >
+      <H1>{`${form.archetype.ماضي.معروف} ${form.archetype.مضارع.معروف} ${verbForm}`}</H1>
 
       <SarfSagheer archetype={form.archetype} />
 
