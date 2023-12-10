@@ -16,6 +16,7 @@ const Page = ({ style, children }: Props) => (
       flexDirection: 'column',
       width: '100%',
       gap: 16,
+      paddingBottom: 64,
     }}
   >
     <Header />
