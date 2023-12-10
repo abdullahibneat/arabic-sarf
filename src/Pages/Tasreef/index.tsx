@@ -50,12 +50,18 @@ const Container = () => {
       <div class="sarfKabir">
         <div>
           <H2>ماضي</H2>
-          <Conjugations tasreef={form.conjugations.ماضي.معروف} />
+          <Conjugations
+            tasreef={form.conjugations.ماضي.معروف}
+            majhool={form.conjugations.ماضي.مجهول}
+          />
         </div>
 
         <div>
           <H2>مضارع</H2>
-          <Conjugations tasreef={form.conjugations.مضارع.معروف} />
+          <Conjugations
+            tasreef={form.conjugations.مضارع.معروف}
+            majhool={form.conjugations.مضارع.مجهول}
+          />
         </div>
 
         <div>

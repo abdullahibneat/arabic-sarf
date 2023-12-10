@@ -2,8 +2,39 @@
   font-family: var(--arabic);
   font-weight: 600;
   font-size: 32px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
+
+  .tabs {
+    display: flex;
+    align-self: center;
+    font-size: 16px;
+    margin-bottom: -2px;
+    width: 150px;
+
+    button {
+      flex: 1;
+      border: solid 2px var(--border);
+      cursor: pointer;
+      padding: 0 8px;
+      background-color: var(--background);
+      color: var(--border);
+      transition:
+        background-color 500ms,
+        color 500ms;
+
+      &:hover,
+      &[data-selected='true'] {
+        background-color: var(--border);
+        color: var(--text);
+      }
+    }
+
+    button + button {
+      margin-left: -2px;
+    }
+  }
 
   .person {
     display: grid;
