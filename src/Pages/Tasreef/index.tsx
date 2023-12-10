@@ -1,8 +1,13 @@
 import { useRoute } from 'preact-iso'
-import { useMemo } from 'preact/hooks'
+import { useMemo, useState } from 'preact/hooks'
 import verbTypes from '../../../data'
-import { RomanNumeral } from '../../../data/types'
-import { Conjugations, Page, SarfSagheer } from '../../Components'
+import { RomanNumeral, VerbChapter } from '../../../data/types'
+import {
+  Conjugations,
+  Page,
+  RootLettersEditor,
+  SarfSagheer,
+} from '../../Components'
 import { ComponentChildren } from 'preact'
 import { isChapter, replaceRoots } from '../../Helpers'
 import './Tasreef.scss'
@@ -10,24 +15,46 @@ import './Tasreef.scss'
 const Container = () => {
   const { verbType, verbForm, verbChapter } = useRoute().params
 
+  const [rootLetters, setRootLetters] = useState({ ف: 'ف', ع: 'ع', ل: 'ل' })
+
   const chapters = useMemo(() => verbTypes[verbType], [verbType])
 
   const baseForm = useMemo(() => {
     const chapterOrForm = chapters?.[verbForm as RomanNumeral]
 
-    if (isChapter(chapterOrForm)) return chapterOrForm
+    let $baseForm: VerbChapter | undefined = undefined
 
-    return chapterOrForm?.[verbChapter]
+    if (isChapter(chapterOrForm)) {
+      $baseForm = chapterOrForm
+    } else {
+      $baseForm = chapterOrForm?.[verbChapter]
+    }
+
+    if ($baseForm) {
+      setRootLetters({
+        ف: $baseForm.archetype.root_letters[0],
+        ع: $baseForm.archetype.root_letters[1],
+        ل: $baseForm.archetype.root_letters[2],
+      })
+    }
+
+    return $baseForm
   }, [chapters, verbForm, verbChapter])
 
   const form = useMemo(() => {
     if (!baseForm) return null
+    return replaceRoots(baseForm, rootLetters)
+  }, [baseForm, rootLetters])
 
-    return replaceRoots(baseForm, {
-      ف: baseForm.archetype.root_letters[0],
-      ع: baseForm.archetype.root_letters[1],
-      ل: baseForm.archetype.root_letters[2],
-    })
+  const placeholder = useMemo(() => {
+    if (baseForm)
+      return {
+        ف: baseForm.archetype.root_letters[0],
+        ع: baseForm.archetype.root_letters[1],
+        ل: baseForm.archetype.root_letters[2],
+      }
+
+    return undefined
   }, [baseForm])
 
   if (!form) {
@@ -43,6 +70,16 @@ const Container = () => {
         paddingTop: 32,
       }}
     >
+      <div class="rootLettersEditor">
+        <RootLettersEditor
+          ajwaf={verbType === 'أجوف'}
+          naqis={verbType === 'ناقص'}
+          placeholder={placeholder}
+          rootLetters={rootLetters}
+          onChange={setRootLetters}
+        />
+      </div>
+
       <H1>{`${form.archetype.ماضي.معروف} ${form.archetype.مضارع.معروف} ${verbForm}`}</H1>
 
       <SarfSagheer archetype={form.archetype} />
