@@ -6,6 +6,10 @@
   flex-direction: column;
   gap: 16px;
 
+  h2 {
+    text-align: center;
+  }
+
   .tabs {
     display: flex;
     align-self: center;

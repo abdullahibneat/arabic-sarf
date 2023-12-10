@@ -3,11 +3,12 @@ import { VerbTasreef } from '../../../data/types'
 import './Conjugations.scss'
 
 type Props = {
+  heading: string
   tasreef: Partial<VerbTasreef>
   majhool?: Partial<VerbTasreef> | null
 }
 
-const Conjugations = ({ tasreef, majhool }: Props) => {
+const Conjugations = ({ heading, tasreef, majhool }: Props) => {
   const [voice, setVoice] = useState<'معروف' | 'مجهول'>('معروف')
 
   const verb = useMemo(() => {
@@ -19,6 +20,8 @@ const Conjugations = ({ tasreef, majhool }: Props) => {
 
   return (
     <div class="conjugationsContainer">
+      <h2>{heading}</h2>
+
       {majhool && (
         <div class="tabs">
           <button

@@ -49,34 +49,31 @@ const Container = () => {
 
       <div class="sarfKabir">
         <div>
-          <H2>ماضي</H2>
           <Conjugations
+            heading="ماضي"
             tasreef={form.conjugations.ماضي.معروف}
             majhool={form.conjugations.ماضي.مجهول}
           />
         </div>
 
         <div>
-          <H2>مضارع</H2>
           <Conjugations
+            heading="مضارع"
             tasreef={form.conjugations.مضارع.معروف}
             majhool={form.conjugations.مضارع.مجهول}
           />
         </div>
 
         <div>
-          <H2>نصب</H2>
-          <Conjugations tasreef={form.conjugations.نصب} />
+          <Conjugations heading="نصب" tasreef={form.conjugations.نصب} />
         </div>
 
         <div>
-          <H2>جزم</H2>
-          <Conjugations tasreef={form.conjugations.جزم} />
+          <Conjugations heading="جزم" tasreef={form.conjugations.جزم} />
         </div>
 
         <div>
-          <H2>أمر</H2>
-          <Conjugations tasreef={form.conjugations.أمر} />
+          <Conjugations heading="أمر" tasreef={form.conjugations.أمر} />
         </div>
       </div>
     </Page>
@@ -96,17 +93,4 @@ const H1 = ({ children }: { children: ComponentChildren }) => (
   >
     {children}
   </h1>
-)
-
-const H2 = ({ children }: { children: ComponentChildren }) => (
-  <h2
-    style={{
-      fontFamily: 'var(--arabic)',
-      fontSize: 32,
-      fontWeight: 600,
-      textAlign: 'center',
-    }}
-  >
-    {children}
-  </h2>
 )
