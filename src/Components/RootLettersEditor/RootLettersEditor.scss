@@ -1,0 +1,33 @@
+.inputs {
+  display: flex;
+  gap: 16px;
+}
+
+input {
+  font-family: var(--arabic);
+  font-weight: 600;
+  font-size: 32px;
+  width: 75px;
+  height: 75px;
+  border-radius: 75px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--border);
+  background-color: var(--background);
+
+  transition:
+    border-color 500ms,
+    color 500ms;
+
+  &:hover,
+  &:focus {
+    color: var(--text);
+    border-color: var(--border-active);
+  }
+
+  &:disabled {
+    background-color: var(--border);
+    cursor: not-allowed;
+  }
+}
