@@ -12,16 +12,16 @@ const Home = () => {
         heading: 'صحيح',
         description: 'A verb where none of the 3 root letters are weak',
       },
-      {
-        id: 'أجوف',
-        heading: 'أجوف',
-        description: 'A verb where the second of the 3 root letters is weak',
-      },
-      {
-        id: 'ناقص',
-        heading: 'ناقص',
-        description: 'A verb where the third of the 3 root letters is weak',
-      },
+      // {
+      //   id: 'أجوف',
+      //   heading: 'أجوف',
+      //   description: 'A verb where the second of the 3 root letters is weak',
+      // },
+      // {
+      //   id: 'ناقص',
+      //   heading: 'ناقص',
+      //   description: 'A verb where the third of the 3 root letters is weak',
+      // },
     ],
     [],
   )

@@ -70,7 +70,7 @@ const Container = () => {
         paddingTop: 32,
       }}
     >
-      <div class="rootLettersEditor">
+      {/* <div class="rootLettersEditor">
         <RootLettersEditor
           ajwaf={verbType === 'أجوف'}
           naqis={verbType === 'ناقص'}
@@ -78,18 +78,18 @@ const Container = () => {
           rootLetters={rootLetters}
           onChange={setRootLetters}
         />
-      </div>
+      </div> */}
 
       <H1>{`${form.archetype.ماضي.معروف} ${form.archetype.مضارع.معروف} ${verbForm}`}</H1>
 
-      <SarfSagheer archetype={form.archetype} />
+      {/* <SarfSagheer archetype={form.archetype} /> */}
 
       <div class="sarfKabir">
         <div>
           <Conjugations
             heading="ماضي"
             tasreef={form.conjugations.ماضي.معروف}
-            majhool={form.conjugations.ماضي.مجهول}
+            // majhool={form.conjugations.ماضي.مجهول}
           />
         </div>
 
@@ -97,21 +97,21 @@ const Container = () => {
           <Conjugations
             heading="مضارع"
             tasreef={form.conjugations.مضارع.معروف}
-            majhool={form.conjugations.مضارع.مجهول}
+            // majhool={form.conjugations.مضارع.مجهول}
           />
         </div>
 
-        <div>
+        {/* <div>
           <Conjugations heading="نصب" tasreef={form.conjugations.نصب} />
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <Conjugations heading="جزم" tasreef={form.conjugations.جزم} />
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <Conjugations heading="أمر" tasreef={form.conjugations.أمر} />
-        </div>
+        </div> */}
       </div>
     </Page>
   )
