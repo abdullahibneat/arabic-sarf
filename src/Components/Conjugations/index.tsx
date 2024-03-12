@@ -41,23 +41,23 @@ const Conjugations = ({ heading, tasreef, majhool }: Props) => {
 
       {verb['3rd'] && (
         <div class="person">
-          <p>{verb['3rd'].feminine['هِيَ']}</p>
           <p>{verb['3rd'].masculine['هُوَ']}</p>
-          <p>{verb['3rd'].feminine['هُمَا']}</p>
           <p>{verb['3rd'].masculine['هُمَا']}</p>
-          <p>{verb['3rd'].feminine['هُنَّ']}</p>
           <p>{verb['3rd'].masculine['هُمْ']}</p>
+          <p>{verb['3rd'].feminine['هِيَ']}</p>
+          <p>{verb['3rd'].feminine['هُمَا']}</p>
+          <p>{verb['3rd'].feminine['هُنَّ']}</p>
         </div>
       )}
 
       {verb['2nd'] && (
         <div class="person">
-          <p>{verb['2nd'].feminine['أَنْتِ']}</p>
           <p>{verb['2nd'].masculine['أَنْتَ']}</p>
-          <p>{verb['2nd'].feminine['أَنْتُمَا']}</p>
           <p>{verb['2nd'].masculine['أَنْتُمَا']}</p>
-          <p>{verb['2nd'].feminine['أَنْتُنَّ']}</p>
           <p>{verb['2nd'].masculine['أَنْتُمْ']}</p>
+          <p>{verb['2nd'].feminine['أَنْتِ']}</p>
+          <p>{verb['2nd'].feminine['أَنْتُمَا']}</p>
+          <p>{verb['2nd'].feminine['أَنْتُنَّ']}</p>
         </div>
       )}
 
