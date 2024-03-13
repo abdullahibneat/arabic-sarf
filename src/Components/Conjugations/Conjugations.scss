@@ -43,7 +43,7 @@
 
   .person {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     min-width: 300px;
 
     p {
@@ -55,7 +55,13 @@
     }
 
     &:not(.first) p {
-      margin-top: -2px;
+      &:nth-child(2n) {
+        margin-left: -2px;
+      }
+
+      &:nth-child(n + 3) {
+        margin-top: -2px;
+      }
     }
 
     &.first {
