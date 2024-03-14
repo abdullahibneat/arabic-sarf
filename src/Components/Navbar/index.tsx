@@ -4,11 +4,14 @@ import { useCallback, useMemo } from 'preact/hooks'
 import verbTypes from '../../../data'
 import { RomanNumeral, VerbChapter } from '../../../data/types'
 import { replaceRoots } from '../../Helpers'
+import useAppState from '../../Hooks/useAppState'
+import AppState from '../../AppState'
 
 const Navbar = () => {
   const { verbChapter, verbForm, verbType } = useRoute().params
 
   const location = useLocation()
+  const state = useAppState()
 
   const goToHome = useCallback(() => location.route('/'), [])
 
@@ -58,6 +61,10 @@ const Navbar = () => {
       location.route(`/${verbType}/${event.target.value}`)
   }, [])
 
+  const toggleViewMode = useCallback(() => {
+    AppState.setItem('groupTasreefs', !state.groupTasreefs)
+  }, [state.groupTasreefs])
+
   return (
     <div class="navbarContainer">
       <button onClick={goToHome}>Home</button>
@@ -100,6 +107,12 @@ const Navbar = () => {
               ))}
             </optgroup>
           </select>
+
+          <div style={{ flex: 1 }} />
+
+          <button onClick={toggleViewMode}>
+            {state.groupTasreefs ? 'Grouped View' : 'List View'}
+          </button>
         </>
       )}
     </div>
