@@ -41,35 +41,40 @@
     }
   }
 
-  .person {
+  p {
+    border: solid 2px var(--border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 8px;
+  }
+
+  .conjugations {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    min-width: 300px;
+    grid-template-columns: 1fr;
 
-    p {
-      border: solid 2px var(--border);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 8px;
+    p + p,
+    div + div {
+      margin-top: -2px;
     }
 
-    &:not(.first) p {
-      &:nth-child(2n) {
-        margin-left: -2px;
+    &.grouped {
+      gap: 16px;
+
+      div + div {
+        margin-top: 0;
       }
 
-      &:nth-child(n + 3) {
-        margin-top: -2px;
-      }
-    }
+      & > div {
+        display: flex;
+        flex-direction: row-reverse;
 
-    &.first {
-      grid-template-columns: 1fr;
+        div {
+          flex: 1;
 
-      p {
-        &:nth-child(2) {
-          margin-top: -2px;
+          &:nth-child(2) {
+            margin-right: -2px;
+          }
         }
       }
     }

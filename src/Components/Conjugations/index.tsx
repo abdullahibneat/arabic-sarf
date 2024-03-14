@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'preact/hooks'
 import { VerbTasreef } from '../../../data/types'
 import './Conjugations.scss'
+import useAppState from '../../Hooks/useAppState'
 
 type Props = {
   heading: string
@@ -10,6 +11,8 @@ type Props = {
 
 const Conjugations = ({ heading, tasreef, majhool }: Props) => {
   const [voice, setVoice] = useState<'معروف' | 'مجهول'>('معروف')
+
+  const state = useAppState()
 
   const verb = useMemo(() => {
     if (voice === 'معروف') return tasreef
@@ -39,34 +42,46 @@ const Conjugations = ({ heading, tasreef, majhool }: Props) => {
         </div>
       )}
 
-      {verb['3rd'] && (
-        <div class="person">
-          <p>{verb['3rd'].feminine['هِيَ']}</p>
-          <p>{verb['3rd'].masculine['هُوَ']}</p>
-          <p>{verb['3rd'].feminine['هُمَا']}</p>
-          <p>{verb['3rd'].masculine['هُمَا']}</p>
-          <p>{verb['3rd'].feminine['هُنَّ']}</p>
-          <p>{verb['3rd'].masculine['هُمْ']}</p>
-        </div>
-      )}
+      <div class={`conjugations ${state.groupTasreefs ? 'grouped' : ''}`}>
+        {verb['3rd'] && (
+          <div>
+            <div>
+              <p>{verb['3rd'].masculine['هُوَ']}</p>
+              <p>{verb['3rd'].masculine['هُمَا']}</p>
+              <p>{verb['3rd'].masculine['هُمْ']}</p>
+            </div>
+            <div>
+              <p>{verb['3rd'].feminine['هِيَ']}</p>
+              <p>{verb['3rd'].feminine['هُمَا']}</p>
+              <p>{verb['3rd'].feminine['هُنَّ']}</p>
+            </div>
+          </div>
+        )}
 
-      {verb['2nd'] && (
-        <div class="person">
-          <p>{verb['2nd'].feminine['أَنْتِ']}</p>
-          <p>{verb['2nd'].masculine['أَنْتَ']}</p>
-          <p>{verb['2nd'].feminine['أَنْتُمَا']}</p>
-          <p>{verb['2nd'].masculine['أَنْتُمَا']}</p>
-          <p>{verb['2nd'].feminine['أَنْتُنَّ']}</p>
-          <p>{verb['2nd'].masculine['أَنْتُمْ']}</p>
-        </div>
-      )}
+        {verb['2nd'] && (
+          <div>
+            <div>
+              <p>{verb['2nd'].masculine['أَنْتَ']}</p>
+              <p>{verb['2nd'].masculine['أَنْتُمَا']}</p>
+              <p>{verb['2nd'].masculine['أَنْتُمْ']}</p>
+            </div>
+            <div>
+              <p>{verb['2nd'].feminine['أَنْتِ']}</p>
+              <p>{verb['2nd'].feminine['أَنْتُمَا']}</p>
+              <p>{verb['2nd'].feminine['أَنْتُنَّ']}</p>
+            </div>
+          </div>
+        )}
 
-      {verb['1st'] && (
-        <div class="first person">
-          <p>{verb['1st'].أَنَا}</p>
-          <p>{verb['1st'].نَحْنُ}</p>
-        </div>
-      )}
+        {verb['1st'] && (
+          <div>
+            <div>
+              <p>{verb['1st'].أَنَا}</p>
+              <p>{verb['1st'].نَحْنُ}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
