@@ -7,15 +7,17 @@ const downloadFlashcardsAsText = (
   const lines: string[] = []
 
   for (const flashcard of flashcards) {
-    lines.push(`# ${flashcard.question}`)
+    if (lines.length !== 0) {
+      lines.push('')
+      lines.push('')
+    }
+    lines.push(`${flashcard.question}:`)
     lines.push(`- Root letters: ${flashcard.root_letters.join(', ')}`)
     lines.push(`- Form: ${flashcard.form}`)
     lines.push(`- Pattern: ${flashcard.pattern}`)
     lines.push(`- Binya: ${flashcard.binya}`)
     lines.push(`- Archetype Sīghah: ${flashcard.archetype}`)
     lines.push(`- Translation: N/A`)
-    lines.push('')
-    lines.push('')
   }
 
   /**
