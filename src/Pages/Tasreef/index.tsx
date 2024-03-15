@@ -11,6 +11,8 @@ import {
 import { ComponentChildren } from 'preact'
 import { isChapter, replaceRoots } from '../../Helpers'
 import './Tasreef.scss'
+import generateFlashcards from '../../Helpers/generateFlashcards'
+import downloadFlashcards from '../../Helpers/downloadFlashcards'
 
 const Container = () => {
   const { verbType, verbForm, verbChapter } = useRoute().params
@@ -57,8 +59,16 @@ const Container = () => {
     return undefined
   }, [baseForm])
 
-  if (!form) {
+  if (!baseForm || !form) {
     return <Page>Form not found</Page>
+  }
+
+  const handleFlashcardGeneration = () => {
+    const flashcards = generateFlashcards(baseForm, rootLetters)
+    downloadFlashcards(
+      flashcards,
+      `${form.archetype.ماضي.معروف} ${form.archetype.مضارع.معروف}`,
+    )
   }
 
   return (
@@ -112,6 +122,10 @@ const Container = () => {
         <div>
           <Conjugations heading="أمر" tasreef={form.conjugations.أمر} />
         </div>
+      </div>
+
+      <div class="generateFlashcards">
+        <a onClick={handleFlashcardGeneration}>Generate flashcards</a>
       </div>
     </Page>
   )

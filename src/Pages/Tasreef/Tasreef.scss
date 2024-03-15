@@ -8,6 +8,17 @@
   gap: 64px;
 }
 
+.generateFlashcards {
+  color: var(--text-disabled);
+  display: flex;
+  justify-content: center; 
+
+  a {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
 @media (min-width: 768px) {
   .sarfKabir {
     grid-template-columns: repeat(2, 1fr);
