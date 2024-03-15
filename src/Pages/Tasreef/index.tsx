@@ -12,7 +12,7 @@ import { ComponentChildren } from 'preact'
 import { isChapter, replaceRoots } from '../../Helpers'
 import './Tasreef.scss'
 import generateFlashcards from '../../Helpers/generateFlashcards'
-import downloadFlashcards from '../../Helpers/downloadFlashcards'
+import downloadFlashcardsAsText from '../../Helpers/downloadFlashcardsAsText'
 
 const Container = () => {
   const { verbType, verbForm, verbChapter } = useRoute().params
@@ -65,7 +65,7 @@ const Container = () => {
 
   const handleFlashcardGeneration = () => {
     const flashcards = generateFlashcards(baseForm, rootLetters)
-    downloadFlashcards(
+    downloadFlashcardsAsText(
       flashcards,
       `${form.archetype.ماضي.معروف} ${form.archetype.مضارع.معروف}`,
     )
