@@ -2,18 +2,14 @@ import verbTypes from '../data'
 import { VerbChapter, VerbTasreef } from '../data/types'
 import { replaceRoots } from './Helpers'
 
-const cells: string[] = []
-
 const processVerbChapter = (
   cells: string[],
   chapterName: string,
   verbChapter: VerbChapter | null,
 ) => {
   if (!verbChapter) {
-    cells.push(`${chapterName} - Madi`)
-    cells.push('')
-    cells.push(`${chapterName} - Mudari`)
-    cells.push('')
+    cells.push(chapterName)
+    cells.push(' ')
     return
   }
 
@@ -21,15 +17,19 @@ const processVerbChapter = (
 
   const verbChapterWithRoots = replaceRoots(verbChapter, { ف, ع, ل })
 
-  cells.push(`${chapterName} - Madi`)
+  cells.push(
+    `${chapterName} - ${verbChapterWithRoots.archetype.ماضي.معروف} ${verbChapterWithRoots.archetype.مضارع.معروف}`,
+  )
+  cells.push(`Madi`)
   prepareTasreefs(cells, verbChapterWithRoots.conjugations.ماضي.معروف)
-  cells.push(`${chapterName} - Mudari`)
+  cells.push(`Mudari`)
   prepareTasreefs(cells, verbChapterWithRoots.conjugations.مضارع.معروف)
+  cells.push(' ')
 }
 
 const prepareTasreefs = (cells: string[], tasreef: VerbTasreef | null) => {
   if (!tasreef) {
-    cells.push('')
+    // cells.push(' ')
     return
   }
 
@@ -50,21 +50,31 @@ const prepareTasreefs = (cells: string[], tasreef: VerbTasreef | null) => {
   cells.push(tasreef['1st'].أَنَا)
   cells.push(tasreef['1st'].نَحْنُ)
   cells.push('Fluency')
-  cells.push('')
+  // cells.push(' ')
 }
 
-for (const [verbTypeName, verbType] of Object.entries(verbTypes)) {
-  cells.push(verbTypeName) // صحيح, أجوف, ناقص
-  cells.push('')
+export const run = () => {
+  const cells: string[] = []
 
-  for (const [chapterName, chapter] of Object.entries(verbType)) {
-    if (!chapter || (chapter && 'archetype' in chapter)) {
-      processVerbChapter(cells, chapterName, chapter as VerbChapter | null)
-    } else {
-      // FORM 1
-      for (const [form1ChapterName, form1Chapter] of Object.entries(chapter)) {
-        processVerbChapter(cells, `I - ${form1ChapterName}`, form1Chapter)
+  for (const [verbTypeName, verbType] of Object.entries(verbTypes)) {
+    // cells.push(verbTypeName) // صحيح, أجوف, ناقص
+    // cells.push(' ')
+
+    for (const [chapterName, chapter] of Object.entries(verbType)) {
+      if (!chapter || (chapter && 'archetype' in chapter)) {
+        processVerbChapter(cells, chapterName, chapter as VerbChapter | null)
+      } else {
+        // FORM 1
+        for (const [form1ChapterName, form1Chapter] of Object.entries(
+          chapter,
+        )) {
+          processVerbChapter(cells, `I`, form1Chapter)
+        }
       }
     }
+
+    break
   }
+
+  return cells
 }
