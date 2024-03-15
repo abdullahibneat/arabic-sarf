@@ -16,6 +16,7 @@ export type VerbType = {
 
 export type VerbChapter = {
   باب: string
+  form: number
   archetype: VerbArchetype
   conjugations: VerbConjugations
 }
