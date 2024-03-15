@@ -11,7 +11,7 @@ const downloadFlashcards = (flashcards: Flashcard[], fileName: string) => {
       `Pattern: ${flashcard.pattern}`,
       `Binya: ${flashcard.binya}`,
       `Archetype Sīghah: ${flashcard.archetype}`,
-      `Translation: `,
+      `Translation: He did`,
     ].join(`\n`),
   ])
 
