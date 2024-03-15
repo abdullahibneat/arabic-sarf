@@ -73,12 +73,10 @@ const Navbar = () => {
         <>
           <span>&rsaquo;</span>
 
-          <select value={verbType} onChange={goToVerbType}>
-            {Object.keys(verbTypes).map((verbType) => (
-              <option key={verbType} value={verbType}>
-                {verbType}
-              </option>
-            ))}
+          <select value={verbType}>
+            <option key={verbType} value={verbType}>
+              {verbType}
+            </option>
           </select>
         </>
       )}
