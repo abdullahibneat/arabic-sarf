@@ -3,7 +3,6 @@ import verbTypes from '../../../data'
 import { useMemo, useCallback } from 'preact/hooks'
 import asRomanNumeral from '../../Helpers/asRomanNumeral'
 import Grid, { GridCell } from '../../Components/Grid'
-import { ComponentChildren } from 'preact'
 import { Page } from '../../Components'
 
 const SelectChapter = () => {
@@ -59,37 +58,10 @@ const SelectChapter = () => {
 
   return (
     <Page>
-      <div style={{ marginBottom: 32 }}>
-        <H2>مجرّد</H2>
-        <p style={{ marginBottom: 16 }}>
-          A verb whose past tense هو sigha has no extra letters in it beyond the
-          3 root letters
-        </p>
-        <Grid cells={mujarradVerbs} onCellClick={handleCellClick} />
-      </div>
-
-      <div>
-        <H2>مزيد فِه</H2>
-        <p style={{ marginBottom: 16 }}>
-          A verb whose past tense هو sigha has extra letters in it beyond the 3
-          root letters
-        </p>
-        <Grid cells={mazidFih} onCellClick={handleCellClick} />
-      </div>
+      <Grid cells={mujarradVerbs} onCellClick={handleCellClick} />
+      <Grid cells={mazidFih} onCellClick={handleCellClick} />
     </Page>
   )
 }
 
 export default SelectChapter
-
-const H2 = ({ children }: { children: ComponentChildren }) => (
-  <h2
-    style={{
-      fontFamily: 'var(--arabic)',
-      fontSize: 32,
-      fontWeight: '600',
-    }}
-  >
-    {children}
-  </h2>
-)
