@@ -13,7 +13,7 @@ const downloadFlashcardsAsText = (
     lines.push(`- Pattern: ${flashcard.pattern}`)
     lines.push(`- Binya: ${flashcard.binya}`)
     lines.push(`- Archetype Sīghah: ${flashcard.archetype}`)
-    lines.push(`- Translation: TODO`)
+    lines.push(`- Translation: N/A`)
     lines.push('')
     lines.push('')
   }
