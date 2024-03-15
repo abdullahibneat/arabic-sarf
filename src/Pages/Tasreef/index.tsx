@@ -80,7 +80,7 @@ const Container = () => {
         />
       </div> */}
 
-      <H1>{`${form.archetype.ماضي.معروف} ${form.archetype.مضارع.معروف} ${verbForm}`}</H1>
+      <H1>{`${form.archetype.ماضي.معروف} ${form.archetype.مضارع.معروف} ${form.form}`}</H1>
 
       {/* <SarfSagheer archetype={form.archetype} /> */}
 
@@ -109,9 +109,9 @@ const Container = () => {
           <Conjugations heading="جزم" tasreef={form.conjugations.جزم} />
         </div> */}
 
-        {/* <div>
+        <div>
           <Conjugations heading="أمر" tasreef={form.conjugations.أمر} />
-        </div> */}
+        </div>
       </div>
     </Page>
   )
@@ -126,6 +126,7 @@ const H1 = ({ children }: { children: ComponentChildren }) => (
       fontSize: 32,
       fontWeight: 600,
       textAlign: 'center',
+      direction: 'rtl',
     }}
   >
     {children}

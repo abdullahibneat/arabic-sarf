@@ -17,7 +17,7 @@ const SelectChapter = () => {
 
     return Object.keys(chapters['I']).map((chapter) => ({
       id: `I/${chapter}`,
-      heading: chapter,
+      heading: `${chapters['I'][chapter].form} ${chapter}`,
     }))
   }, [chapters])
 
@@ -33,7 +33,7 @@ const SelectChapter = () => {
 
       const chapter = chapters[roman]
 
-      let heading = roman
+      let heading = String(chapterNumber)
 
       if (chapter) heading += ' ' + chapter.باب
 
