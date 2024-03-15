@@ -13,6 +13,7 @@ import { isChapter, replaceRoots } from '../../Helpers'
 import './Tasreef.scss'
 import generateFlashcards from '../../Helpers/generateFlashcards'
 import downloadFlashcardsAsText from '../../Helpers/downloadFlashcardsAsText'
+import downloadFlashcardsAsCsv from '../../Helpers/downloadFlashcardsAsCsv'
 
 const Container = () => {
   const { verbType, verbForm, verbChapter } = useRoute().params
@@ -63,9 +64,11 @@ const Container = () => {
     return <Page>Form not found</Page>
   }
 
-  const handleFlashcardGeneration = () => {
+  const handleFlashcardGeneration = (type: 'csv' | 'text') => () => {
     const flashcards = generateFlashcards(baseForm, rootLetters)
-    downloadFlashcardsAsText(
+    const action =
+      type === 'csv' ? downloadFlashcardsAsCsv : downloadFlashcardsAsText
+    action(
       flashcards,
       `${form.archetype.ماضي.معروف} ${form.archetype.مضارع.معروف}`,
     )
@@ -125,7 +128,12 @@ const Container = () => {
       </div>
 
       <div class="generateFlashcards">
-        <a onClick={handleFlashcardGeneration}>Generate flashcards</a>
+        <p>Generate flashcards</p>
+        <div>
+          <a onClick={handleFlashcardGeneration('csv')}>CSV</a>
+          <span> / </span>
+          <a onClick={handleFlashcardGeneration('text')}>Text</a>
+        </div>
       </div>
     </Page>
   )
