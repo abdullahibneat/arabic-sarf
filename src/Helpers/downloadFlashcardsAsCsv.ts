@@ -1,6 +1,6 @@
 import { Flashcard } from './generateFlashcards'
 
-const downloadFlashcards = (flashcards: Flashcard[], fileName: string) => {
+const downloadFlashcardsAsCsv = (flashcards: Flashcard[], fileName: string) => {
   let csv = `"QUESTION","ANSWER"`
 
   const answers = flashcards.map((flashcard, i) => [
@@ -37,4 +37,4 @@ const downloadFlashcards = (flashcards: Flashcard[], fileName: string) => {
   document.body.removeChild(element)
 }
 
-export default downloadFlashcards
+export default downloadFlashcardsAsCsv
