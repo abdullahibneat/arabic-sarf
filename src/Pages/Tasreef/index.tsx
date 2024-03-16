@@ -57,6 +57,15 @@ const Container = () => {
     return undefined
   }, [baseForm])
 
+  const audioPath = useMemo(() => {
+    let path = `/recordings/${verbType}/${verbForm}`
+    const chapterOrForm = chapters?.[verbForm as RomanNumeral]
+    if (!isChapter(chapterOrForm)) {
+      path += `/${verbChapter}`
+    }
+    return path
+  }, [verbType, verbForm, chapters, verbChapter])
+
   if (!form) {
     return <Page>Form not found</Page>
   }
@@ -89,6 +98,7 @@ const Container = () => {
           <Conjugations
             heading="ماضي"
             tasreef={form.conjugations.ماضي.معروف}
+            audioSrc={audioPath + '/ماضي.mp3'}
             // majhool={form.conjugations.ماضي.مجهول}
           />
         </div>
@@ -97,6 +107,7 @@ const Container = () => {
           <Conjugations
             heading="مضارع"
             tasreef={form.conjugations.مضارع.معروف}
+            audioSrc={audioPath + '/مضارع.mp3'}
             // majhool={form.conjugations.مضارع.مجهول}
           />
         </div>
@@ -110,7 +121,11 @@ const Container = () => {
         </div> */}
 
         <div>
-          <Conjugations heading="أمر" tasreef={form.conjugations.أمر} />
+          <Conjugations
+            heading="أمر"
+            tasreef={form.conjugations.أمر}
+            audioSrc={audioPath + '/أمر.mp3'}
+          />
         </div>
       </div>
     </Page>

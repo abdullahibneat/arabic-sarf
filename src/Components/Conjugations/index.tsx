@@ -7,9 +7,10 @@ type Props = {
   heading: string
   tasreef: Partial<VerbTasreef>
   majhool?: Partial<VerbTasreef> | null
+  audioSrc?: string
 }
 
-const Conjugations = ({ heading, tasreef, majhool }: Props) => {
+const Conjugations = ({ heading, tasreef, majhool, audioSrc }: Props) => {
   const [voice, setVoice] = useState<'معروف' | 'مجهول'>('معروف')
 
   const state = useAppState()
@@ -40,6 +41,13 @@ const Conjugations = ({ heading, tasreef, majhool }: Props) => {
             مجهول
           </button>
         </div>
+      )}
+
+      {audioSrc && (
+        <audio key={audioSrc} controls>
+          <source src={audioSrc} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
       )}
 
       <div class={`conjugations ${state.groupTasreefs ? 'grouped' : ''}`}>
