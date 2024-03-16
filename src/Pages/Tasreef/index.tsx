@@ -120,13 +120,13 @@ const Container = () => {
           <Conjugations heading="جزم" tasreef={form.conjugations.جزم} />
         </div> */}
 
-        <div>
+        {/* <div>
           <Conjugations
             heading="أمر"
             tasreef={form.conjugations.أمر}
             audioSrc={audioPath + '/أمر.mp3'}
           />
-        </div>
+        </div> */}
       </div>
     </Page>
   )
