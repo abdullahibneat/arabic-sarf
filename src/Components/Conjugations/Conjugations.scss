@@ -1,24 +1,12 @@
-.modal {
+.translation-template {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  div {
-    padding: 32px;
-    background-color: var(--background);
-    min-width: 40%;
-  }
-
-  button {
-    margin-top: 16px;
-  }
+  bottom: 16px;
+  right: 16px;
+  background-color: var(--text);
+  color: var(--background);
+  border: none;
+  padding: 16px;
+  border-radius: 64px;
 }
 
 .conjugationsContainer {
@@ -107,7 +95,6 @@
     }
 
     &.grouped {
-
       div + div {
         margin-top: 0;
       }

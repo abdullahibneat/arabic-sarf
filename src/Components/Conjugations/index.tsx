@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'preact/hooks'
 import { VerbTasreef } from '../../../data/types'
 import './Conjugations.scss'
 import useAppState from '../../Hooks/useAppState'
+import Modal from '../Modal'
 
 type Props = {
   heading: string
@@ -25,6 +26,8 @@ const Conjugations = ({
     english: string
   } | null>(null)
 
+  const [showTranslationTemplate, setShowTranslationTemplate] = useState(false)
+
   const state = useAppState()
 
   const verb = useMemo(() => {
@@ -43,20 +46,31 @@ const Conjugations = ({
 
   return (
     <>
-      {person && (
-        <div class="modal">
-          <div>
-            <p>Seegha: {person.arabic}</p>
-            <p>Person: {person.english}</p>
-            {meaning && (
-              <p>
-                Meaning: {person.english} {meaning}
-              </p>
-            )}
-            <button onClick={() => setPerson(null)}>Close</button>
-          </div>
+      <Modal open={!!person} onClose={() => setPerson(null)}>
+        <div>
+          {person && <p>Seegha: {person.arabic}</p>}
+          {person && <p>Person: {person.english}</p>}
+          {person && meaning && (
+            <p>
+              Meaning: {person.english} {meaning}
+            </p>
+          )}
         </div>
-      )}
+      </Modal>
+
+      <Modal
+        open={showTranslationTemplate}
+        onClose={() => setShowTranslationTemplate(false)}
+      >
+        <img src="/assets/translation-template.jpg" />
+      </Modal>
+
+      <button
+        class="translation-template"
+        onClick={() => setShowTranslationTemplate(true)}
+      >
+        Translation Template
+      </button>
 
       <div class="conjugationsContainer">
         <h2>{heading}</h2>
