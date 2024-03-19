@@ -109,7 +109,7 @@ const Container = () => {
             heading="مضارع"
             tasreef={form.conjugations.مضارع.معروف}
             audioSrc={audioPath + '/مضارع.mp3'}
-            meaning="will help"
+            // meaning="will help"
             // majhool={form.conjugations.مضارع.مجهول}
           />
         </div>
