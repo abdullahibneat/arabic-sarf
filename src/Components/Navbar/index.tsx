@@ -108,9 +108,19 @@ const Navbar = () => {
 
           <div style={{ flex: 1 }} />
 
-          <button onClick={toggleViewMode}>
-            {state.groupTasreefs ? 'Grouped View' : 'List View'}
-          </button>
+          <select
+            style={{ fontWeight: 'normal' }}
+            value={state.groupTasreefs ? 1 : 0}
+            onChange={(e) => {
+              e.preventDefault()
+              if (!!e.target && 'value' in e.target) {
+                AppState.setItem('groupTasreefs', e.target.value === '1')
+              }
+            }}
+          >
+            <option value="0">List View</option>
+            <option value="1">Grouped View</option>
+          </select>
         </>
       )}
     </div>
