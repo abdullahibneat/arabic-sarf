@@ -12,6 +12,7 @@ export type Flashcard = {
   pattern: string // استخدم يستخدم
   binya: string // مضارع
   archetype: string // يستبشرون مثل يستخدمون
+  person: string
 }
 
 type Tasreef = VerbTasreef | { '2nd': VerbSighaSecondPerson }
@@ -50,6 +51,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['3rd']['masculine']['هُوَ']} مثل ${archetypeTasreef['3rd']['masculine']['هُوَ']}`,
+        person: 'He',
       })
       flashcards.push({
         question: tasreef['3rd']['masculine']['هُمَا'],
@@ -58,6 +60,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['3rd']['masculine']['هُمَا']} مثل ${archetypeTasreef['3rd']['masculine']['هُمَا']}`,
+        person: 'They (2 male)',
       })
       flashcards.push({
         question: tasreef['3rd']['masculine']['هُمْ'],
@@ -66,6 +69,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['3rd']['masculine']['هُمْ']} مثل ${archetypeTasreef['3rd']['masculine']['هُمْ']}`,
+        person: 'They (3+ male)',
       })
       flashcards.push({
         question: tasreef['3rd']['feminine']['هِيَ'],
@@ -74,6 +78,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['3rd']['feminine']['هِيَ']} مثل ${archetypeTasreef['3rd']['feminine']['هِيَ']}`,
+        person: 'She',
       })
       flashcards.push({
         question: tasreef['3rd']['feminine']['هُمَا'],
@@ -82,6 +87,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['3rd']['feminine']['هُمَا']} مثل ${archetypeTasreef['3rd']['feminine']['هُمَا']}`,
+        person: 'They (2 female)',
       })
       flashcards.push({
         question: tasreef['3rd']['feminine']['هُنَّ'],
@@ -90,6 +96,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['3rd']['feminine']['هُنَّ']} مثل ${archetypeTasreef['3rd']['feminine']['هُنَّ']}`,
+        person: 'They (3+ female)',
       })
     }
 
@@ -101,6 +108,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['2nd']['masculine']['أَنْتَ']} مثل ${archetypeTasreef['2nd']['masculine']['أَنْتَ']}`,
+        person: 'You (male)',
       })
       flashcards.push({
         question: tasreef['2nd']['masculine']['أَنْتُمَا'],
@@ -109,6 +117,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['2nd']['masculine']['أَنْتُمَا']} مثل ${archetypeTasreef['2nd']['masculine']['أَنْتُمَا']}`,
+        person: 'You (2 male)',
       })
       flashcards.push({
         question: tasreef['2nd']['masculine']['أَنْتُمْ'],
@@ -117,6 +126,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['2nd']['masculine']['أَنْتُمْ']} مثل ${archetypeTasreef['2nd']['masculine']['أَنْتُمْ']}`,
+        person: 'You (3+ male)',
       })
       flashcards.push({
         question: tasreef['2nd']['feminine']['أَنْتِ'],
@@ -125,6 +135,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['2nd']['feminine']['أَنْتِ']} مثل ${archetypeTasreef['2nd']['feminine']['أَنْتِ']}`,
+        person: 'You (female)',
       })
       flashcards.push({
         question: tasreef['2nd']['feminine']['أَنْتُمَا'],
@@ -133,6 +144,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['2nd']['feminine']['أَنْتُمَا']} مثل ${archetypeTasreef['2nd']['feminine']['أَنْتُمَا']}`,
+        person: 'You (2 female)',
       })
       flashcards.push({
         question: tasreef['2nd']['feminine']['أَنْتُنَّ'],
@@ -141,6 +153,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['2nd']['feminine']['أَنْتُنَّ']} مثل ${archetypeTasreef['2nd']['feminine']['أَنْتُنَّ']}`,
+        person: 'You (3+ female)',
       })
     }
 
@@ -152,6 +165,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['1st']['أَنَا']} مثل ${archetypeTasreef['1st']['أَنَا']}`,
+        person: 'I',
       })
       flashcards.push({
         question: tasreef['1st']['نَحْنُ'],
@@ -160,6 +174,7 @@ const generateFlashcards = (
         pattern: `${archetype.ماضي.معروف} ${archetype.مضارع.معروف}`,
         binya,
         archetype: `${tasreef['1st']['نَحْنُ']} مثل ${archetypeTasreef['1st']['نَحْنُ']}`,
+        person: 'We',
       })
     }
   }
