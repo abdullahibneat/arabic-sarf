@@ -1,3 +1,26 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    padding: 32px;
+    background-color: var(--background);
+    min-width: 40%;
+  }
+
+  button {
+    margin-top: 16px;
+  }
+}
+
 .conjugationsContainer {
   font-family: var(--arabic);
   font-weight: 600;

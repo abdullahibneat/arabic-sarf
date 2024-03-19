@@ -99,6 +99,7 @@ const Container = () => {
             heading="ماضي"
             tasreef={form.conjugations.ماضي.معروف}
             audioSrc={audioPath + '/ماضي.mp3'}
+            meaning="helped"
             // majhool={form.conjugations.ماضي.مجهول}
           />
         </div>
@@ -108,6 +109,7 @@ const Container = () => {
             heading="مضارع"
             tasreef={form.conjugations.مضارع.معروف}
             audioSrc={audioPath + '/مضارع.mp3'}
+            meaning="will help"
             // majhool={form.conjugations.مضارع.مجهول}
           />
         </div>
