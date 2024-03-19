@@ -54,14 +54,14 @@ const Conjugations = ({ heading, tasreef, majhool, audioSrc }: Props) => {
         {verb['3rd'] && (
           <div>
             <div>
-              <p>{verb['3rd'].masculine['هُوَ']}</p>
-              <p>{verb['3rd'].masculine['هُمَا']}</p>
-              <p>{verb['3rd'].masculine['هُمْ']}</p>
+              <p data-number="1">{verb['3rd'].masculine['هُوَ']}</p>
+              <p data-number="2">{verb['3rd'].masculine['هُمَا']}</p>
+              <p data-number="3">{verb['3rd'].masculine['هُمْ']}</p>
             </div>
             <div>
-              <p>{verb['3rd'].feminine['هِيَ']}</p>
-              <p>{verb['3rd'].feminine['هُمَا']}</p>
-              <p>{verb['3rd'].feminine['هُنَّ']}</p>
+              <p data-number="4">{verb['3rd'].feminine['هِيَ']}</p>
+              <p data-number="5">{verb['3rd'].feminine['هُمَا']}</p>
+              <p data-number="6">{verb['3rd'].feminine['هُنَّ']}</p>
             </div>
           </div>
         )}
@@ -69,14 +69,14 @@ const Conjugations = ({ heading, tasreef, majhool, audioSrc }: Props) => {
         {verb['2nd'] && (
           <div>
             <div>
-              <p>{verb['2nd'].masculine['أَنْتَ']}</p>
-              <p>{verb['2nd'].masculine['أَنْتُمَا']}</p>
-              <p>{verb['2nd'].masculine['أَنْتُمْ']}</p>
+              <p data-number="7">{verb['2nd'].masculine['أَنْتَ']}</p>
+              <p data-number="8">{verb['2nd'].masculine['أَنْتُمَا']}</p>
+              <p data-number="9">{verb['2nd'].masculine['أَنْتُمْ']}</p>
             </div>
             <div>
-              <p>{verb['2nd'].feminine['أَنْتِ']}</p>
-              <p>{verb['2nd'].feminine['أَنْتُمَا']}</p>
-              <p>{verb['2nd'].feminine['أَنْتُنَّ']}</p>
+              <p data-number="10">{verb['2nd'].feminine['أَنْتِ']}</p>
+              <p data-number="11">{verb['2nd'].feminine['أَنْتُمَا']}</p>
+              <p data-number="12">{verb['2nd'].feminine['أَنْتُنَّ']}</p>
             </div>
           </div>
         )}
@@ -84,8 +84,8 @@ const Conjugations = ({ heading, tasreef, majhool, audioSrc }: Props) => {
         {verb['1st'] && (
           <div>
             <div>
-              <p>{verb['1st'].أَنَا}</p>
-              <p>{verb['1st'].نَحْنُ}</p>
+              <p data-number="13">{verb['1st'].أَنَا}</p>
+              <p data-number="14">{verb['1st'].نَحْنُ}</p>
             </div>
           </div>
         )}

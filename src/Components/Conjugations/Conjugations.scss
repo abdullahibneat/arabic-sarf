@@ -56,14 +56,34 @@
   .conjugations {
     display: grid;
     grid-template-columns: 1fr;
+    gap: 16px;
 
     p + p,
     div + div {
       margin-top: -2px;
     }
 
+    p {
+      position: relative;
+    }
+
+    p:before {
+      content: attr(data-number);
+      position: absolute;
+      top: 0;
+      right: 16px;
+      color: var(--text-disabled);
+    }
+
+    &:not(.grouped) {
+      & > div {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
     &.grouped {
-      gap: 16px;
 
       div + div {
         margin-top: 0;
@@ -78,6 +98,11 @@
 
           &:nth-child(2) {
             margin-right: -2px;
+
+            p:before {
+              right: unset;
+              left: 16px;
+            }
           }
         }
       }
