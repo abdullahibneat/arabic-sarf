@@ -10,11 +10,12 @@ export type GridCell = {
 
 type Props = {
   cells: GridCell[]
+  rtl?: boolean
   onCellClick?: (cell: GridCell) => void
 }
 
-const Grid = ({ cells, onCellClick }: Props) => (
-  <div class="grid">
+const Grid = ({ cells, rtl, onCellClick }: Props) => (
+  <div class="grid" style={{ direction: rtl ? 'rtl' : undefined }}>
     {cells.map((cell) => (
       <Cell key={cell.id} cell={cell} onCellClick={onCellClick} />
     ))}

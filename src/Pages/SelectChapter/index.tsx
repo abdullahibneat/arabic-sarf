@@ -58,8 +58,11 @@ const SelectChapter = () => {
 
   return (
     <Page>
-      <Grid cells={mujarradVerbs} onCellClick={handleCellClick} />
-      <Grid cells={mazidFih} onCellClick={handleCellClick} />
+      <Grid
+        rtl
+        cells={mujarradVerbs.concat(mazidFih)}
+        onCellClick={handleCellClick}
+      />
     </Page>
   )
 }
