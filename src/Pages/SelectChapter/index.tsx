@@ -4,6 +4,7 @@ import { useMemo, useCallback } from 'preact/hooks'
 import asRomanNumeral from '../../Helpers/asRomanNumeral'
 import Grid, { GridCell } from '../../Components/Grid'
 import { Page } from '../../Components'
+import { replaceRoots } from '../../Helpers'
 
 const SelectChapter = () => {
   const location = useLocation()
@@ -15,10 +16,24 @@ const SelectChapter = () => {
   const mujarradVerbs = useMemo(() => {
     if (!chapters) return []
 
-    return Object.keys(chapters['I']).map((chapter) => ({
-      id: `I/${chapter}`,
-      heading: `${chapters['I'][chapter].form} ${chapter}`,
-    }))
+    const verbs: GridCell[] = []
+
+    for (const chapter of Object.keys(chapters['I'])) {
+      let $chapter = chapters['I'][chapter]
+      $chapter = replaceRoots($chapter, {
+        ف: $chapter.archetype.root_letters[0],
+        ع: $chapter.archetype.root_letters[1],
+        ل: $chapter.archetype.root_letters[2],
+      })
+
+      verbs.push({
+        id: `I/${chapter}`,
+        pre: String($chapter.form),
+        heading: `${$chapter.archetype.ماضي.معروف} ${$chapter.archetype.مضارع.معروف}`,
+      })
+    }
+
+    return verbs
   }, [chapters])
 
   const mazidFih = useMemo(() => {
@@ -31,14 +46,22 @@ const SelectChapter = () => {
 
       if (roman === 'I') continue
 
-      const chapter = chapters[roman]
+      let chapter = chapters[roman]
 
       let heading = String(chapterNumber)
 
-      if (chapter) heading += ' ' + chapter.باب
+      if (chapter) {
+        chapter = replaceRoots(chapter, {
+          ف: chapter.archetype.root_letters[0],
+          ع: chapter.archetype.root_letters[1],
+          ل: chapter.archetype.root_letters[2],
+        })
+        heading = `${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`
+      }
 
       cells.push({
         id: roman,
+        pre: String(chapter?.form),
         heading,
         disabled: !chapter,
       })

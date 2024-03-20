@@ -3,6 +3,7 @@ import './GridStyles.scss'
 
 export type GridCell = {
   id: string
+  pre?: string
   heading: string
   description?: string
   disabled?: boolean

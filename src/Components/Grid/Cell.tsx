@@ -28,6 +28,7 @@ const Cell = ({ cell, onCellClick }: Props) => {
       onClick={handleClick}
       onKeyPress={handleKeyPress}
     >
+      {cell.pre && <small>{cell.pre}</small>}
       <h2>{cell.heading}</h2>
       {cell.description && <p>{cell.description}</p>}
     </div>
