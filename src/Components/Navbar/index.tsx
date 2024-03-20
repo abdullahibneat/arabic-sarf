@@ -57,7 +57,7 @@ const Navbar = () => {
 
   const goToChapter = useCallback((event: { target: EventTarget | null }) => {
     if (!event.target) return
-    if ('value' in event.target) location.route(event.target.value)
+    if ('value' in event.target) location.route(String(event.target.value))
   }, [])
 
   const toggleViewMode = useCallback(() => {
