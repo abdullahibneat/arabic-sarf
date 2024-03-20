@@ -9,7 +9,7 @@ import { replaceRoots } from '../../Helpers'
 const SelectChapter = () => {
   const location = useLocation()
 
-  const { verbType } = useRoute().params
+  const { verbType = 'صحيح' } = useRoute().params
 
   const chapters = useMemo(() => verbTypes[verbType], [verbType])
 
@@ -71,7 +71,7 @@ const SelectChapter = () => {
   }, [chapters])
 
   const handleCellClick = useCallback(
-    ({ id }: { id: string }) => location.route(`${verbType}/${id}`),
+    ({ id }: { id: string }) => location.route(id),
     [verbType],
   )
 

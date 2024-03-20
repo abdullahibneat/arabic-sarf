@@ -8,7 +8,7 @@ import useAppState from '../../Hooks/useAppState'
 import AppState from '../../AppState'
 
 const Navbar = () => {
-  const { verbChapter, verbForm, verbType } = useRoute().params
+  const { verbChapter, verbForm, verbType = 'صحيح' } = useRoute().params
 
   const location = useLocation()
   const state = useAppState()
@@ -57,8 +57,7 @@ const Navbar = () => {
 
   const goToChapter = useCallback((event: { target: EventTarget | null }) => {
     if (!event.target) return
-    if ('value' in event.target)
-      location.route(`/${verbType}/${event.target.value}`)
+    if ('value' in event.target) location.route(event.target.value)
   }, [])
 
   const toggleViewMode = useCallback(() => {
@@ -68,7 +67,7 @@ const Navbar = () => {
   return (
     <div class="navbarContainer">
       <button onClick={goToHome}>Home</button>
-
+      {/* 
       {verbType && (
         <>
           <span>&rsaquo;</span>
@@ -79,7 +78,7 @@ const Navbar = () => {
             </option>
           </select>
         </>
-      )}
+      )} */}
 
       {verbForm && (
         <>

@@ -13,7 +13,7 @@ import { isChapter, replaceRoots } from '../../Helpers'
 import './Tasreef.scss'
 
 const Container = () => {
-  const { verbType, verbForm, verbChapter } = useRoute().params
+  const { verbType = 'صحيح', verbForm, verbChapter } = useRoute().params
 
   const [rootLetters, setRootLetters] = useState({ ف: 'ف', ع: 'ع', ل: 'ل' })
 
