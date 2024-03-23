@@ -80,12 +80,9 @@ const SelectChapter = () => {
   }
 
   return (
-    <Page>
-      <Grid
-        rtl
-        cells={mujarradVerbs.concat(mazidFih)}
-        onCellClick={handleCellClick}
-      />
+    <Page style={{ display: 'flex', flexDirection: 'column', gap: 64 }}>
+      <Grid rtl cells={mujarradVerbs} onCellClick={handleCellClick} />
+      <Grid rtl cells={mazidFih} onCellClick={handleCellClick} />
     </Page>
   )
 }
