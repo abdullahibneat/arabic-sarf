@@ -1,12 +1,16 @@
 import { useLocation, useRoute } from 'preact-iso'
 import verbTypes from '../../../data'
-import { useMemo, useCallback } from 'preact/hooks'
+import { useMemo, useCallback, useState } from 'preact/hooks'
 import asRomanNumeral from '../../Helpers/asRomanNumeral'
 import Grid, { GridCell } from '../../Components/Grid'
 import { Page } from '../../Components'
 import { replaceRoots } from '../../Helpers'
+import Modal from '../../Components/Modal'
+import './SelectChapter.scss'
 
 const SelectChapter = () => {
+  const [showOverview, setShowOverview] = useState(false)
+
   const location = useLocation()
 
   const { verbType = 'صحيح' } = useRoute().params
@@ -82,7 +86,21 @@ const SelectChapter = () => {
   return (
     <Page style={{ display: 'flex', flexDirection: 'column', gap: 64 }}>
       <Grid rtl cells={mujarradVerbs} onCellClick={handleCellClick} />
+
       <Grid rtl cells={mazidFih} onCellClick={handleCellClick} />
+
+      <button class="floating-button" onClick={() => setShowOverview(true)}>
+        Overview
+      </button>
+
+      <Modal open={showOverview} onClose={() => setShowOverview(false)}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <img src="/assets/mujarrad-madi.png" />
+          <img src="/assets/mujarrad-mudari.png" />
+          <img src="/assets/mazeed-fihi-madi.png" />
+          <img src="/assets/mazeed-fihi-mudari.png" />
+        </div>
+      </Modal>
     </Page>
   )
 }

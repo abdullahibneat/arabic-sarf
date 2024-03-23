@@ -1,10 +1,11 @@
 import Cell from './Cell'
 import './GridStyles.scss'
+import { JSX } from 'preact'
 
 export type GridCell = {
   id: string
-  pre?: string
-  heading: string
+  pre?: string | JSX.Element
+  heading?: string
   description?: string
   disabled?: boolean
 }

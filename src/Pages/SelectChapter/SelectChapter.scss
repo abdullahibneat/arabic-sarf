@@ -1,0 +1,11 @@
+.floating-button {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    background-color: var(--text);
+    color: var(--background);
+    border: none;
+    padding: 16px;
+    border-radius: 64px;
+    z-index: 9;
+}

@@ -5,18 +5,21 @@
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.75);
-  z-index: 1;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  div {
+  &>div {
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 32px;
     background-color: var(--background);
     min-width: 40%;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
   }
 
   button {

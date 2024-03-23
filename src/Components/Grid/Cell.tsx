@@ -29,7 +29,7 @@ const Cell = ({ cell, onCellClick }: Props) => {
       onKeyPress={handleKeyPress}
     >
       {cell.pre && <small>{cell.pre}</small>}
-      <h2>{cell.heading}</h2>
+      {cell.heading && <h2>{cell.heading}</h2>}
       {cell.description && <p>{cell.description}</p>}
     </div>
   )
