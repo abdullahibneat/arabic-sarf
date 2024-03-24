@@ -1,0 +1,30 @@
+{
+  "name": "sarf",
+  "version": "0.0.1",
+  "description": "This repository features a collection of Sarf (صرف - Arabic verb conjugations) and a simple UI to navigate through the various verb forms",
+  "author": "Abdullah Ibne Atiq <hello@abdu.io>",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "preact": "^10.13.1",
+    "preact-iso": "^2.4.0"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.5.0",
+    "@types/node": "^20.11.30",
+    "prettier": "^3.2.5",
+    "sass": "^1.72.0",
+    "typescript": "^5.4.3",
+    "vite": "^4.3.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "license": "MIT",
+  "private": false
+}
