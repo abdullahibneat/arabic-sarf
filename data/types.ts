@@ -10,8 +10,8 @@ export type RomanNumeral =
   | 'IX'
   | 'X'
 
-export type VerbType = {
-  I: Record<string, VerbChapter>
+export type VerbType<Mujarrad extends string = string> = {
+  I: Record<Mujarrad, VerbChapter>
 } & Record<Exclude<RomanNumeral, 'I'>, VerbChapter | null>
 
 export type VerbChapter = {
