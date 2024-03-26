@@ -1,0 +1,66 @@
+.tasreef {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  gap: 16px;
+  direction: ltr;
+
+  .person {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .gender {
+      flex: 1;
+      border: solid 1px var(--border);
+      border-radius: 6px;
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 36px;
+      }
+
+      div + div {
+        border-top: solid 1px var(--border);
+      }
+    }
+  }
+
+  &.by-gender {
+    gap: 16px;
+
+    .person {
+      flex-direction: row-reverse;
+      gap: 16px;
+    }
+  }
+
+  &.by-person {
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    .person {
+      flex-direction: column;
+      flex: 1;
+      gap: 0;
+      border: solid 1px var(--border);
+      border-radius: 6px;
+
+      &.first {
+        flex-basis: 100%;
+      }
+
+      .gender {
+        border: none;
+        border-radius: 0;
+      }
+
+      .gender + .gender {
+        border-top: solid 1px var(--border);
+      }
+    }
+  }
+}

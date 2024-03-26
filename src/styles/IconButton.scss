@@ -1,0 +1,13 @@
+.icon-button {
+  padding: 4px;
+  border-radius: 6px;
+
+  cursor: pointer;
+  background-color: var(--white);
+  transition: background-color 250ms;
+
+  &.active,
+  &:hover {
+    background-color: var(--hover);
+  }
+}

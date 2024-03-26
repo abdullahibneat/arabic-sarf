@@ -1,0 +1,19 @@
+.menu-item {
+  display: flex;
+  gap: 4px;
+  height: 40px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  direction: rtl;
+  user-select: none;
+
+  cursor: pointer;
+  background-color: var(--white);
+  transition: background-color 250ms;
+
+  &.active,
+  &:hover {
+    background-color: var(--hover);
+  }
+}
