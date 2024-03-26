@@ -1,0 +1,26 @@
+.app-container {
+  display: flex;
+  flex-direction: column-reverse;
+
+  main {
+    padding-top: 64px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .app-container {
+    flex: 1;
+    height: 0;
+    flex-direction: row;
+
+    main {
+      flex: 1;
+      padding-top: 0;
+      overflow: auto;
+    }
+
+    aside {
+      width: 250px;
+    }
+  }
+}
