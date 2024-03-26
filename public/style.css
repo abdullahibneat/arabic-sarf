@@ -65,3 +65,7 @@ html {
   height: 100vh; /* old browsers */
   height: 100dvh; /* new browsers */
 }
+
+svg * {
+  transition: fill 250ms;
+}
