@@ -10,6 +10,7 @@
 
 body {
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
 }
 
 img,
@@ -26,6 +27,7 @@ button,
 textarea,
 select {
   font: inherit;
+  border: none;
 }
 
 p,
@@ -36,4 +38,30 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+}
+
+:root {
+  --white: #ffffff;
+  --text: #374151;
+  --text-secondary: #9ca3af;
+  --hover: #e5e7eb;
+  --border: #e5e7eb;
+}
+
+html {
+  background-color: var(--white);
+
+  font-family: 'Noto Sans Arabic', 'Noto Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--text);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* old browsers */
+  height: 100dvh; /* new browsers */
 }
