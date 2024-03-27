@@ -1,6 +1,7 @@
 .icon-button {
   padding: 4px;
   border-radius: 6px;
+  flex-shrink: 0;
 
   cursor: pointer;
   background-color: var(--white);
