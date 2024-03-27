@@ -1,0 +1,38 @@
+.screen-wrapper {
+  display: flex;
+  flex: 1;
+  height: 0;
+
+  main {
+    flex: 1;
+    width: 0;
+    display: flex;
+    flex-direction: column;
+
+    .screen-content {
+      flex: 1;
+      height: 0;
+      overflow: auto;
+    }
+  }
+
+  aside {
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .screen-wrapper {
+    flex-direction: column;
+
+    main {
+      width: unset;
+      height: 0;
+      padding-top: 64px;
+    }
+
+    aside {
+      width: 100%;
+    }
+  }
+}

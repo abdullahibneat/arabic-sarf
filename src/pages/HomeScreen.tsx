@@ -1,6 +1,7 @@
 import Tasreef, { TasreefProps } from '../components/Tasreef'
 
 import Flex from '../components/Flex'
+import Screen from '../components/Screen'
 import Text from '../components/Text'
 import isVerbChapter from '../helpers/isVerbChapter'
 import { useMemo } from 'preact/hooks'
@@ -55,29 +56,31 @@ const HomeScreen = () => {
   }, [])
 
   return (
-    <Flex column gap={32} padding="32px 0">
-      {sections.map((section, i) => (
-        <Flex key={`section-${i}`} column gap={16}>
-          <Flex column alignItems="center">
-            <Text type="bold">{section.title}</Text>
-            <Text>{section.subHeading}</Text>
-          </Flex>
+    <Screen>
+      <Flex column gap={32} padding="32px 0">
+        {sections.map((section, i) => (
+          <Flex key={`section-${i}`} column gap={16}>
+            <Flex column alignItems="center">
+              <Text type="bold">{section.title}</Text>
+              <Text>{section.subHeading}</Text>
+            </Flex>
 
-          <Flex justifyContent="center">
-            <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
-              {section.tasreefs.map((tasreef, j) => (
-                <Tasreef
-                  key={`section-${i}-tasreef-${j}`}
-                  title={tasreef.title}
-                  verbTasreef={tasreef.verbTasreef}
-                  groupMode="list"
-                />
-              ))}
+            <Flex justifyContent="center">
+              <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
+                {section.tasreefs.map((tasreef, j) => (
+                  <Tasreef
+                    key={`section-${i}-tasreef-${j}`}
+                    title={tasreef.title}
+                    verbTasreef={tasreef.verbTasreef}
+                    groupMode="list"
+                  />
+                ))}
+              </Flex>
             </Flex>
           </Flex>
-        </Flex>
-      ))}
-    </Flex>
+        ))}
+      </Flex>
+    </Screen>
   )
 }
 
