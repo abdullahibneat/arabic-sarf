@@ -7,11 +7,18 @@ import MenuItem from './MenuItem'
 import Text from './Text'
 import useAppState from '../hooks/useAppState'
 import { useState } from 'preact/hooks'
+import verbTypes from '../../data'
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false)
 
   const { tasreefGroupMode } = useAppState()
+
+  const {
+    صحيح: { I: mujarrad, ...mazeedFih },
+  } = verbTypes
+
+  const letters = ['a', 'b', 'c', 'd', 'e', 'f']
 
   return (
     <aside class={open ? 'open' : ''}>
@@ -30,24 +37,27 @@ const Sidebar = () => {
         <MenuItem tag="All" title="Overview" />
 
         <Flex column gap={8}>
-          <MenuItem tag="1a" title="نَصَرَ يَنْصُرُ" />
-          <MenuItem tag="1b" title="ضَرَبَ يَضْرِبُ" />
-          <MenuItem tag="1c" title="فَتَحَ يَفْتَحُ" />
-          <MenuItem tag="1d" title="سَمْعَ يَسْمَعُ" />
-          <MenuItem tag="1e" title="حَسِبَ يَحْسِبُ" />
-          <MenuItem tag="1f" title="كَرُمَ يَكْرُمُ" />
+          {Object.values(mujarrad).map(
+            ({ باب, archetype: { ماضي, مضارع } }) => (
+              <MenuItem
+                key={باب}
+                tag={`1${letters.shift()}`}
+                title={`${ماضي.معروف} ${مضارع.معروف}`}
+              />
+            ),
+          )}
         </Flex>
 
         <Flex column gap={8}>
-          <MenuItem tag="2" title="كَذَّبَ يُكَذِّبُ" />
-          <MenuItem tag="3" title="شَاهَدَ يُشَاهِدُ" />
-          <MenuItem tag="4" title="أَنْزَلَ يُنْزِلُ" />
-          <MenuItem tag="5" title="تَذَكَّرَ يَتَذَكَّرُ" />
-          <MenuItem tag="6" title="تبادَلَ يَتَبَادَلُ" />
-          <MenuItem tag="7" title="انْصَرَفَ يَنْصَرِفُ" />
-          <MenuItem tag="8" title="احْتَرَمَ يَحْتَرِمُ" />
-          <MenuItem tag="9" title="احْمَرَّ يَحْمَرُّ" />
-          <MenuItem tag="10" title="اسْتَخْدَمَ يَسْتَخْدِمُ" />
+          {Object.values(mazeedFih)
+            .flatMap((chapter) => chapter ?? [])
+            .map(({ باب, form, archetype: { ماضي, مضارع } }) => (
+              <MenuItem
+                key={باب}
+                tag={form}
+                title={`${ماضي.معروف} ${مضارع.معروف}`}
+              />
+            ))}
         </Flex>
       </Flex>
 
