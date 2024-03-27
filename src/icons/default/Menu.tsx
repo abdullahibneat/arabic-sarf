@@ -1,4 +1,4 @@
-const Play = () => (
+const Menu = () => (
   <svg
     width="25"
     height="24"
@@ -15,4 +15,4 @@ const Play = () => (
   </svg>
 )
 
-export default Play
+export default Menu
