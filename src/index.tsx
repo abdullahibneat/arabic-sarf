@@ -2,6 +2,7 @@ import './styles/App.scss'
 
 import { LocationProvider, Route, Router } from 'preact-iso'
 
+import AudioPlayer from './components/AudioPlayer'
 import HomeScreen from './pages/HomeScreen'
 import NotFound from './pages/_404'
 import Sidebar from './components/Sidebar'
@@ -12,10 +13,14 @@ const App = () => {
     <LocationProvider>
       <div class="app-container">
         <main>
-          <Router>
-            <Route path="/" component={HomeScreen} />
-            <Route default component={NotFound} />
-          </Router>
+          <div class="router">
+            <Router>
+              <Route path="/" component={HomeScreen} />
+              <Route default component={NotFound} />
+            </Router>
+          </div>
+
+          <AudioPlayer />
         </main>
 
         <Sidebar />
