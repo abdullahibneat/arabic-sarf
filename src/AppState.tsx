@@ -2,12 +2,14 @@ const LOCAL_STORAGE_KEY = 'state'
 
 export type AppStateType = {
   tasreefGroupMode: 'list' | 'by-person' | 'by-gender'
+  playbackSpeed: number
 }
 
 export type SetItemListener = (state: AppStateType) => void
 
 const defaultState: AppStateType = {
   tasreefGroupMode: 'list',
+  playbackSpeed: 1,
 }
 
 class State {
@@ -62,6 +64,13 @@ class State {
         typeof localStorageState.tasreefGroupMode === 'string'
       ) {
         this.state.tasreefGroupMode = localStorageState.tasreefGroupMode
+      }
+
+      if (
+        'playbackSpeed' in localStorageState &&
+        typeof localStorageState.playbackSpeed === 'number'
+      ) {
+        this.state.playbackSpeed = localStorageState.playbackSpeed
       }
     } catch (_) {
       // ignore errors

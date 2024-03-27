@@ -1,0 +1,32 @@
+.audio-player {
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: solid 1px var(--border);
+  gap: 16px;
+  padding: 0 32px;
+
+  input {
+    flex: 1;
+    max-width: 300px;
+  }
+
+  .playback-speed {
+    display: flex;
+    gap: 8px;
+
+    div {
+      transition: color 250ms;
+      cursor: pointer;
+      user-select: none;
+
+      &.active,
+      &:hover {
+        div {
+          color: var(--text) !important;
+        }
+      }
+    }
+  }
+}
