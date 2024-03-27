@@ -1,28 +1,23 @@
 import '../styles/Tasreef.scss'
 
 import { AppStateType } from '../AppState'
-import { VerbChapter } from '../../data/types'
+import { VerbTasreef } from '../../data/types'
 import useAppState from '../hooks/useAppState'
-import { useMemo } from 'preact/hooks'
 
 export type TasreefProps = {
-  verbChapter: VerbChapter
+  title: string
+  verbTasreef: VerbTasreef
   groupMode?: AppStateType['tasreefGroupMode']
 }
 
-const Tasreef = ({ verbChapter, groupMode }: TasreefProps) => {
+const Tasreef = ({ title, verbTasreef, groupMode }: TasreefProps) => {
   const { tasreefGroupMode } = useAppState()
-
-  const verbTasreef = useMemo(
-    () => verbChapter.conjugations.ماضي.معروف,
-    [verbChapter],
-  )
 
   return (
     <div class={`tasreef ${groupMode || tasreefGroupMode}`}>
       <div class="first person">
         <div class="gender">
-          <div>{verbChapter.باب}</div>
+          <div>{title}</div>
         </div>
       </div>
 
