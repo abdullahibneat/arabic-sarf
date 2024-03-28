@@ -1,5 +1,7 @@
 import '../styles/Sidebar.scss'
 
+import { useLocation, useRoute } from 'preact-iso'
+
 import AppState from '../AppState'
 import Flex from './Flex'
 import IconButton from './IconButton'
@@ -13,6 +15,9 @@ const Sidebar = () => {
   const [open, setOpen] = useState(false)
 
   const { tasreefGroupMode } = useAppState()
+
+  const route = useRoute()
+  const location = useLocation()
 
   const {
     صحيح: { I: mujarrad, ...mazeedFih },
@@ -34,15 +39,22 @@ const Sidebar = () => {
       </div>
 
       <Flex flex={1} column gap={36} padding="16px 24px" overflow="auto">
-        <MenuItem tag="All" title="Overview" />
+        <MenuItem
+          tag="All"
+          title="Overview"
+          active={route.path === '/'}
+          onClick={() => location.route('/')}
+        />
 
         <Flex column gap={8}>
           {Object.values(mujarrad).map(
-            ({ باب, archetype: { ماضي, مضارع } }) => (
+            ({ باب, form, archetype: { ماضي, مضارع } }) => (
               <MenuItem
                 key={باب}
                 tag={`1${letters.shift()}`}
                 title={`${ماضي.معروف} ${مضارع.معروف}`}
+                active={decodeURI(route.path) === `/صحيح/${form}/${باب}`}
+                onClick={() => location.route(`/صحيح/${form}/${باب}`)}
               />
             ),
           )}
@@ -56,6 +68,8 @@ const Sidebar = () => {
                 key={باب}
                 tag={form}
                 title={`${ماضي.معروف} ${مضارع.معروف}`}
+                active={decodeURI(route.path) === `/صحيح/${form}`}
+                onClick={() => location.route(`/صحيح/${form}`)}
               />
             ))}
         </Flex>
