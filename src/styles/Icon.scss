@@ -1,0 +1,7 @@
+.icon-container {
+  --fill: var(--base-fill);
+
+  &:hover {
+    --fill: var(--hover-fill);
+  }
+}
