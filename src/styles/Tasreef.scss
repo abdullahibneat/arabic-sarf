@@ -5,6 +5,26 @@
   gap: 16px;
   direction: ltr;
 
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    border: solid 1px var(--border);
+    border-radius: 6px;
+    position: relative;
+
+    .play {
+      position: absolute;
+      top: 0;
+      left: 6px;
+      bottom: 0;
+
+      display: flex;
+      align-items: center;
+    }
+  }
+
   .person {
     display: flex;
     flex-direction: column;
@@ -41,6 +61,10 @@
     flex-direction: row-reverse;
     flex-wrap: wrap;
     gap: 16px;
+
+    .header {
+      flex-basis: 100%;
+    }
 
     .person {
       flex-direction: column;

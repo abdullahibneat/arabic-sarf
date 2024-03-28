@@ -32,6 +32,18 @@ const TasreefScreen = () => {
     return verbForm[params.verbChapter] || null
   }, [params.verbType, params.verbForm, params.verbChapter])
 
+  const audioPath = useMemo(() => {
+    let path = `/recordings/${params.verbType}/${asRomanNumeral(
+      Number(params.verbForm),
+    )}`
+
+    if (verbChapter?.form === 1) {
+      path += `/${verbChapter.باب}`
+    }
+
+    return path
+  }, [params.verbType, params.verbForm, verbChapter])
+
   return (
     <Screen>
       {verbChapter && (
@@ -46,10 +58,12 @@ const TasreefScreen = () => {
               <Tasreef
                 title="ماضي"
                 verbTasreef={verbChapter.conjugations.ماضي.معروف}
+                audioSrc={audioPath + '/ماضي.mp3'}
               />
               <Tasreef
                 title="مضارع"
                 verbTasreef={verbChapter.conjugations.مضارع.معروف}
+                audioSrc={audioPath + '/مضارع.mp3'}
               />
             </Flex>
           </Flex>

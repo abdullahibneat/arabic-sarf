@@ -1,24 +1,38 @@
 import '../styles/Tasreef.scss'
 
 import { AppStateType } from '../AppState'
+import IconButton from './IconButton'
 import { VerbTasreef } from '../../data/types'
 import useAppState from '../hooks/useAppState'
+import useAudioPlayer from '../hooks/useAudioPlayer'
 
 export type TasreefProps = {
   title: string
   verbTasreef: VerbTasreef
+  audioSrc?: string
   groupMode?: AppStateType['tasreefGroupMode']
 }
 
-const Tasreef = ({ title, verbTasreef, groupMode }: TasreefProps) => {
+const Tasreef = ({ title, verbTasreef, audioSrc, groupMode }: TasreefProps) => {
   const { tasreefGroupMode } = useAppState()
+
+  const audioPlayer = useAudioPlayer()
 
   return (
     <div class={`tasreef ${groupMode || tasreefGroupMode}`}>
-      <div class="first person">
-        <div class="gender">
-          <div>{title}</div>
-        </div>
+      <div class="header">
+        {audioSrc && (
+          <div class="play">
+            <IconButton
+              size="micro"
+              name="play"
+              color="text-secondary"
+              hoverColor="text"
+              onClick={() => audioPlayer.setSrc(audioSrc)}
+            />
+          </div>
+        )}
+        <div>{title}</div>
       </div>
 
       <div class="person">

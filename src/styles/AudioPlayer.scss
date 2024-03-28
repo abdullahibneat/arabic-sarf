@@ -1,11 +1,17 @@
 .audio-player {
-  height: 64px;
+  height: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   border-top: solid 1px var(--border);
   gap: 16px;
   padding: 0 32px;
+  transition: height 250ms;
+  overflow: hidden;
+
+  &.visible {
+    height: 64px;
+  }
 
   input {
     flex: 1;
