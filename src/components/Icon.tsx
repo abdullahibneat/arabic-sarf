@@ -9,6 +9,7 @@ export type IconProps = {
   color?: 'white' | 'text' | 'text' | 'text-secondary' | 'hover' | 'border'
   hoverColor?: 'white' | 'text' | 'text' | 'text-secondary' | 'hover' | 'border'
   name: keyof typeof DefaultIcons
+  padding?: number
 } & (
   | { size?: 'default' | never; name: keyof typeof DefaultIcons }
   | { size: 'micro'; name: keyof typeof MicroIcons }
@@ -19,6 +20,7 @@ const Icon = ({
   name,
   color = 'text',
   hoverColor = 'text',
+  padding,
 }: IconProps) => {
   const IconComponent = useMemo(() => {
     if (size === 'micro') return MicroIcons[name]
@@ -31,6 +33,7 @@ const Icon = ({
       style={{
         '--base-fill': `var(--${color})`,
         '--hover-fill': `var(--${hoverColor})`,
+        padding,
       }}
     >
       <IconComponent />

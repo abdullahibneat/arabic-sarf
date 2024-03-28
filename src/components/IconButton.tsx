@@ -11,7 +11,7 @@ export type IconButtonProps = IconProps & {
 
 const IconButton = ({ active, onClick, ...iconProps }: IconButtonProps) => (
   <button class={`icon-button ${active ? 'active' : ''}`} onClick={onClick}>
-    <Icon {...iconProps} />
+    <Icon padding={4} {...iconProps} />
   </button>
 )
 
