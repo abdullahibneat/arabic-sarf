@@ -29,7 +29,7 @@ const Text = ({ type, color = 'text', style = {}, children }: TextProps) => {
 export default Text
 
 const types: Record<
-  'h1' | 'h2' | 'bold' | 'small' | 'small-bold',
+  'h1' | 'h2' | 'bold' | 'medium' | 'small' | 'small-medium' | 'small-bold',
   CSSProperties
 > = {
   h1: {
@@ -45,8 +45,16 @@ const types: Record<
   bold: {
     fontWeight: 700,
   },
+  medium: {
+    fontWeight: 600,
+  },
   small: {
     fontSize: 14,
+    lineHeight: '24px',
+  },
+  'small-medium': {
+    fontSize: 14,
+    fontWeight: 600,
     lineHeight: '24px',
   },
   'small-bold': {

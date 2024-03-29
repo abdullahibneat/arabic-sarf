@@ -13,7 +13,7 @@ export type MenuItemProps = {
 
 const MenuItem = ({ tag, title, active, onClick }: MenuItemProps) => (
   <div class={`menu-item ${active ? 'active' : ''}`} onClick={onClick}>
-    <Text type="small-bold" style={{ flex: 1 }}>
+    <Text type="small-medium" style={{ flex: 1 }}>
       {title}
     </Text>
     {tag !== undefined && <Tag>{tag}</Tag>}
