@@ -47,6 +47,8 @@ import wajada from './mithaal/1/وَجَدَ.json'
 import wajala from './mithaal/1/وَجِلَ.json'
 import wahaba from './mithaal/1/وَهَبَ.json'
 
+import mithaalForm8 from './mithaal/8.json'
+
 import { VerbType } from './types'
 
 const صحيح: VerbType = {
