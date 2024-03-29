@@ -25,6 +25,11 @@ const AudioPlayer = ({ setAudioPlayer }: Props) => {
     audio.addEventListener('timeupdate', () =>
       setCurrentTime(audio.currentTime),
     )
+    audio.addEventListener('ended', () => {
+      if (!audio.loop) {
+        setPlaying(false)
+      }
+    })
   }, [])
 
   useEffect(() => {
