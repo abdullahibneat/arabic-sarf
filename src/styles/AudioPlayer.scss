@@ -1,11 +1,11 @@
 .audio-player {
   height: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   border-top: solid 1px var(--border);
-  gap: 16px;
-  padding: 0 32px;
+  gap: 4px;
+  padding: 0 16px;
   transition: height 250ms;
   overflow: hidden;
 
@@ -13,24 +13,33 @@
     height: 64px;
   }
 
-  input {
+  .main-controls {
     flex: 1;
-    max-width: 300px;
-  }
-
-  .playback-speed {
     display: flex;
-    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
 
-    div {
-      transition: color 250ms;
-      cursor: pointer;
-      user-select: none;
+    input {
+      flex: 1;
+      width: 0;
+      max-width: 300px;
+    }
 
-      &.active,
-      &:hover {
-        div {
-          color: var(--text) !important;
+    .playback-speed {
+      display: flex;
+      gap: 8px;
+
+      div {
+        transition: color 250ms;
+        cursor: pointer;
+        user-select: none;
+
+        &.active,
+        &:hover {
+          div {
+            color: var(--text) !important;
+          }
         }
       }
     }

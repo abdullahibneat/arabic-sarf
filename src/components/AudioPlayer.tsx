@@ -1,6 +1,6 @@
 import '../styles/AudioPlayer.scss'
 
-import { useEffect, useRef, useState } from 'preact/hooks'
+import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
 import AppState from '../AppState'
 import { AudioPlayerContextType } from '../contexts/AudioPlayerContext'
@@ -49,64 +49,81 @@ const AudioPlayer = ({ setAudioPlayer }: Props) => {
     })
   }, [])
 
-  const play = async () => {
+  const play = useCallback(async () => {
     await audio?.play()
     setPlaying(true)
-  }
+  }, [])
 
-  const pause = () => {
+  const pause = useCallback(() => {
     audio?.pause()
     setPlaying(false)
-  }
+  }, [])
 
-  const close = () => {
+  const close = useCallback(() => {
     audio.src = ''
     setPlaying(false)
     setVisible(false)
-  }
+  }, [])
 
-  const setSrc = async (src: string) => {
+  const setSrc = useCallback(async (src: string) => {
     audio.src = src
-    audio.playbackRate = playbackSpeed
+    // TODO: Use forwardRef to pass audio player back to parent
+    // Currently it's using setAudioPlayer in the first render,
+    // so it won't use the new playbackRate if it's changed in the middle
+    audio.playbackRate = AppState.getItem('playbackSpeed')
     await audio.play()
     setPlaying(true)
     setVisible(true)
-  }
+  }, [])
 
   return (
     <div class={`audio-player ${visible ? 'visible' : ''}`}>
-      {playing && <IconButton name="pause" onClick={pause} />}
+      <div class="gap" />
 
-      {!playing && <IconButton name="play" onClick={play} />}
+      <div class="main-controls">
+        {playing && <IconButton name="pause" onClick={pause} />}
 
-      <input
-        type="range"
-        max={audio.duration}
-        value={currentTime}
-        onChange={(e) => {
-          if (e.target && 'value' in e.target)
-            audio.currentTime = e.target.value as number
-        }}
-      />
+        {!playing && <IconButton name="play" onClick={play} />}
 
-      <div class="playback-speed">
-        {[1, 1.5, 2].map((speed) => (
-          <div
-            key={String(speed)}
-            class={playbackSpeed === speed ? 'active' : ''}
-            onClick={() => AppState.setItem('playbackSpeed', speed)}
-          >
-            <Text type="small-bold" color="text-secondary">
-              {`${speed}x`}
-            </Text>
-          </div>
-        ))}
+        <input
+          type="range"
+          max={Math.floor(audio.duration)}
+          value={currentTime}
+          onChange={(e) => {
+            if (e.target && 'value' in e.target)
+              audio.currentTime = e.target.value as number
+          }}
+        />
+
+        <div class="playback-speed">
+          {[1, 1.5, 2].map((speed) => (
+            <div
+              key={String(speed)}
+              class={playbackSpeed === speed ? 'active' : ''}
+              onClick={() => AppState.setItem('playbackSpeed', speed)}
+            >
+              <Text type="small-bold" color="text-secondary">
+                {`${speed}x`}
+              </Text>
+            </div>
+          ))}
+        </div>
+
+        <IconButton
+          name="repeat"
+          active={playbackLoop}
+          onClick={() => AppState.setItem('playbackLoop', !playbackLoop)}
+        />
       </div>
 
+      <div class="gap" />
+
       <IconButton
-        name="repeat"
-        active={playbackLoop}
-        onClick={() => AppState.setItem('playbackLoop', !playbackLoop)}
+        size="micro"
+        name="close"
+        color="text-secondary"
+        hoverColor="text"
+        onClick={close}
       />
     </div>
   )
