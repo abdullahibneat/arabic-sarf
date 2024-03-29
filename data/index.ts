@@ -112,7 +112,15 @@ const مثال: VerbType = {
     وَجِلَ: wajala,
     وَهَبَ: wahaba,
   },
+  II: null,
+  III: null,
+  IV: null,
+  V: null,
+  VI: null,
+  VII: null,
   VIII: mithaalForm8,
+  IX: null,
+  X: null,
 }
 
 const verbTypes: Record<string, VerbType> = { صحيح, أجوف, ناقص, مثال }
