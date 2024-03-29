@@ -27,12 +27,12 @@ const HomeScreen = () => {
       if (isVerbChapter(value)) {
         const chapter = replaceRoots(value)
         $sections[2].tasreefs.push({
-          title: `${chapter.form} - ${chapter.باب}`,
+          title: `${chapter.form} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
           verbTasreef: chapter.conjugations.ماضي.معروف,
         })
 
         $sections[3].tasreefs.push({
-          title: `${chapter.form} - ${chapter.باب}`,
+          title: `${chapter.form} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
           verbTasreef: chapter.conjugations.مضارع.معروف,
         })
       } else if (value) {
@@ -44,12 +44,12 @@ const HomeScreen = () => {
           const letter = letters.shift()
 
           $sections[0].tasreefs.push({
-            title: `1${letter} - ${chapter.باب}`,
+            title: `1${letter} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
             verbTasreef: chapter.conjugations.ماضي.معروف,
           })
 
           $sections[1].tasreefs.push({
-            title: `1${letter} - ${chapter.باب}`,
+            title: `1${letter} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
             verbTasreef: chapter.conjugations.مضارع.معروف,
           })
         }
