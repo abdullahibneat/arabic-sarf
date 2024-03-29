@@ -14,6 +14,8 @@ const replaceRoots = (
 
   const replaced = replace(obj, /[فعل]/g, rootLetters)
 
+  replaced.باب = obj.باب
+
   replaced.archetype.root_letters = [
     obj.archetype.root_letters[0],
     obj.archetype.root_letters[1],
