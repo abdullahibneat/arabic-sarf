@@ -1,34 +1,10 @@
-import { VerbType } from './types'
-import ajwafForm10 from './ajwaf/10.json'
-import ajwafForm2 from './ajwaf/2.json'
-import ajwafForm3 from './ajwaf/3.json'
-import ajwafForm4 from './ajwaf/4.json'
-import ajwafForm5 from './ajwaf/5.json'
-import ajwafForm6 from './ajwaf/6.json'
-import ajwafForm7 from './ajwaf/7.json'
-import ajwafForm8 from './ajwaf/8.json'
-import ajwafForm9 from './ajwaf/9.json'
-import baaa from './ajwaf/1/بَاعَ.json'
-import daaa from './naqis/1/دَعَا.json'
+import nasara from './sahih/1/نَصَرَ.json'
 import daraba from './sahih/1/ضَرَبَ.json'
 import fataha from './sahih/1/فَتَحَ.json'
-import hasiba from './sahih/1/حَسِبَ.json'
+import samia from './sahih/1/سَمِعَ.json'
 import karuma from './sahih/1/كَرُمَ.json'
-import khaafa from './ajwaf/1/خَافَ.json'
-import nahaa from './naqis/1/نَهَى.json'
-import naqisForm10 from './naqis/10.json'
-import naqisForm2 from './naqis/2.json'
-import naqisForm3 from './naqis/3.json'
-import naqisForm4 from './naqis/4.json'
-import naqisForm5 from './naqis/5.json'
-import naqisForm6 from './naqis/6.json'
-import naqisForm7 from './naqis/7.json'
-import naqisForm8 from './naqis/8.json'
-import nasara from './sahih/1/نَصَرَ.json'
-import qaala from './ajwaf/1/قَالَ.json'
-import radia from './naqis/1/رَضِيَ.json'
-import ramaa from './naqis/1/رَمَى.json'
-import sahihForm10 from './sahih/10.json'
+import hasiba from './sahih/1/حَسِبَ.json'
+
 import sahihForm2 from './sahih/2.json'
 import sahihForm3 from './sahih/3.json'
 import sahihForm4 from './sahih/4.json'
@@ -37,11 +13,43 @@ import sahihForm6 from './sahih/6.json'
 import sahihForm7 from './sahih/7.json'
 import sahihForm8 from './sahih/8.json'
 import sahihForm9 from './sahih/9.json'
-import samia from './sahih/1/سَمِعَ.json'
+import sahihForm10 from './sahih/10.json'
 
-const صحيح: VerbType<
-  'نَصَرَ' | 'ضَرَبَ' | 'فَتَحَ' | 'سَمِعَ' | 'حَسِبَ' | 'كَرُمَ'
-> = {
+import qaala from './ajwaf/1/قَالَ.json'
+import baaa from './ajwaf/1/بَاعَ.json'
+import khaafa from './ajwaf/1/خَافَ.json'
+
+import ajwafForm2 from './ajwaf/2.json'
+import ajwafForm3 from './ajwaf/3.json'
+import ajwafForm4 from './ajwaf/4.json'
+import ajwafForm5 from './ajwaf/5.json'
+import ajwafForm6 from './ajwaf/6.json'
+import ajwafForm7 from './ajwaf/7.json'
+import ajwafForm8 from './ajwaf/8.json'
+import ajwafForm9 from './ajwaf/9.json'
+import ajwafForm10 from './ajwaf/10.json'
+
+import daaa from './naqis/1/دَعَا.json'
+import ramaa from './naqis/1/رَمَى.json'
+import radia from './naqis/1/رَضِيَ.json'
+import nahaa from './naqis/1/نَهَى.json'
+
+import naqisForm2 from './naqis/2.json'
+import naqisForm3 from './naqis/3.json'
+import naqisForm4 from './naqis/4.json'
+import naqisForm5 from './naqis/5.json'
+import naqisForm6 from './naqis/6.json'
+import naqisForm7 from './naqis/7.json'
+import naqisForm8 from './naqis/8.json'
+import naqisForm10 from './naqis/10.json'
+
+import wajada from './mithaal/1/وَجَدَ.json'
+import wajala from './mithaal/1/وَجِلَ.json'
+import wahaba from './mithaal/1/وَهَبَ.json'
+
+import { VerbType } from './types'
+
+const صحيح: VerbType = {
   I: {
     نَصَرَ: nasara,
     ضَرَبَ: daraba,
@@ -59,9 +67,9 @@ const صحيح: VerbType<
   VIII: sahihForm8,
   IX: sahihForm9,
   X: sahihForm10,
-} as const
+}
 
-const أجوف: VerbType<'قَالَ' | 'بَاعَ' | 'خَافَ'> = {
+const أجوف: VerbType = {
   I: {
     قَالَ: qaala,
     بَاعَ: baaa,
@@ -76,9 +84,9 @@ const أجوف: VerbType<'قَالَ' | 'بَاعَ' | 'خَافَ'> = {
   VIII: ajwafForm8,
   IX: ajwafForm9,
   X: ajwafForm10,
-} as const
+}
 
-const ناقص: VerbType<'دَعَا' | 'رَمَى' | 'رَضِيَ' | 'نَهَى'> = {
+const ناقص: VerbType = {
   I: {
     دَعَا: daaa,
     رَمَى: ramaa,
@@ -94,8 +102,17 @@ const ناقص: VerbType<'دَعَا' | 'رَمَى' | 'رَضِيَ' | 'نَه�
   VIII: naqisForm8,
   IX: null,
   X: naqisForm10,
-} as const
+}
 
-const verbTypes = { صحيح, أجوف, ناقص } as const
+const مثال: VerbType = {
+  I: {
+    وَجَدَ: wajada,
+    وَجِلَ: wajala,
+    وَهَبَ: wahaba,
+  },
+  VIII: mithaalForm8,
+}
+
+const verbTypes: Record<string, VerbType> = { صحيح, أجوف, ناقص, مثال }
 
 export default verbTypes
