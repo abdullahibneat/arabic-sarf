@@ -1,5 +1,6 @@
 import '../styles/Sidebar.scss'
 
+import { useCallback, useState } from 'preact/hooks'
 import { useLocation, useRoute } from 'preact-iso'
 
 import AppState from '../AppState'
@@ -9,7 +10,6 @@ import MenuItem from './MenuItem'
 import Text from './Text'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
-import { useState } from 'preact/hooks'
 import verbTypes from '../../data'
 
 const Sidebar = () => {
@@ -25,6 +25,14 @@ const Sidebar = () => {
   } = verbTypes
 
   const letters = ['a', 'b', 'c', 'd', 'e', 'f']
+
+  const handlePress = useCallback(
+    (route: string) => () => {
+      location.route(route)
+      setOpen(false)
+    },
+    [],
+  )
 
   return (
     <aside class={open ? 'open' : ''}>
@@ -44,7 +52,7 @@ const Sidebar = () => {
           tag="All"
           title="Overview"
           active={route.path === '/'}
-          onClick={() => location.route('/')}
+          onClick={handlePress('/')}
         />
 
         <Flex column gap={8}>
@@ -60,7 +68,7 @@ const Sidebar = () => {
                 tag={`1${letters.shift()}`}
                 title={`${ماضي.معروف} ${مضارع.معروف}`}
                 active={decodeURI(route.path) === `/صحيح/${form}/${باب}`}
-                onClick={() => location.route(`/صحيح/${form}/${باب}`)}
+                onClick={handlePress(`/صحيح/${form}/${باب}`)}
               />
             )
           })}
@@ -81,7 +89,7 @@ const Sidebar = () => {
                   tag={form}
                   title={`${ماضي.معروف} ${مضارع.معروف}`}
                   active={decodeURI(route.path) === `/صحيح/${form}`}
-                  onClick={() => location.route(`/صحيح/${form}`)}
+                  onClick={handlePress(`/صحيح/${form}`)}
                 />
               )
             })}
