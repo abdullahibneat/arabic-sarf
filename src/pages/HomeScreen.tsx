@@ -4,6 +4,7 @@ import Flex from '../components/Flex'
 import Screen from '../components/Screen'
 import Text from '../components/Text'
 import isVerbChapter from '../helpers/isVerbChapter'
+import replaceRoots from '../helpers/replaceRoots'
 import { useMemo } from 'preact/hooks'
 import verbTypes from '../../data'
 
@@ -24,29 +25,32 @@ const HomeScreen = () => {
 
     for (const value of Object.values(صحيح)) {
       if (isVerbChapter(value)) {
+        const chapter = replaceRoots(value)
         $sections[2].tasreefs.push({
-          title: `${value.form} - ${value.باب}`,
-          verbTasreef: value.conjugations.ماضي.معروف,
+          title: `${chapter.form} - ${chapter.باب}`,
+          verbTasreef: chapter.conjugations.ماضي.معروف,
         })
 
         $sections[3].tasreefs.push({
-          title: `${value.form} - ${value.باب}`,
-          verbTasreef: value.conjugations.مضارع.معروف,
+          title: `${chapter.form} - ${chapter.باب}`,
+          verbTasreef: chapter.conjugations.مضارع.معروف,
         })
       } else if (value) {
         const letters = ['a', 'b', 'c', 'd', 'e', 'f']
 
         for (const archetype of Object.values(value)) {
+          const chapter = replaceRoots(archetype)
+
           const letter = letters.shift()
 
           $sections[0].tasreefs.push({
-            title: `1${letter} - ${archetype.باب}`,
-            verbTasreef: archetype.conjugations.ماضي.معروف,
+            title: `1${letter} - ${chapter.باب}`,
+            verbTasreef: chapter.conjugations.ماضي.معروف,
           })
 
           $sections[1].tasreefs.push({
-            title: `1${letter} - ${archetype.باب}`,
-            verbTasreef: archetype.conjugations.مضارع.معروف,
+            title: `1${letter} - ${chapter.باب}`,
+            verbTasreef: chapter.conjugations.مضارع.معروف,
           })
         }
       }

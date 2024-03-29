@@ -6,6 +6,7 @@ import Tasreef from '../components/Tasreef'
 import Text from '../components/Text'
 import asRomanNumeral from '../helpers/asRomanNumeral'
 import isVerbChapter from '../helpers/isVerbChapter'
+import replaceRoots from '../helpers/replaceRoots'
 import { useMemo } from 'preact/hooks'
 import { useRoute } from 'preact-iso'
 import verbTypes from '../../data'
@@ -25,11 +26,15 @@ const TasreefScreen = () => {
 
     if (!verbForm) return null
 
-    if (isVerbChapter(verbForm)) {
-      return verbForm
+    const chapter = isVerbChapter(verbForm)
+      ? verbForm
+      : verbForm[params.verbChapter]
+
+    if (chapter) {
+      return replaceRoots(chapter)
     }
 
-    return verbForm[params.verbChapter] || null
+    return null
   }, [params.verbType, params.verbForm, params.verbChapter])
 
   const audioPath = useMemo(() => {

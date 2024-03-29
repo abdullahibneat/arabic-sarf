@@ -7,6 +7,7 @@ import Flex from './Flex'
 import IconButton from './IconButton'
 import MenuItem from './MenuItem'
 import Text from './Text'
+import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
 import { useState } from 'preact/hooks'
 import verbTypes from '../../data'
@@ -47,8 +48,13 @@ const Sidebar = () => {
         />
 
         <Flex column gap={8}>
-          {Object.values(mujarrad).map(
-            ({ باب, form, archetype: { ماضي, مضارع } }) => (
+          {Object.values(mujarrad).map((originalChapter) => {
+            const {
+              باب,
+              form,
+              archetype: { ماضي, مضارع },
+            } = replaceRoots(originalChapter)
+            return (
               <MenuItem
                 key={باب}
                 tag={`1${letters.shift()}`}
@@ -56,22 +62,29 @@ const Sidebar = () => {
                 active={decodeURI(route.path) === `/صحيح/${form}/${باب}`}
                 onClick={() => location.route(`/صحيح/${form}/${باب}`)}
               />
-            ),
-          )}
+            )
+          })}
         </Flex>
 
         <Flex column gap={8}>
           {Object.values(mazeedFih)
             .flatMap((chapter) => chapter ?? [])
-            .map(({ باب, form, archetype: { ماضي, مضارع } }) => (
-              <MenuItem
-                key={باب}
-                tag={form}
-                title={`${ماضي.معروف} ${مضارع.معروف}`}
-                active={decodeURI(route.path) === `/صحيح/${form}`}
-                onClick={() => location.route(`/صحيح/${form}`)}
-              />
-            ))}
+            .map((originalChapter) => {
+              const {
+                باب,
+                form,
+                archetype: { ماضي, مضارع },
+              } = replaceRoots(originalChapter)
+              return (
+                <MenuItem
+                  key={باب}
+                  tag={form}
+                  title={`${ماضي.معروف} ${مضارع.معروف}`}
+                  active={decodeURI(route.path) === `/صحيح/${form}`}
+                  onClick={() => location.route(`/صحيح/${form}`)}
+                />
+              )
+            })}
         </Flex>
       </Flex>
 
