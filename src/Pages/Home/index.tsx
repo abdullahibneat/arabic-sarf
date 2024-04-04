@@ -22,6 +22,11 @@ const Home = () => {
         heading: 'ناقص',
         description: 'A verb where the third of the 3 root letters is weak',
       },
+      {
+        id: 'مثال',
+        heading: 'مثال',
+        description: 'A verb where the first of the 3 root letters is weak',
+      },
     ],
     [],
   )

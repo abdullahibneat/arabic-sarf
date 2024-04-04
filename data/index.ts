@@ -43,6 +43,13 @@ import naqisForm7 from './naqis/7.json'
 import naqisForm8 from './naqis/8.json'
 import naqisForm10 from './naqis/10.json'
 
+
+import wajada from './mithaal/1/وَجَدَ.json'
+import wajala from './mithaal/1/وَجِلَ.json'
+import wahaba from './mithaal/1/وَهَبَ.json'
+
+import mithaalForm8 from './mithaal/8.json'
+
 import madda from './muda\'af/1/مَدَّ.json'
 
 import { VerbType } from './types'
@@ -102,12 +109,30 @@ const ناقص: VerbType = {
   X: naqisForm10,
 }
 
+const مثال: VerbType = {
+  I: {
+    وَجَدَ: wajada,
+    وَجِلَ: wajala,
+    وَهَبَ: wahaba,
+  },
+  II: null,
+  III: null,
+  IV: null,
+  V: null,
+  VI: null,
+  VII: null,
+  VIII: mithaalForm8,
+  IX: null,
+  X: null,
+}
+
 const مضاعف: VerbType = {
   I: {
     مَدَّ: madda,
   }
 }
 
-const verbTypes: Record<string, VerbType> = { صحيح, أجوف, ناقص, مضاعف }
+const verbTypes: Record<string, VerbType> = { صحيح, أجوف, ناقص, مثال, مضاعف }
+
 
 export default verbTypes
