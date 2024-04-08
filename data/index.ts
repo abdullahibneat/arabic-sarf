@@ -53,6 +53,15 @@ import madda from './muda\'af/1/مَدَّ.json'
 import farra from './muda\'af/1/فَرَّ.json'
 import massa from './muda\'af/1/مَسَّ.json'
 
+import mudaafForm2 from './muda\'af/2.json'
+import mudaafForm3 from './muda\'af/3.json'
+import mudaafForm4 from './muda\'af/4.json'
+import mudaafForm5 from './muda\'af/5.json'
+import mudaafForm6 from './muda\'af/6.json'
+import mudaafForm7 from './muda\'af/7.json'
+import mudaafForm8 from './muda\'af/8.json'
+import mudaafForm10 from './muda\'af/10.json'
+
 import { VerbType } from './types'
 
 const صحيح: VerbType = {
@@ -132,7 +141,17 @@ const مضاعف: VerbType = {
     مَدَّ: madda,
  فَرَّ: farra,
  مَسَّ: massa,
-  }
+  },
+  II: mudaafForm2,
+  III: mudaafForm3,
+  IV: mudaafForm4,
+  V: mudaafForm5,
+  VI: mudaafForm6,
+  VII: mudaafForm7,
+  VIII: mudaafForm8,
+  IX: null,
+  X: mudaafForm10,
+
 }
 
 const verbTypes: Record<string, VerbType> = { مضاعف, صحيح, أجوف, ناقص, مثال }
