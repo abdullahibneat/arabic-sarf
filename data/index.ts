@@ -49,9 +49,9 @@ import wahaba from './mithaal/1/وَهَبَ.json'
 
 import mithaalForm8 from './mithaal/8.json'
 
-import madda from './mudaaf/1/مَدَّ.json'
-import farra from './mudaaf/1/فَرَّ.json'
-import massa from './mudaaf/1/مَسَّ.json'
+import madda from './mudaaf/1/مَدَّ.json'
+import farra from './mudaaf/1/فَرَّ.json'
+import massa from './mudaaf/1/مَسَّ.json'
 
 import mudaafForm2 from './mudaaf/2.json'
 import mudaafForm3 from './mudaaf/3.json'
@@ -154,6 +154,6 @@ const مضاعف: VerbType = {
 
 }
 
-const verbTypes: Record<string, VerbType> = { مضاعف, صحيح, أجوف, ناقص, مثال }
+const verbTypes: Record<string, VerbType> = { صحيح, أجوف, ناقص, مثال, مضاعف }
 
 export default verbTypes
