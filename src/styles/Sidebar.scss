@@ -17,12 +17,14 @@ aside {
   .header {
     border-bottom: solid 1px var(--border);
     position: relative;
+    padding: 0 24px;
+    user-select: none;
 
     .mobile-menu {
       opacity: 0;
       position: absolute;
       top: 0;
-      right: 16px;
+      right: 24px;
       bottom: 0;
       display: flex;
       align-items: center;
@@ -46,8 +48,11 @@ aside {
     height: 100%;
     transition: height 250ms;
 
-    .header .mobile-menu {
-      opacity: 1;
+    .header {
+      justify-content: flex-start;
+      .mobile-menu {
+        opacity: 1;
+      }
     }
 
     &:not(.open) {
