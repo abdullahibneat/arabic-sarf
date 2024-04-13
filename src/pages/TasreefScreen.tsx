@@ -60,16 +60,20 @@ const TasreefScreen = () => {
 
           <Flex justifyContent="center">
             <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
-              <Tasreef
-                title="ماضي"
-                verbTasreef={verbChapter.conjugations.ماضي.معروف}
-                audioSrc={audioPath + '/ماضي.mp3'}
-              />
-              <Tasreef
-                title="مضارع"
-                verbTasreef={verbChapter.conjugations.مضارع.معروف}
-                audioSrc={audioPath + '/مضارع.mp3'}
-              />
+              <div style={{ direction: 'ltr' }}>
+                <Tasreef
+                  title="ماضي"
+                  verbTasreef={verbChapter.conjugations.ماضي.معروف}
+                  audioSrc={audioPath + '/ماضي.mp3'}
+                />
+              </div>
+              <div style={{ direction: 'ltr' }}>
+                <Tasreef
+                  title="مضارع"
+                  verbTasreef={verbChapter.conjugations.مضارع.معروف}
+                  audioSrc={audioPath + '/مضارع.mp3'}
+                />
+              </div>
             </Flex>
           </Flex>
         </Flex>

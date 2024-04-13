@@ -72,12 +72,16 @@ const HomeScreen = () => {
             <Flex justifyContent="center">
               <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
                 {section.tasreefs.map((tasreef, j) => (
-                  <Tasreef
+                  <div
                     key={`section-${i}-tasreef-${j}`}
-                    title={tasreef.title}
-                    verbTasreef={tasreef.verbTasreef}
-                    groupMode="list"
-                  />
+                    style={{ direction: 'ltr' }}
+                  >
+                    <Tasreef
+                      title={tasreef.title}
+                      verbTasreef={tasreef.verbTasreef}
+                      groupMode="list"
+                    />
+                  </div>
                 ))}
               </Flex>
             </Flex>
