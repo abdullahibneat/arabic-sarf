@@ -40,11 +40,30 @@
 
       div {
         display: flex;
-        justify-content: center;
-        align-items: center;
         height: 36px;
-        padding: 0 12px;
-        white-space: nowrap;
+
+        p,
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        p {
+          flex: 1;
+          direction: rtl;
+          padding: 0 12px;
+          white-space: nowrap;
+        }
+
+        span {
+          width: 24px;
+          user-select: none;
+          color: var(--text-secondary);
+          border-left: solid 1px var(--border);
+          font-size: 14px;
+          line-height: 24px;
+        }
       }
 
       div + div {
@@ -63,6 +82,15 @@
     .person {
       flex-direction: row-reverse;
       gap: 16px;
+
+      .gender:nth-child(2n) div {
+        flex-direction: row-reverse;
+
+        span {
+          border-left: none;
+          border-right: solid 1px var(--border);
+        }
+      }
     }
   }
 
@@ -82,6 +110,17 @@
       gap: 0;
       border: solid 1px var(--border);
       border-radius: 6px;
+
+      &:nth-child(2n + 1) {
+        .gender div {
+          flex-direction: row-reverse;
+
+          span {
+            border-left: none;
+            border-right: solid 1px var(--border);
+          }
+        }
+      }
 
       &.first {
         flex-basis: 100%;

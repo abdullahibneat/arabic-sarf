@@ -37,34 +37,76 @@ const Tasreef = ({ title, verbTasreef, audioSrc, groupMode }: TasreefProps) => {
 
       <div class="person">
         <div class="gender">
-          <div>{verbTasreef['3rd']['masculine']['هُوَ']}</div>
-          <div>{verbTasreef['3rd']['masculine']['هُمَا']}</div>
-          <div>{verbTasreef['3rd']['masculine']['هُمْ']}</div>
+          <div>
+            <p>{verbTasreef['3rd']['masculine']['هُوَ']}</p>
+            <span>1</span>
+          </div>
+          <div>
+            <p>{verbTasreef['3rd']['masculine']['هُمَا']}</p>
+            <span>2</span>
+          </div>
+          <div>
+            <p>{verbTasreef['3rd']['masculine']['هُمْ']}</p>
+            <span>3</span>
+          </div>
         </div>
         <div class="gender">
-          <div>{verbTasreef['3rd']['feminine']['هِيَ']}</div>
-          <div>{verbTasreef['3rd']['feminine']['هُمَا']}</div>
-          <div>{verbTasreef['3rd']['feminine']['هُنَّ']}</div>
+          <div>
+            <p>{verbTasreef['3rd']['feminine']['هِيَ']}</p>
+            <span>4</span>
+          </div>
+          <div>
+            <p>{verbTasreef['3rd']['feminine']['هُمَا']}</p>
+            <span>5</span>
+          </div>
+          <div>
+            <p>{verbTasreef['3rd']['feminine']['هُنَّ']}</p>
+            <span>6</span>
+          </div>
         </div>
       </div>
 
       <div class="person">
         <div class="gender">
-          <div>{verbTasreef['2nd']['masculine']['أَنْتَ']}</div>
-          <div>{verbTasreef['2nd']['masculine']['أَنْتُمَا']}</div>
-          <div>{verbTasreef['2nd']['masculine']['أَنْتُمْ']}</div>
+          <div>
+            <p>{verbTasreef['2nd']['masculine']['أَنْتَ']}</p>
+            <span>7</span>
+          </div>
+          <div>
+            <p>{verbTasreef['2nd']['masculine']['أَنْتُمَا']}</p>
+            <span>8</span>
+          </div>
+          <div>
+            <p>{verbTasreef['2nd']['masculine']['أَنْتُمْ']}</p>
+            <span>9</span>
+          </div>
         </div>
         <div class="gender">
-          <div>{verbTasreef['2nd']['feminine']['أَنْتِ']}</div>
-          <div>{verbTasreef['2nd']['feminine']['أَنْتُمَا']}</div>
-          <div>{verbTasreef['2nd']['feminine']['أَنْتُنَّ']}</div>
+          <div>
+            <p>{verbTasreef['2nd']['feminine']['أَنْتِ']}</p>
+            <span>10</span>
+          </div>
+          <div>
+            <p>{verbTasreef['2nd']['feminine']['أَنْتُمَا']}</p>
+            <span>11</span>
+          </div>
+          <div>
+            <p>{verbTasreef['2nd']['feminine']['أَنْتُنَّ']}</p>
+            <span>12</span>
+          </div>
         </div>
       </div>
 
       <div class="first person">
         <div class="gender">
-          <div>{verbTasreef['1st']['أَنَا']}</div>
-          <div>{verbTasreef['1st']['نَحْنُ']}</div>
+          <div>
+            <p>{verbTasreef['1st']['أَنَا']}</p>
+            <span>13</span>
+          </div>
+          <div>
+            <p>{verbTasreef['1st']['نَحْنُ']}</p>
+            <span>14</span>
+          </div>
         </div>
       </div>
     </div>
