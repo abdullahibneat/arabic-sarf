@@ -1,8 +1,7 @@
 .tasreef {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 16px;
-  direction: ltr;
+  min-width: 120px;
 
   .header {
     display: flex;
@@ -11,7 +10,6 @@
     height: 36px;
     padding: 0 12px;
     white-space: nowrap;
-    min-width: 120px;
     border: solid 1px var(--border);
     border-radius: 6px;
     position: relative;
@@ -29,17 +27,16 @@
   }
 
   .person {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 16px;
 
     .gender {
-      flex: 1;
       border: solid 1px var(--border);
       border-radius: 6px;
 
       div {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 24px;
         height: 36px;
 
         p,
@@ -50,14 +47,11 @@
         }
 
         p {
-          flex: 1;
           direction: rtl;
           padding: 0 12px;
-          white-space: nowrap;
         }
 
         span {
-          width: 24px;
           user-select: none;
           color: var(--text-secondary);
           border-left: solid 1px var(--border);
@@ -73,66 +67,51 @@
   }
 
   &.by-gender {
-    gap: 16px;
-
-    .header {
-      min-width: 200px;
+    .person:not(.first) {
+      grid-template-columns: 1fr 1fr;
+      direction: rtl;
     }
 
-    .person {
-      flex-direction: row-reverse;
-      gap: 16px;
+    .gender:nth-child(2n) span {
+      border-left: none;
+      border-right: solid 1px var(--border);
+    }
 
-      .gender:nth-child(2n) div {
-        flex-direction: row-reverse;
-
-        span {
-          border-left: none;
-          border-right: solid 1px var(--border);
-        }
-      }
+    .gender:nth-child(2n + 1) div {
+      direction: ltr;
     }
   }
 
   &.by-person {
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    direction: rtl;
 
-    .header {
-      flex-basis: 100%;
-      min-width: 200px;
+    .header,
+    .first {
+      grid-column: span 2;
     }
 
     .person {
-      flex-direction: column;
-      flex: 1;
       gap: 0;
       border: solid 1px var(--border);
       border-radius: 6px;
 
-      &:nth-child(2n + 1) {
-        .gender div {
-          flex-direction: row-reverse;
-
-          span {
-            border-left: none;
-            border-right: solid 1px var(--border);
-          }
-        }
-      }
-
-      &.first {
-        flex-basis: 100%;
-      }
-
       .gender {
         border: none;
         border-radius: 0;
+
+        &:nth-child(2n) {
+          border-top: solid 1px var(--border);
+        }
       }
 
-      .gender + .gender {
-        border-top: solid 1px var(--border);
+      &:nth-child(2n) {
+        direction: ltr;
+      }
+
+      &:nth-child(2n + 1) span {
+        border-left: none;
+        border-right: solid 1px var(--border);
       }
     }
   }
