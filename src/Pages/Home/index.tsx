@@ -1,6 +1,7 @@
-import { useLocation } from 'preact-iso'
-import { useMemo, useCallback } from 'preact/hooks'
 import { Grid, Page } from '../../Components'
+import { useCallback, useMemo } from 'preact/hooks'
+
+import { useLocation } from 'preact-iso'
 
 const Home = () => {
   const location = useLocation()
@@ -26,6 +27,11 @@ const Home = () => {
         id: 'مثال',
         heading: 'مثال',
         description: 'A verb where the first of the 3 root letters is weak',
+      },
+      {
+        id: 'مضاعف',
+        heading: 'مضاعف',
+        description: 'A verb where the root letters are doubled',
       },
     ],
     [],
