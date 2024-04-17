@@ -90,3 +90,58 @@ svg * {
 ::-webkit-scrollbar-button {
   display: none;
 }
+
+.global-modal-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition:
+    visibility 250ms,
+    background-color 250ms;
+
+  display: flex;
+  visibility: hidden;
+  justify-content: center;
+  align-items: center;
+  padding: 64px;
+}
+
+.global-modal-overlay:has(.global-modal) {
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.global-modal {
+  background-color: white;
+  border-radius: 6px;
+  border: solid 1px var(--border);
+  animation: revealGlobalModal 500ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes revealGlobalModal {
+  0% {
+    opacity: 0;
+    margin-top: 100px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+.global-modal-header {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 8px 12px;
+  border-bottom: solid 1px var(--border);
+}
+
+.global-modal-header-close {
+  padding-top: 2px;
+  line-height: 0;
+}
