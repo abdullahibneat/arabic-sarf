@@ -8,7 +8,6 @@ export type IconProps = {
   size?: 'default' | 'micro'
   color?: 'white' | 'text' | 'text' | 'text-secondary' | 'hover' | 'border'
   hoverColor?: 'white' | 'text' | 'text' | 'text-secondary' | 'hover' | 'border'
-  name: keyof typeof DefaultIcons
   padding?: number
 } & (
   | { size?: 'default' | never; name: keyof typeof DefaultIcons }
