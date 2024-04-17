@@ -7,6 +7,7 @@ import Pause from './Pause'
 import Play from './Play'
 import Repeat from './Repeat'
 import Search from './Search'
+import Settings from './Settings'
 import Translate from './Translate'
 
 export default {
@@ -19,5 +20,6 @@ export default {
   play: Play,
   repeat: Repeat,
   search: Search,
+  settings: Settings,
   translate: Translate,
 }
