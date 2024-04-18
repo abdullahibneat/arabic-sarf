@@ -7,9 +7,11 @@ import AppState from '../AppState'
 import Flex from './Flex'
 import IconButton from './IconButton'
 import MenuItem from './MenuItem'
+import SettingsModal from '../modals/SettingsModal'
 import Text from './Text'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
+import useModal from '../hooks/useModal'
 import verbTypes from '../../data'
 
 const Sidebar = () => {
@@ -19,6 +21,7 @@ const Sidebar = () => {
 
   const route = useRoute()
   const location = useLocation()
+  const modal = useModal()
 
   const {
     صحيح: { I: mujarrad, ...mazeedFih },
@@ -33,6 +36,13 @@ const Sidebar = () => {
     },
     [],
   )
+
+  const openSettings = useCallback(() => {
+    modal.open({
+      title: 'Settings',
+      children: <SettingsModal />,
+    })
+  }, [])
 
   return (
     <aside class={open ? 'open' : ''}>
@@ -96,25 +106,36 @@ const Sidebar = () => {
         </Flex>
       </Flex>
 
-      <Flex class="footer" gap={16}>
-        <IconButton
-          active={tasreefGroupMode === 'by-person'}
-          name="group-by-person"
-          color={tasreefGroupMode === 'by-person' ? 'text' : 'text-secondary'}
-          onClick={() => AppState.setItem('tasreefGroupMode', 'by-person')}
-        />
-        <IconButton
-          active={tasreefGroupMode === 'by-gender'}
-          name="group-by-gender"
-          color={tasreefGroupMode === 'by-gender' ? 'text' : 'text-secondary'}
-          onClick={() => AppState.setItem('tasreefGroupMode', 'by-gender')}
-        />
-        <IconButton
-          active={tasreefGroupMode === 'list'}
-          name="list"
-          color={tasreefGroupMode === 'list' ? 'text' : 'text-secondary'}
-          onClick={() => AppState.setItem('tasreefGroupMode', 'list')}
-        />
+      <Flex class="footer" alignItems="stretch">
+        <Flex justifyContent="center" alignItems="center" gap={16} flex={1}>
+          <IconButton
+            active={tasreefGroupMode === 'by-person'}
+            name="group-by-person"
+            color={tasreefGroupMode === 'by-person' ? 'text' : 'text-secondary'}
+            onClick={() => AppState.setItem('tasreefGroupMode', 'by-person')}
+          />
+          <IconButton
+            active={tasreefGroupMode === 'by-gender'}
+            name="group-by-gender"
+            color={tasreefGroupMode === 'by-gender' ? 'text' : 'text-secondary'}
+            onClick={() => AppState.setItem('tasreefGroupMode', 'by-gender')}
+          />
+          <IconButton
+            active={tasreefGroupMode === 'list'}
+            name="list"
+            color={tasreefGroupMode === 'list' ? 'text' : 'text-secondary'}
+            onClick={() => AppState.setItem('tasreefGroupMode', 'list')}
+          />
+        </Flex>
+
+        <Flex
+          justifyContent="center"
+          alignItems="center"
+          borderLeft="solid 1px var(--border)"
+          padding="0 16px"
+        >
+          <IconButton name="settings" onClick={openSettings} />
+        </Flex>
       </Flex>
     </aside>
   )
