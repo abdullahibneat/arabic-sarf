@@ -1,7 +1,6 @@
 const LOCAL_STORAGE_KEY = 'state'
 
 export type AppStateType = {
-  tasreefGroupMode: 'list' | 'by-person' | 'by-gender'
   playbackSpeed: number
   playbackLoop: boolean
   settings: {
@@ -14,13 +13,13 @@ export type AppStateType = {
     showJazm: boolean
     showAmr: boolean
     showMajhool: boolean
+    tasreefGroupMode: 'list' | 'by-person' | 'by-gender'
   }
 }
 
 export type SetItemListener = (state: AppStateType) => void
 
 const defaultState: AppStateType = {
-  tasreefGroupMode: 'list',
   playbackSpeed: 1,
   playbackLoop: false,
   settings: {
@@ -33,6 +32,7 @@ const defaultState: AppStateType = {
     showJazm: true,
     showAmr: true,
     showMajhool: true,
+    tasreefGroupMode: 'list',
   },
 }
 

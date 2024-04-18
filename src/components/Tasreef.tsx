@@ -10,16 +10,16 @@ export type TasreefProps = {
   title: string
   verbTasreef: VerbTasreef
   audioSrc?: string
-  groupMode?: AppStateType['tasreefGroupMode']
+  groupMode?: AppStateType['settings']['tasreefGroupMode']
 }
 
 const Tasreef = ({ title, verbTasreef, audioSrc, groupMode }: TasreefProps) => {
-  const { tasreefGroupMode } = useAppState()
+  const { settings } = useAppState()
 
   const audioPlayer = useAudioPlayer()
 
   return (
-    <div class={`tasreef ${groupMode || tasreefGroupMode}`}>
+    <div class={`tasreef ${groupMode || settings.tasreefGroupMode}`}>
       <div class="header">
         {audioSrc && (
           <div class="play">

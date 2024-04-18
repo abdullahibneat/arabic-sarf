@@ -4,6 +4,7 @@ import { useCallback, useMemo } from 'preact/hooks'
 
 import AppState from '../AppState'
 import Flex from '../components/Flex'
+import IconButton from '../components/IconButton'
 import Segmented from '../components/Segmented'
 import Text from '../components/Text'
 import useAppState from '../hooks/useAppState'
@@ -137,17 +138,69 @@ const SettingsModal = () => {
       </Flex>
 
       <Flex column gap={4}>
-        <Text>Tasreef options</Text>
-        <div class="table">
-          {tasreefOptions.map((option) => (
-            <Row
-              {...option}
-              onChange={(property, value) =>
-                AppState.setItem('settings', { ...settings, [property]: value })
-              }
-            />
-          ))}
-        </div>
+        <Text>Tasreef group mode</Text>
+        <Flex justifyContent="center" alignItems="center" gap={16} flex={1}>
+          <IconButton
+            active={settings.tasreefGroupMode === 'by-person'}
+            name="group-by-person"
+            color={
+              settings.tasreefGroupMode === 'by-person'
+                ? 'text'
+                : 'text-secondary'
+            }
+            onClick={() =>
+              AppState.setItem('settings', {
+                ...settings,
+                tasreefGroupMode: 'by-person',
+              })
+            }
+          />
+          <IconButton
+            active={settings.tasreefGroupMode === 'by-gender'}
+            name="group-by-gender"
+            color={
+              settings.tasreefGroupMode === 'by-gender'
+                ? 'text'
+                : 'text-secondary'
+            }
+            onClick={() =>
+              AppState.setItem('settings', {
+                ...settings,
+                tasreefGroupMode: 'by-gender',
+              })
+            }
+          />
+          <IconButton
+            active={settings.tasreefGroupMode === 'list'}
+            name="list"
+            color={
+              settings.tasreefGroupMode === 'list' ? 'text' : 'text-secondary'
+            }
+            onClick={() =>
+              AppState.setItem('settings', {
+                ...settings,
+                tasreefGroupMode: 'list',
+              })
+            }
+          />
+        </Flex>
+
+        <Flex column gap={4}>
+          <Text>Tasreef options</Text>
+          <div class="table">
+            {tasreefOptions.map((option) => (
+              <Row
+                {...option}
+                onChange={(property, value) =>
+                  AppState.setItem('settings', {
+                    ...settings,
+                    [property]: value,
+                  })
+                }
+              />
+            ))}
+          </div>
+        </Flex>
       </Flex>
     </Flex>
   )

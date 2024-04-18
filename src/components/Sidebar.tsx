@@ -3,21 +3,17 @@ import '../styles/Sidebar.scss'
 import { useCallback, useState } from 'preact/hooks'
 import { useLocation, useRoute } from 'preact-iso'
 
-import AppState from '../AppState'
 import Flex from './Flex'
 import IconButton from './IconButton'
 import MenuItem from './MenuItem'
 import SettingsModal from '../modals/SettingsModal'
 import Text from './Text'
 import replaceRoots from '../helpers/replaceRoots'
-import useAppState from '../hooks/useAppState'
 import useModal from '../hooks/useModal'
 import verbTypes from '../../data'
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false)
-
-  const { tasreefGroupMode } = useAppState()
 
   const route = useRoute()
   const location = useLocation()
@@ -107,32 +103,12 @@ const Sidebar = () => {
       </Flex>
 
       <Flex class="footer" alignItems="stretch">
-        <Flex justifyContent="center" alignItems="center" gap={16} flex={1}>
-          <IconButton
-            active={tasreefGroupMode === 'by-person'}
-            name="group-by-person"
-            color={tasreefGroupMode === 'by-person' ? 'text' : 'text-secondary'}
-            onClick={() => AppState.setItem('tasreefGroupMode', 'by-person')}
-          />
-          <IconButton
-            active={tasreefGroupMode === 'by-gender'}
-            name="group-by-gender"
-            color={tasreefGroupMode === 'by-gender' ? 'text' : 'text-secondary'}
-            onClick={() => AppState.setItem('tasreefGroupMode', 'by-gender')}
-          />
-          <IconButton
-            active={tasreefGroupMode === 'list'}
-            name="list"
-            color={tasreefGroupMode === 'list' ? 'text' : 'text-secondary'}
-            onClick={() => AppState.setItem('tasreefGroupMode', 'list')}
-          />
-        </Flex>
-
+        <Flex flex={1} />
         <Flex
           justifyContent="center"
           alignItems="center"
           borderLeft="solid 1px var(--border)"
-          padding="0 16px"
+          padding="0 8px"
         >
           <IconButton name="settings" onClick={openSettings} />
         </Flex>
