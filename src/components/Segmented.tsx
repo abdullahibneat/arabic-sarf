@@ -4,12 +4,12 @@ import Text from './Text'
 
 export type SegmentedOption = {
   label: string
-  value: string | number
+  value: string | number | boolean
 }
 
 type Props<T extends SegmentedOption> = {
   value?: T['value'] | null
-  options: T[]
+  options: T[] | Readonly<T[]>
   onChange?: (option: T) => void
 }
 
@@ -23,7 +23,7 @@ const Segmented = <T extends SegmentedOption = SegmentedOption>({
       {options.map((option) => (
         <div
           key={String(option.value)}
-          class={`segment ${value && option.value === value ? 'active' : ''}`}
+          class={`segment ${option.value === value ? 'active' : ''}`}
           onClick={() => onChange?.(option)}
         >
           <Text type="small" style={{ color: 'inherit' }}>
