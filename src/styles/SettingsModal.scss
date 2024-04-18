@@ -1,0 +1,29 @@
+.table {
+  border: solid 1px var(--border);
+  border-radius: 6px;
+  width: 60%;
+  margin: 0 auto;
+
+  .table-row:not(:first-of-type) {
+    border-top: solid 1px var(--border);
+  }
+}
+
+.table-row {
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+
+  div {
+    height: 32px;
+    padding: 2px 8px;
+  }
+
+  div:first-of-type {
+    flex: 1;
+  }
+
+  div + div {
+    border-left: solid 1px var(--border);
+  }
+}
