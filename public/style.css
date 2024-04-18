@@ -137,7 +137,8 @@ svg * {
   display: flex;
   gap: 8px;
   align-items: flex-start;
-  padding: 8px 12px;
+  padding: 12px;
+  padding-left: 24px;
   border-bottom: solid 1px var(--border);
 }
 

@@ -31,7 +31,9 @@ const App = () => {
         {modal && (
           <div class="global-modal" onClick={(e) => e.stopPropagation()}>
             <div class="global-modal-header">
-              <Text style={{ flex: 1 }}>{modal.title}</Text>
+              <Text style={{ flex: 1 }} type="bold">
+                {modal.title}
+              </Text>
               <div class="global-modal-header-close">
                 <IconButton size="micro" name="close" onClick={closeModal} />
               </div>
