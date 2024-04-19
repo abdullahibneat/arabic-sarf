@@ -1,28 +1,28 @@
-export type RomanNumeral =
-  | 'I'
-  | 'II'
-  | 'III'
-  | 'IV'
-  | 'V'
-  | 'VI'
-  | 'VII'
-  | 'VIII'
-  | 'IX'
-  | 'X'
+export type MazeedFihiChapters =
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+  | '7'
+  | '8'
+  | '9'
+  | '10'
 
-export type VerbType<Mujarrad extends string = string> = {
-  I: Record<Mujarrad, VerbChapter>
-} & Record<Exclude<RomanNumeral, 'I'>, VerbChapter | null>
+export type VerbTypes = {
+  '1': Record<string, VerbChapter>
+} & Record<MazeedFihiChapters, VerbChapter | null>
 
 export type VerbChapter = {
+  type: string
   باب: string
   form: number
+  root_letters: Array<string[]>
   archetype: VerbArchetype
   conjugations: VerbConjugations
 }
 
 export type VerbArchetype = {
-  root_letters: string[]
   ماضي: {
     معروف: string
     مجهول: string | null
@@ -47,8 +47,14 @@ export type VerbConjugations = {
     معروف: VerbTasreef
     مجهول: VerbTasreef | null
   }
-  نصب: VerbTasreef
-  جزم: VerbTasreef
+  نصب: {
+    معروف: VerbTasreef
+    مجهول: VerbTasreef | null
+  }
+  جزم: {
+    معروف: VerbTasreef
+    مجهول: VerbTasreef | null
+  }
   أمر: { '2nd': VerbSighaSecondPerson }
 }
 

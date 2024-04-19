@@ -1,3 +1,5 @@
+// import-sort-ignore
+
 import nasara from './sahih/1/نَصَرَ.json'
 import daraba from './sahih/1/ضَرَبَ.json'
 import fataha from './sahih/1/فَتَحَ.json'
@@ -47,7 +49,9 @@ import wajada from './mithaal/1/وَجَدَ.json'
 import wajala from './mithaal/1/وَجِلَ.json'
 import wahaba from './mithaal/1/وَهَبَ.json'
 
+import mithaalForm4 from './mithaal/4.json'
 import mithaalForm8 from './mithaal/8.json'
+import mithaalForm10 from './mithaal/10.json'
 
 import madda from './mudaaf/1/مَدَّ.json'
 import farra from './mudaaf/1/فَرَّ.json'
@@ -62,10 +66,10 @@ import mudaafForm7 from './mudaaf/7.json'
 import mudaafForm8 from './mudaaf/8.json'
 import mudaafForm10 from './mudaaf/10.json'
 
-import { VerbType } from './types'
+import { VerbTypes } from './types'
 
-const صحيح: VerbType = {
-  I: {
+const صحيح: VerbTypes = {
+  '1': {
     نَصَرَ: nasara,
     ضَرَبَ: daraba,
     فَتَحَ: fataha,
@@ -73,87 +77,86 @@ const صحيح: VerbType = {
     حَسِبَ: hasiba,
     كَرُمَ: karuma,
   },
-  II: sahihForm2,
-  III: sahihForm3,
-  IV: sahihForm4,
-  V: sahihForm5,
-  VI: sahihForm6,
-  VII: sahihForm7,
-  VIII: sahihForm8,
-  IX: sahihForm9,
-  X: sahihForm10,
+  '2': sahihForm2,
+  '3': sahihForm3,
+  '4': sahihForm4,
+  '5': sahihForm5,
+  '6': sahihForm6,
+  '7': sahihForm7,
+  '8': sahihForm8,
+  '9': sahihForm9,
+  '10': sahihForm10,
 }
 
-const أجوف: VerbType = {
-  I: {
+const أجوف: VerbTypes = {
+  '1': {
     قَالَ: qaala,
     بَاعَ: baaa,
     خَافَ: khaafa,
   },
-  II: ajwafForm2,
-  III: ajwafForm3,
-  IV: ajwafForm4,
-  V: ajwafForm5,
-  VI: ajwafForm6,
-  VII: ajwafForm7,
-  VIII: ajwafForm8,
-  IX: ajwafForm9,
-  X: ajwafForm10,
+  '2': ajwafForm2,
+  '3': ajwafForm3,
+  '4': ajwafForm4,
+  '5': ajwafForm5,
+  '6': ajwafForm6,
+  '7': ajwafForm7,
+  '8': ajwafForm8,
+  '9': ajwafForm9,
+  '10': ajwafForm10,
 }
 
-const ناقص: VerbType = {
-  I: {
+const ناقص: VerbTypes = {
+  '1': {
     دَعَا: daaa,
     رَمَى: ramaa,
     رَضِيَ: radia,
     نَهَى: nahaa,
   },
-  II: naqisForm2,
-  III: naqisForm3,
-  IV: naqisForm4,
-  V: naqisForm5,
-  VI: naqisForm6,
-  VII: naqisForm7,
-  VIII: naqisForm8,
-  IX: null,
-  X: naqisForm10,
+  '2': naqisForm2,
+  '3': naqisForm3,
+  '4': naqisForm4,
+  '5': naqisForm5,
+  '6': naqisForm6,
+  '7': naqisForm7,
+  '8': naqisForm8,
+  '9': null,
+  '10': naqisForm10,
 }
 
-const مثال: VerbType = {
-  I: {
+const مثال: VerbTypes = {
+  '1': {
     وَجَدَ: wajada,
     وَجِلَ: wajala,
     وَهَبَ: wahaba,
   },
-  II: null,
-  III: null,
-  IV: null,
-  V: null,
-  VI: null,
-  VII: null,
-  VIII: mithaalForm8,
-  IX: null,
-  X: null,
+  '2': { ...sahihForm2, type: 'مثال', root_letters: [['و', 'ح', 'د']] },
+  '3': { ...sahihForm3, type: 'مثال', root_letters: [['و', 'ف', 'ق']] },
+  '4': mithaalForm4,
+  '5': { ...sahihForm5, type: 'مثال', root_letters: [['و', 'ك', 'ل']] },
+  '6': { ...sahihForm6, type: 'مثال', root_letters: [['و', 'ض', 'ع']] },
+  '7': null,
+  '8': mithaalForm8,
+  '9': null,
+  '10': mithaalForm10,
 }
 
-const مضاعف: VerbType = {
-  I: {
+const مضاعف: VerbTypes = {
+  '1': {
     مَدَّ: madda,
- فَرَّ: farra,
- مَسَّ: massa,
+    فَرَّ: farra,
+    مَسَّ: massa,
   },
-  II: mudaafForm2,
-  III: mudaafForm3,
-  IV: mudaafForm4,
-  V: mudaafForm5,
-  VI: mudaafForm6,
-  VII: mudaafForm7,
-  VIII: mudaafForm8,
-  IX: null,
-  X: mudaafForm10,
-
+  '2': mudaafForm2,
+  '3': mudaafForm3,
+  '4': mudaafForm4,
+  '5': mudaafForm5,
+  '6': mudaafForm6,
+  '7': mudaafForm7,
+  '8': mudaafForm8,
+  '9': null,
+  '10': mudaafForm10,
 }
 
-const verbTypes: Record<string, VerbType> = { صحيح, أجوف, ناقص, مثال, مضاعف }
+const verbTypes: Record<string, VerbTypes> = { صحيح, أجوف, ناقص, مثال, مضاعف }
 
 export default verbTypes
