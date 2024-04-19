@@ -1,9 +1,8 @@
-import { VerbChapter, VerbType } from '../../data/types'
-
 import Flex from '../components/Flex'
 import Screen from '../components/Screen'
 import Tasreef from '../components/Tasreef'
 import Text from '../components/Text'
+import { VerbChapter } from '../../data/types'
 import asRomanNumeral from '../helpers/asRomanNumeral'
 import isVerbChapter from '../helpers/isVerbChapter'
 import replaceRoots from '../helpers/replaceRoots'
@@ -15,7 +14,7 @@ const TasreefScreen = () => {
   const params = useRoute().params
 
   const verbChapter = useMemo(() => {
-    const verbType = verbTypes[params.verbType] as VerbType | undefined
+    const verbType = verbTypes[params.verbType]
 
     if (!verbType) return null
 

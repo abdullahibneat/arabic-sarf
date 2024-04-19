@@ -20,7 +20,7 @@ const Sidebar = () => {
   const modal = useModal()
 
   const {
-    صحيح: { I: mujarrad, ...mazeedFih },
+    صحيح: { '1': mujarrad, ...mazeedFih },
   } = verbTypes
 
   const letters = ['a', 'b', 'c', 'd', 'e', 'f']

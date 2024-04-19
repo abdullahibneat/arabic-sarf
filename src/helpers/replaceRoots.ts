@@ -7,20 +7,16 @@ const replaceRoots = (
 ) => {
   if (!rootLetters)
     rootLetters = {
-      ف: obj.archetype.root_letters[0],
-      ع: obj.archetype.root_letters[1],
-      ل: obj.archetype.root_letters[2],
+      ف: obj.root_letters[0][0],
+      ع: obj.root_letters[0][1],
+      ل: obj.root_letters[0][2],
     }
 
   const replaced = replace(obj, /[فعل]/g, rootLetters)
 
   replaced.باب = obj.باب
 
-  replaced.archetype.root_letters = [
-    obj.archetype.root_letters[0],
-    obj.archetype.root_letters[1],
-    obj.archetype.root_letters[2],
-  ]
+  replaced.root_letters = obj.root_letters
 
   return replaced
 }
