@@ -7,7 +7,7 @@ aside {
 
   .header,
   .footer {
-    height: 64px;
+    height: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,7 +33,6 @@ aside {
   }
 
   .footer {
-    height: 48px;
     border-top: solid 1px var(--border);
   }
 }
