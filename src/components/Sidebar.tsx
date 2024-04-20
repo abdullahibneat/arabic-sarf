@@ -1,6 +1,7 @@
 import '../styles/Sidebar.scss'
 
-import { useCallback, useState } from 'preact/hooks'
+import Accordion, { AccordionGroup, AccordionGroupItem } from './Accordion'
+import { useCallback, useMemo, useState } from 'preact/hooks'
 import { useLocation, useRoute } from 'preact-iso'
 
 import Flex from './Flex'
@@ -8,30 +9,86 @@ import IconButton from './IconButton'
 import MenuItem from './MenuItem'
 import SettingsModal from '../modals/SettingsModal'
 import Text from './Text'
+import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
+import useAppState from '../hooks/useAppState'
 import useModal from '../hooks/useModal'
 import verbTypes from '../../data'
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false)
 
-  const route = useRoute()
-  const location = useLocation()
   const modal = useModal()
+  const location = useLocation()
+  const params = useRoute().params
 
-  const {
-    صحيح: { '1': mujarrad, ...mazeedFih },
-  } = verbTypes
+  const { settings } = useAppState()
 
-  const letters = ['a', 'b', 'c', 'd', 'e', 'f']
-
-  const handlePress = useCallback(
-    (route: string) => () => {
-      location.route(route)
-      setOpen(false)
-    },
-    [],
+  const activeItemId = useMemo(
+    () =>
+      `/${params.verbType}/${params.verbForm}${params.verbChapter ? `/${params.verbChapter}` : ''}`,
+    [params],
   )
+
+  const accordionData = useMemo(() => {
+    const accordionGroups: AccordionGroup[] = []
+
+    for (const verbTypeKey of Object.keys(verbTypes)) {
+      if (settings.hiddenVerbTypes.includes(verbTypeKey)) {
+        continue
+      }
+
+      const verbType = verbTypes[verbTypeKey]
+
+      const items: AccordionGroupItem[] = [
+        {
+          id: `/${verbTypeKey}`,
+          title: 'Overview',
+          tag: 'All',
+        },
+      ]
+
+      for (const chapterKey of Object.keys(verbType)) {
+        const chapter = verbType[chapterKey]
+
+        if (isMujarrad(chapter)) {
+          const letters = ['a', 'b', 'c', 'd', 'e', 'f']
+
+          for (const chapterKey of Object.keys(chapter)) {
+            items.push({
+              id: `/${verbTypeKey}/1/${chapterKey}`,
+              title: replaceRoots(chapter[chapterKey]!).title,
+              tag: `1${letters.shift()}`,
+            })
+          }
+        } else if (chapter) {
+          items.push({
+            id: `/${verbTypeKey}/${chapterKey}`,
+            title: replaceRoots(chapter).title,
+            tag: chapter.form,
+          })
+        }
+      }
+
+      accordionGroups.push({
+        id: verbTypeKey,
+        title: verbTypeKey,
+        items,
+      })
+    }
+
+    return accordionGroups
+  }, [settings.hiddenVerbTypes])
+
+  const goToHomepage = useCallback(() => {
+    location.route('/')
+    setOpen(false)
+  }, [])
+
+  const goToVerb = useCallback((item: AccordionGroupItem) => {
+    location.route(item.id)
+    setOpen(false)
+  }, [])
 
   const openSettings = useCallback(() => {
     modal.open({
@@ -55,51 +112,17 @@ const Sidebar = () => {
 
       <Flex flex={1} column gap={36} padding="16px 24px" overflow="auto">
         <MenuItem
-          tag="All"
-          title="Overview"
-          active={route.path === '/'}
-          onClick={handlePress('/')}
+          active={location.path === '/'}
+          title="All Tasreefs"
+          onClick={goToHomepage}
         />
 
-        <Flex column gap={8}>
-          {Object.values(mujarrad).map((originalChapter) => {
-            const {
-              باب,
-              form,
-              archetype: { ماضي, مضارع },
-            } = replaceRoots(originalChapter)
-            return (
-              <MenuItem
-                key={باب}
-                tag={`1${letters.shift()}`}
-                title={`${ماضي.معروف} ${مضارع.معروف}`}
-                active={decodeURI(route.path) === `/صحيح/${form}/${باب}`}
-                onClick={handlePress(`/صحيح/${form}/${باب}`)}
-              />
-            )
-          })}
-        </Flex>
-
-        <Flex column gap={8}>
-          {Object.values(mazeedFih)
-            .flatMap((chapter) => chapter ?? [])
-            .map((originalChapter) => {
-              const {
-                باب,
-                form,
-                archetype: { ماضي, مضارع },
-              } = replaceRoots(originalChapter)
-              return (
-                <MenuItem
-                  key={باب}
-                  tag={form}
-                  title={`${ماضي.معروف} ${مضارع.معروف}`}
-                  active={decodeURI(route.path) === `/صحيح/${form}`}
-                  onClick={handlePress(`/صحيح/${form}`)}
-                />
-              )
-            })}
-        </Flex>
+        <Accordion
+          data={accordionData}
+          activeGroupId={params.verbType}
+          activeItemId={activeItemId}
+          onPressGroupItem={goToVerb}
+        />
       </Flex>
 
       <Flex class="footer" alignItems="stretch">
