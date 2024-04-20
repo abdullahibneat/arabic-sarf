@@ -19,8 +19,8 @@ export type AccordionGroupItem = {
 
 type Props = {
   data: AccordionGroup[]
-  activeGroupId?: string
-  activeItemId?: string
+  activeGroupId?: string | null
+  activeItemId?: string | null
   onPressGroup?: (group: AccordionGroup) => void
   onPressGroupItem?: (item: AccordionGroupItem) => void
 }
@@ -58,8 +58,8 @@ const AccordionGroup = ({
   onPressGroupItem,
 }: {
   group: AccordionGroup
-  activeGroupId?: string
-  activeItemId?: string
+  activeGroupId?: string | null
+  activeItemId?: string | null
   onPressGroup?: (group: AccordionGroup) => void
   onPressGroupItem?: (item: AccordionGroupItem) => void
 }) => {
@@ -84,14 +84,16 @@ const AccordionGroup = ({
   )
 
   return (
-    <div class={`accordion-group ${open ? 'open' : ''}`}>
+    <div
+      class={`accordion-group ${open ? 'open' : ''} ${group.id === activeGroupId ? 'active' : ''}`}
+    >
       <MenuItem
         title={group.title}
         icon={open ? 'chevron-down' : 'chevron-left'}
         onClick={handleGroupPress}
       />
 
-      <div class={`content-wrapper ${open ? 'open' : ''}`}>
+      <div class="content-wrapper">
         <div class="content">
           <Flex column gap={8} padding={8}>
             {group.items.map((item) => (
