@@ -66,9 +66,9 @@ import mudaafForm7 from './mudaaf/7.json'
 import mudaafForm8 from './mudaaf/8.json'
 import mudaafForm10 from './mudaaf/10.json'
 
-import { VerbTypes } from './types'
+import { VerbTypeMap } from './types'
 
-const صحيح: VerbTypes = {
+const صحيح: VerbTypeMap = {
   '1': {
     نَصَرَ: nasara,
     ضَرَبَ: daraba,
@@ -88,7 +88,7 @@ const صحيح: VerbTypes = {
   '10': sahihForm10,
 }
 
-const أجوف: VerbTypes = {
+const أجوف: VerbTypeMap = {
   '1': {
     قَالَ: qaala,
     بَاعَ: baaa,
@@ -105,7 +105,7 @@ const أجوف: VerbTypes = {
   '10': ajwafForm10,
 }
 
-const ناقص: VerbTypes = {
+const ناقص: VerbTypeMap = {
   '1': {
     دَعَا: daaa,
     رَمَى: ramaa,
@@ -123,7 +123,7 @@ const ناقص: VerbTypes = {
   '10': naqisForm10,
 }
 
-const مثال: VerbTypes = {
+const مثال: VerbTypeMap = {
   '1': {
     وَجَدَ: wajada,
     وَجِلَ: wajala,
@@ -140,7 +140,7 @@ const مثال: VerbTypes = {
   '10': mithaalForm10,
 }
 
-const مضاعف: VerbTypes = {
+const مضاعف: VerbTypeMap = {
   '1': {
     مَدَّ: madda,
     فَرَّ: farra,
@@ -157,7 +157,7 @@ const مضاعف: VerbTypes = {
   '10': mudaafForm10,
 }
 
-const verbTypes: Record<string, VerbTypes | undefined> = {
+const verbTypes: Record<string, VerbTypeMap | undefined> = {
   صحيح,
   أجوف,
   ناقص,

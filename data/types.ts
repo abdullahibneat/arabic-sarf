@@ -1,4 +1,4 @@
-export type VerbTypes = Record<
+export type VerbTypeMap = Record<
   string,
   Record<string, VerbChapter | undefined> | VerbChapter | null | undefined
 >
