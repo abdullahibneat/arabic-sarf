@@ -19,11 +19,8 @@ const App = () => {
       <LocationProvider>
         <Router>
           <Route path="/" component={OverviewScreen} />
-          <Route path="/:verbType" component={OverviewScreen} />
-          <Route
-            path="/:verbType/:verbForm/:verbChapter?"
-            component={TasreefScreen}
-          />
+          <Route path="/:type" component={OverviewScreen} />
+          <Route path="/:type/:form/:chapter?" component={TasreefScreen} />
           <Route default component={NotFound} />
         </Router>
       </LocationProvider>

@@ -15,10 +15,10 @@ const SettingsModal = () => {
 
   const verbTypeOptions = useMemo(
     () =>
-      Object.keys(verbTypes).map((verbType) => ({
-        key: verbType,
-        name: verbType,
-        value: !settings.hiddenVerbTypes.includes(verbType),
+      Object.keys(verbTypes).map((type) => ({
+        key: type,
+        name: type,
+        value: !settings.hiddenVerbTypes.includes(type),
       })),
     [settings.hiddenVerbTypes],
   )
@@ -65,18 +65,18 @@ const SettingsModal = () => {
     ],
   )
 
-  const toggleVerbType = useCallback((verbType: string, enable: boolean) => {
+  const toggleVerbType = useCallback((type: string, enable: boolean) => {
     const newSettings = AppState.getItem('settings')
 
     const hide = !enable
-    const currentlyHidden = newSettings.hiddenVerbTypes.includes(verbType)
+    const currentlyHidden = newSettings.hiddenVerbTypes.includes(type)
 
     if (enable && currentlyHidden) {
       newSettings.hiddenVerbTypes = newSettings.hiddenVerbTypes.filter(
-        (type) => type !== verbType,
+        (type) => type !== type,
       )
     } else if (hide && !currentlyHidden) {
-      newSettings.hiddenVerbTypes = newSettings.hiddenVerbTypes.concat(verbType)
+      newSettings.hiddenVerbTypes = newSettings.hiddenVerbTypes.concat(type)
     }
 
     AppState.setItem('settings', newSettings)

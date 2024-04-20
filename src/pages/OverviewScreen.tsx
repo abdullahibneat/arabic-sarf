@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'preact/hooks'
 import Flex from '../components/Flex'
 import Screen from '../components/Screen'
 import Text from '../components/Text'
-import { VerbTypes } from '../../data/types'
+import { VerbTypeMap } from '../../data/types'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
@@ -17,63 +17,69 @@ const OverviewScreen = () => {
   const { settings } = useAppState()
 
   const generateOverviewForVerbType = useCallback(
-    (verbTypeKey: string, verbType: VerbTypes) => {
+    (type: string, verbMap: VerbTypeMap) => {
       const $sections: Array<{
         title: string
         subHeading: string
         tasreefs: TasreefProps[]
       }> = [
         {
-          title: `${verbTypeKey} - ماضي`,
+          title: `${type} - ماضي`,
           subHeading: 'Forms 1a to 1f',
           tasreefs: [],
         },
         {
-          title: `${verbTypeKey} - مضارع`,
+          title: `${type} - مضارع`,
           subHeading: 'Forms 1a to 1f',
           tasreefs: [],
         },
         {
-          title: `${verbTypeKey} - ماضي`,
+          title: `${type} - ماضي`,
           subHeading: 'Forms 2 to 10',
           tasreefs: [],
         },
         {
-          title: `${verbTypeKey} - مضارع`,
+          title: `${type} - مضارع`,
           subHeading: 'Forms 2 to 10',
           tasreefs: [],
         },
       ]
 
-      for (const value of Object.values(verbType)) {
-        if (isMujarrad(value)) {
+      const mujarradMadi = $sections[0]
+      const mujarradMudari = $sections[1]
+      const mazeedFihiMadi = $sections[2]
+      const mazeedFihiMudari = $sections[3]
+
+      for (const chapter of Object.values(verbMap)) {
+        if (isMujarrad(chapter)) {
           const letters = ['a', 'b', 'c', 'd', 'e', 'f']
 
-          for (const archetype of Object.values(value)) {
+          for (const archetype of Object.values(chapter)) {
             const chapter = replaceRoots(archetype!)
 
             const letter = letters.shift()
 
-            $sections[0].tasreefs.push({
+            mujarradMadi.tasreefs.push({
               title: `1${letter} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
-              verbTasreef: chapter.conjugations.ماضي.معروف,
+              tasreef: chapter.conjugations.ماضي.معروف,
             })
 
-            $sections[1].tasreefs.push({
+            mujarradMudari.tasreefs.push({
               title: `1${letter} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
-              verbTasreef: chapter.conjugations.مضارع.معروف,
+              tasreef: chapter.conjugations.مضارع.معروف,
             })
           }
-        } else if (value) {
-          const chapter = replaceRoots(value)
-          $sections[2].tasreefs.push({
-            title: `${chapter.form} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
-            verbTasreef: chapter.conjugations.ماضي.معروف,
+        } else if (chapter) {
+          const archetype = replaceRoots(chapter)
+
+          mazeedFihiMadi.tasreefs.push({
+            title: `${archetype.form} - ${archetype.archetype.ماضي.معروف} ${archetype.archetype.مضارع.معروف}`,
+            tasreef: archetype.conjugations.ماضي.معروف,
           })
 
-          $sections[3].tasreefs.push({
-            title: `${chapter.form} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
-            verbTasreef: chapter.conjugations.مضارع.معروف,
+          mazeedFihiMudari.tasreefs.push({
+            title: `${archetype.form} - ${archetype.archetype.ماضي.معروف} ${archetype.archetype.مضارع.معروف}`,
+            tasreef: archetype.conjugations.مضارع.معروف,
           })
         }
       }
@@ -84,26 +90,30 @@ const OverviewScreen = () => {
   )
 
   const sections = useMemo(() => {
-    const $verbTypes: Record<string, VerbTypes[]> = {}
-    if (params.verbType) {
-      const verbType = verbTypes[params.verbType]
+    const $verbTypes: Record<string, VerbTypeMap[]> = {}
+
+    if (params.type) {
+      const verbType = verbTypes[params.type]
+
       if (verbType) {
-        $verbTypes[params.verbType] = [verbType]
+        $verbTypes[params.type] = [verbType]
       }
     } else {
       for (const verbTypeKey of Object.keys(verbTypes)) {
         if (settings.hiddenVerbTypes.includes(verbTypeKey)) {
           continue
         }
+
         $verbTypes[verbTypeKey] = [verbTypes[verbTypeKey]!]
       }
     }
-    return Object.entries($verbTypes).flatMap(([verbTypeKey, verbTypes]) =>
-      verbTypes.flatMap((verbType) =>
-        generateOverviewForVerbType(verbTypeKey, verbType),
+
+    return Object.entries($verbTypes).flatMap(([type, verbMap]) =>
+      verbMap.flatMap((verbType) =>
+        generateOverviewForVerbType(type, verbType),
       ),
     )
-  }, [params.verbType, settings.hiddenVerbTypes])
+  }, [params.type, settings.hiddenVerbTypes])
 
   return (
     <Screen>
@@ -124,7 +134,7 @@ const OverviewScreen = () => {
                   >
                     <Tasreef
                       title={tasreef.title}
-                      verbTasreef={tasreef.verbTasreef}
+                      tasreef={tasreef.tasreef}
                       groupMode="list"
                     />
                   </div>

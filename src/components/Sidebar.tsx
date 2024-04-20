@@ -25,47 +25,45 @@ const Sidebar = () => {
   const { settings } = useAppState()
 
   const activeItemId = useMemo(() => {
-    if (params.verbChapter)
-      return `/${params.verbType}/${params.verbForm}/${params.verbChapter}`
-    if (params.verbForm) return `/${params.verbType}/${params.verbForm}`
-    if (params.verbType) return `/${params.verbType}`
+    if (params.chapter)
+      return `/${params.type}/${params.form}/${params.chapter}`
+    if (params.form) return `/${params.type}/${params.form}`
+    if (params.type) return `/${params.type}`
     return null
   }, [params])
 
   const accordionData = useMemo(() => {
     const accordionGroups: AccordionGroup[] = []
 
-    for (const verbTypeKey of Object.keys(verbTypes)) {
-      if (settings.hiddenVerbTypes.includes(verbTypeKey)) {
+    for (const type of Object.keys(verbTypes)) {
+      if (settings.hiddenVerbTypes.includes(type)) {
         continue
       }
 
-      const verbType = verbTypes[verbTypeKey]!
+      const verbType = verbTypes[type]!
 
       const items: AccordionGroupItem[] = [
         {
-          id: `/${verbTypeKey}`,
+          id: `/${type}`,
           title: 'Overview',
           tag: 'All',
         },
       ]
 
-      for (const chapterKey of Object.keys(verbType)) {
-        const chapter = verbType[chapterKey]
-
+      for (const chapter of Object.values(verbType)) {
         if (isMujarrad(chapter)) {
           const letters = ['a', 'b', 'c', 'd', 'e', 'f']
 
-          for (const chapterKey of Object.keys(chapter)) {
+          for (const mujarradChapter of Object.values(chapter)) {
             items.push({
-              id: `/${verbTypeKey}/1/${chapterKey}`,
-              title: replaceRoots(chapter[chapterKey]!).title,
+              id: `/${type}/${mujarradChapter?.form}/${mujarradChapter?.باب}`,
+              title: replaceRoots(mujarradChapter!).title,
               tag: `1${letters.shift()}`,
             })
           }
         } else if (chapter) {
           items.push({
-            id: `/${verbTypeKey}/${chapterKey}`,
+            id: `/${type}/${chapter.form}`,
             title: replaceRoots(chapter).title,
             tag: chapter.form,
           })
@@ -73,8 +71,8 @@ const Sidebar = () => {
       }
 
       accordionGroups.push({
-        id: verbTypeKey,
-        title: verbTypeKey,
+        id: type,
+        title: type,
         items,
       })
     }
@@ -121,7 +119,7 @@ const Sidebar = () => {
 
         <Accordion
           data={accordionData}
-          activeGroupId={params.verbType}
+          activeGroupId={params.type}
           activeItemId={activeItemId}
           onPressGroupItem={goToVerb}
         />

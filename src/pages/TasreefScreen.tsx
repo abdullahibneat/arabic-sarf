@@ -12,32 +12,28 @@ const TasreefScreen = () => {
   const params = useRoute().params
 
   const chapter = useMemo(() => {
-    const type = verbTypes[params.verbType]
+    const type = verbTypes[params.type]
 
     if (!type) return null
 
-    const form = type[params.verbForm]
+    const form = type[params.form]
 
     if (!form) return null
 
-    const chapter = isMujarrad(form) ? form[params.verbChapter] : form
+    const chapter = isMujarrad(form) ? form[params.chapter] : form
 
-    if (chapter) {
-      return replaceRoots(chapter)
-    }
-
-    return null
-  }, [params.verbType, params.verbForm, params.verbChapter])
+    return chapter ? replaceRoots(chapter) : null
+  }, [params.type, params.form, params.chapter])
 
   const audioPath = useMemo(() => {
-    let path = `/recordings/${params.verbType}/${params.verbForm}`
+    let path = `/recordings/${chapter?.type}/${chapter?.form}`
 
     if (chapter?.form === 1) {
       path += `/${chapter.باب}`
     }
 
     return path
-  }, [params.verbType, params.verbForm, chapter])
+  }, [chapter])
 
   return (
     <Screen>
@@ -52,14 +48,14 @@ const TasreefScreen = () => {
               <div style={{ direction: 'ltr' }}>
                 <Tasreef
                   title="ماضي"
-                  verbTasreef={chapter.conjugations.ماضي.معروف}
+                  tasreef={chapter.conjugations.ماضي.معروف}
                   audioSrc={audioPath + '/ماضي.mp3'}
                 />
               </div>
               <div style={{ direction: 'ltr' }}>
                 <Tasreef
                   title="مضارع"
-                  verbTasreef={chapter.conjugations.مضارع.معروف}
+                  tasreef={chapter.conjugations.مضارع.معروف}
                   audioSrc={audioPath + '/مضارع.mp3'}
                 />
               </div>
