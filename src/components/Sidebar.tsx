@@ -54,9 +54,9 @@ const Sidebar = () => {
         if (isMujarrad(chapter)) {
           const letters = ['a', 'b', 'c', 'd', 'e', 'f']
 
-          for (const mujarradChapter of Object.values(chapter)) {
+          for (const [$chapter, mujarradChapter] of Object.entries(chapter)) {
             items.push({
-              id: `/${type}/${mujarradChapter?.form}/${mujarradChapter?.باب}`,
+              id: `/${type}/${mujarradChapter?.form}/${$chapter}`,
               title: replaceRoots(mujarradChapter!).title,
               tag: `1${letters.shift()}`,
             })
