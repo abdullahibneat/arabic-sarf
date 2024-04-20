@@ -107,6 +107,8 @@ svg * {
   justify-content: center;
   align-items: center;
   padding: 64px;
+
+  overflow: hidden;
 }
 
 .global-modal-overlay:has(.global-modal) {
@@ -118,6 +120,8 @@ svg * {
   background-color: white;
   border-radius: 6px;
   border: solid 1px var(--border);
+  max-height: 100%;
+  overflow-y: auto;
   animation: revealGlobalModal 500ms;
   animation-fill-mode: forwards;
 }
