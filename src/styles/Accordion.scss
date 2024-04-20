@@ -1,4 +1,7 @@
 .accordion-group {
+  border: solid 1px var(--border);
+  border-radius: 6px;
+
   .content-wrapper {
     display: grid;
     grid-template-rows: 0fr;

@@ -1,8 +1,9 @@
 import '../styles/Accordion.scss'
 
+import { useCallback, useEffect, useState } from 'preact/hooks'
+
 import Flex from './Flex'
 import MenuItem from './MenuItem'
-import { useState } from 'preact/hooks'
 
 export type AccordionGroup = {
   id: string
@@ -13,17 +14,35 @@ export type AccordionGroup = {
 export type AccordionGroupItem = {
   id: string
   title: string
+  tag?: string | number
 }
 
 type Props = {
   data: AccordionGroup[]
+  activeGroupId?: string
+  activeItemId?: string
+  onPressGroup?: (group: AccordionGroup) => void
+  onPressGroupItem?: (item: AccordionGroupItem) => void
 }
 
-const Accordion = ({ data }: Props) => {
+const Accordion = ({
+  data,
+  activeGroupId,
+  activeItemId,
+  onPressGroup,
+  onPressGroupItem,
+}: Props) => {
   return (
     <Flex column gap={8}>
-      {data.map((group) => (
-        <AccordionGroup key={group.id} group={group} />
+      {data.map((group, i) => (
+        <AccordionGroup
+          key={group.id}
+          group={group}
+          activeGroupId={activeGroupId}
+          activeItemId={activeItemId}
+          onPressGroup={onPressGroup}
+          onPressGroupItem={onPressGroupItem}
+        />
       ))}
     </Flex>
   )
@@ -31,23 +50,58 @@ const Accordion = ({ data }: Props) => {
 
 export default Accordion
 
-const AccordionGroup = ({ group }: { group: AccordionGroup }) => {
+const AccordionGroup = ({
+  group,
+  activeGroupId,
+  activeItemId,
+  onPressGroup,
+  onPressGroupItem,
+}: {
+  group: AccordionGroup
+  activeGroupId?: string
+  activeItemId?: string
+  onPressGroup?: (group: AccordionGroup) => void
+  onPressGroupItem?: (item: AccordionGroupItem) => void
+}) => {
   const [open, setOpen] = useState(false)
 
+  useEffect(() => {
+    if (activeGroupId && group.id === activeGroupId) {
+      setOpen(true)
+    }
+  }, [activeGroupId])
+
+  const handleGroupPress = useCallback(() => {
+    setOpen((open) => !open)
+    onPressGroup?.(group)
+  }, [onPressGroup])
+
+  const handleItemPress = useCallback(
+    (item: AccordionGroupItem) => () => {
+      onPressGroupItem?.(item)
+    },
+    [onPressGroupItem],
+  )
+
   return (
-    <div class="accordion-group">
+    <div class={`accordion-group ${open ? 'open' : ''}`}>
       <MenuItem
-        active={open}
         title={group.title}
         icon={open ? 'chevron-down' : 'chevron-left'}
-        onClick={() => setOpen(!open)}
+        onClick={handleGroupPress}
       />
 
       <div class={`content-wrapper ${open ? 'open' : ''}`}>
         <div class="content">
           <Flex column gap={8} padding={8}>
             {group.items.map((item) => (
-              <MenuItem key={item.id} title={item.title} />
+              <MenuItem
+                key={item.id}
+                active={item.id === activeItemId}
+                title={item.title}
+                tag={item.tag}
+                onClick={handleItemPress(item)}
+              />
             ))}
           </Flex>
         </div>
