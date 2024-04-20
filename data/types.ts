@@ -1,22 +1,13 @@
-export type MazeedFihiChapters =
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '10'
-
-export type VerbTypes = {
-  '1': Record<string, VerbChapter>
-} & Record<MazeedFihiChapters, VerbChapter | null>
+export type VerbTypes = Record<
+  string,
+  Record<string, VerbChapter | undefined> | VerbChapter | null | undefined
+>
 
 export type VerbChapter = {
   type: string
-  باب: string
   form: number
+  باب: string
+  title: string
   root_letters: Array<string[]>
   archetype: VerbArchetype
   conjugations: VerbConjugations
