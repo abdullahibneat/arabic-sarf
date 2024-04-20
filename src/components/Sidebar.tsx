@@ -40,7 +40,7 @@ const Sidebar = () => {
         continue
       }
 
-      const verbType = verbTypes[verbTypeKey]
+      const verbType = verbTypes[verbTypeKey]!
 
       const items: AccordionGroupItem[] = [
         {

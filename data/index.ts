@@ -157,6 +157,12 @@ const مضاعف: VerbTypes = {
   '10': mudaafForm10,
 }
 
-const verbTypes: Record<string, VerbTypes> = { صحيح, أجوف, ناقص, مثال, مضاعف }
+const verbTypes: Record<string, VerbTypes | undefined> = {
+  صحيح,
+  أجوف,
+  ناقص,
+  مثال,
+  مضاعف,
+}
 
 export default verbTypes

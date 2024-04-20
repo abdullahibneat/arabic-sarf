@@ -2,9 +2,9 @@ import { LocationProvider, Route, Router } from 'preact-iso'
 import { ModalContext, ModalProps } from './contexts/ModalContext'
 import { useCallback, useState } from 'preact/hooks'
 
-import HomeScreen from './pages/HomeScreen'
 import IconButton from './components/IconButton'
 import NotFound from './pages/_404'
+import OverviewScreen from './pages/OverviewScreen'
 import TasreefScreen from './pages/TasreefScreen'
 import Text from './components/Text'
 import { render } from 'preact'
@@ -18,7 +18,8 @@ const App = () => {
     <ModalContext.Provider value={{ open: setModal, close: closeModal }}>
       <LocationProvider>
         <Router>
-          <Route path="/" component={HomeScreen} />
+          <Route path="/" component={OverviewScreen} />
+          <Route path="/:verbType" component={OverviewScreen} />
           <Route
             path="/:verbType/:verbForm/:verbChapter?"
             component={TasreefScreen}
