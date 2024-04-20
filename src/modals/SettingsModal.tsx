@@ -13,11 +13,15 @@ import verbTypes from '../../data'
 const SettingsModal = () => {
   const { settings } = useAppState()
 
-  const verbTypeOptions = Object.keys(verbTypes).map((verbType) => ({
-    key: verbType,
-    name: verbType,
-    value: !settings.hiddenVerbTypes.includes(verbType),
-  }))
+  const verbTypeOptions = useMemo(
+    () =>
+      Object.keys(verbTypes).map((verbType) => ({
+        key: verbType,
+        name: verbType,
+        value: !settings.hiddenVerbTypes.includes(verbType),
+      })),
+    [settings.hiddenVerbTypes],
+  )
 
   const mujarradChapterHeadingsOptions = useMemo(
     () =>
@@ -46,12 +50,20 @@ const SettingsModal = () => {
     [],
   )
 
-  const tasreefOptions = [
-    { key: 'showNasb', name: 'Nasb', value: settings.showNasb },
-    { key: 'showJazm', name: 'Jazm', value: settings.showJazm },
-    { key: 'showAmr', name: 'Amr', value: settings.showAmr },
-    { key: 'showMajhool', name: 'Majhool', value: settings.showMajhool },
-  ]
+  const tasreefOptions = useMemo(
+    () => [
+      { key: 'showNasb', name: 'Nasb', value: settings.showNasb },
+      { key: 'showJazm', name: 'Jazm', value: settings.showJazm },
+      { key: 'showAmr', name: 'Amr', value: settings.showAmr },
+      { key: 'showMajhool', name: 'Majhool', value: settings.showMajhool },
+    ],
+    [
+      settings.showNasb,
+      settings.showJazm,
+      settings.showAmr,
+      settings.showMajhool,
+    ],
+  )
 
   const toggleVerbType = useCallback((verbType: string, enable: boolean) => {
     const newSettings = AppState.getItem('settings')
@@ -64,7 +76,7 @@ const SettingsModal = () => {
         (type) => type !== verbType,
       )
     } else if (hide && !currentlyHidden) {
-      newSettings.hiddenVerbTypes.push(verbType)
+      newSettings.hiddenVerbTypes = newSettings.hiddenVerbTypes.concat(verbType)
     }
 
     AppState.setItem('settings', newSettings)
