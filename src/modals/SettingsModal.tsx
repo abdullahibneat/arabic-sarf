@@ -73,7 +73,7 @@ const SettingsModal = () => {
 
     if (enable && currentlyHidden) {
       newSettings.hiddenVerbTypes = newSettings.hiddenVerbTypes.filter(
-        (type) => type !== type,
+        ($type) => $type !== type,
       )
     } else if (hide && !currentlyHidden) {
       newSettings.hiddenVerbTypes = newSettings.hiddenVerbTypes.concat(type)
