@@ -2,9 +2,7 @@ import Flex from '../components/Flex'
 import Screen from '../components/Screen'
 import Tasreef from '../components/Tasreef'
 import Text from '../components/Text'
-import { VerbChapter } from '../../data/types'
-import asRomanNumeral from '../helpers/asRomanNumeral'
-import isVerbChapter from '../helpers/isVerbChapter'
+import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import { useMemo } from 'preact/hooks'
 import { useRoute } from 'preact-iso'
@@ -13,21 +11,16 @@ import verbTypes from '../../data'
 const TasreefScreen = () => {
   const params = useRoute().params
 
-  const verbChapter = useMemo(() => {
-    const verbType = verbTypes[params.verbType]
+  const chapter = useMemo(() => {
+    const type = verbTypes[params.verbType]
 
-    if (!verbType) return null
+    if (!type) return null
 
-    const verbForm = verbType[asRomanNumeral(Number(params.verbForm))] as
-      | Record<string, VerbChapter>
-      | VerbChapter
-      | undefined
+    const form = type[params.verbForm]
 
-    if (!verbForm) return null
+    if (!form) return null
 
-    const chapter = isVerbChapter(verbForm)
-      ? verbForm
-      : verbForm[params.verbChapter]
+    const chapter = isMujarrad(form) ? form[params.verbChapter] : form
 
     if (chapter) {
       return replaceRoots(chapter)
@@ -37,24 +30,21 @@ const TasreefScreen = () => {
   }, [params.verbType, params.verbForm, params.verbChapter])
 
   const audioPath = useMemo(() => {
-    let path = `/recordings/${params.verbType}/${asRomanNumeral(
-      Number(params.verbForm),
-    )}`
+    let path = `/recordings/${params.verbType}/${params.verbForm}`
 
-    if (verbChapter?.form === 1) {
-      path += `/${verbChapter.باب}`
+    if (chapter?.form === 1) {
+      path += `/${chapter.باب}`
     }
 
     return path
-  }, [params.verbType, params.verbForm, verbChapter])
+  }, [params.verbType, params.verbForm, chapter])
 
   return (
     <Screen>
-      {verbChapter && (
+      {chapter && (
         <Flex column gap={32} padding="32px 0">
           <Text type="bold" style={{ textAlign: 'center' }}>
-            {verbChapter.archetype.ماضي.معروف}{' '}
-            {verbChapter.archetype.مضارع.معروف}
+            {chapter.title}
           </Text>
 
           <Flex justifyContent="center">
@@ -62,14 +52,14 @@ const TasreefScreen = () => {
               <div style={{ direction: 'ltr' }}>
                 <Tasreef
                   title="ماضي"
-                  verbTasreef={verbChapter.conjugations.ماضي.معروف}
+                  verbTasreef={chapter.conjugations.ماضي.معروف}
                   audioSrc={audioPath + '/ماضي.mp3'}
                 />
               </div>
               <div style={{ direction: 'ltr' }}>
                 <Tasreef
                   title="مضارع"
-                  verbTasreef={verbChapter.conjugations.مضارع.معروف}
+                  verbTasreef={chapter.conjugations.مضارع.معروف}
                   audioSrc={audioPath + '/مضارع.mp3'}
                 />
               </div>
