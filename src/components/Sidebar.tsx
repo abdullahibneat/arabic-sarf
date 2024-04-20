@@ -24,11 +24,13 @@ const Sidebar = () => {
 
   const { settings } = useAppState()
 
-  const activeItemId = useMemo(
-    () =>
-      `/${params.verbType}/${params.verbForm}${params.verbChapter ? `/${params.verbChapter}` : ''}`,
-    [params],
-  )
+  const activeItemId = useMemo(() => {
+    if (params.verbChapter)
+      return `/${params.verbType}/${params.verbForm}/${params.verbChapter}`
+    if (params.verbForm) return `/${params.verbType}/${params.verbForm}`
+    if (params.verbType) return `/${params.verbType}`
+    return null
+  }, [params])
 
   const accordionData = useMemo(() => {
     const accordionGroups: AccordionGroup[] = []
@@ -110,7 +112,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <Flex flex={1} column gap={36} padding="16px 24px" overflow="auto">
+      <Flex flex={1} column gap={8} padding="16px 24px" overflow="auto">
         <MenuItem
           active={location.path === '/'}
           title="All Tasreefs"
