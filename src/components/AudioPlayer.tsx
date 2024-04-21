@@ -67,9 +67,6 @@ const AudioPlayer = ({ setAudioPlayer }: Props) => {
 
   const setSrc = useCallback(async (src: string) => {
     audio.src = src
-    // TODO: Use forwardRef to pass audio player back to parent
-    // Currently it's using setAudioPlayer in the first render,
-    // so it won't use the new playbackRate if it's changed in the middle
     audio.playbackRate = AppState.getItem('playbackSpeed')
     await audio.play()
     setPlaying(true)
