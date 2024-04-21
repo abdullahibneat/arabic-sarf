@@ -2,6 +2,7 @@ import RootLettersEditor, { RootLetters } from '../components/RootLettersEditor'
 import { useMemo, useState } from 'preact/hooks'
 
 import Flex from '../components/Flex'
+import SarfSagheer from '../components/SarfSagheer'
 import Tasreef from '../components/Tasreef'
 import Text from '../components/Text'
 import isMujarrad from '../helpers/isMujarrad'
@@ -80,6 +81,12 @@ const TasreefScreen = () => {
       <Text type="bold" style={{ textAlign: 'center' }}>
         {chapter.title}
       </Text>
+
+      {settings.showSarfSagheer && (
+        <Flex alignSelf="center">
+          <SarfSagheer chapter={chapter} />
+        </Flex>
+      )}
 
       <Flex justifyContent="center">
         <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">

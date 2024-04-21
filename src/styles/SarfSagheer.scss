@@ -1,0 +1,14 @@
+.sarf-sagheer {
+  padding: 32px;
+  text-align: center;
+  border: solid 1px var(--border);
+  border-radius: 6px;
+
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 700;
+
+  span {
+    color: var(--border);
+  }
+}
