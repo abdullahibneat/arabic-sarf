@@ -3,12 +3,15 @@ import Tasreef from '../components/Tasreef'
 import Text from '../components/Text'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
+import useAppState from '../hooks/useAppState'
 import { useMemo } from 'preact/hooks'
 import { useRoute } from 'preact-iso'
 import verbTypes from '../../data'
 
 const TasreefScreen = () => {
   const params = useRoute().params
+
+  const { settings } = useAppState()
 
   const chapter = useMemo(() => {
     const type = verbTypes[params.type]
@@ -51,6 +54,7 @@ const TasreefScreen = () => {
               audioSrc={audioPath + '/ماضي.mp3'}
             />
           </div>
+
           <div style={{ direction: 'ltr' }}>
             <Tasreef
               title="مضارع"
@@ -58,6 +62,38 @@ const TasreefScreen = () => {
               audioSrc={audioPath + '/مضارع.mp3'}
             />
           </div>
+
+          {settings.showNasb && (
+            <div style={{ direction: 'ltr' }}>
+              <Tasreef
+                title="نصب"
+                tasreef={chapter.conjugations.نصب.معروف}
+                particle="لَنْ"
+                audioSrc={audioPath + '/نصب.mp3'}
+              />
+            </div>
+          )}
+
+          {settings.showJazm && (
+            <div style={{ direction: 'ltr' }}>
+              <Tasreef
+                title="جزم"
+                tasreef={chapter.conjugations.جزم.معروف}
+                particle="لَمْ"
+                audioSrc={audioPath + '/جزم.mp3'}
+              />
+            </div>
+          )}
+
+          {settings.showAmr && (
+            <div style={{ direction: 'ltr' }}>
+              <Tasreef
+                title="أمر"
+                tasreef={chapter.conjugations.أمر}
+                audioSrc={audioPath + '/أمر.mp3'}
+              />
+            </div>
+          )}
         </Flex>
       </Flex>
     </Flex>
