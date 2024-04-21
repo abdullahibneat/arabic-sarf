@@ -123,8 +123,8 @@ const Sidebar = () => {
 
           <Accordion
             data={accordionData}
-            activeGroupId={type}
-            activeItemId={activeItemId}
+            activeGroupId={type ? decodeURI(type) : null}
+            activeItemId={activeItemId ? decodeURI(activeItemId) : null}
             onPressGroupItem={goToVerb}
           />
         </Flex>
