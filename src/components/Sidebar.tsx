@@ -109,20 +109,22 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <Flex flex={1} column gap={8} padding="16px 24px" overflow="auto">
-        <MenuItem
-          active={location.path === '/'}
-          title="All Tasreefs"
-          onClick={goToHomepage}
-        />
+      <div class="sidebar-content">
+        <Flex column gap={8}>
+          <MenuItem
+            active={location.path === '/'}
+            title="All Tasreefs"
+            onClick={goToHomepage}
+          />
 
-        <Accordion
-          data={accordionData}
-          activeGroupId={type}
-          activeItemId={activeItemId}
-          onPressGroupItem={goToVerb}
-        />
-      </Flex>
+          <Accordion
+            data={accordionData}
+            activeGroupId={type}
+            activeItemId={activeItemId}
+            onPressGroupItem={goToVerb}
+          />
+        </Flex>
+      </div>
 
       <Flex class="footer" alignItems="stretch">
         <Flex flex={1} />

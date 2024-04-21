@@ -32,6 +32,16 @@ aside {
     }
   }
 
+  .sidebar-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 24px;
+    padding-right: 8px; // 24px (from line above) - 16px (scrollbar width)
+    overflow-y: scroll;
+  }
+
   .footer {
     border-top: solid 1px var(--border);
   }
