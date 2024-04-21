@@ -1,9 +1,12 @@
+import '../styles/OverviewScreen.scss'
+
 import Tasreef, { TasreefProps } from '../components/Tasreef'
 import { useCallback, useMemo } from 'preact/hooks'
 
 import Flex from '../components/Flex'
 import Text from '../components/Text'
 import { VerbTypeMap } from '../../data/types'
+import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
@@ -19,27 +22,22 @@ const OverviewScreen = () => {
     (type: string, verbMap: VerbTypeMap) => {
       const $sections: Array<{
         title: string
-        subHeading: string
         tasreefs: TasreefProps[]
       }> = [
         {
           title: `${type} / مجرّد / ماضي`,
-          subHeading: 'Forms 1a to 1f',
           tasreefs: [],
         },
         {
           title: `${type} / مجرّد / مضارع`,
-          subHeading: 'Forms 1a to 1f',
           tasreefs: [],
         },
         {
           title: `${type} / مزيد فيه / مضارع`,
-          subHeading: 'Forms 2 to 10',
           tasreefs: [],
         },
         {
           title: `${type} - مضارع`,
-          subHeading: 'Forms 2 to 10',
           tasreefs: [],
         },
       ]
@@ -111,13 +109,12 @@ const OverviewScreen = () => {
   }, [params.type, settings.hiddenVerbTypes])
 
   return (
-    <Flex column gap={32} padding="32px 0">
+    <Flex column padding="32px 0">
       {sections.map((section, i) => (
-        <Flex key={`section-${i}`} column gap={16}>
-          <Flex column alignItems="center">
-            <Text type="bold">{section.title}</Text>
-            <Text>{section.subHeading}</Text>
-          </Flex>
+        <div key={`section-${i}`} class="section">
+          <Text type="bold" style={{ textAlign: 'center' }}>
+            {section.title}
+          </Text>
 
           <Flex justifyContent="center">
             <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
@@ -135,7 +132,7 @@ const OverviewScreen = () => {
               ))}
             </Flex>
           </Flex>
-        </Flex>
+        </div>
       ))}
     </Flex>
   )
