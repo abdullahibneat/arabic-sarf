@@ -6,6 +6,7 @@ import { useCallback, useMemo } from 'preact/hooks'
 import Flex from '../components/Flex'
 import Text from '../components/Text'
 import { VerbTypeMap } from '../../data/types'
+import getMazeedFihiChapterHeading from '../helpers/getMazeedFihiChapterHeading'
 import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
@@ -66,12 +67,12 @@ const OverviewScreen = () => {
           const archetype = replaceRoots(chapter)
 
           mazeedFihiMadi.tasreefs.push({
-            title: `${archetype.form} - ${archetype.archetype.ماضي.معروف} ${archetype.archetype.مضارع.معروف}`,
+            title: getMazeedFihiChapterHeading(archetype.form),
             tasreef: archetype.conjugations.ماضي.معروف,
           })
 
           mazeedFihiMudari.tasreefs.push({
-            title: `${archetype.form} - ${archetype.archetype.ماضي.معروف} ${archetype.archetype.مضارع.معروف}`,
+            title: getMazeedFihiChapterHeading(archetype.form),
             tasreef: archetype.conjugations.مضارع.معروف,
           })
         }
@@ -79,7 +80,7 @@ const OverviewScreen = () => {
 
       return $sections
     },
-    [settings.mazeedFihiChapterHeadings],
+    [settings.mujarradChapterHeadings, settings.mazeedFihiChapterHeadings],
   )
 
   const sections = useMemo(() => {

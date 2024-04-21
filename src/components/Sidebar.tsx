@@ -8,6 +8,7 @@ import IconButton from './IconButton'
 import MenuItem from './MenuItem'
 import SettingsModal from '../modals/SettingsModal'
 import Text from './Text'
+import getMazeedFihiChapterHeading from '../helpers/getMazeedFihiChapterHeading'
 import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
@@ -63,7 +64,7 @@ const Sidebar = () => {
           items.push({
             id: `/${type}/${chapter.form}`,
             title: replaceRoots(chapter).title,
-            tag: chapter.form,
+            tag: getMazeedFihiChapterHeading(chapter.form),
           })
         }
       }
@@ -76,7 +77,11 @@ const Sidebar = () => {
     }
 
     return accordionGroups
-  }, [settings.hiddenVerbTypes, settings.mujarradChapterHeadings])
+  }, [
+    settings.hiddenVerbTypes,
+    settings.mujarradChapterHeadings,
+    settings.mazeedFihiChapterHeadings,
+  ])
 
   const goToHomepage = useCallback(() => {
     location.route('/')
