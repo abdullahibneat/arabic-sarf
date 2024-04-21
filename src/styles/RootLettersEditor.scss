@@ -1,0 +1,37 @@
+.root-letters-editor {
+  direction: rtl;
+
+  input {
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    border: solid 1px var(--border);
+    color: var(--text);
+    outline: none;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    &:first-of-type {
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+
+    &:last-of-type {
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+    }
+
+    &::placeholder {
+      color: var(--border);
+    }
+
+    &:focus {
+      border-color: var(--text);
+    }
+  }
+
+  input + input {
+    margin-right: -1px;
+  }
+}

@@ -1,19 +1,27 @@
+import RootLettersEditor, { RootLetters } from '../components/RootLettersEditor'
+import { useMemo, useState } from 'preact/hooks'
+
 import Flex from '../components/Flex'
 import Tasreef from '../components/Tasreef'
 import Text from '../components/Text'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
-import { useMemo } from 'preact/hooks'
 import { useRoute } from 'preact-iso'
 import verbTypes from '../../data'
 
 const TasreefScreen = () => {
+  const [rootLetters, setRootLetters] = useState<RootLetters>({
+    ف: 'ف',
+    ع: 'ع',
+    ل: 'ل',
+  })
+
   const params = useRoute().params
 
   const { settings } = useAppState()
 
-  const chapter = useMemo(() => {
+  const baseChapter = useMemo(() => {
     const type = verbTypes[params.type]
 
     if (!type) return null
@@ -24,23 +32,51 @@ const TasreefScreen = () => {
 
     const chapter = isMujarrad(form) ? form[params.chapter] : form
 
-    return chapter ? replaceRoots(chapter) : null
+    if (chapter) {
+      setRootLetters({
+        ف: chapter.root_letters[0][0],
+        ع: chapter.root_letters[0][1],
+        ل: chapter.root_letters[0][2],
+      })
+
+      return chapter
+    } else {
+      return null
+    }
   }, [params.type, params.form, params.chapter])
 
-  const audioPath = useMemo(() => {
-    let path = `/recordings/${chapter?.type}/${chapter?.form}`
+  const chapter = useMemo(
+    () => (baseChapter ? replaceRoots(baseChapter, rootLetters) : null),
+    [rootLetters],
+  )
 
-    if (chapter?.form === 1) {
-      path += `/${chapter.باب}`
+  const audioPath = useMemo(() => {
+    let path = `/recordings/${baseChapter?.type}/${baseChapter?.form}`
+
+    if (baseChapter?.form === 1) {
+      path += `/${baseChapter.باب}`
     }
 
     return path
-  }, [chapter])
+  }, [baseChapter])
 
   if (!chapter) return <div>Not found</div>
 
   return (
     <Flex column gap={32} padding="32px 0">
+      {settings.showRootLettersEditor && (
+        <Flex alignSelf="center">
+          <RootLettersEditor
+            rootLetters={{
+              ف: chapter.root_letters[0][0],
+              ع: chapter.root_letters[0][1],
+              ل: chapter.root_letters[0][2],
+            }}
+            onChange={setRootLetters}
+          />
+        </Flex>
+      )}
+
       <Text type="bold" style={{ textAlign: 'center' }}>
         {chapter.title}
       </Text>
