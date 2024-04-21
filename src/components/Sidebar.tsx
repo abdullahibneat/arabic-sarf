@@ -8,6 +8,7 @@ import IconButton from './IconButton'
 import MenuItem from './MenuItem'
 import SettingsModal from '../modals/SettingsModal'
 import Text from './Text'
+import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
@@ -51,13 +52,11 @@ const Sidebar = () => {
 
       for (const chapter of Object.values(verbType)) {
         if (isMujarrad(chapter)) {
-          const letters = ['a', 'b', 'c', 'd', 'e', 'f']
-
           for (const [$chapter, mujarradChapter] of Object.entries(chapter)) {
             items.push({
               id: `/${type}/${mujarradChapter?.form}/${$chapter}`,
               title: replaceRoots(mujarradChapter!).title,
-              tag: `1${letters.shift()}`,
+              tag: getMujarradChapterHeading(mujarradChapter!.باب),
             })
           }
         } else if (chapter) {
@@ -77,7 +76,7 @@ const Sidebar = () => {
     }
 
     return accordionGroups
-  }, [settings.hiddenVerbTypes])
+  }, [settings.hiddenVerbTypes, settings.mujarradChapterHeadings])
 
   const goToHomepage = useCallback(() => {
     location.route('/')

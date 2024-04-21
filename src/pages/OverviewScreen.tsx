@@ -23,17 +23,17 @@ const OverviewScreen = () => {
         tasreefs: TasreefProps[]
       }> = [
         {
-          title: `${type} - ماضي`,
+          title: `${type} / مجرّد / ماضي`,
           subHeading: 'Forms 1a to 1f',
           tasreefs: [],
         },
         {
-          title: `${type} - مضارع`,
+          title: `${type} / مجرّد / مضارع`,
           subHeading: 'Forms 1a to 1f',
           tasreefs: [],
         },
         {
-          title: `${type} - ماضي`,
+          title: `${type} / مزيد فيه / مضارع`,
           subHeading: 'Forms 2 to 10',
           tasreefs: [],
         },
@@ -51,20 +51,16 @@ const OverviewScreen = () => {
 
       for (const chapter of Object.values(verbMap)) {
         if (isMujarrad(chapter)) {
-          const letters = ['a', 'b', 'c', 'd', 'e', 'f']
-
           for (const archetype of Object.values(chapter)) {
             const chapter = replaceRoots(archetype!)
 
-            const letter = letters.shift()
-
             mujarradMadi.tasreefs.push({
-              title: `1${letter} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
+              title: getMujarradChapterHeading(chapter.باب),
               tasreef: chapter.conjugations.ماضي.معروف,
             })
 
             mujarradMudari.tasreefs.push({
-              title: `1${letter} - ${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
+              title: getMujarradChapterHeading(chapter.باب),
               tasreef: chapter.conjugations.مضارع.معروف,
             })
           }
@@ -85,7 +81,7 @@ const OverviewScreen = () => {
 
       return $sections
     },
-    [],
+    [settings.mazeedFihiChapterHeadings],
   )
 
   const sections = useMemo(() => {
