@@ -139,6 +139,7 @@ const SettingsModal = () => {
         <Text>Tasreef group mode</Text>
         <Flex justifyContent="center" alignItems="center" gap={16} flex={1}>
           <IconButton
+            title="By person"
             active={settings.tasreefGroupMode === 'by-person'}
             name="group-by-person"
             color={
@@ -154,6 +155,7 @@ const SettingsModal = () => {
             }
           />
           <IconButton
+            title="By gender"
             active={settings.tasreefGroupMode === 'by-gender'}
             name="group-by-gender"
             color={
@@ -169,6 +171,7 @@ const SettingsModal = () => {
             }
           />
           <IconButton
+            title="List"
             active={settings.tasreefGroupMode === 'list'}
             name="list"
             color={
