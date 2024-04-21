@@ -1,10 +1,11 @@
 import '../styles/SettingsModal.scss'
 
-import { useCallback, useMemo } from 'preact/hooks'
+import AppState, { AppStateType } from '../AppState'
+import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
 
-import AppState from '../AppState'
 import Flex from '../components/Flex'
 import IconButton from '../components/IconButton'
+import { JSX } from 'preact'
 import Segmented from '../components/Segmented'
 import Text from '../components/Text'
 import useAppState from '../hooks/useAppState'
@@ -12,6 +13,36 @@ import verbTypes from '../../data'
 
 const SettingsModal = () => {
   const { settings } = useAppState()
+
+  const [preset, setPreset] = useState('Custom')
+
+  useEffect(() => {
+    presetsLoop: for (const [presetName, preset] of Object.entries(presets)) {
+      for (const [key, value] of Object.entries(preset)) {
+        if (key === 'tasreefGroupMode') {
+          continue
+        }
+
+        if (Array.isArray(value)) {
+          if (
+            JSON.stringify(value.sort()) !==
+            JSON.stringify(Array.from(settings[key]).sort())
+          ) {
+            continue presetsLoop
+          }
+        } else {
+          if (value !== settings[key]) {
+            continue presetsLoop
+          }
+        }
+      }
+      setPreset(presetName)
+    }
+  }, [])
+
+  const isCustomPreset = useMemo(() => preset === 'Custom', [preset])
+
+  const presetNames = useMemo(() => Object.keys(presets).concat('Custom'), [])
 
   const verbTypeOptions = useMemo(
     () =>
@@ -65,6 +96,20 @@ const SettingsModal = () => {
     ],
   )
 
+  const onPresetChange = useCallback(
+    (event: JSX.TargetedEvent<HTMLSelectElement>) => {
+      if (event.target instanceof HTMLSelectElement) {
+        const presetName = event.target.value
+        const preset = presets[presetName]
+
+        if (preset) AppState.setItem('settings', preset)
+
+        setPreset(event.target.value)
+      }
+    },
+    [],
+  )
+
   const toggleVerbType = useCallback((type: string, enable: boolean) => {
     const newSettings = AppState.getItem('settings')
 
@@ -85,10 +130,25 @@ const SettingsModal = () => {
   return (
     <Flex column gap={12} width={400} padding={24} paddingTop={12}>
       <Flex column gap={4}>
+        <Text>Presets</Text>
+        <select class="dropdown" value={preset} onChange={onPresetChange}>
+          {presetNames.map((preset) => (
+            <option key={preset} value={preset}>
+              {preset}
+            </option>
+          ))}
+        </select>
+      </Flex>
+
+      <Flex column gap={4}>
         <Text>Verb types</Text>
         <div class="table">
           {verbTypeOptions.map((option) => (
-            <Row {...option} onChange={toggleVerbType} />
+            <Row
+              {...option}
+              disabled={!isCustomPreset}
+              onChange={toggleVerbType}
+            />
           ))}
         </div>
       </Flex>
@@ -98,6 +158,7 @@ const SettingsModal = () => {
         <Segmented
           value={settings.mujarradChapterHeadings}
           options={mujarradChapterHeadingsOptions}
+          disabled={!isCustomPreset}
           onChange={({ value }) =>
             AppState.setItem('settings', {
               ...settings,
@@ -112,6 +173,7 @@ const SettingsModal = () => {
         <Segmented
           value={settings.mazeedFihiChapterHeadings}
           options={mazeedFihiChapterHeadingsOptions}
+          disabled={!isCustomPreset}
           onChange={({ value }) =>
             AppState.setItem('settings', {
               ...settings,
@@ -126,6 +188,7 @@ const SettingsModal = () => {
         <Segmented
           value={settings.showRootLettersEditor}
           options={booleanOptions}
+          disabled={!isCustomPreset}
           onChange={({ value }) =>
             AppState.setItem('settings', {
               ...settings,
@@ -140,6 +203,7 @@ const SettingsModal = () => {
         <Segmented
           value={settings.showSarfSagheer}
           options={booleanOptions}
+          disabled={!isCustomPreset}
           onChange={({ value }) =>
             AppState.setItem('settings', {
               ...settings,
@@ -203,6 +267,7 @@ const SettingsModal = () => {
             {tasreefOptions.map((option) => (
               <Row
                 {...option}
+                disabled={!isCustomPreset}
                 onChange={(property, value) =>
                   AppState.setItem('settings', {
                     ...settings,
@@ -224,22 +289,43 @@ const Row = ({
   key,
   name,
   value = false,
+  disabled,
   onChange,
 }: {
   key: string
   name: string
   value?: boolean
+  disabled?: boolean
   onChange?: (name: string, value: boolean) => void
 }) => (
-  <div class="table-row" onClick={() => onChange?.(key, !value)}>
+  <div
+    class={`table-row ${disabled ? 'disabled' : ''}`}
+    onClick={disabled ? undefined : () => onChange?.(key, !value)}
+  >
     <div>{name}</div>
     <div>
       <input
         type="checkbox"
         name={name}
         checked={value}
+        disabled={disabled}
         onChange={() => onChange?.(key, !value)}
       />
     </div>
   </div>
 )
+
+const presets: Record<string, AppStateType['settings']> = {
+  'Misk - Level 1': {
+    hiddenVerbTypes: ['أجوف', 'ناقص', 'مثال', 'مضاعف'],
+    mujarradChapterHeadings: 'english',
+    mazeedFihiChapterHeadings: 'english',
+    showRootLettersEditor: false,
+    showSarfSagheer: false,
+    showNasb: false,
+    showJazm: false,
+    showAmr: false,
+    showMajhool: false,
+    tasreefGroupMode: 'list',
+  },
+}

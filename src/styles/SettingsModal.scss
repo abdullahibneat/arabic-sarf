@@ -26,4 +26,23 @@
   div + div {
     border-left: solid 1px var(--border);
   }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+}
+
+.dropdown {
+  height: 36px;
+  color: var(--text);
+  padding: 0 8px;
+  border: solid 1px var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 250ms;
+
+  &:focus {
+    border-color: var(--text);
+  }
 }
