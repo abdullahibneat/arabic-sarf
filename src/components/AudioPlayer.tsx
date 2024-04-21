@@ -68,9 +68,13 @@ const AudioPlayer = ({ setAudioPlayer }: Props) => {
   const setSrc = useCallback(async (src: string) => {
     audio.src = src
     audio.playbackRate = AppState.getItem('playbackSpeed')
-    await audio.play()
-    setPlaying(true)
-    setVisible(true)
+    try {
+      await audio.play()
+      setPlaying(true)
+      setVisible(true)
+    } catch (_) {
+      alert(`This audio hasn't been recorded yet`)
+    }
   }, [])
 
   return (
