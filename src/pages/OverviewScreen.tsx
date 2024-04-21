@@ -107,7 +107,7 @@ const OverviewScreen = () => {
         generateOverviewForVerbType(type, verbType),
       ),
     )
-  }, [params.type, settings.hiddenVerbTypes])
+  }, [params.type, settings.hiddenVerbTypes, generateOverviewForVerbType])
 
   return (
     <Flex column padding="32px 0">
