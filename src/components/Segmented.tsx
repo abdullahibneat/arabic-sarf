@@ -10,21 +10,23 @@ export type SegmentedOption = {
 type Props<T extends SegmentedOption> = {
   value?: T['value'] | null
   options: T[] | Readonly<T[]>
+  disabled?: boolean
   onChange?: (option: T) => void
 }
 
 const Segmented = <T extends SegmentedOption = SegmentedOption>({
   value,
   options,
+  disabled,
   onChange,
 }: Props<T>) => {
   return (
-    <div class="segmented-container">
+    <div class={`segmented-container ${disabled ? 'disabled' : ''}`}>
       {options.map((option) => (
         <div
           key={String(option.value)}
           class={`segment ${option.value === value ? 'active' : ''}`}
-          onClick={() => onChange?.(option)}
+          onClick={disabled ? undefined : () => onChange?.(option)}
         >
           <Text type="small" style={{ color: 'inherit' }}>
             {option.label}
