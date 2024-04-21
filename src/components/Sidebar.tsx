@@ -2,7 +2,6 @@ import '../styles/Sidebar.scss'
 
 import Accordion, { AccordionGroup, AccordionGroupItem } from './Accordion'
 import { useCallback, useMemo, useState } from 'preact/hooks'
-import { useLocation, useRoute } from 'preact-iso'
 
 import Flex from './Flex'
 import IconButton from './IconButton'
@@ -12,6 +11,7 @@ import Text from './Text'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
+import { useLocation } from 'preact-iso'
 import useModal from '../hooks/useModal'
 import verbTypes from '../../data'
 
@@ -20,17 +20,16 @@ const Sidebar = () => {
 
   const modal = useModal()
   const location = useLocation()
-  const params = useRoute().params
+  const [type, form, chapter] = location.url.substring(1).split('/')
 
   const { settings } = useAppState()
 
   const activeItemId = useMemo(() => {
-    if (params.chapter)
-      return `/${params.type}/${params.form}/${params.chapter}`
-    if (params.form) return `/${params.type}/${params.form}`
-    if (params.type) return `/${params.type}`
+    if (chapter) return `/${type}/${form}/${chapter}`
+    if (form) return `/${type}/${form}`
+    if (type) return `/${type}`
     return null
-  }, [params])
+  }, [type, form, chapter])
 
   const accordionData = useMemo(() => {
     const accordionGroups: AccordionGroup[] = []
@@ -119,7 +118,7 @@ const Sidebar = () => {
 
         <Accordion
           data={accordionData}
-          activeGroupId={params.type}
+          activeGroupId={type}
           activeItemId={activeItemId}
           onPressGroupItem={goToVerb}
         />

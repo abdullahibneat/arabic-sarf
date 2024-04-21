@@ -2,7 +2,6 @@ import Tasreef, { TasreefProps } from '../components/Tasreef'
 import { useCallback, useMemo } from 'preact/hooks'
 
 import Flex from '../components/Flex'
-import Screen from '../components/Screen'
 import Text from '../components/Text'
 import { VerbTypeMap } from '../../data/types'
 import isMujarrad from '../helpers/isMujarrad'
@@ -116,35 +115,33 @@ const OverviewScreen = () => {
   }, [params.type, settings.hiddenVerbTypes])
 
   return (
-    <Screen>
-      <Flex column gap={32} padding="32px 0">
-        {sections.map((section, i) => (
-          <Flex key={`section-${i}`} column gap={16}>
-            <Flex column alignItems="center">
-              <Text type="bold">{section.title}</Text>
-              <Text>{section.subHeading}</Text>
-            </Flex>
+    <Flex column gap={32} padding="32px 0">
+      {sections.map((section, i) => (
+        <Flex key={`section-${i}`} column gap={16}>
+          <Flex column alignItems="center">
+            <Text type="bold">{section.title}</Text>
+            <Text>{section.subHeading}</Text>
+          </Flex>
 
-            <Flex justifyContent="center">
-              <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
-                {section.tasreefs.map((tasreef, j) => (
-                  <div
-                    key={`section-${i}-tasreef-${j}`}
-                    style={{ direction: 'ltr' }}
-                  >
-                    <Tasreef
-                      title={tasreef.title}
-                      tasreef={tasreef.tasreef}
-                      groupMode="list"
-                    />
-                  </div>
-                ))}
-              </Flex>
+          <Flex justifyContent="center">
+            <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
+              {section.tasreefs.map((tasreef, j) => (
+                <div
+                  key={`section-${i}-tasreef-${j}`}
+                  style={{ direction: 'ltr' }}
+                >
+                  <Tasreef
+                    title={tasreef.title}
+                    tasreef={tasreef.tasreef}
+                    groupMode="list"
+                  />
+                </div>
+              ))}
             </Flex>
           </Flex>
-        ))}
-      </Flex>
-    </Screen>
+        </Flex>
+      ))}
+    </Flex>
   )
 }
 

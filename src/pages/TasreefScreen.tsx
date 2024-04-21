@@ -1,5 +1,4 @@
 import Flex from '../components/Flex'
-import Screen from '../components/Screen'
 import Tasreef from '../components/Tasreef'
 import Text from '../components/Text'
 import isMujarrad from '../helpers/isMujarrad'
@@ -35,35 +34,33 @@ const TasreefScreen = () => {
     return path
   }, [chapter])
 
-  return (
-    <Screen>
-      {chapter && (
-        <Flex column gap={32} padding="32px 0">
-          <Text type="bold" style={{ textAlign: 'center' }}>
-            {chapter.title}
-          </Text>
+  if (!chapter) return <div>Not found</div>
 
-          <Flex justifyContent="center">
-            <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
-              <div style={{ direction: 'ltr' }}>
-                <Tasreef
-                  title="ماضي"
-                  tasreef={chapter.conjugations.ماضي.معروف}
-                  audioSrc={audioPath + '/ماضي.mp3'}
-                />
-              </div>
-              <div style={{ direction: 'ltr' }}>
-                <Tasreef
-                  title="مضارع"
-                  tasreef={chapter.conjugations.مضارع.معروف}
-                  audioSrc={audioPath + '/مضارع.mp3'}
-                />
-              </div>
-            </Flex>
-          </Flex>
+  return (
+    <Flex column gap={32} padding="32px 0">
+      <Text type="bold" style={{ textAlign: 'center' }}>
+        {chapter.title}
+      </Text>
+
+      <Flex justifyContent="center">
+        <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
+          <div style={{ direction: 'ltr' }}>
+            <Tasreef
+              title="ماضي"
+              tasreef={chapter.conjugations.ماضي.معروف}
+              audioSrc={audioPath + '/ماضي.mp3'}
+            />
+          </div>
+          <div style={{ direction: 'ltr' }}>
+            <Tasreef
+              title="مضارع"
+              tasreef={chapter.conjugations.مضارع.معروف}
+              audioSrc={audioPath + '/مضارع.mp3'}
+            />
+          </div>
         </Flex>
-      )}
-    </Screen>
+      </Flex>
+    </Flex>
   )
 }
 

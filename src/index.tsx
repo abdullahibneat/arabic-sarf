@@ -1,10 +1,16 @@
+import {
+  AudioPlayerContext,
+  AudioPlayerContextType,
+} from './contexts/AudioPlayerContext'
 import { LocationProvider, Route, Router } from 'preact-iso'
 import { ModalContext, ModalProps } from './contexts/ModalContext'
 import { useCallback, useState } from 'preact/hooks'
 
+import AudioPlayer from './components/AudioPlayer'
 import IconButton from './components/IconButton'
 import NotFound from './pages/_404'
 import OverviewScreen from './pages/OverviewScreen'
+import Sidebar from './components/Sidebar'
 import TasreefScreen from './pages/TasreefScreen'
 import Text from './components/Text'
 import { render } from 'preact'
@@ -12,34 +18,59 @@ import { render } from 'preact'
 const App = () => {
   const [modal, setModal] = useState<ModalProps | null>(null)
 
-  const closeModal = useCallback(() => setModal(null), [])
+  const [audioPlayer, setAudioPlayer] = useState<AudioPlayerContextType>({
+    play: async () => {},
+    pause: () => null,
+    close: () => null,
+    setSrc: async () => {},
+  })
 
+  const closeModal = useCallback(() => setModal(null), [])
   return (
     <ModalContext.Provider value={{ open: setModal, close: closeModal }}>
-      <LocationProvider>
-        <Router>
-          <Route path="/" component={OverviewScreen} />
-          <Route path="/:type" component={OverviewScreen} />
-          <Route path="/:type/:form/:chapter?" component={TasreefScreen} />
-          <Route default component={NotFound} />
-        </Router>
-      </LocationProvider>
-
-      <div class="global-modal-overlay" onClick={closeModal}>
-        {modal && (
-          <div class="global-modal" onClick={(e) => e.stopPropagation()}>
-            <div class="global-modal-header">
-              <Text style={{ flex: 1 }} type="bold">
-                {modal.title}
-              </Text>
-              <div class="global-modal-header-close">
-                <IconButton size="micro" name="close" onClick={closeModal} />
+      <AudioPlayerContext.Provider value={audioPlayer}>
+        <LocationProvider>
+          <div class="screen-wrapper">
+            <main>
+              <div class="screen-content">
+                <Router>
+                  <Route path="/" component={OverviewScreen} />
+                  <Route path="/:type" component={OverviewScreen} />
+                  <Route
+                    path="/:type/:form/:chapter?"
+                    component={TasreefScreen}
+                  />
+                  <Route default component={NotFound} />
+                </Router>
               </div>
-            </div>
-            <div>{modal.children}</div>
+
+              <AudioPlayer setAudioPlayer={setAudioPlayer} />
+            </main>
+
+            <Sidebar />
           </div>
-        )}
-      </div>
+
+          <div class="global-modal-overlay" onClick={closeModal}>
+            {modal && (
+              <div class="global-modal" onClick={(e) => e.stopPropagation()}>
+                <div class="global-modal-header">
+                  <Text style={{ flex: 1 }} type="bold">
+                    {modal.title}
+                  </Text>
+                  <div class="global-modal-header-close">
+                    <IconButton
+                      size="micro"
+                      name="close"
+                      onClick={closeModal}
+                    />
+                  </div>
+                </div>
+                <div>{modal.children}</div>
+              </div>
+            )}
+          </div>
+        </LocationProvider>
+      </AudioPlayerContext.Provider>
     </ModalContext.Provider>
   )
 }
