@@ -31,7 +31,7 @@ const TasreefScreen = () => {
 
   const [verbCase, setVerbCase] = useState('مرفوع')
 
-  const tabs = useMemo(() => ['معروف', 'مجهول', 'صرف سغير'].reverse(), [])
+  const tabs = useMemo(() => ['معروف', 'مجهول', 'صرف صغير'].reverse(), [])
   const verbCases = useMemo(() => ['مرفوع', 'منصوب', 'مجزوم'].reverse(), [])
 
   const params = useRoute().params
@@ -152,7 +152,7 @@ const TasreefScreen = () => {
       </Flex>
 
       <Flex column gap={16} justifyContent="center">
-        {activeTab === 'صرف سغير' && (
+        {activeTab === 'صرف صغير' && (
           <Flex column padding="0 16px" alignItems="center">
             <SarfSagheer chapter={chapter} />
           </Flex>
