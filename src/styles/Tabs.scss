@@ -1,0 +1,32 @@
+.tabs-container {
+  display: flex;
+  position: relative;
+
+  .tab {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--border);
+    border-bottom: solid 1px var(--border);
+    transition: border-bottom-color 250ms;
+
+    &:hover {
+      color: var(--text-secondary);
+    }
+
+    &.active {
+      color: var(--text);
+    }
+  }
+
+  .active-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    transition: left 250ms;
+    background-color: var(--text);
+  }
+}
