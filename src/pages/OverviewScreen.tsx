@@ -110,7 +110,7 @@ const OverviewScreen = () => {
   }, [params.type, settings.hiddenVerbTypes, generateOverviewForVerbType])
 
   return (
-    <Flex column padding="32px 0">
+    <Flex column padding="16px 0 32px">
       {sections.map((section, i) => (
         <div key={`section-${i}`} class="section">
           <Text type="bold" style={{ textAlign: 'center' }}>
