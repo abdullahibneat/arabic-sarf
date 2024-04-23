@@ -27,11 +27,11 @@ const TasreefScreen = () => {
   const [rootLettersEditorCollapsed, setRootLettersEditorCollapsed] =
     useState(true)
 
-  const [activeTab, setActiveTab] = useState('صرف سغير')
+  const [activeTab, setActiveTab] = useState('معروف')
 
   const [verbCase, setVerbCase] = useState('مرفوع')
 
-  const tabs = useMemo(() => ['صرف سغير', 'معروف', 'مجهول'].reverse(), [])
+  const tabs = useMemo(() => ['معروف', 'مجهول', 'صرف سغير'].reverse(), [])
   const verbCases = useMemo(() => ['مرفوع', 'منصوب', 'مجزوم'].reverse(), [])
 
   const params = useRoute().params
