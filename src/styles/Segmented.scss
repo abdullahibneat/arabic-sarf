@@ -6,15 +6,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 36px;
     cursor: pointer;
     user-select: none;
     color: var(--border);
+    padding: 4px 8px;
     border: solid 1px var(--border);
 
-    transition:
-      color 250ms,
-      border-color 250ms;
+    transition: border-color 250ms;
 
     &:first-of-type {
       border-top-left-radius: 6px;
