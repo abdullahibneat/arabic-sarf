@@ -17,6 +17,7 @@ const Text = ({ type, color = 'text', style = {}, children }: TextProps) => {
     <div
       style={{
         color: `var(--${color})`,
+        transition: 'color 250ms',
         ...style,
         ...textStyles,
       }}

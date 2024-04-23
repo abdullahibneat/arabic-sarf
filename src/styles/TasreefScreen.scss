@@ -1,0 +1,19 @@
+.root-letters-editor-revealer {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 250ms;
+  overflow: hidden;
+
+  .root-letters-editor-wrapper {
+    min-height: 0;
+    transition: visibility 250ms;
+  }
+
+  &.collapsed {
+    grid-template-rows: 0fr;
+
+    .root-letters-editor-wrapper {
+      visibility: hidden;
+    }
+  }
+}
