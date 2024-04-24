@@ -72,6 +72,12 @@ const TasreefScreen = () => {
     return $chapter
   }, [rootLetters])
 
+  const madi = useMemo(() => {
+    if (!chapter) return null
+    if (activeTab === 'مجهول') return chapter.conjugations.ماضي.مجهول
+    return chapter.conjugations.ماضي.معروف
+  }, [chapter, activeTab])
+
   const mudari = useMemo(() => {
     if (!chapter) return null
 
@@ -113,13 +119,13 @@ const TasreefScreen = () => {
   if (!chapter) return <div>Not found</div>
 
   return (
-    <Flex flex={1} column gap={32} padding="16px 0 32px">
-      <Flex column gap={16}>
-        <Flex column gap={8} alignItems="center">
-          <Flex gap={8}>
-            <Text type="bold">{chapter.title}</Text>
+    <Flex flex={1} column gap={16} padding="16px 0 32px">
+      <Flex column gap={8} alignItems="center">
+        <div class="title">
+          <Text type="bold">{chapter.title}</Text>
 
-            {settings.showRootLettersEditor && (
+          {settings.showRootLettersEditor && (
+            <div class="collapse-icon">
               <IconButton
                 size="micro"
                 name="chevron-down"
@@ -127,29 +133,31 @@ const TasreefScreen = () => {
                   setRootLettersEditorCollapsed(!rootLettersEditorCollapsed)
                 }
               />
-            )}
-          </Flex>
-
-          {settings.showRootLettersEditor && (
-            <div
-              class={`root-letters-editor-revealer ${rootLettersEditorCollapsed ? 'collapsed' : ''}`}
-            >
-              <div class="root-letters-editor-wrapper">
-                <RootLettersEditor
-                  rootLetters={{
-                    ف: chapter.root_letters[0][0],
-                    ع: chapter.root_letters[0][1],
-                    ل: chapter.root_letters[0][2],
-                  }}
-                  onChange={setRootLetters}
-                />
-              </div>
             </div>
           )}
-        </Flex>
+        </div>
 
-        <Tabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
+        {settings.showRootLettersEditor && (
+          <div
+            class={`root-letters-editor-revealer ${
+              rootLettersEditorCollapsed ? 'collapsed' : ''
+            }`}
+          >
+            <div class="root-letters-editor-wrapper">
+              <RootLettersEditor
+                rootLetters={{
+                  ف: chapter.root_letters[0][0],
+                  ع: chapter.root_letters[0][1],
+                  ل: chapter.root_letters[0][2],
+                }}
+                onChange={setRootLetters}
+              />
+            </div>
+          </div>
+        )}
       </Flex>
+
+      <Tabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
 
       <Flex column gap={16} justifyContent="center">
         {activeTab === 'صرف صغير' && (
@@ -172,47 +180,31 @@ const TasreefScreen = () => {
         )}
 
         {showVerbTasreefs && (
-          <Flex
-            gap={16}
-            justifyContent="center"
-            padding="0 64px"
-            overflowX="auto"
-            direction="rtl"
-          >
-            {verbCase === 'مرفوع' && (
-              <div style={{ direction: 'ltr' }}>
+          <Flex padding="0 64px" overflow="auto hidden" direction="rtl">
+            <Flex gap={16} margin="0 auto">
+              {verbCase === 'مرفوع' && madi && (
                 <Tasreef
                   title="ماضي"
-                  tasreef={
-                    chapter.conjugations.ماضي[
-                      activeTab === 'مجهول' ? 'مجهول' : 'معروف'
-                    ]
-                  }
+                  tasreef={madi}
                   audioSrc={audioPath + '/ماضي.mp3'}
                 />
-              </div>
-            )}
+              )}
 
-            {mudari && (
-              <div style={{ direction: 'ltr' }}>
-                <Tasreef
-                  title="مضارع"
-                  tasreef={mudari.tasreef}
-                  particle={mudari.particle}
-                  audioSrc={audioPath + '/مضارع.mp3'}
-                />
-              </div>
-            )}
+              <Tasreef
+                title="مضارع"
+                tasreef={mudari?.tasreef || null}
+                particle={mudari?.particle}
+                audioSrc={audioPath + '/مضارع.mp3'}
+              />
 
-            {settings.showAmr && verbCase === 'مجزوم' && (
-              <div style={{ direction: 'ltr' }}>
+              {settings.showAmr && verbCase === 'مجزوم' && (
                 <Tasreef
                   title="أمر"
                   tasreef={chapter.conjugations.أمر}
                   audioSrc={audioPath + '/أمر.mp3'}
                 />
-              </div>
-            )}
+              )}
+            </Flex>
           </Flex>
         )}
       </Flex>

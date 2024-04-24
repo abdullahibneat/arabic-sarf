@@ -1,3 +1,15 @@
+.title {
+  position: relative;
+
+  .collapse-icon {
+    position: absolute;
+    top: 0;
+    right: -32px;
+    bottom: 0;
+    display: flex;
+  }
+}
+
 .root-letters-editor-revealer {
   display: grid;
   grid-template-rows: 1fr;
