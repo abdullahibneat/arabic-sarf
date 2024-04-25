@@ -101,6 +101,14 @@ const TasreefScreen = () => {
     return { tasreef, particle }
   }, [chapter, verbCase, activeTab])
 
+  const amr = useMemo(() => {
+    if (!settings.showAmr) return null
+    if (activeTab !== 'معروف') return null
+    if (verbCase !== 'مجزوم') return null
+    if (!chapter) return null
+    return chapter.conjugations.أمر
+  }, [settings.showAmr, activeTab, verbCase, chapter])
+
   const audioPath = useMemo(() => {
     let path = `/recordings/${baseChapter?.type}/${baseChapter?.form}`
 
@@ -197,10 +205,10 @@ const TasreefScreen = () => {
                 audioSrc={audioPath + '/مضارع.mp3'}
               />
 
-              {settings.showAmr && verbCase === 'مجزوم' && (
+              {amr && (
                 <Tasreef
                   title="أمر"
-                  tasreef={chapter.conjugations.أمر}
+                  tasreef={amr}
                   audioSrc={audioPath + '/أمر.mp3'}
                 />
               )}
