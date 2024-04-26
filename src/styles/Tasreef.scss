@@ -44,6 +44,7 @@
   .person {
     display: grid;
     gap: 16px;
+    direction: ltr;
 
     .gender {
       border: solid 1px var(--border);
@@ -111,6 +112,7 @@
       gap: 0;
       border: solid 1px var(--border);
       border-radius: 6px;
+      direction: rtl;
 
       .gender {
         border: none;
