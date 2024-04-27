@@ -133,6 +133,8 @@ svg * {
 }
 
 .global-modal-overlay {
+  z-index: 999;
+
   position: absolute;
   top: 0;
   right: 0;
@@ -161,10 +163,14 @@ svg * {
   background-color: white;
   border-radius: 6px;
   border: solid 1px var(--border);
-  max-height: 100%;
-  overflow-y: auto;
   animation: revealGlobalModal 500ms;
   animation-fill-mode: forwards;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 @keyframes revealGlobalModal {
@@ -190,4 +196,9 @@ svg * {
 .global-modal-header-close {
   padding-top: 2px;
   line-height: 0;
+}
+
+.global-modal-content {
+  flex: 1;
+  overflow: auto;
 }

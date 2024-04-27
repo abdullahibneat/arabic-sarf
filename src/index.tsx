@@ -52,7 +52,16 @@ const App = () => {
 
           <div class="global-modal-overlay" onClick={closeModal}>
             {modal && (
-              <div class="global-modal" onClick={(e) => e.stopPropagation()}>
+              <div
+                class="global-modal"
+                style={{
+                  width: modal.width,
+                  maxWidth: modal.maxWidth,
+                  height: modal.height,
+                  maxHeight: modal.maxHeight,
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div class="global-modal-header">
                   <Text style={{ flex: 1 }} type="bold">
                     {modal.title}
@@ -65,7 +74,7 @@ const App = () => {
                     />
                   </div>
                 </div>
-                <div>{modal.children}</div>
+                <div class="global-modal-content">{modal.children}</div>
               </div>
             )}
           </div>

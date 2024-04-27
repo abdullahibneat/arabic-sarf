@@ -2,6 +2,10 @@ import { ComponentChildren, createContext } from 'preact'
 
 export type ModalProps = {
   title: string
+  width?: number | string
+  maxWidth?: number | string
+  height?: number | string
+  maxHeight?: number | string
   children: ComponentChildren
 }
 

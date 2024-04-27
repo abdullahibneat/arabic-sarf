@@ -96,6 +96,7 @@ const Sidebar = () => {
   const openSettings = useCallback(() => {
     modal.open({
       title: 'Settings',
+      maxWidth: 400,
       children: <SettingsModal />,
     })
   }, [])

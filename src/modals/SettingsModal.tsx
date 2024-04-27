@@ -134,7 +134,7 @@ const SettingsModal = () => {
   }, [])
 
   return (
-    <Flex column gap={12} width={400} padding={24} paddingTop={12}>
+    <Flex column gap={12} padding={24} paddingTop={12}>
       <Flex column gap={4}>
         <Text>Tasreef group mode</Text>
         <Flex justifyContent="center" alignItems="center" gap={16} flex={1}>
