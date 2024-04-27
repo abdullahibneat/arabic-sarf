@@ -128,7 +128,7 @@ const TasreefScreen = () => {
 
   return (
     <Flex flex={1} column gap={16} padding="16px 0 32px">
-      <Flex column gap={8} alignItems="center">
+      <Flex column alignItems="center">
         <div class="title">
           <Text type="bold">{chapter.title}</Text>
 

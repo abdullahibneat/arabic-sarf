@@ -3,7 +3,6 @@ aside {
   flex-direction: column;
   background-color: var(--white);
   border-left: solid 1px var(--border);
-  overscroll-behavior: none;
 
   .header,
   .footer {
@@ -19,6 +18,10 @@ aside {
     position: relative;
     padding: 0 24px;
     user-select: none;
+
+    .logo {
+      transition: opacity 250ms;
+    }
 
     .mobile-menu {
       opacity: 0;
@@ -56,19 +59,33 @@ aside {
     left: 0;
     border-left: none;
     height: 100%;
-    transition: height 250ms;
+    z-index: 99;
+    transition:
+      height 250ms,
+      background-color 250ms;
 
     .header {
-      justify-content: flex-start;
+      height: 60px;
+
       .mobile-menu {
         opacity: 1;
+        pointer-events: initial;
       }
     }
 
     &:not(.open) {
-      // display: block;
-      height: 48px;
+      height: 60px;
       overflow: hidden;
+      background-color: transparent;
+      pointer-events: none;
+
+      .header {
+        border-bottom: none;
+
+        .logo {
+          opacity: 0;
+        }
+      }
     }
   }
 }

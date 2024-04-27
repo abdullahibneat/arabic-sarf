@@ -18,13 +18,17 @@
 
   .root-letters-editor-wrapper {
     min-height: 0;
-    transition: visibility 250ms;
+    margin-top: 8px;
+    transition:
+      visibility 250ms,
+      margin-top 250ms;
   }
 
   &.collapsed {
     grid-template-rows: 0fr;
 
     .root-letters-editor-wrapper {
+      margin-top: 0;
       visibility: hidden;
     }
   }

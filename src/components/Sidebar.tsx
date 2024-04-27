@@ -104,7 +104,9 @@ const Sidebar = () => {
   return (
     <aside class={open ? 'open' : ''}>
       <div class="header">
-        <Text type="h2">صرف</Text>
+        <div class="logo">
+          <Text type="h2">صرف</Text>
+        </div>
 
         <div class="mobile-menu">
           <IconButton
