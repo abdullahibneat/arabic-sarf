@@ -105,39 +105,33 @@ const RootLettersEditor = ({
 
   return (
     <div class="root-letters-editor" ref={inputsContainer}>
-      <div class="root-letter">
-        <input
-          id="input-ف"
-          value={value['ف']}
-          placeholder="ف"
-          maxLength={1}
-          onFocus={handleFocus}
-          onKeyDown={handleKeyDown}
-          onInput={handleInput('ف')}
-        />
-      </div>
-      <div class="root-letter">
-        <input
-          id="input-ع"
-          value={value['ع']}
-          placeholder="ع"
-          maxLength={1}
-          onFocus={handleFocus}
-          onKeyDown={handleKeyDown}
-          onInput={handleInput('ع')}
-        />
-      </div>
-      <div class="root-letter">
-        <input
-          id="input-ل"
-          value={value['ل']}
-          placeholder="ل"
-          maxLength={1}
-          onFocus={handleFocus}
-          onKeyDown={handleKeyDown}
-          onInput={handleInput('ل')}
-        />
-      </div>
+      <input
+        id="input-ف"
+        value={value['ف']}
+        placeholder="ف"
+        maxLength={1}
+        onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
+        onInput={handleInput('ف')}
+      />
+      <input
+        id="input-ع"
+        value={value['ع']}
+        placeholder="ع"
+        maxLength={1}
+        onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
+        onInput={handleInput('ع')}
+      />
+      <input
+        id="input-ل"
+        value={value['ل']}
+        placeholder="ل"
+        maxLength={1}
+        onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
+        onInput={handleInput('ل')}
+      />
     </div>
   )
 }
