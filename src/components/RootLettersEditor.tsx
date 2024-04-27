@@ -31,7 +31,7 @@ const RootLettersEditor = ({
     if (!(event.target instanceof HTMLInputElement)) return
 
     const ids = Array.from(
-      inputsContainer.current.querySelectorAll(':not(:disabled)'),
+      inputsContainer.current.querySelectorAll('input:not(:disabled)'),
     ).map((element) => element.id)
 
     const currentIndex = ids.indexOf(event.target.id)
@@ -52,6 +52,8 @@ const RootLettersEditor = ({
 
     if (nextInput instanceof HTMLInputElement) {
       nextInput.focus()
+    } else {
+      event.target.blur()
     }
   }, [])
 
@@ -62,7 +64,7 @@ const RootLettersEditor = ({
         if (!inputsContainer.current) return
 
         const ids = Array.from(
-          inputsContainer.current.querySelectorAll(':not(:disabled)'),
+          inputsContainer.current.querySelectorAll('input:not(:disabled)'),
         ).map((element) => element.id)
 
         const currentIndex = ids.indexOf(event.target.id)
@@ -103,33 +105,39 @@ const RootLettersEditor = ({
 
   return (
     <div class="root-letters-editor" ref={inputsContainer}>
-      <input
-        id="input-ف"
-        value={value['ف']}
-        placeholder="ف"
-        maxLength={1}
-        onFocus={handleFocus}
-        onKeyDown={handleKeyDown}
-        onInput={handleInput('ف')}
-      />
-      <input
-        id="input-ع"
-        value={value['ع']}
-        placeholder="ع"
-        maxLength={1}
-        onFocus={handleFocus}
-        onKeyDown={handleKeyDown}
-        onInput={handleInput('ع')}
-      />
-      <input
-        id="input-ل"
-        value={value['ل']}
-        placeholder="ل"
-        maxLength={1}
-        onFocus={handleFocus}
-        onKeyDown={handleKeyDown}
-        onInput={handleInput('ل')}
-      />
+      <div class="root-letter">
+        <input
+          id="input-ف"
+          value={value['ف']}
+          placeholder="ف"
+          maxLength={1}
+          onFocus={handleFocus}
+          onKeyDown={handleKeyDown}
+          onInput={handleInput('ف')}
+        />
+      </div>
+      <div class="root-letter">
+        <input
+          id="input-ع"
+          value={value['ع']}
+          placeholder="ع"
+          maxLength={1}
+          onFocus={handleFocus}
+          onKeyDown={handleKeyDown}
+          onInput={handleInput('ع')}
+        />
+      </div>
+      <div class="root-letter">
+        <input
+          id="input-ل"
+          value={value['ل']}
+          placeholder="ل"
+          maxLength={1}
+          onFocus={handleFocus}
+          onKeyDown={handleKeyDown}
+          onInput={handleInput('ل')}
+        />
+      </div>
     </div>
   )
 }

@@ -1,16 +1,12 @@
 .root-letters-editor {
   direction: rtl;
+  display: flex;
 
-  input {
-    text-align: center;
+  .root-letter {
     width: 36px;
     height: 36px;
     border: solid 1px var(--border);
-    color: var(--text);
-    outline: none;
-
-    font-size: 16px;
-    font-weight: 600;
+    overflow: hidden;
 
     &:first-of-type {
       border-top-right-radius: 50%;
@@ -22,16 +18,29 @@
       border-bottom-left-radius: 50%;
     }
 
-    &::placeholder {
-      color: var(--border);
+    &:focus-within {
+      border-color: var(--text);
+      z-index: 1;
     }
 
-    &:focus {
-      border-color: var(--text);
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border-radius: 0;
+      text-align: center;
+      color: var(--text);
+      outline: none;
+      font-size: 16px;
+      font-weight: 600;
+
+      &::placeholder {
+        color: var(--border);
+      }
     }
   }
 
-  input + input {
+  .root-letter + .root-letter {
     margin-right: -1px;
   }
 }
