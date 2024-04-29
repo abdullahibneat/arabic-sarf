@@ -33,6 +33,10 @@
     &::placeholder {
       color: var(--border);
     }
+
+    &:disabled {
+      color: var(--text-secondary);
+    }
   }
 
   input + input {

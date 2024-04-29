@@ -8,11 +8,17 @@ export type RootLetters = { ف: string; ع: string; ل: string }
 
 type Props = {
   rootLetters?: RootLetters
+  mithaal?: boolean
+  ajwaf?: boolean
+  naqis?: boolean
   onChange?: (rootLetters: RootLetters) => void
 }
 
 const RootLettersEditor = ({
   rootLetters = { ف: 'ف', ع: 'ع', ل: 'ل' },
+  mithaal,
+  ajwaf,
+  naqis,
   onChange,
 }: Props) => {
   const [value, setValue] = useState(rootLetters)
@@ -107,27 +113,30 @@ const RootLettersEditor = ({
     <div class="root-letters-editor" ref={inputsContainer}>
       <input
         id="input-ف"
-        value={value['ف']}
+        value={mithaal ? 'و/ي' : value['ف']}
         placeholder="ف"
         maxLength={1}
+        disabled={mithaal}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onInput={handleInput('ف')}
       />
       <input
         id="input-ع"
-        value={value['ع']}
+        value={ajwaf ? 'و/ي' : value['ع']}
         placeholder="ع"
         maxLength={1}
+        disabled={ajwaf}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onInput={handleInput('ع')}
       />
       <input
         id="input-ل"
-        value={value['ل']}
+        value={naqis ? 'و/ي' : value['ل']}
         placeholder="ل"
         maxLength={1}
+        disabled={naqis}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onInput={handleInput('ل')}

@@ -158,6 +158,9 @@ const TasreefScreen = () => {
                   ع: chapter.root_letters[0][1],
                   ل: chapter.root_letters[0][2],
                 }}
+                mithaal={params.type === 'مثال'}
+                ajwaf={params.type === 'أجوف'}
+                naqis={params.type === 'ناقص'}
                 onChange={setRootLetters}
               />
             </div>
