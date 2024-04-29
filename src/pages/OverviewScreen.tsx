@@ -26,19 +26,27 @@ const OverviewScreen = () => {
         tasreefs: TasreefProps[]
       }> = [
         {
-          title: `${type} / مجرّد / ماضي`,
+          title: `${type} / ${
+            settings.mujarradChapterHeadings === 'arabic' ? `مجرّد / ` : ''
+          }ماضي`,
           tasreefs: [],
         },
         {
-          title: `${type} / مجرّد / مضارع`,
+          title: `${type} / ${
+            settings.mujarradChapterHeadings === 'arabic' ? `مجرّد / ` : ''
+          }مضارع`,
           tasreefs: [],
         },
         {
-          title: `${type} / مزيد فيه / مضارع`,
+          title: `${type} / ${
+            settings.mujarradChapterHeadings === 'arabic' ? `مزيد فيه / ` : ''
+          }ماضي`,
           tasreefs: [],
         },
         {
-          title: `${type} - مضارع`,
+          title: `${type} / ${
+            settings.mujarradChapterHeadings === 'arabic' ? `مزيد فيه / ` : ''
+          }مضارع`,
           tasreefs: [],
         },
       ]
