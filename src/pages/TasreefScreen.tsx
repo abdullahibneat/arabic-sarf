@@ -28,15 +28,29 @@ const TasreefScreen = () => {
     useState(true)
 
   const [activeTab, setActiveTab] = useState('معروف')
-
   const [verbCase, setVerbCase] = useState('مرفوع')
-
-  const tabs = useMemo(() => ['معروف', 'مجهول', 'صرف صغير'].reverse(), [])
-  const verbCases = useMemo(() => ['مرفوع', 'منصوب', 'مجزوم'].reverse(), [])
 
   const params = useRoute().params
 
   const { settings } = useAppState()
+
+  const tabs = useMemo(() => {
+    const $tabs = ['معروف']
+
+    if (settings.showMajhool) $tabs.push('مجهول')
+    if (settings.showSarfSagheer) $tabs.push('صرف صغير')
+
+    return $tabs.reverse()
+  }, [settings.showMajhool, settings.showSarfSagheer])
+
+  const verbCases = useMemo(() => {
+    const $verbCases = ['مرفوع']
+
+    if (settings.showNasb) $verbCases.push('منصوب')
+    if (settings.showJazm) $verbCases.push('مجزوم')
+
+    return $verbCases.reverse()
+  }, [settings.showNasb, settings.showJazm])
 
   const baseChapter = useMemo(() => {
     const type = verbTypes[params.type]
@@ -74,9 +88,10 @@ const TasreefScreen = () => {
 
   const madi = useMemo(() => {
     if (!chapter) return null
+    if (verbCase !== 'مرفوع') return null
     if (activeTab === 'مجهول') return chapter.conjugations.ماضي.مجهول
     return chapter.conjugations.ماضي.معروف
-  }, [chapter, activeTab])
+  }, [chapter, verbCase, activeTab])
 
   const mudari = useMemo(() => {
     if (!chapter) return null
@@ -168,7 +183,9 @@ const TasreefScreen = () => {
         )}
       </Flex>
 
-      <Tabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
+      {tabs.length > 1 && (
+        <Tabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
+      )}
 
       <Flex column gap={16} justifyContent="center">
         {activeTab === 'صرف صغير' && (
@@ -177,7 +194,7 @@ const TasreefScreen = () => {
           </Flex>
         )}
 
-        {showVerbTasreefs && (
+        {showVerbTasreefs && verbCases.length > 1 && (
           <Flex alignSelf="center">
             <Segmented
               value={verbCase}
@@ -192,14 +209,12 @@ const TasreefScreen = () => {
 
         {showVerbTasreefs && (
           <Flex padding="0 64px" overflow="auto hidden" direction="rtl">
-            <Flex gap={16} margin="0 auto">
-              {verbCase === 'مرفوع' && madi && (
-                <Tasreef
-                  title="ماضي"
-                  tasreef={madi}
-                  audioSrc={audioPath + '/ماضي.mp3'}
-                />
-              )}
+            <Flex gap={16}>
+              <Tasreef
+                title="ماضي"
+                tasreef={madi}
+                audioSrc={audioPath + '/ماضي.mp3'}
+              />
 
               <Tasreef
                 title="مضارع"
