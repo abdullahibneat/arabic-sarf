@@ -1,5 +1,6 @@
 import '../styles/SarfSagheer.scss'
 
+import Text from './Text'
 import { VerbChapter } from '../../data/types'
 import { useMemo } from 'preact/hooks'
 
@@ -26,20 +27,20 @@ const SarfSagheer = ({ chapter }: Props) => {
 
   return (
     <div class="sarf-sagheer">
-      <p>
+      <Text>
         {ماضي.معروف} {مضارع.معروف} {مصضر[0]} <span>فهو</span> {فاعل}
-      </p>
+      </Text>
 
       {مجهول && (
-        <p>
+        <Text>
           <span>و</span> {مجهول.ماضي} {مجهول.مضارع} {مصضر[0]} <span>فهو</span>{' '}
           {مجهول.مفعول}
-        </p>
+        </Text>
       )}
 
-      <p>
+      <Text>
         <span>الأمر منه</span> {أمر} <span>و النّهي عنه</span> لا {نهي}
-      </p>
+      </Text>
     </div>
   )
 }
