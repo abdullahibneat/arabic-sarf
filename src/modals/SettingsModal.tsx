@@ -58,8 +58,8 @@ const SettingsModal = () => {
   const mujarradChapterHeadingsOptions = useMemo(
     () =>
       [
-        { label: 'Arabic (ن, ض, ف)', value: 'arabic' },
         { label: 'English (1a, 1b, 1c)', value: 'english' },
+        { label: 'Arabic (ن, ض, ف)', value: 'arabic' },
       ] as const,
     [],
   )
