@@ -37,10 +37,11 @@ const SettingsModal = () => {
         }
       }
       setPreset(presetName)
+      return
     }
-  }, [])
 
-  const isCustomPreset = useMemo(() => preset === 'Custom', [preset])
+    setPreset('Custom')
+  }, [settings, settings.hiddenVerbTypes])
 
   const presetNames = useMemo(() => Object.keys(presets).concat('Custom'), [])
 
@@ -202,11 +203,7 @@ const SettingsModal = () => {
         <Text>Verb types</Text>
         <div class="table">
           {verbTypeOptions.map((option) => (
-            <Row
-              {...option}
-              disabled={!isCustomPreset}
-              onChange={toggleVerbType}
-            />
+            <Row {...option} onChange={toggleVerbType} />
           ))}
         </div>
       </Flex>
@@ -216,7 +213,6 @@ const SettingsModal = () => {
         <Segmented
           value={settings.mujarradChapterHeadings}
           options={mujarradChapterHeadingsOptions}
-          disabled={!isCustomPreset}
           onChange={({ value }) =>
             AppState.setItem('settings', {
               ...settings,
@@ -231,7 +227,6 @@ const SettingsModal = () => {
         <Segmented
           value={settings.mazeedFihiChapterHeadings}
           options={mazeedFihiChapterHeadingsOptions}
-          disabled={!isCustomPreset}
           onChange={({ value }) =>
             AppState.setItem('settings', {
               ...settings,
@@ -246,7 +241,6 @@ const SettingsModal = () => {
         <Segmented
           value={settings.showRootLettersEditor}
           options={booleanOptions}
-          disabled={!isCustomPreset}
           onChange={({ value }) =>
             AppState.setItem('settings', {
               ...settings,
@@ -261,7 +255,6 @@ const SettingsModal = () => {
         <Segmented
           value={settings.showSarfSagheer}
           options={booleanOptions}
-          disabled={!isCustomPreset}
           onChange={({ value }) =>
             AppState.setItem('settings', {
               ...settings,
@@ -277,7 +270,6 @@ const SettingsModal = () => {
           {tasreefOptions.map((option) => (
             <Row
               {...option}
-              disabled={!isCustomPreset}
               onChange={(property, value) =>
                 AppState.setItem('settings', {
                   ...settings,
@@ -317,7 +309,6 @@ const Row = ({
         type="checkbox"
         name={name}
         checked={value}
-        disabled={disabled}
         onChange={() => onChange?.(key, !value)}
       />
     </div>
