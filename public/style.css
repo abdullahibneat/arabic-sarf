@@ -190,6 +190,7 @@ svg * {
   padding: 12px;
   padding-left: 24px;
   border-bottom: solid 1px var(--border);
+  user-select: none;
 }
 
 .global-modal-header-close {
