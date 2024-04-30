@@ -4,7 +4,7 @@ import {
 } from './contexts/AudioPlayerContext'
 import { LocationProvider, Route, Router } from 'preact-iso'
 import { ModalContext, ModalProps } from './contexts/ModalContext'
-import { useCallback, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
 import AudioPlayer from './components/AudioPlayer'
 import IconButton from './components/IconButton'
@@ -14,9 +14,18 @@ import Sidebar from './components/Sidebar'
 import TasreefScreen from './pages/TasreefScreen'
 import Text from './components/Text'
 import { render } from 'preact'
+import useAppState from './hooks/useAppState'
 
 const App = () => {
+  const appState = useAppState()
+
   const [modal, setModal] = useState<ModalProps | null>(null)
+
+  useEffect(() => {
+    console.log('useEffect', appState.fontSize)
+    const root = document.documentElement
+    root.style.fontSize = `${appState.fontSize}px`
+  }, [appState.fontSize])
 
   const [audioPlayer, setAudioPlayer] = useState<AudioPlayerContextType>({
     play: async () => {},

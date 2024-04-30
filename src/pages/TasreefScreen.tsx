@@ -189,7 +189,7 @@ const TasreefScreen = () => {
 
       <Flex column gap={16} justifyContent="center">
         {activeTab === 'صرف صغير' && (
-          <Flex column padding="0 16px" alignItems="center">
+          <Flex column padding="0 1rem" alignItems="center">
             <SarfSagheer chapter={chapter} />
           </Flex>
         )}

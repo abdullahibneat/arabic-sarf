@@ -5,12 +5,19 @@ import { useMemo } from 'preact/hooks'
 
 export type TextProps = {
   type?: keyof typeof types
+  ellipsis?: boolean
   color?: 'white' | 'text' | 'text' | 'text-secondary' | 'hover' | 'border'
   style?: JSX.CSSProperties
   children: ComponentChildren
 }
 
-const Text = ({ type, color = 'text', style = {}, children }: TextProps) => {
+const Text = ({
+  type,
+  ellipsis,
+  color = 'text',
+  style = {},
+  children,
+}: TextProps) => {
   const textStyles = useMemo(() => (type ? types[type] : {}), [type])
 
   return (
@@ -18,6 +25,9 @@ const Text = ({ type, color = 'text', style = {}, children }: TextProps) => {
       style={{
         color: `var(--${color})`,
         transition: 'color 250ms',
+        overflow: ellipsis ? 'hidden' : undefined,
+        textOverflow: ellipsis ? 'ellipsis' : undefined,
+        whiteSpace: ellipsis ? 'nowrap' : undefined,
         ...style,
         ...textStyles,
       }}
@@ -34,14 +44,14 @@ const types: Record<
   CSSProperties
 > = {
   h1: {
-    fontSize: 36,
+    fontSize: '2.25rem',
     fontWeight: 700,
-    lineHeight: '40px',
+    lineHeight: '2.5rem',
   },
   h2: {
-    fontSize: 24,
+    fontSize: '1.5rem',
     fontWeight: 700,
-    lineHeight: '32px',
+    lineHeight: '2rem',
   },
   bold: {
     fontWeight: 700,
@@ -50,17 +60,17 @@ const types: Record<
     fontWeight: 600,
   },
   small: {
-    fontSize: 14,
-    lineHeight: '24px',
+    fontSize: '0.875rem',
+    lineHeight: '1.5rem',
   },
   'small-medium': {
-    fontSize: 14,
+    fontSize: '0.875rem',
     fontWeight: 600,
-    lineHeight: '24px',
+    lineHeight: '1.5rem',
   },
   'small-bold': {
-    fontSize: 14,
+    fontSize: '0.875rem',
     fontWeight: 700,
-    lineHeight: '24px',
+    lineHeight: '1.5rem',
   },
 }

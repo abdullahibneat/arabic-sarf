@@ -2,15 +2,15 @@
   display: grid;
   gap: 16px;
   min-width: 120px;
-  min-height: 360px;
+  min-height: 280px;
   position: relative;
 
   .header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 36px;
-    padding: 0 12px;
+    height: 2.25rem;
+    padding: 0 0.75rem;
     white-space: nowrap;
     border: solid 1px var(--border);
     border-radius: 6px;
@@ -52,8 +52,8 @@
 
       div {
         display: grid;
-        grid-template-columns: 1fr 24px;
-        height: 36px;
+        grid-template-columns: 1fr 1.5rem;
+        height: 2.25rem;
 
         p,
         span {
@@ -64,7 +64,7 @@
 
         p {
           direction: rtl;
-          padding: 0 12px;
+          padding: 0 0.75rem;
           white-space: nowrap;
         }
 
@@ -72,8 +72,7 @@
           user-select: none;
           color: var(--text-secondary);
           border-left: solid 1px var(--border);
-          font-size: 14px;
-          line-height: 24px;
+          font-size: 0.875rem;
         }
       }
 

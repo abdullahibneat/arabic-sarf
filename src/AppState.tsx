@@ -1,6 +1,7 @@
 const LOCAL_STORAGE_KEY = 'state'
 
 export type AppStateType = {
+  fontSize: number
   playbackSpeed: number
   playbackLoop: boolean
   settings: {
@@ -20,6 +21,7 @@ export type AppStateType = {
 export type SetItemListener = (state: AppStateType) => void
 
 const defaultState: AppStateType = {
+  fontSize: 16,
   playbackSpeed: 1,
   playbackLoop: false,
   settings: {
@@ -93,18 +95,18 @@ class State {
 
   private applyValidValues = (from: Object, to: Object) => {
     for (const key of Object.keys(to)) {
-      if (to[key] === undefined) continue
+      if (from[key] === undefined) continue
 
       if (Array.isArray(to[key])) {
         if (!Array.isArray(from[key])) continue
-        from[key] = to[key]
+        to[key] = from[key]
       } else {
-        if (typeof from[key] === 'object') {
-          if (typeof to[key] === 'object') {
-            this.applyValidValues(to[key], from[key])
+        if (typeof to[key] === 'object') {
+          if (typeof from[key] === 'object') {
+            this.applyValidValues(from[key], to[key])
           }
         } else {
-          from[key] = to[key]
+          to[key] = from[key]
         }
       }
     }

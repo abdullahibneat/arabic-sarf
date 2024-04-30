@@ -17,7 +17,7 @@ export type MenuItemProps = {
 const MenuItem = ({ tag, title, active, icon, onClick }: MenuItemProps) => (
   <div class={`menu-item ${active ? 'active' : ''}`} onClick={onClick}>
     {icon && <Icon size="micro" name={icon} />}
-    <Text type="small-medium" style={{ flex: 1 }}>
+    <Text type="small-medium" ellipsis style={{ flex: 1 }}>
       {title}
     </Text>
     {tag !== undefined && <Tag>{tag}</Tag>}

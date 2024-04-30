@@ -3,6 +3,7 @@ import '../styles/Sidebar.scss'
 import Accordion, { AccordionGroup, AccordionGroupItem } from './Accordion'
 import { useCallback, useMemo, useState } from 'preact/hooks'
 
+import AppState from '../AppState'
 import Flex from './Flex'
 import IconButton from './IconButton'
 import MenuItem from './MenuItem'
@@ -22,6 +23,8 @@ const Sidebar = () => {
 
   const modal = useModal()
   const location = useLocation()
+  const appState = useAppState()
+
   const [type, form, chapter] = location.url.substring(1).split('/')
 
   const { settings } = useAppState()
@@ -134,7 +137,22 @@ const Sidebar = () => {
       </div>
 
       <Flex class="footer" alignItems="stretch">
-        <Flex flex={1} />
+        <Flex flex={1} padding={8} gap={8} alignItems="center">
+          <p style={{ fontSize: 12 }}>{appState.fontSize}</p>
+
+          <input
+            type="range"
+            style={{ flex: 1 }}
+            min={12}
+            max={24}
+            value={appState.fontSize}
+            onInput={(e) => {
+              if (e.target && 'value' in e.target)
+                AppState.setItem('fontSize', Number(e.target.value))
+            }}
+          />
+        </Flex>
+
         <Flex
           justifyContent="center"
           alignItems="center"

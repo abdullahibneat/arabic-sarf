@@ -4,15 +4,15 @@
 
   input {
     display: block;
-    width: 36px;
-    height: 36px;
+    width: 2.25rem;
+    height: 2.25rem;
     border: solid 1px var(--border);
     padding: 0;
     border-radius: 0;
     text-align: center;
     color: var(--text);
     outline: none;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
 
     &:first-of-type {
