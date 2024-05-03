@@ -1,8 +1,7 @@
 .tasreef {
   display: grid;
-  gap: 16px;
-  min-width: 120px;
-  min-height: 280px;
+  gap: 1rem;
+  min-width: 7.5rem;
   position: relative;
 
   .header {
@@ -32,69 +31,73 @@
     border: solid 1px var(--border);
     border-radius: 6px;
     position: absolute;
-    top: 52px;
+    top: 3.25rem;
     left: 0;
     right: 0;
     bottom: 0;
     display: flex;
     justify-content: center;
-    padding-top: 16px;
+    padding-top: 1rem;
   }
 
   .person {
     display: grid;
-    gap: 16px;
+    gap: 1rem;
     direction: ltr;
 
     .gender {
       border: solid 1px var(--border);
       border-radius: 6px;
 
-      div {
+      .cell {
         display: grid;
         grid-template-columns: 1fr 1.5rem;
         height: 2.25rem;
 
-        p,
-        span {
+        .seegha,
+        .seegha-number {
           display: flex;
           justify-content: center;
           align-items: center;
         }
 
-        p {
+        .seegha {
           direction: rtl;
           padding: 0 0.75rem;
           white-space: nowrap;
+
+          span {
+            right: -1.25rem;
+          }
         }
 
-        span {
+        .seegha-number {
           user-select: none;
           color: var(--text-secondary);
           border-left: solid 1px var(--border);
-          font-size: 0.875rem;
+          font-size: 14px;
         }
       }
 
-      div + div {
+      .cell + .cell {
         border-top: solid 1px var(--border);
       }
     }
   }
 
   &.by-gender {
-    .person:not(.first) {
+    .person:not(:last-of-type) {
       grid-template-columns: 1fr 1fr;
       direction: rtl;
     }
 
-    .gender:nth-child(2n) span {
-      border-left: none;
-      border-right: solid 1px var(--border);
+    .gender:nth-child(2n + 1) .cell {
+      direction: ltr;
     }
 
-    .gender:nth-child(2n + 1) div {
-      direction: ltr;
+    .gender:nth-child(2n) .seegha-number {
+      border-left: none;
+      border-right: solid 1px var(--border);
     }
   }
 
@@ -103,7 +106,7 @@
     direction: rtl;
 
     .header,
-    .first {
+    .person:last-of-type {
       grid-column: span 2;
     }
 
@@ -126,7 +129,7 @@
         direction: ltr;
       }
 
-      &:nth-child(2n + 1) span {
+      &:nth-child(2n + 1) .seegha-number {
         border-left: none;
         border-right: solid 1px var(--border);
       }
