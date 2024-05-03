@@ -13,6 +13,7 @@ export type AppStateType = {
     showNasb: boolean
     showJazm: boolean
     showAmr: boolean
+    showNasbJazmParticle: boolean
     showMajhool: boolean
     tasreefGroupMode: 'list' | 'by-person' | 'by-gender'
   }
@@ -33,6 +34,7 @@ const defaultState: AppStateType = {
     showNasb: true,
     showJazm: true,
     showAmr: true,
+    showNasbJazmParticle: true,
     showMajhool: true,
     tasreefGroupMode: 'list',
   },

@@ -109,12 +109,16 @@ const TasreefScreen = () => {
       particle = 'لم'
     }
 
+    if (!settings.showNasbJazmParticle) {
+      particle = ''
+    }
+
     const tasreef = chapter.conjugations[tense][voice]
 
     if (!tasreef) return null
 
     return { tasreef, particle }
-  }, [chapter, verbCase, activeTab])
+  }, [chapter, verbCase, activeTab, settings.showNasbJazmParticle])
 
   const amr = useMemo(() => {
     if (!settings.showAmr) return null

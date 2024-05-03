@@ -82,14 +82,28 @@ const SettingsModal = () => {
     [],
   )
 
-  const tasreefOptions = useMemo(
-    () => [
+  const tasreefOptions = useMemo(() => {
+    const options = [
       { key: 'showNasb', name: 'Nasb', value: settings.showNasb },
       { key: 'showJazm', name: 'Jazm', value: settings.showJazm },
       { key: 'showAmr', name: 'Amr', value: settings.showAmr },
-    ],
-    [settings.showNasb, settings.showJazm, settings.showAmr],
-  )
+    ]
+
+    if (settings.showNasb || settings.showJazm) {
+      options.push({
+        key: 'showNasbJazmParticle',
+        name: 'Show لن/لم',
+        value: settings.showNasbJazmParticle,
+      })
+    }
+
+    return options
+  }, [
+    settings.showNasb,
+    settings.showJazm,
+    settings.showNasbJazmParticle,
+    settings.showAmr,
+  ])
 
   const onPresetChange = useCallback(
     (event: JSX.TargetedEvent<HTMLSelectElement>) => {
@@ -334,6 +348,7 @@ const presets: Record<string, AppStateType['settings']> = {
     showJazm: false,
     showAmr: false,
     showMajhool: false,
+    showNasbJazmParticle: false,
     tasreefGroupMode: 'list',
   },
 }
