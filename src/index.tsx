@@ -22,7 +22,6 @@ const App = () => {
   const [modal, setModal] = useState<ModalProps | null>(null)
 
   useEffect(() => {
-    console.log('useEffect', appState.fontSize)
     const root = document.documentElement
     root.style.fontSize = `${appState.fontSize}px`
   }, [appState.fontSize])
