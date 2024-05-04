@@ -79,7 +79,7 @@ const Tasreef = ({
 
       {!tasreef && (
         <div class="not-found">
-          <Text color="text-secondary">Not found</Text>
+          <Text color="text-secondary">N/A</Text>
         </div>
       )}
 
