@@ -82,28 +82,14 @@ const SettingsModal = () => {
     [],
   )
 
-  const tasreefOptions = useMemo(() => {
-    const options = [
+  const tasreefOptions = useMemo(
+    () => [
       { key: 'showNasb', name: 'Nasb', value: settings.showNasb },
       { key: 'showJazm', name: 'Jazm', value: settings.showJazm },
       { key: 'showAmr', name: 'Amr', value: settings.showAmr },
-    ]
-
-    if (settings.showNasb || settings.showJazm) {
-      options.push({
-        key: 'showNasbJazmParticle',
-        name: 'Show لن/لم',
-        value: settings.showNasbJazmParticle,
-      })
-    }
-
-    return options
-  }, [
-    settings.showNasb,
-    settings.showJazm,
-    settings.showNasbJazmParticle,
-    settings.showAmr,
-  ])
+    ],
+    [settings.showNasb, settings.showJazm, settings.showAmr],
+  )
 
   const onPresetChange = useCallback(
     (event: JSX.TargetedEvent<HTMLSelectElement>) => {
@@ -302,6 +288,22 @@ const SettingsModal = () => {
           ))}
         </div>
       </Flex>
+
+      {(settings.showNasb || settings.showJazm) && (
+        <Flex column gap={4}>
+          <Text>Show لن/لم</Text>
+          <Segmented
+            value={settings.showNasbJazmParticle}
+            options={booleanOptions}
+            onChange={({ value }) =>
+              AppState.setItem('settings', {
+                ...settings,
+                showNasbJazmParticle: value,
+              })
+            }
+          />
+        </Flex>
+      )}
     </Flex>
   )
 }
