@@ -340,7 +340,7 @@ const Row = ({
 )
 
 const presets: Record<string, AppStateType['settings']> = {
-  'Misk - Level 1': {
+  'Misk - Beginner': {
     hiddenVerbTypes: ['أجوف', 'ناقص', 'مثال', 'مضاعف'],
     mujarradChapterHeadings: 'english',
     mazeedFihiChapterHeadings: 'english',
@@ -350,6 +350,19 @@ const presets: Record<string, AppStateType['settings']> = {
     showJazm: false,
     showAmr: false,
     showMajhool: false,
+    showNasbJazmParticle: false,
+    tasreefGroupMode: 'list',
+  },
+  'Misk - Intermediate': {
+    hiddenVerbTypes: [],
+    mujarradChapterHeadings: 'english',
+    mazeedFihiChapterHeadings: 'english',
+    showRootLettersEditor: true,
+    showSarfSagheer: true,
+    showNasb: true,
+    showJazm: true,
+    showAmr: true,
+    showMajhool: true,
     showNasbJazmParticle: false,
     tasreefGroupMode: 'list',
   },
