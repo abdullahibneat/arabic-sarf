@@ -13,7 +13,7 @@ const useQuery = () => {
 
   const set = useCallback(
     (key: string, value: string) => {
-      navigate(location.path, { ...location.query, [key]: String(value) }, true)
+      navigate(location.path, { ...location.query, [key]: String(value) })
     },
     [location.query, navigate],
   )

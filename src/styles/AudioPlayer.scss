@@ -8,6 +8,7 @@
   padding: 0 16px;
   transition: height 250ms;
   overflow: hidden;
+  background-color: var(--white);
 
   &.visible {
     height: 48px;

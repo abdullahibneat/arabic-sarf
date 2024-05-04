@@ -151,54 +151,56 @@ const TasreefScreen = () => {
   if (!chapter) return <div>Not found</div>
 
   return (
-    <Flex flex={1} column gap={16} padding="16px 0 32px">
-      <Flex column alignItems="center">
-        <div class="title">
-          <Text type="bold">{chapter.title}</Text>
+    <Flex flex={1} column gap={16} paddingBottom={32}>
+      <Flex column gap={16} paddingTop={16} backgroundColor="var(--white)">
+        <Flex column alignItems="center">
+          <div class="title">
+            <Text type="bold">{chapter.title}</Text>
+
+            {settings.showRootLettersEditor && (
+              <div class="collapse-icon">
+                <IconButton
+                  size="micro"
+                  name="chevron-down"
+                  onClick={() =>
+                    setRootLettersEditorCollapsed(!rootLettersEditorCollapsed)
+                  }
+                />
+              </div>
+            )}
+          </div>
 
           {settings.showRootLettersEditor && (
-            <div class="collapse-icon">
-              <IconButton
-                size="micro"
-                name="chevron-down"
-                onClick={() =>
-                  setRootLettersEditorCollapsed(!rootLettersEditorCollapsed)
-                }
-              />
+            <div
+              class={`root-letters-editor-revealer ${
+                rootLettersEditorCollapsed ? 'collapsed' : ''
+              }`}
+            >
+              <div class="root-letters-editor-wrapper">
+                <RootLettersEditor
+                  rootLetters={{
+                    ف: chapter.root_letters[0][0],
+                    ع: chapter.root_letters[0][1],
+                    ل: chapter.root_letters[0][2],
+                  }}
+                  mithaal={params.type === 'مثال'}
+                  ajwaf={params.type === 'أجوف'}
+                  naqis={params.type === 'ناقص'}
+                  onChange={setRootLetters}
+                />
+              </div>
             </div>
           )}
-        </div>
+        </Flex>
 
-        {settings.showRootLettersEditor && (
-          <div
-            class={`root-letters-editor-revealer ${
-              rootLettersEditorCollapsed ? 'collapsed' : ''
-            }`}
-          >
-            <div class="root-letters-editor-wrapper">
-              <RootLettersEditor
-                rootLetters={{
-                  ف: chapter.root_letters[0][0],
-                  ع: chapter.root_letters[0][1],
-                  ل: chapter.root_letters[0][2],
-                }}
-                mithaal={params.type === 'مثال'}
-                ajwaf={params.type === 'أجوف'}
-                naqis={params.type === 'ناقص'}
-                onChange={setRootLetters}
-              />
-            </div>
-          </div>
+        {tabs.length > 1 && (
+          <Tabs
+            tabs={tabs}
+            activeTab={activeTab}
+            onTabClick={(activeTab) => query.set('activeTab', activeTab)}
+          />
         )}
       </Flex>
-
-      {tabs.length > 1 && (
-        <Tabs
-          tabs={tabs}
-          activeTab={activeTab}
-          onTabClick={(activeTab) => query.set('activeTab', activeTab)}
-        />
-      )}
 
       <Flex column gap={16} justifyContent="center">
         {activeTab === 'صرف صغير' && (
@@ -223,8 +225,8 @@ const TasreefScreen = () => {
         )}
 
         {showVerbTasreefs && (
-          <Flex padding="0 64px" overflow="auto hidden" direction="rtl">
-            <Flex gap={16}>
+          <Flex justifyContent="center">
+            <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
               <Tasreef
                 title="ماضي"
                 tasreef={madi}

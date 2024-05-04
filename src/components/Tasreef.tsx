@@ -62,7 +62,7 @@ const Tasreef = ({
 
   return (
     <div class={`tasreef ${groupMode || settings.tasreefGroupMode}`}>
-      <div class="header">
+      <div class="header cell">
         {audioSrc && (
           <div class="play">
             <IconButton

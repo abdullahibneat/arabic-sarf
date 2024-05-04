@@ -3,6 +3,14 @@
   gap: 1rem;
   min-width: 7.5rem;
   position: relative;
+  flex-shrink: 0;
+
+  .cell {
+    display: grid;
+    grid-template-columns: 1fr 1.5rem;
+    height: 2.25rem;
+    background-color: var(--white);
+  }
 
   .header {
     display: flex;
@@ -38,22 +46,21 @@
     display: flex;
     justify-content: center;
     padding-top: 1rem;
+    background-color: var(--white);
   }
 
   .person {
     display: grid;
     gap: 1rem;
     direction: ltr;
+    overflow: hidden;
 
     .gender {
       border: solid 1px var(--border);
       border-radius: 6px;
+      overflow: hidden;
 
       .cell {
-        display: grid;
-        grid-template-columns: 1fr 1.5rem;
-        height: 2.25rem;
-
         .seegha,
         .seegha-number {
           display: flex;

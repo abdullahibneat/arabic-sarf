@@ -39,22 +39,25 @@ const Text = ({
 
 export default Text
 
+const darkMode =
+  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+
 const types: Record<
   'h1' | 'h2' | 'bold' | 'medium' | 'small' | 'small-medium' | 'small-bold',
   CSSProperties
 > = {
   h1: {
     fontSize: '2.25rem',
-    fontWeight: 700,
+    fontWeight: darkMode ? 600 : 700,
     lineHeight: '2.5rem',
   },
   h2: {
     fontSize: '1.5rem',
-    fontWeight: 700,
+    fontWeight: darkMode ? 600 : 700,
     lineHeight: '2rem',
   },
   bold: {
-    fontWeight: 700,
+    fontWeight: darkMode ? 600 : 700,
   },
   medium: {
     fontWeight: 600,
@@ -70,7 +73,7 @@ const types: Record<
   },
   'small-bold': {
     fontSize: '0.875rem',
-    fontWeight: 700,
+    fontWeight: darkMode ? 600 : 700,
     lineHeight: '1.5rem',
   },
 }
