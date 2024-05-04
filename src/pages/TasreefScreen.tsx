@@ -14,6 +14,7 @@ import { VerbConjugations } from '../../data/types'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
+import useQuery from '../hooks/useQuery'
 import { useRoute } from 'preact-iso'
 import verbTypes from '../../data'
 
@@ -27,9 +28,13 @@ const TasreefScreen = () => {
   const [rootLettersEditorCollapsed, setRootLettersEditorCollapsed] =
     useState(true)
 
-  const [activeTab, setActiveTab] = useState('معروف')
-  const [verbCase, setVerbCase] = useState('مرفوع')
+  // const [activeTab, setActiveTab] = useState('معروف')
+  // const [verbCase, setVerbCase] = useState('مرفوع')
 
+  const {
+    query: { activeTab = 'معروف', verbCase = 'مرفوع' },
+    ...query
+  } = useQuery()
   const params = useRoute().params
 
   const { settings } = useAppState()
@@ -188,7 +193,11 @@ const TasreefScreen = () => {
       </Flex>
 
       {tabs.length > 1 && (
-        <Tabs tabs={tabs} activeTab={activeTab} onTabClick={setActiveTab} />
+        <Tabs
+          tabs={tabs}
+          activeTab={activeTab}
+          onTabClick={(activeTab) => query.set('activeTab', activeTab)}
+        />
       )}
 
       <Flex column gap={16} justifyContent="center">
@@ -206,7 +215,9 @@ const TasreefScreen = () => {
                 label: verbCase,
                 value: verbCase,
               }))}
-              onChange={({ value: verbCase }) => setVerbCase(verbCase)}
+              onChange={({ value: verbCase }) =>
+                query.set('verbCase', verbCase)
+              }
             />
           </Flex>
         )}

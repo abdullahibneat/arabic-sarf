@@ -16,6 +16,7 @@ import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
 import { useLocation } from 'preact-iso'
 import useModal from '../hooks/useModal'
+import useNavigate from '../hooks/useNavigate'
 import verbTypes from '../../data'
 
 const Sidebar = () => {
@@ -23,9 +24,10 @@ const Sidebar = () => {
 
   const modal = useModal()
   const location = useLocation()
+  const navigate = useNavigate()
   const appState = useAppState()
 
-  const [type, form, chapter] = location.url.substring(1).split('/')
+  const [type, form, chapter] = location.path.substring(1).split('/')
 
   const { settings } = useAppState()
 
@@ -87,14 +89,17 @@ const Sidebar = () => {
   ])
 
   const goToHomepage = useCallback(() => {
-    location.route('/')
+    navigate('/', {})
     setOpen(false)
-  }, [])
+  }, [navigate])
 
-  const goToVerb = useCallback((item: AccordionGroupItem) => {
-    location.route(item.id)
-    setOpen(false)
-  }, [])
+  const goToVerb = useCallback(
+    (item: AccordionGroupItem) => {
+      navigate(item.id)
+      setOpen(false)
+    },
+    [navigate],
+  )
 
   const openSettings = useCallback(() => {
     modal.open({
