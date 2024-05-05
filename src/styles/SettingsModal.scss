@@ -15,8 +15,10 @@
   user-select: none;
 
   div {
-    height: 32px;
-    padding: 2px 8px;
+    height: 2.25rem;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
   }
 
   div:first-of-type {
@@ -33,7 +35,7 @@
 }
 
 .dropdown {
-  height: 36px;
+  height: 2.25rem;
   color: var(--text);
   padding: 0 8px;
   border: solid 1px var(--border);
