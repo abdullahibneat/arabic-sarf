@@ -2,6 +2,11 @@ const LOCAL_STORAGE_KEY = 'state'
 
 export type AppStateType = {
   fontSize: number
+  arabicFont:
+    | 'System'
+    | 'Noto Sans Arabic'
+    | 'KFGQPC Uthman Taha Naskh'
+    | 'KFGQPC Uthmanic Script Hafs'
   playbackSpeed: number
   playbackLoop: boolean
   settings: {
@@ -23,6 +28,7 @@ export type SetItemListener = (state: AppStateType) => void
 
 const defaultState: AppStateType = {
   fontSize: 16,
+  arabicFont: 'Noto Sans Arabic',
   playbackSpeed: 1,
   playbackLoop: false,
   settings: {

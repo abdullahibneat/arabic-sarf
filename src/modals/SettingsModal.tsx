@@ -12,7 +12,7 @@ import useAppState from '../hooks/useAppState'
 import verbTypes from '../../data'
 
 const SettingsModal = () => {
-  const { settings } = useAppState()
+  const { settings, fontSize, arabicFont } = useAppState()
 
   const [preset, setPreset] = useState('Custom')
 
@@ -42,6 +42,16 @@ const SettingsModal = () => {
 
     setPreset('Custom')
   }, [settings, settings.hiddenVerbTypes])
+
+  const arabicFonts = useMemo<AppStateType['arabicFont'][]>(
+    () => [
+      'System',
+      'Noto Sans Arabic',
+      'KFGQPC Uthman Taha Naskh',
+      'KFGQPC Uthmanic Script Hafs',
+    ],
+    [],
+  )
 
   const presetNames = useMemo(() => Object.keys(presets).concat('Custom'), [])
 
@@ -89,6 +99,16 @@ const SettingsModal = () => {
       { key: 'showAmr', name: 'Amr', value: settings.showAmr },
     ],
     [settings.showNasb, settings.showJazm, settings.showAmr],
+  )
+
+  const onArabicFontChange = useCallback(
+    (event: JSX.TargetedEvent<HTMLSelectElement>) => {
+      if (event.target instanceof HTMLSelectElement) {
+        const arabicFont = event.target.value
+        AppState.setItem('arabicFont', arabicFont as AppStateType['arabicFont'])
+      }
+    },
+    [arabicFonts],
   )
 
   const onPresetChange = useCallback(
@@ -180,6 +200,57 @@ const SettingsModal = () => {
             }
           />
         </Flex>
+      </Flex>
+
+      <Flex column gap={4}>
+        <Text>Font size: {fontSize}px</Text>
+
+        <Flex>
+          <Flex
+            width={32}
+            height={32}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <p style={{ fontSize: 12, lineHeight: '13px' }}>A</p>
+          </Flex>
+
+          <input
+            type="range"
+            style={{ flex: 1 }}
+            min={12}
+            max={24}
+            value={fontSize}
+            onInput={(e) => {
+              if (e.target && 'value' in e.target)
+                AppState.setItem('fontSize', Number(e.target.value))
+            }}
+          />
+
+          <Flex
+            width={32}
+            height={32}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <p style={{ fontSize: 16, lineHeight: '16px' }}>A</p>
+          </Flex>
+        </Flex>
+      </Flex>
+
+      <Flex column gap={4}>
+        <Text>Arabic Font</Text>
+        <select
+          class="dropdown"
+          value={arabicFont}
+          onChange={onArabicFontChange}
+        >
+          {arabicFonts.map((arabicFont) => (
+            <option key={arabicFont} value={arabicFont}>
+              {arabicFont}
+            </option>
+          ))}
+        </select>
       </Flex>
 
       <Flex column gap={4}>

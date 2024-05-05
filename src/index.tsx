@@ -26,6 +26,13 @@ const App = () => {
     root.style.fontSize = `${appState.fontSize}px`
   }, [appState.fontSize])
 
+  useEffect(() => {
+    const root = document.querySelector<HTMLElement>(':root')
+    if (root) {
+      root.style.setProperty('--arabic-font', appState.arabicFont)
+    }
+  }, [appState.arabicFont])
+
   const [audioPlayer, setAudioPlayer] = useState<AudioPlayerContextType>({
     play: async () => {},
     pause: () => null,
