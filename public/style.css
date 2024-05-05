@@ -1,3 +1,30 @@
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  src: url('noto-sans-arabic.woff2');
+  unicode-range: U+0600-06FF;
+}
+
+@font-face {
+  font-family: 'System';
+  src: local('-apple-system'), local('BlinkMacSystemFont'),
+    local('Traditional Arabic');
+  unicode-range: U+0600-06FF;
+}
+
+@font-face {
+  font-family: 'KFGQPC Uthman Taha Naskh';
+  src: url('uthman-taha-naskh.ttf');
+  unicode-range: U+0600-06FF;
+  size-adjust: 130%;
+}
+
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script Hafs';
+  src: url('uthmanic-script-hafs.otf');
+  unicode-range: U+0600-06FF;
+  size-adjust: 130%;
+}
+
 *,
 *::before,
 *::after {
@@ -55,6 +82,7 @@ h6 {
   --hover: #e5e7eb;
   --border: #e5e7eb;
   --background: #f3f3f3;
+  --arabic-font: 'Noto Sans Arabic';
 }
 
 @media (prefers-color-scheme: dark) {
@@ -71,7 +99,7 @@ h6 {
 html {
   background-color: var(--background);
 
-  font-family: 'Noto Sans Arabic', 'Noto Sans', sans-serif;
+  font-family: var(--arabic-font), 'Noto Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
