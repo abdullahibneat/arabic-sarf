@@ -12,3 +12,9 @@
     border-top: solid 1px var(--border);
   }
 }
+
+@media print {
+  .section {
+    break-inside: avoid;
+  }
+}

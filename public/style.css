@@ -250,3 +250,20 @@ svg * {
   flex: 1;
   overflow: auto;
 }
+
+@media print {
+  body {
+    visibility: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .screen-wrapper main .screen-content {
+    visibility: visible;
+    position: absolute;
+    width: 100vw;
+    height: fit-content;
+  }
+}

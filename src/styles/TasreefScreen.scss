@@ -33,3 +33,11 @@
     }
   }
 }
+
+@media print {
+  .collapse-icon,
+  .tabs-container,
+  .root-letters-editor-revealer {
+    display: none !important;
+  }
+}
