@@ -27,14 +27,6 @@ const TasreefScreen = () => {
   const [rootLettersEditorCollapsed, setRootLettersEditorCollapsed] =
     useState(true)
 
-  // const [activeTab, setActiveTab] = useState('معروف')
-  // const [verbCase, setVerbCase] = useState('مرفوع')
-
-  // const {
-  //   query: { activeTab = 'معروف', verbCase = 'مرفوع' },
-  //   ...query
-  // } = useQuery()
-
   const [searchParams, setSearchParams] = useSearchParams()
   const params = useParams()
 
