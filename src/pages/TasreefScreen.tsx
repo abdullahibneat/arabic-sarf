@@ -2,6 +2,7 @@ import '../styles/TasreefScreen.scss'
 
 import RootLettersEditor, { RootLetters } from '../components/RootLettersEditor'
 import { useMemo, useState } from 'preact/hooks'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 import Flex from '../components/Flex'
 import IconButton from '../components/IconButton'
@@ -14,8 +15,6 @@ import { VerbConjugations } from '../../data/types'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
-import useQuery from '../hooks/useQuery'
-import { useRoute } from 'preact-iso'
 import verbTypes from '../../data'
 
 const TasreefScreen = () => {
@@ -31,11 +30,16 @@ const TasreefScreen = () => {
   // const [activeTab, setActiveTab] = useState('معروف')
   // const [verbCase, setVerbCase] = useState('مرفوع')
 
-  const {
-    query: { activeTab = 'معروف', verbCase = 'مرفوع' },
-    ...query
-  } = useQuery()
-  const params = useRoute().params
+  // const {
+  //   query: { activeTab = 'معروف', verbCase = 'مرفوع' },
+  //   ...query
+  // } = useQuery()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const params = useParams()
+
+  const activeTab = searchParams.get('activeTab') || 'معروف'
+  const verbCase = searchParams.get('verbCase') || 'مرفوع'
 
   const { settings } = useAppState()
 
@@ -58,15 +62,15 @@ const TasreefScreen = () => {
   }, [settings.showNasb, settings.showJazm])
 
   const baseChapter = useMemo(() => {
-    const type = verbTypes[params.type]
+    const type = verbTypes[params.type || '']
 
     if (!type) return null
 
-    const form = type[params.form]
+    const form = type[params.form || '']
 
     if (!form) return null
 
-    const chapter = isMujarrad(form) ? form[params.chapter] : form
+    const chapter = isMujarrad(form) ? form[params.chapter || ''] : form
 
     if (chapter) {
       setRootLetters({
@@ -197,7 +201,10 @@ const TasreefScreen = () => {
           <Tabs
             tabs={tabs}
             activeTab={activeTab}
-            onTabClick={(activeTab) => query.set('activeTab', activeTab)}
+            onTabClick={(activeTab) => {
+              searchParams.set('activeTab', activeTab)
+              setSearchParams(searchParams)
+            }}
           />
         )}
       </Flex>
@@ -217,9 +224,10 @@ const TasreefScreen = () => {
                 label: verbCase,
                 value: verbCase,
               }))}
-              onChange={({ value: verbCase }) =>
-                query.set('verbCase', verbCase)
-              }
+              onChange={({ value: verbCase }) => {
+                searchParams.set('verbCase', verbCase)
+                setSearchParams(searchParams)
+              }}
             />
           </Flex>
         )}

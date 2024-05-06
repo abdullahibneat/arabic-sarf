@@ -11,11 +11,11 @@ import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
-import { useRoute } from 'preact-iso'
+import { useParams } from 'react-router-dom'
 import verbTypes from '../../data'
 
 const OverviewScreen = () => {
-  const params = useRoute().params
+  const params = useParams()
 
   const { settings } = useAppState()
 

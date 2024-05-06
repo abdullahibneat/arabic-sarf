@@ -2,6 +2,7 @@ import '../styles/Sidebar.scss'
 
 import Accordion, { AccordionGroup, AccordionGroupItem } from './Accordion'
 import { useCallback, useMemo, useState } from 'preact/hooks'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import Flex from './Flex'
 import IconButton from './IconButton'
@@ -13,9 +14,7 @@ import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
-import { useLocation } from 'preact-iso'
 import useModal from '../hooks/useModal'
-import useNavigate from '../hooks/useNavigate'
 import verbTypes from '../../data'
 
 const Sidebar = () => {
@@ -25,7 +24,7 @@ const Sidebar = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const [type, form, chapter] = location.path.substring(1).split('/')
+  const { type, form, chapter } = useParams()
 
   const { settings } = useAppState()
 
@@ -125,7 +124,7 @@ const Sidebar = () => {
       <div class="sidebar-content">
         <Flex column gap={8}>
           <MenuItem
-            active={location.path === '/'}
+            active={location.pathname === '/'}
             title="All Tasreefs"
             onClick={goToHomepage}
           />
