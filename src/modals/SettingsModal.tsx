@@ -12,7 +12,7 @@ import useAppState from '../hooks/useAppState'
 import verbTypes from '../../data'
 
 const SettingsModal = () => {
-  const { settings, fontSize, arabicFont } = useAppState()
+  const { settings, fontSize, arabicFont, theme } = useAppState()
 
   const [preset, setPreset] = useState('Custom')
 
@@ -42,6 +42,16 @@ const SettingsModal = () => {
 
     setPreset('Custom')
   }, [settings, settings.hiddenVerbTypes])
+
+  const themeOptions = useMemo(
+    () =>
+      [
+        { label: 'System', value: 'system' },
+        { label: 'Light', value: 'light' },
+        { label: 'Dark', value: 'dark' },
+      ] as const,
+    [],
+  )
 
   const arabicFonts = useMemo<AppStateType['arabicFont'][]>(
     () => [
@@ -150,6 +160,15 @@ const SettingsModal = () => {
 
   return (
     <Flex column gap={12} padding={24} paddingTop={12}>
+      <Flex column gap={4}>
+        <Text>Theme</Text>
+        <Segmented
+          value={theme}
+          options={themeOptions}
+          onChange={({ value }) => AppState.setItem('theme', value)}
+        />
+      </Flex>
+
       <Flex column gap={4}>
         <Text>Tasreef group mode</Text>
         <Flex justifyContent="center" alignItems="center" gap={16} flex={1}>

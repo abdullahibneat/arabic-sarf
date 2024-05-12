@@ -2,6 +2,7 @@ import { ComponentChildren, JSX } from 'preact'
 
 import { CSSProperties } from 'preact/compat'
 import { useMemo } from 'preact/hooks'
+import useTheme from '../hooks/useTheme'
 
 export type TextProps = {
   type?: keyof typeof types
@@ -18,6 +19,8 @@ const Text = ({
   style = {},
   children,
 }: TextProps) => {
+  const theme = useTheme()
+
   const textStyles = useMemo(() => (type ? types[type] : {}), [type])
 
   return (
@@ -30,6 +33,7 @@ const Text = ({
         whiteSpace: ellipsis ? 'nowrap' : undefined,
         ...style,
         ...textStyles,
+        fontWeight: theme === 'dark' ? 400 : textStyles.fontWeight,
       }}
     >
       {children}
@@ -39,25 +43,22 @@ const Text = ({
 
 export default Text
 
-const darkMode =
-  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-
 const types: Record<
   'h1' | 'h2' | 'bold' | 'medium' | 'small' | 'small-medium' | 'small-bold',
   CSSProperties
 > = {
   h1: {
     fontSize: '2.25rem',
-    fontWeight: darkMode ? 600 : 700,
+    fontWeight: 700,
     lineHeight: '2.5rem',
   },
   h2: {
     fontSize: '1.5rem',
-    fontWeight: darkMode ? 600 : 700,
+    fontWeight: 700,
     lineHeight: '2rem',
   },
   bold: {
-    fontWeight: darkMode ? 600 : 700,
+    fontWeight: 700,
   },
   medium: {
     fontWeight: 600,
@@ -73,7 +74,7 @@ const types: Record<
   },
   'small-bold': {
     fontSize: '0.875rem',
-    fontWeight: darkMode ? 600 : 700,
+    fontWeight: 700,
     lineHeight: '1.5rem',
   },
 }

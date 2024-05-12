@@ -7,6 +7,7 @@ import TasreefScreen from './pages/TasreefScreen'
 import { render } from 'preact'
 import useAppState from './hooks/useAppState'
 import { useEffect } from 'preact/hooks'
+import useTheme from './hooks/useTheme'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,21 @@ const router = createBrowserRouter([
 
 const Entrypoint = () => {
   const appState = useAppState()
+
+  const theme = useTheme()
+
+  useEffect(() => {
+    const root = document.querySelector<HTMLElement>(':root')
+    if (root) {
+      if (theme === 'dark') {
+        root.classList.remove('light')
+        root.classList.add('dark')
+      } else {
+        root.classList.remove('dark')
+        root.classList.add('light')
+      }
+    }
+  }, [theme])
 
   useEffect(() => {
     const root = document.documentElement

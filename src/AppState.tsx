@@ -9,6 +9,7 @@ export type AppStateType = {
     | 'KFGQPC Uthmanic Script Hafs'
   playbackSpeed: number
   playbackLoop: boolean
+  theme: 'system' | 'light' | 'dark'
   settings: {
     hiddenVerbTypes: string[]
     mujarradChapterHeadings: 'arabic' | 'english' // [ن، ض، ف] / [1a, 1b, 1c]
@@ -31,6 +32,7 @@ const defaultState: AppStateType = {
   arabicFont: 'Noto Sans Arabic',
   playbackSpeed: 1,
   playbackLoop: false,
+  theme: 'system',
   settings: {
     hiddenVerbTypes: [],
     mujarradChapterHeadings: 'arabic',

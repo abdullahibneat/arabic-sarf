@@ -85,15 +85,13 @@ h6 {
   --arabic-font: 'Noto Sans Arabic';
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --white: #0a0a0a;
-    --text: #ededed;
-    --text-secondary: #a1a1a1;
-    --hover: #1f1f1f;
-    --border: #262626;
-    --background: #000000;
-  }
+:root.dark {
+  --white: #0a0a0a;
+  --text: #ededed;
+  --text-secondary: #a1a1a1;
+  --hover: #1f1f1f;
+  --border: #262626;
+  --background: #000000;
 }
 
 html {
