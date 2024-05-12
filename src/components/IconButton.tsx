@@ -21,7 +21,7 @@ const IconButton = ({
     title={title}
     onClick={onClick}
   >
-    <Icon padding={4} {...iconProps} />
+    <Icon {...iconProps} />
   </button>
 )
 
