@@ -3,7 +3,24 @@
   "form": 10,
   "باب": "اسْتِفْعَال",
   "title": "اسْتَفَالَ يَسْتَفِيْلُ",
-  "root_letters": [["ع", "و", "ذ"]],
+  "root_letters": [
+    {
+      "arabic": "عوذ",
+      "english": {
+        "base": "seek",
+        "past": "sought",
+        "specifically": { "base": "refuge", "passive": "for refuge" }
+      }
+    },
+    {
+      "arabic": "طوع",
+      "english": {
+        "base": "able",
+        "prefixToBe": true,
+        "passive": "capable of"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "اسْتَفَالَ",

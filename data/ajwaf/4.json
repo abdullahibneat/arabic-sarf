@@ -3,7 +3,11 @@
   "form": 4,
   "باب": "إِفْعَال",
   "title": "أَفَالَ يُفِيْلُ",
-  "root_letters": [["ر", "و", "د"]],
+  "root_letters": [
+    { "arabic": "رود", "english": "intend" },
+    { "arabic": "جوب", "english": "answer" },
+    { "arabic": "حوط", "english": "surround" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "أَفَالَ",

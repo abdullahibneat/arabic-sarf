@@ -3,7 +3,11 @@
   "form": 8,
   "باب": "افْتِعَال",
   "title": "افْتَعَلَ يَفْتَعِلُ",
-  "root_letters": [["ح", "ر", "م"]],
+  "root_letters": [
+    { "arabic": "حرم", "english": "respect" },
+    { "arabic": "جهد", "english": { "base": "work", "specifically": "hard" } },
+    { "arabic": "غسل", "english": "bathe" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "افْتَعَلَ",

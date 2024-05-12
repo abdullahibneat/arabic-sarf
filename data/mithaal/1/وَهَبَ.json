@@ -3,7 +3,7 @@
   "form": 1,
   "باب": "فَتَحَ",
   "title": "فَعَلَ يَعَلُ",
-  "root_letters": [["و", "ه", "ب"]],
+  "root_letters": [{ "arabic": "وهب", "english": "gift" }],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَلَ",

@@ -3,7 +3,18 @@
   "form": 1,
   "باب": "فَتَحَ",
   "title": "فَعَلَ يَفْعَلُ",
-  "root_letters": [["ف", "ت", "ح"]],
+  "root_letters": [
+    { "arabic": "فتح", "english": "open" },
+    {
+      "arabic": "نصح",
+      "english": {
+        "base": "give",
+        "past": "gave",
+        "passive": "given",
+        "specifically": "sincere advice"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَلَ",

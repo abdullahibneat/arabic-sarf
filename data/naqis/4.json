@@ -3,7 +3,27 @@
   "form": 4,
   "باب": "إِفْعَال",
   "title": "أَفْعَى يُفْعِيْ",
-  "root_letters": [["ب", "ك", "ي"]],
+  "root_letters": [
+    {
+      "arabic": "بكي",
+      "english": {
+        "base": "make",
+        "past": "made",
+        "specifically": {
+          "base": "someone cry",
+          "passive": "to cry"
+        }
+      }
+    },
+    {
+      "arabic": "لقي",
+      "english": {
+        "base": "throw",
+        "past": "threw",
+        "passive": "thrown"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "أَفْعَى",

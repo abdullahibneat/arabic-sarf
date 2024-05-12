@@ -3,7 +3,11 @@
   "form": 3,
   "باب": "مُفَاعَلَة",
   "title": "فَاعَلَ يُفَاعِلُ",
-  "root_letters": [["ش", "ه", "د"]],
+  "root_letters": [
+    { "arabic": "شهد", "english": "witness" },
+    { "arabic": "سفر", "english": "travel" },
+    { "arabic": "سعد", "english": "help" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَاعَلَ",

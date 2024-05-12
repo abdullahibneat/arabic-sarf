@@ -3,7 +3,9 @@
   "form": 1,
   "باب": "ضَرَبَ",
   "title": "فَعَّ يَفِعُّ",
-  "root_letters": [["ف", "ر", "ر"]],
+  "root_letters": [
+    { "arabic": "فرر", "english": { "base": "flee", "past": "fled" } }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَّ",

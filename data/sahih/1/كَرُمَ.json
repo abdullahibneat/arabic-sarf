@@ -3,7 +3,10 @@
   "form": 1,
   "باب": "كَرُمَ",
   "title": "فَعُلَ يَفْعُلُ",
-  "root_letters": [["ك", "ر", "م"]],
+  "root_letters": [
+    { "arabic": "كرم", "english": { "base": "noble", "prefixToBe": true } },
+    { "arabic": "قرب", "english": { "base": "near", "prefixToBe": true } }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعُلَ",

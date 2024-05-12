@@ -3,7 +3,14 @@
   "form": 1,
   "باب": "نَصَرَ",
   "title": "فَعَا يَفْعُوْ",
-  "root_letters": [["د", "ع", "و"]],
+  "root_letters": [
+    { "arabic": "دعو", "english": "call" },
+    {
+      "arabic": "عفو",
+      "english": { "base": "forgive", "past": "forgave", "passive": "forgiven" }
+    },
+    { "arabic": "رجو", "english": "hope" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَا",

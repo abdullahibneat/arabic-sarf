@@ -3,7 +3,31 @@
   "form": 7,
   "باب": "انْفِعَال",
   "title": "انْفَعَلَ يَنْفَعِلُ",
-  "root_letters": [["ص", "ر", "ف"]],
+  "root_letters": [
+    {
+      "arabic": "صرف",
+      "english": {
+        "base": "turn",
+        "specifically": "away"
+      }
+    },
+    {
+      "arabic": "قسن",
+      "english": {
+        "base": "divided",
+        "prefixToBe": true,
+        "passive": "made to be divided"
+      }
+    },
+    {
+      "arabic": "كشف",
+      "english": {
+        "base": "revealed",
+        "prefixToBe": true,
+        "passive": "made to be revealed"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "انْفَعَلَ",

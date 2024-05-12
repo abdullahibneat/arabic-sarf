@@ -3,7 +3,11 @@
   "form": 1,
   "باب": "سَمِعَ",
   "title": "فَالَ يَفَالُ",
-  "root_letters": [["خ", "و", "ف"]],
+  "root_letters": [
+    { "arabic": "خوف", "english": "fear" },
+    { "arabic": "نوم", "english": { "base": "sleep", "past": "slept" } },
+    { "arabic": "شوا", "english": "want" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَالَ",

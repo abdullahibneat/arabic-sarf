@@ -129,11 +129,37 @@ const مثال: VerbTypeMap = {
     وَجِلَ: wajala,
     وَهَبَ: wahaba,
   },
-  '2': { ...sahihForm2, type: 'مثال', root_letters: [['و', 'ح', 'د']] },
-  '3': { ...sahihForm3, type: 'مثال', root_letters: [['و', 'ف', 'ق']] },
+  '2': {
+    ...sahihForm2,
+    type: 'مثال',
+    root_letters: [{ arabic: 'وحد', english: 'unite' }],
+  },
+  '3': {
+    ...sahihForm3,
+    type: 'مثال',
+    root_letters: [{ arabic: 'وفق', english: 'agree' }],
+  },
   '4': mithaalForm4,
-  '5': { ...sahihForm5, type: 'مثال', root_letters: [['و', 'ك', 'ل']] },
-  '6': { ...sahihForm6, type: 'مثال', root_letters: [['و', 'ض', 'ع']] },
+  '5': {
+    ...sahihForm5,
+    type: 'مثال',
+    root_letters: [{ arabic: 'وكل', english: 'trust' }],
+  },
+  '6': {
+    ...sahihForm6,
+    type: 'مثال',
+    root_letters: [
+      {
+        arabic: 'وضع',
+        english: {
+          base: 'behave humbly',
+          past: 'behaved humbly',
+          presentContinuous: 'behaving humbly',
+          passive: 'made to behave humbly',
+        },
+      },
+    ],
+  },
   '7': null,
   '8': mithaalForm8,
   '9': null,

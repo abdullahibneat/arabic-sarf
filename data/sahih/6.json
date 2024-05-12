@@ -3,7 +3,11 @@
   "form": 6,
   "باب": "تَفَاعُل",
   "title": "تَفَاعَلَ يَتَفَاعَلُ",
-  "root_letters": [["ب", "د", "ل"]],
+  "root_letters": [
+    { "arabic": "بدل", "english": "exchange" },
+    { "arabic": "قبل", "english": "face" },
+    { "arabic": "فخر", "english": "boast" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "تَفَاعَلَ",

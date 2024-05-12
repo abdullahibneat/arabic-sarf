@@ -3,7 +3,11 @@
   "form": 5,
   "باب": "تَفَعُّل",
   "title": "تَفَعَّى يَتَفَعَّى",
-  "root_letters": [["م", "ن", "ي"]],
+  "root_letters": [
+    { "arabic": "منو", "english": "wish" },
+    { "arabic": "جلو", "english": "manifest" },
+    { "arabic": "خطو", "english": { "base": "climb", "specifically": "over" } }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "تَفَعَّى",

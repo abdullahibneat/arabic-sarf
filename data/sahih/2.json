@@ -3,7 +3,27 @@
   "form": 2,
   "باب": "تَفْعِيْل",
   "title": "فَعَّلَ يُفَعِّلُ",
-  "root_letters": [["ك", "ذ", "ب"]],
+  "root_letters": [
+    { "arabic": "كذب", "english": "deny" },
+    {
+      "arabic": "فهم",
+      "english": {
+        "base": "make",
+        "past": "made",
+        "specifically": {
+          "base": "someone understand",
+          "passive": "to understand"
+        }
+      }
+    },
+    {
+      "arabic": "سخن",
+      "english": {
+        "base": "heat",
+        "specifically": "up"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَّلَ",

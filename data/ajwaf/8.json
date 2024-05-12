@@ -3,7 +3,13 @@
   "form": 8,
   "باب": "افْتِعَال",
   "title": "افْتَالَ يَفْتَالُ",
-  "root_letters": [["ح", "و", "ج"]],
+  "root_letters": [
+    { "arabic": "حوج", "english": "need" },
+    {
+      "arabic": "شوق",
+      "english": { "base": "desire", "passive": "wished for" }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "افْتَالَ",

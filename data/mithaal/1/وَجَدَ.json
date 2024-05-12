@@ -3,7 +3,9 @@
   "form": 1,
   "باب": "ضَرَبَ",
   "title": "فَعَلَ يَعِلُ",
-  "root_letters": [["و", "ج", "د"]],
+  "root_letters": [
+    { "arabic": "وجد", "english": { "base": "find", "past": "found" } }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَلَ",

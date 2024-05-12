@@ -3,7 +3,10 @@
   "form": 2,
   "باب": "تَفْعِيْل",
   "title": "فَعَّى يُفَعِّيْ",
-  "root_letters": [["ص", "ل", "ي"]],
+  "root_letters": [
+    { "arabic": "صلو", "english": "pray" },
+    { "arabic": "سمي", "english": "name" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَّى",

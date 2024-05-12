@@ -3,7 +3,24 @@
   "form": 1,
   "باب": "ضَرَبَ",
   "title": "فَعَى يَفْعِيْ",
-  "root_letters": [["ر", "م", "ي"]],
+  "root_letters": [
+    {
+      "arabic": "رمي",
+      "english": {
+        "base": "throw",
+        "past": "threw",
+        "passive": "thrown"
+      }
+    },
+    {
+      "arabic": "مشي",
+      "english": "walk"
+    },
+    {
+      "arabic": "هدي",
+      "english": "guide"
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَى",

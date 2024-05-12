@@ -3,7 +3,11 @@
   "form": 1,
   "باب": "ضَرَبَ",
   "title": "فَالَ يَفِيْلُ",
-  "root_letters": [["ب", "ي", "ع"]],
+  "root_letters": [
+    { "arabic": "بيع", "english": { "base": "sell", "past": "sold" } },
+    { "arabic": "زيد", "english": "increase" },
+    { "arabic": "عيش", "english": "live" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَالَ",

@@ -3,7 +3,7 @@
   "form": 3,
   "باب": "تَفْعِيْل",
   "title": "فَاعَّ يُفَاعُّ",
-  "root_letters": [["ش", "ق", "ق"]],
+  "root_letters": [{ "arabic": "شقق", "english": "oppose" }],
   "archetype": {
     "ماضي": {
       "معروف": "فَاعَّ",

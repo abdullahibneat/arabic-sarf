@@ -3,7 +3,16 @@
   "form": 8,
   "باب": "افْتِعَال",
   "title": "افْتَعَى يَفْتَعِيْ",
-  "root_letters": [["ج", "ب", "ي"]],
+  "root_letters": [
+    {
+      "arabic": "جبي",
+      "english": { "base": "choose", "past": "chose", "passive": "chosen" }
+    },
+    {
+      "arabic": "ردي",
+      "english": { "base": "wear", "past": "worn" }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "افْتَعَى",
