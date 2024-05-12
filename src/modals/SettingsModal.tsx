@@ -236,6 +236,12 @@ const SettingsModal = () => {
             <p style={{ fontSize: 16, lineHeight: '16px' }}>A</p>
           </Flex>
         </Flex>
+
+        <Text>Text Preview</Text>
+
+        <div class="sample-text">
+          <Text>نَصَرَ يَنْصَرَ نَصْرًا</Text>
+        </div>
       </Flex>
 
       <Flex column gap={4}>

@@ -1,3 +1,11 @@
+.sample-text {
+  padding: 0.5rem;
+  text-align: center;
+  border: solid 1px var(--border);
+  border-radius: 6px;
+  background-color: var(--white);
+}
+
 .table {
   border: solid 1px var(--border);
   border-radius: 6px;
