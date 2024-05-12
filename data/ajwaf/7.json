@@ -3,7 +3,16 @@
   "form": 7,
   "باب": "انْفِعَال",
   "title": "انْفَالَ يَنْفَالُ",
-  "root_letters": [["ه", "و", "ر"]],
+  "root_letters": [
+    {
+      "arabic": "هور",
+      "english": { "base": "collapse", "passive": "demolished" }
+    },
+    {
+      "arabic": "قود",
+      "english": { "base": "follow", "passive": "led" }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "انْفَالَ",

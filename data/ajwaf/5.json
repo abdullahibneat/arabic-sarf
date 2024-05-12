@@ -3,7 +3,10 @@
   "form": 5,
   "باب": "تَفَعُّل",
   "title": "تَفَوَّلَ يَتَفَوَّلُ",
-  "root_letters": [["ج", "و", "ل"]],
+  "root_letters": [
+    { "arabic": "جول", "english": "roam" },
+    { "arabic": "طيب", "english": "perfume" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "تَفَوَّلَ",

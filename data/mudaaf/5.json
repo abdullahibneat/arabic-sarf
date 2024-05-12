@@ -3,7 +3,9 @@
   "form": 5,
   "باب": "تَفَعُّل",
   "title": "تَفَعَّلَ يَتَفَعَّلُ",
-  "root_letters": [["ك", "ر", "ر"]],
+  "root_letters": [
+    { "arabic": "كرر", "english": { "base": "repeated", "prefixToBe": true } }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "تَفَعَّلَ",

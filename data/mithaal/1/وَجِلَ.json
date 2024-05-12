@@ -3,7 +3,16 @@
   "form": 1,
   "باب": "سَمِعَ",
   "title": "فَعِلَ يَفْعَلُ",
-  "root_letters": [["و", "ج", "ل"]],
+  "root_letters": [
+    {
+      "arabic": "وجل",
+      "english": {
+        "base": "afraid",
+        "prefixToBe": true,
+        "passive": "feared"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعِلَ",

@@ -3,7 +3,7 @@
   "form": 1,
   "باب": "حَسِبَ",
   "title": "فَعِلَ يَفْعِلُ",
-  "root_letters": [["ح", "س", "ب"]],
+  "root_letters": [{ "arabic": "حسب", "english": "calculate" }],
   "archetype": {
     "ماضي": {
       "معروف": "فَعِلَ",

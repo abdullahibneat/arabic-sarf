@@ -3,7 +3,23 @@
   "form": 1,
   "باب": "ضَرَبَ",
   "title": "فَعَلَ يَفْعِلُ",
-  "root_letters": [["ض", "ر", "ب"]],
+  "root_letters": [
+    {
+      "arabic": "ضرب",
+      "english": {
+        "base": "hit",
+        "past": "hit",
+        "presentContinuous": "hitting"
+      }
+    },
+    {
+      "arabic": "كسر",
+      "english": {
+        "base": "break",
+        "past": "broke"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَلَ",

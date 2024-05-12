@@ -3,7 +3,31 @@
   "form": 6,
   "باب": "تَفَاعُل",
   "title": "تَفَاعَى يَتَفَاعَى",
-  "root_letters": [["ه", "د", "ي"]],
+  "root_letters": [
+    {
+      "arabic": "هدي",
+      "english": {
+        "base": "exchange",
+        "passive": "made to exchange",
+        "specifically": "gifts"
+      }
+    },
+    {
+      "arabic": "بكي",
+      "english": {
+        "base": "feign",
+        "passive": "made to feign",
+        "specifically": "crying"
+      }
+    },
+    {
+      "arabic": "رضي",
+      "english": {
+        "base": "agree",
+        "passive": "made to agree"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "تَفَاعَى",

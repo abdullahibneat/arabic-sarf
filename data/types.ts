@@ -8,10 +8,31 @@ export type VerbChapter = {
   form: number
   باب: string
   title: string
-  root_letters: Array<string[]>
+  root_letters: RootLetter[]
   archetype: VerbArchetype
   conjugations: VerbConjugations
 }
+
+export type RootLetter = {
+  arabic: string
+  english: EnglishVerb
+}
+
+export type EnglishVerb =
+  | string
+  | {
+      base: string
+      past?: string
+      prefixToBe?: boolean
+      presentContinuous?: string
+      passive?: string
+      specifically?:
+        | string
+        | {
+            base: string
+            passive: string
+          }
+    }
 
 export type VerbArchetype = {
   ماضي: {

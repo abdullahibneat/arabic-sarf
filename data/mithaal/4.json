@@ -3,7 +3,9 @@
   "form": 4,
   "باب": "إِفْعَال",
   "title": "أَفْعَلَ يُفْعِلُ",
-  "root_letters": [["و", "ر", "د"]],
+  "root_letters": [
+    { "arabic": "ورد", "english": { "base": "bring", "past": "brought" } }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "أَفْعَلَ",

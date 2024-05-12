@@ -3,7 +3,12 @@
   "form": 1,
   "باب": "نَصَرَ",
   "title": "فَالَ يَفُوْلُ",
-  "root_letters": [["ق", "و", "ل"]],
+  "root_letters": [
+    {
+      "arabic": "قول",
+      "english": { "base": "say", "past": "said", "passive": "told" }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَالَ",

@@ -3,7 +3,9 @@
   "form": 10,
   "باب": "اسْتِفْعَال",
   "title": "اسْتَفَعَّ يَسْتَفِعُّ",
-  "root_letters": [["ق", "ر", "ر"]],
+  "root_letters": [
+    { "arabic": "قرر", "english": { "base": "settle", "specifically": "down" } }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "اسْتَفَعَّ",

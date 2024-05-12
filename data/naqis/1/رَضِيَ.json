@@ -3,7 +3,28 @@
   "form": 1,
   "باب": "سَمِعَ",
   "title": "فَعِيَ يَفْعَى",
-  "root_letters": [["ر", "ض", "ي"]],
+  "root_letters": [
+    {
+      "arabic": "رضي",
+      "english": {
+        "base": "pleased",
+        "prefixToBe": true
+      }
+    },
+    {
+      "arabic": "خشي",
+      "english": "fear"
+    },
+    {
+      "arabic": "نسي",
+      "english": {
+        "base": "forget",
+        "past": "forgot",
+        "presentContinuous": "forgetting",
+        "passive": "forgotten"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعِيَ",

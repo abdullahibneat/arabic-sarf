@@ -3,7 +3,10 @@
   "form": 1,
   "باب": "سَمِعَ",
   "title": "فَعِلَ يَفْعَلُ",
-  "root_letters": [["س", "م", "ع"]],
+  "root_letters": [
+    { "arabic": "سمع", "english": { "base": "hear", "past": "heard" } },
+    { "arabic": "كره", "english": "dislike" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعِلَ",

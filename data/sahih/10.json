@@ -3,7 +3,28 @@
   "form": 10,
   "باب": "اسْتِفْعَال",
   "title": "اسْتَفْعَلَ يَسْتَفْعِلُ",
-  "root_letters": [["خ", "د", "م"]],
+  "root_letters": [
+    { "arabic": "خدم", "english": "employ" },
+    {
+      "arabic": "غفر",
+      "english": {
+        "base": "seek",
+        "past": "sought",
+        "specifically": {
+          "base": "forgiveness",
+          "passive": "for forgiveness"
+        }
+      }
+    },
+    {
+      "arabic": "مسك",
+      "english": {
+        "base": "grab",
+        "past": "grabbed",
+        "presentContinuous": "grabbing"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "اسْتَفْعَلَ",

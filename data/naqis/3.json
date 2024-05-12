@@ -3,7 +3,10 @@
   "form": 3,
   "باب": "مُفَاعَلَة",
   "title": "فَاعَى يُفَاعِيْ",
-  "root_letters": [["ن", "د", "و"]],
+  "root_letters": [
+    { "arabic": "ندو", "english": "call" },
+    { "arabic": "نجو", "english": "whisper" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَاعَى",

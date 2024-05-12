@@ -3,7 +3,26 @@
   "form": 7,
   "باب": "انْفِعَال",
   "title": "انْفَعَى يَنْفَعِيْ",
-  "root_letters": [["ج", "ل", "و"]],
+  "root_letters": [
+    {
+      "arabic": "جلو",
+      "english": {
+        "base": "become",
+        "past": "became",
+        "passive": "made to become",
+        "specifically": "clear"
+      }
+    },
+    {
+      "arabic": "حنو",
+      "english": {
+        "base": "become",
+        "past": "became",
+        "passive": "made to become",
+        "specifically": "clear"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "انْفَعَى",

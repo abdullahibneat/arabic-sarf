@@ -3,7 +3,7 @@
   "form": 8,
   "باب": "افْتِعَال",
   "title": "افْتَعَّ يَفْتَعُّ",
-  "root_letters": [["ع", "د", "د"]],
+  "root_letters": [{ "arabic": "عدد", "english": "count" }],
   "archetype": {
     "ماضي": {
       "معروف": "افْتَعَّ",

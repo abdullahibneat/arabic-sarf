@@ -3,7 +3,10 @@
   "form": 6,
   "باب": "تَفَاعُل",
   "title": "تَفَاوَلَ يَتَفَاوَلُ",
-  "root_letters": [["ع", "و", "ن"]],
+  "root_letters": [
+    { "arabic": "عون", "english": "help" },
+    { "arabic": "ضيق", "english": "help" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "تَفَاوَلَ",

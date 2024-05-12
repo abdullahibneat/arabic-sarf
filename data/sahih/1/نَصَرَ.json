@@ -3,7 +3,10 @@
   "form": 1,
   "باب": "نَصَرَ",
   "title": "فَعَلَ يَفْعُلُ",
-  "root_letters": [["ن", "ص", "ر"]],
+  "root_letters": [
+    { "arabic": "نصر", "english": "help" },
+    { "arabic": "دخل", "english": "enter" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَلَ",

@@ -3,7 +3,17 @@
   "form": 9,
   "باب": "افْعِلَال",
   "title": "افْعَلَّ يَفْعَلُّ",
-  "root_letters": [["ح", "م", "ر"]],
+  "root_letters": [
+    {
+      "arabic": "حمر",
+      "english": {
+        "base": "become",
+        "past": "became",
+        "passive": "made to become",
+        "specifically": "red"
+      }
+    }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "افْعَلَّ",
