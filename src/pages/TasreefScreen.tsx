@@ -66,9 +66,9 @@ const TasreefScreen = () => {
 
     if (chapter) {
       setRootLetters({
-        ف: chapter.root_letters[0][0],
-        ع: chapter.root_letters[0][1],
-        ل: chapter.root_letters[0][2],
+        ف: chapter.root_letters[0].arabic[0],
+        ع: chapter.root_letters[0].arabic[1],
+        ل: chapter.root_letters[0].arabic[2],
       })
 
       return chapter
@@ -175,9 +175,9 @@ const TasreefScreen = () => {
               <div class="root-letters-editor-wrapper">
                 <RootLettersEditor
                   rootLetters={{
-                    ف: chapter.root_letters[0][0],
-                    ع: chapter.root_letters[0][1],
-                    ل: chapter.root_letters[0][2],
+                    ف: chapter.root_letters[0].arabic[0],
+                    ع: chapter.root_letters[0].arabic[1],
+                    ل: chapter.root_letters[0].arabic[2],
                   }}
                   mithaal={params.type === 'مثال'}
                   ajwaf={params.type === 'أجوف'}

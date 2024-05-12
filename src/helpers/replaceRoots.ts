@@ -7,9 +7,9 @@ const replaceRoots = (
 ) => {
   if (!rootLetters)
     rootLetters = {
-      ف: obj.root_letters[0][0],
-      ع: obj.root_letters[0][1],
-      ل: obj.root_letters[0][2],
+      ف: obj.root_letters[0].arabic[0],
+      ع: obj.root_letters[0].arabic[1],
+      ل: obj.root_letters[0].arabic[2],
     }
 
   const replaced = replace(obj, /[فعل]/g, rootLetters)
