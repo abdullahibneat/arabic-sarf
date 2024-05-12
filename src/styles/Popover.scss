@@ -1,0 +1,19 @@
+.popover-trigger {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  .popover-wrapper {
+    position: absolute;
+    top: 100%;
+    z-index: 4;
+    padding: 8px;
+  }
+
+  .popover-content {
+    background-color: var(--white);
+    border: solid 1px var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+}
