@@ -4,10 +4,11 @@
   min-width: 7.5rem;
   position: relative;
   flex-shrink: 0;
+  direction: rtl;
 
   .cell {
-    display: grid;
-    grid-template-columns: 1fr 1.5rem;
+    display: flex;
+    flex-direction: row-reverse;
     height: 2.25rem;
     background-color: var(--white);
   }
@@ -52,7 +53,6 @@
   .person {
     display: grid;
     gap: 1rem;
-    direction: ltr;
     overflow: hidden;
 
     .gender {
@@ -69,7 +69,7 @@
         }
 
         .seegha {
-          direction: rtl;
+          flex: 1;
           padding: 0 0.75rem;
           white-space: nowrap;
 
@@ -79,6 +79,7 @@
         }
 
         .seegha-number {
+          width: 1.5rem;
           user-select: none;
           color: var(--text-secondary);
           border-left: solid 1px var(--border);
@@ -95,22 +96,22 @@
   &.by-gender {
     .person:not(:last-of-type) {
       grid-template-columns: 1fr 1fr;
-      direction: rtl;
     }
 
-    .gender:nth-child(2n + 1) .cell {
-      direction: ltr;
-    }
+    .gender:nth-child(2n) {
+      .cell {
+        flex-direction: row;
+      }
 
-    .gender:nth-child(2n) .seegha-number {
-      border-left: none;
-      border-right: solid 1px var(--border);
+      .seegha-number {
+        border-left: none;
+        border-right: solid 1px var(--border);
+      }
     }
   }
 
   &.by-person {
     grid-template-columns: 1fr 1fr;
-    direction: rtl;
 
     .header,
     .person:last-of-type {
@@ -121,7 +122,6 @@
       gap: 0;
       border: solid 1px var(--border);
       border-radius: 6px;
-      direction: rtl;
 
       .gender {
         border: none;
@@ -132,13 +132,15 @@
         }
       }
 
-      &:nth-child(2n) {
-        direction: ltr;
-      }
+      &:nth-child(2n + 1) {
+        .cell {
+          flex-direction: row;
 
-      &:nth-child(2n + 1) .seegha-number {
-        border-left: none;
-        border-right: solid 1px var(--border);
+          .seegha-number {
+            border-left: none;
+            border-right: solid 1px var(--border);
+          }
+        }
       }
     }
   }

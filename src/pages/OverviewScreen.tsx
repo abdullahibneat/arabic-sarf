@@ -128,16 +128,12 @@ const OverviewScreen = () => {
           <Flex justifyContent="center">
             <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
               {section.tasreefs.map((tasreef, j) => (
-                <div
+                <Tasreef
                   key={`section-${i}-tasreef-${j}`}
-                  style={{ direction: 'ltr' }}
-                >
-                  <Tasreef
-                    title={tasreef.title}
-                    tasreef={tasreef.tasreef}
-                    groupMode="list"
-                  />
-                </div>
+                  title={tasreef.title}
+                  tasreef={tasreef.tasreef}
+                  groupMode="list"
+                />
               ))}
             </Flex>
           </Flex>
