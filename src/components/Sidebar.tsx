@@ -2,7 +2,12 @@ import '../styles/Sidebar.scss'
 
 import Accordion, { AccordionGroup, AccordionGroupItem } from './Accordion'
 import { useCallback, useMemo, useState } from 'preact/hooks'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom'
 
 import Flex from './Flex'
 import IconButton from './IconButton'
@@ -23,6 +28,7 @@ const Sidebar = () => {
   const modal = useModal()
   const location = useLocation()
   const navigate = useNavigate()
+  const [search] = useSearchParams()
 
   const { type, form, chapter } = useParams()
 
@@ -92,10 +98,10 @@ const Sidebar = () => {
 
   const goToVerb = useCallback(
     (item: AccordionGroupItem) => {
-      navigate(item.id)
+      navigate({ pathname: item.id, search: '?' + search.toString() })
       setOpen(false)
     },
-    [navigate],
+    [navigate, search],
   )
 
   const openSettings = useCallback(() => {
