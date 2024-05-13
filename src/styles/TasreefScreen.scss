@@ -10,34 +10,9 @@
   }
 }
 
-.root-letters-editor-revealer {
-  display: grid;
-  grid-template-rows: 1fr;
-  transition: grid-template-rows 250ms;
-  overflow: hidden;
-
-  .root-letters-editor-wrapper {
-    min-height: 0;
-    margin-top: 8px;
-    transition:
-      visibility 250ms,
-      margin-top 250ms;
-  }
-
-  &.collapsed {
-    grid-template-rows: 0fr;
-
-    .root-letters-editor-wrapper {
-      margin-top: 0;
-      visibility: hidden;
-    }
-  }
-}
-
 @media print {
   .collapse-icon,
-  .tabs-container,
-  .root-letters-editor-revealer {
+  .tabs-container {
     display: none !important;
   }
 }
