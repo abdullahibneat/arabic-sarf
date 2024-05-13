@@ -15,9 +15,8 @@
     {
       "arabic": "طوع",
       "english": {
-        "base": "able",
-        "prefixToBe": true,
-        "passive": "capable of"
+        "base": "capable",
+        "prefixToBe": true
       }
     }
   ],
