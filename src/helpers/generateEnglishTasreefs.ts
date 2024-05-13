@@ -328,31 +328,31 @@ const generateJazmMaroofTasreef = (verb: {
 }): VerbConjugations['مضارع']['معروف'] => ({
   '3rd': {
     masculine: {
-      هُوَ: ['was not', verb.base].join(' '),
-      هُمَا: ['were not', verb.base].join(' '),
-      هُمْ: ['were not', verb.base].join(' '),
+      هُوَ: ['did not', verb.base].join(' '),
+      هُمَا: ['did not', verb.base].join(' '),
+      هُمْ: ['did not', verb.base].join(' '),
     },
     feminine: {
-      هِيَ: ['was not', verb.base].join(' '),
-      هُمَا: ['were not', verb.base].join(' '),
-      هُنَّ: ['were not', verb.base].join(' '),
+      هِيَ: ['did not', verb.base].join(' '),
+      هُمَا: ['did not', verb.base].join(' '),
+      هُنَّ: ['did not', verb.base].join(' '),
     },
   },
   '2nd': {
     masculine: {
-      أَنْتَ: ['were not', verb.base].join(' '),
-      أَنْتُمَا: ['were not', verb.base].join(' '),
-      أَنْتُمْ: ['were not', verb.base].join(' '),
+      أَنْتَ: ['did not', verb.base].join(' '),
+      أَنْتُمَا: ['did not', verb.base].join(' '),
+      أَنْتُمْ: ['did not', verb.base].join(' '),
     },
     feminine: {
-      أَنْتِ: ['were not', verb.base].join(' '),
-      أَنْتُمَا: ['were not', verb.base].join(' '),
-      أَنْتُنَّ: ['were not', verb.base].join(' '),
+      أَنْتِ: ['did not', verb.base].join(' '),
+      أَنْتُمَا: ['did not', verb.base].join(' '),
+      أَنْتُنَّ: ['did not', verb.base].join(' '),
     },
   },
   '1st': {
-    أَنَا: ['was not', verb.base].join(' '),
-    نَحْنُ: ['were not', verb.base].join(' '),
+    أَنَا: ['did not', verb.base].join(' '),
+    نَحْنُ: ['did not', verb.base].join(' '),
   },
 })
 
