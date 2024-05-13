@@ -12,6 +12,7 @@ import Tabs from '../components/Tabs'
 import Tasreef from '../components/Tasreef'
 import Text from '../components/Text'
 import { VerbConjugations } from '../../data/types'
+import generateEnglishTasreefs from '../helpers/generateEnglishTasreefs'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
@@ -33,7 +34,7 @@ const TasreefScreen = () => {
   const activeTab = searchParams.get('activeTab') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
 
-  const { settings } = useAppState()
+  const { settings, showEnglish } = useAppState()
 
   const tabs = useMemo(() => {
     const $tabs = ['معروف']
@@ -77,6 +78,12 @@ const TasreefScreen = () => {
     }
   }, [params.type, params.form, params.chapter])
 
+  const english = useMemo(() => {
+    if (!baseChapter) return null
+    if (!showEnglish) return null
+    return generateEnglishTasreefs(baseChapter.root_letters[0].english)
+  }, [baseChapter, showEnglish])
+
   const chapter = useMemo(() => {
     const $chapter = baseChapter ? replaceRoots(baseChapter, rootLetters) : null
 
@@ -90,9 +97,10 @@ const TasreefScreen = () => {
   const madi = useMemo(() => {
     if (!chapter) return null
     if (verbCase !== 'مرفوع') return null
-    if (activeTab === 'مجهول') return chapter.conjugations.ماضي.مجهول
-    return chapter.conjugations.ماضي.معروف
-  }, [chapter, verbCase, activeTab])
+    if (activeTab === 'مجهول')
+      return (english || chapter.conjugations).ماضي.مجهول
+    return (english || chapter.conjugations).ماضي.معروف
+  }, [chapter, verbCase, activeTab, english])
 
   const mudari = useMemo(() => {
     if (!chapter) return null
@@ -110,24 +118,24 @@ const TasreefScreen = () => {
       particle = 'لم'
     }
 
-    if (!settings.showNasbJazmParticle) {
+    if (!settings.showNasbJazmParticle || english) {
       particle = ''
     }
 
-    const tasreef = chapter.conjugations[tense][voice]
+    const tasreef = (english || chapter.conjugations)[tense][voice]
 
     if (!tasreef) return null
 
     return { tasreef, particle }
-  }, [chapter, verbCase, activeTab, settings.showNasbJazmParticle])
+  }, [chapter, english, verbCase, activeTab, settings.showNasbJazmParticle])
 
   const amr = useMemo(() => {
     if (!settings.showAmr) return null
     if (activeTab !== 'معروف') return null
     if (verbCase !== 'مجزوم') return null
     if (!chapter) return null
-    return chapter.conjugations.أمر
-  }, [settings.showAmr, activeTab, verbCase, chapter])
+    return (english || chapter.conjugations).أمر
+  }, [settings.showAmr, activeTab, verbCase, chapter, english])
 
   const audioPath = useMemo(() => {
     let path = `/recordings/${baseChapter?.type}/${baseChapter?.form}`

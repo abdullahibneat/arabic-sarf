@@ -6,6 +6,7 @@ import { useCallback, useMemo } from 'preact/hooks'
 import Flex from '../components/Flex'
 import Text from '../components/Text'
 import { VerbTypeMap } from '../../data/types'
+import generateEnglishTasreefs from '../helpers/generateEnglishTasreefs'
 import getMazeedFihiChapterHeading from '../helpers/getMazeedFihiChapterHeading'
 import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
@@ -17,7 +18,7 @@ import verbTypes from '../../data'
 const OverviewScreen = () => {
   const params = useParams()
 
-  const { settings } = useAppState()
+  const { settings, showEnglish } = useAppState()
 
   const generateOverviewForVerbType = useCallback(
     (type: string, verbMap: VerbTypeMap) => {
@@ -60,35 +61,47 @@ const OverviewScreen = () => {
         if (isMujarrad(chapter)) {
           for (const archetype of Object.values(chapter)) {
             const chapter = replaceRoots(archetype!)
+            const english = generateEnglishTasreefs(
+              chapter.root_letters[0].english,
+            )
 
             mujarradMadi.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: chapter.conjugations.ماضي.معروف,
+              tasreef: (showEnglish ? english : chapter.conjugations).ماضي
+                .معروف,
             })
 
             mujarradMudari.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: chapter.conjugations.مضارع.معروف,
+              tasreef: (showEnglish ? english : chapter.conjugations).مضارع
+                .معروف,
             })
           }
         } else if (chapter) {
           const archetype = replaceRoots(chapter)
+          const english = generateEnglishTasreefs(
+            chapter.root_letters[0].english,
+          )
 
           mazeedFihiMadi.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: archetype.conjugations.ماضي.معروف,
+            tasreef: (showEnglish ? english : chapter.conjugations).ماضي.معروف,
           })
 
           mazeedFihiMudari.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: archetype.conjugations.مضارع.معروف,
+            tasreef: (showEnglish ? english : chapter.conjugations).مضارع.معروف,
           })
         }
       }
 
       return $sections
     },
-    [settings.mujarradChapterHeadings, settings.mazeedFihiChapterHeadings],
+    [
+      showEnglish,
+      settings.mujarradChapterHeadings,
+      settings.mazeedFihiChapterHeadings,
+    ],
   )
 
   const sections = useMemo(() => {

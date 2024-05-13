@@ -9,6 +9,7 @@ import {
   useSearchParams,
 } from 'react-router-dom'
 
+import AppState from '../AppState'
 import Flex from './Flex'
 import IconButton from './IconButton'
 import MenuItem from './MenuItem'
@@ -32,7 +33,7 @@ const Sidebar = () => {
 
   const { type, form, chapter } = useParams()
 
-  const { settings } = useAppState()
+  const { settings, showEnglish } = useAppState()
 
   const activeItemId = useMemo(() => {
     if (chapter) return `/${type}/${form}/${chapter}`
@@ -145,7 +146,17 @@ const Sidebar = () => {
       </div>
 
       <Flex class="footer" alignItems="stretch">
-        <Flex flex={1} />
+        <Flex flex={1} gap={8} alignItems="center" padding="0 1rem">
+          <input
+            id="showEnglish"
+            type="checkbox"
+            checked={showEnglish}
+            onChange={() => AppState.setItem('showEnglish', !showEnglish)}
+          />
+          <label for="showEnglish" style={{ userSelect: 'none' }}>
+            English
+          </label>
+        </Flex>
 
         <Flex
           justifyContent="center"

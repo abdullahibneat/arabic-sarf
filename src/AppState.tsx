@@ -10,6 +10,7 @@ export type AppStateType = {
   playbackSpeed: number
   playbackLoop: boolean
   theme: 'system' | 'light' | 'dark'
+  showEnglish: boolean
   settings: {
     hiddenVerbTypes: string[]
     mujarradChapterHeadings: 'arabic' | 'english' // [ن، ض، ف] / [1a, 1b, 1c]
@@ -33,6 +34,7 @@ const defaultState: AppStateType = {
   playbackSpeed: 1,
   playbackLoop: false,
   theme: 'system',
+  showEnglish: false,
   settings: {
     hiddenVerbTypes: [],
     mujarradChapterHeadings: 'arabic',

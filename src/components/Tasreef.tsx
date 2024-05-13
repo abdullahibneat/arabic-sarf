@@ -1,12 +1,13 @@
 import '../styles/Tasreef.scss'
 
+import { useCallback, useMemo } from 'preact/hooks'
+
 import { AppStateType } from '../AppState'
 import IconButton from './IconButton'
 import Text from './Text'
 import { VerbTasreef } from '../../data/types'
 import useAppState from '../hooks/useAppState'
 import useAudioPlayer from '../hooks/useAudioPlayer'
-import { useMemo } from 'preact/hooks'
 
 export type TasreefProps = {
   title: string
@@ -23,11 +24,27 @@ const Tasreef = ({
   audioSrc,
   groupMode,
 }: TasreefProps) => {
-  const { settings } = useAppState()
+  const { settings, showEnglish } = useAppState()
 
   const audioPlayer = useAudioPlayer()
 
   const prefix = useMemo(() => (particle ? particle + ' ' : ''), [particle])
+
+  const getPronoun = useCallback(
+    (pronoun: string) => {
+      if (!showEnglish) return ''
+
+      if (pronoun === 'هُوَ') return 'he '
+      if (pronoun === 'هِيَ') return 'she '
+      if (['هُمَا', 'هُمْ', 'هُنَّ'].includes(pronoun)) return 'he '
+
+      if (pronoun === 'أَنَا') return 'I '
+      if (pronoun === 'نَحْنُ') return 'we '
+
+      return 'you '
+    },
+    [showEnglish],
+  )
 
   const data = useMemo(() => {
     const persons = {
@@ -46,12 +63,17 @@ const Tasreef = ({
       if (Array.isArray(obj)) {
         const pronouns = obj
         return [
-          pronouns.map((pronoun) => String(tasreef?.[person]?.[pronoun] ?? '')),
+          pronouns.map(
+            (pronoun) =>
+              getPronoun(pronoun) + String(tasreef?.[person]?.[pronoun] ?? ''),
+          ),
         ]
       } else {
         return Object.entries(obj).map(([gender, pronouns]) =>
-          pronouns.map((pronoun) =>
-            String(tasreef?.[person]?.[gender]?.[pronoun] ?? ''),
+          pronouns.map(
+            (pronoun) =>
+              getPronoun(pronoun) +
+              String(tasreef?.[person]?.[gender]?.[pronoun] ?? ''),
           ),
         )
       }
