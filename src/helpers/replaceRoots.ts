@@ -3,7 +3,7 @@ import replace from './replace'
 
 const replaceRoots = (
   obj: VerbChapter,
-  rootLetters?: { ف?: string; ع?: string; ل?: string },
+  rootLetters?: { ف?: string; ع?: string; ل?: string } | null,
 ) => {
   if (!rootLetters)
     rootLetters = {
