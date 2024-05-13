@@ -154,14 +154,14 @@ const OverviewScreen = () => {
 
           mazeedFihiMadi.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: (showEnglish ? english : chapter.conjugations)[
+            tasreef: (showEnglish ? english : archetype.conjugations)[
               pastConjugation
             ]?.[activeTab],
           })
 
           mazeedFihiMudari.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: (showEnglish ? english : chapter.conjugations)[
+            tasreef: (showEnglish ? english : archetype.conjugations)[
               presentConjugation
             ]?.[activeTab],
           })
