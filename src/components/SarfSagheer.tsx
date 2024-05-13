@@ -4,11 +4,11 @@ import Text from './Text'
 import { VerbChapter } from '../../data/types'
 import { useMemo } from 'preact/hooks'
 
-type Props = {
+export type SarfSagheerProps = {
   chapter: VerbChapter
 }
 
-const SarfSagheer = ({ chapter }: Props) => {
+const SarfSagheer = ({ chapter }: SarfSagheerProps) => {
   const {
     archetype: { ماضي, مضارع, مصضر, فاعل, مفعول, أمر, نهي },
   } = chapter

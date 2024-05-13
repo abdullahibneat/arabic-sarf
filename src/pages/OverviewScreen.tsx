@@ -1,7 +1,9 @@
 import '../styles/OverviewScreen.scss'
 
+import SarfSagheer, { SarfSagheerProps } from '../components/SarfSagheer'
 import Tasreef, { TasreefProps } from '../components/Tasreef'
 import { useCallback, useMemo } from 'preact/hooks'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 import Flex from '../components/Flex'
 import Text from '../components/Text'
@@ -12,19 +14,82 @@ import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
-import { useParams } from 'react-router-dom'
 import verbTypes from '../../data'
 
 const OverviewScreen = () => {
   const params = useParams()
 
+  const [searchParams] = useSearchParams()
+
   const { settings, showEnglish } = useAppState()
 
-  const generateOverviewForVerbType = useCallback(
+  const activeTab = searchParams.get('activeTab') || 'معروف'
+  const verbCase = searchParams.get('verbCase') || 'مرفوع'
+
+  const pastConjugation = useMemo(() => {
+    if (verbCase === 'مرفوع') return 'ماضي'
+    return verbCase
+  }, [verbCase])
+
+  const presentConjugation = useMemo(() => {
+    if (verbCase === 'منصوب') return 'نصب'
+    if (verbCase === 'مجزوم') return 'جزم'
+    return 'مضارع'
+  }, [verbCase])
+
+  const particle = useMemo(() => {
+    if (settings.showNasbJazmParticle) {
+      if (verbCase === 'منصوب') return 'لن'
+      if (verbCase === 'مجزوم') return 'لم'
+    }
+  }, [settings.showNasbJazmParticle, verbCase])
+
+  const generateSarfSagheerOverviewForVerbType = useCallback(
+    (type: string, verbMap: VerbTypeMap) => {
+      const $sections: Array<{
+        title: string
+        sarfSagheers: SarfSagheerProps[]
+      }> = [
+        {
+          title: `${type} / ${
+            settings.mujarradChapterHeadings === 'arabic' ? `مجرّد` : ''
+          }`,
+          sarfSagheers: [],
+        },
+        {
+          title: `${type} / ${
+            settings.mujarradChapterHeadings === 'arabic' ? `مزيد فيه` : ''
+          }`,
+          sarfSagheers: [],
+        },
+      ]
+
+      const mujarrad = $sections[0]
+      const mazeedFihi = $sections[1]
+
+      for (const chapter of Object.values(verbMap)) {
+        if (isMujarrad(chapter)) {
+          for (const archetype of Object.values(chapter)) {
+            const chapter = replaceRoots(archetype!)
+            mujarrad.sarfSagheers.push({ chapter })
+          }
+        } else if (chapter) {
+          const archetype = replaceRoots(chapter)
+          mazeedFihi.sarfSagheers.push({ chapter: archetype })
+        }
+      }
+
+      return $sections
+    },
+    [settings.mujarradChapterHeadings],
+  )
+
+  const generateTasreefOverviewForVerbType = useCallback(
     (type: string, verbMap: VerbTypeMap) => {
       const $sections: Array<{
         title: string
         tasreefs: TasreefProps[]
+        particle?: string
       }> = [
         {
           title: `${type} / ${
@@ -37,6 +102,7 @@ const OverviewScreen = () => {
             settings.mujarradChapterHeadings === 'arabic' ? `مجرّد / ` : ''
           }مضارع`,
           tasreefs: [],
+          particle,
         },
         {
           title: `${type} / ${
@@ -49,6 +115,7 @@ const OverviewScreen = () => {
             settings.mujarradChapterHeadings === 'arabic' ? `مزيد فيه / ` : ''
           }مضارع`,
           tasreefs: [],
+          particle,
         },
       ]
 
@@ -67,14 +134,16 @@ const OverviewScreen = () => {
 
             mujarradMadi.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: (showEnglish ? english : chapter.conjugations).ماضي
-                .معروف,
+              tasreef: (showEnglish ? english : chapter.conjugations)[
+                pastConjugation
+              ]?.[activeTab],
             })
 
             mujarradMudari.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: (showEnglish ? english : chapter.conjugations).مضارع
-                .معروف,
+              tasreef: (showEnglish ? english : chapter.conjugations)[
+                presentConjugation
+              ]?.[activeTab],
             })
           }
         } else if (chapter) {
@@ -85,12 +154,16 @@ const OverviewScreen = () => {
 
           mazeedFihiMadi.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: (showEnglish ? english : chapter.conjugations).ماضي.معروف,
+            tasreef: (showEnglish ? english : chapter.conjugations)[
+              pastConjugation
+            ]?.[activeTab],
           })
 
           mazeedFihiMudari.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: (showEnglish ? english : chapter.conjugations).مضارع.معروف,
+            tasreef: (showEnglish ? english : chapter.conjugations)[
+              presentConjugation
+            ]?.[activeTab],
           })
         }
       }
@@ -101,10 +174,14 @@ const OverviewScreen = () => {
       showEnglish,
       settings.mujarradChapterHeadings,
       settings.mazeedFihiChapterHeadings,
+      activeTab,
+      pastConjugation,
+      presentConjugation,
+      particle,
     ],
   )
 
-  const sections = useMemo(() => {
+  const tasreefSections = useMemo(() => {
     const $verbTypes: Record<string, VerbTypeMap[]> = {}
 
     if (params.type) {
@@ -125,10 +202,49 @@ const OverviewScreen = () => {
 
     return Object.entries($verbTypes).flatMap(([type, verbMap]) =>
       verbMap.flatMap((verbType) =>
-        generateOverviewForVerbType(type, verbType),
+        generateTasreefOverviewForVerbType(type, verbType),
       ),
     )
-  }, [params.type, settings.hiddenVerbTypes, generateOverviewForVerbType])
+  }, [
+    params.type,
+    settings.hiddenVerbTypes,
+    generateTasreefOverviewForVerbType,
+  ])
+
+  const sarfSagheerSections = useMemo(() => {
+    const $verbTypes: Record<string, VerbTypeMap[]> = {}
+
+    if (params.type) {
+      const verbType = verbTypes[params.type]
+
+      if (verbType) {
+        $verbTypes[params.type] = [verbType]
+      }
+    } else {
+      for (const verbTypeKey of Object.keys(verbTypes)) {
+        if (settings.hiddenVerbTypes.includes(verbTypeKey)) {
+          continue
+        }
+
+        $verbTypes[verbTypeKey] = [verbTypes[verbTypeKey]!]
+      }
+    }
+
+    return Object.entries($verbTypes).flatMap(([type, verbMap]) =>
+      verbMap.flatMap((verbType) =>
+        generateSarfSagheerOverviewForVerbType(type, verbType),
+      ),
+    )
+  }, [
+    params.type,
+    settings.hiddenVerbTypes,
+    generateTasreefOverviewForVerbType,
+  ])
+
+  const sections = useMemo(() => {
+    if (activeTab === 'صرف صغير') return sarfSagheerSections
+    return tasreefSections
+  }, [activeTab, sarfSagheerSections, tasreefSections])
 
   return (
     <Flex column padding="16px 0 32px">
@@ -139,15 +255,30 @@ const OverviewScreen = () => {
           </Text>
 
           <Flex justifyContent="center">
-            <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
-              {section.tasreefs.map((tasreef, j) => (
-                <Tasreef
-                  key={`section-${i}-tasreef-${j}`}
-                  title={tasreef.title}
-                  tasreef={tasreef.tasreef}
-                  groupMode="list"
-                />
-              ))}
+            <Flex
+              column={'sarfSagheers' in section}
+              gap={32}
+              padding="0 64px"
+              overflowX="auto"
+              direction="rtl"
+            >
+              {'tasreefs' in section &&
+                section.tasreefs.map((tasreef, j) => (
+                  <Tasreef
+                    key={`section-${i}-tasreef-${j}`}
+                    title={tasreef.title}
+                    tasreef={tasreef.tasreef}
+                    particle={section.particle}
+                    groupMode="list"
+                  />
+                ))}
+              {'sarfSagheers' in section &&
+                section.sarfSagheers.map((sarfSagheer, j) => (
+                  <SarfSagheer
+                    key={`section-${i}-tasreef-${j}`}
+                    chapter={sarfSagheer.chapter}
+                  />
+                ))}
             </Flex>
           </Flex>
         </div>

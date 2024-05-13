@@ -8,7 +8,7 @@
     padding-top: 0;
   }
 
-  &:not(:first-of-type):nth-child(2n + 1) {
+  & + & {
     border-top: solid 1px var(--border);
   }
 }
