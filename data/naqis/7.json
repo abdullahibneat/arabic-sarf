@@ -6,21 +6,11 @@
   "root_letters": [
     {
       "arabic": "جلو",
-      "english": {
-        "base": "become",
-        "past": "became",
-        "passive": "made to become",
-        "specifically": "clear"
-      }
+      "english": "reveal"
     },
     {
       "arabic": "حنو",
-      "english": {
-        "base": "become",
-        "past": "became",
-        "passive": "made to become",
-        "specifically": "clear"
-      }
+      "english": "curve"
     }
   ],
   "archetype": {

@@ -15,16 +15,14 @@
       "arabic": "قسن",
       "english": {
         "base": "divided",
-        "prefixToBe": true,
-        "passive": "made to be divided"
+        "prefixToBe": true
       }
     },
     {
       "arabic": "كشف",
       "english": {
         "base": "revealed",
-        "prefixToBe": true,
-        "passive": "made to be revealed"
+        "prefixToBe": true
       }
     }
   ],
