@@ -265,11 +265,7 @@ const SettingsModal = () => {
 
       <Flex column gap={4}>
         <Text>Arabic Font</Text>
-        <select
-          class="dropdown"
-          value={arabicFont}
-          onChange={onArabicFontChange}
-        >
+        <select value={arabicFont} onChange={onArabicFontChange}>
           {arabicFonts.map((arabicFont) => (
             <option key={arabicFont} value={arabicFont}>
               {arabicFont}
@@ -280,7 +276,7 @@ const SettingsModal = () => {
 
       <Flex column gap={4}>
         <Text>Presets</Text>
-        <select class="dropdown" value={preset} onChange={onPresetChange}>
+        <select value={preset} onChange={onPresetChange}>
           {presetNames.map((preset) => (
             <option key={preset} value={preset}>
               {preset}

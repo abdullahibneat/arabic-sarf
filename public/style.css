@@ -65,6 +65,22 @@ input[type='checkbox'] {
   accent-color: var(--border);
 }
 
+select {
+  height: 2.25rem;
+  color: var(--text);
+  padding: 0 8px;
+  border: solid 1px var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 250ms;
+  background-color: var(--hover);
+
+  &:focus {
+    border-color: var(--text);
+  }
+}
+
 p,
 h1,
 h2,
