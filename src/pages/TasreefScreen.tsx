@@ -11,27 +11,32 @@ import { useMemo } from 'preact/hooks'
 import { useSearchParams } from 'react-router-dom'
 
 const TasreefScreen = () => {
-  const { chapter } = useChapterStateContext()
+  const { chapter, englishVerb } = useChapterStateContext()
 
   const [searchParams] = useSearchParams()
 
   const activeTab = searchParams.get('activeTab') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
 
-  const { settings, showEnglish } = useAppState()
+  const { settings } = useAppState()
 
   const english = useMemo(() => {
-    if (!chapter) return null
-    if (!showEnglish) return null
-    return generateEnglishTasreefs(chapter.root_letters[0].english)
-  }, [chapter, showEnglish])
+    if (!englishVerb) return null
+    return generateEnglishTasreefs(englishVerb)
+  }, [englishVerb])
 
   const madi = useMemo(() => {
     if (!chapter) return null
     if (verbCase !== 'مرفوع') return null
     if (activeTab === 'مجهول')
-      return (english || chapter.conjugations).ماضي.مجهول
-    return (english || chapter.conjugations).ماضي.معروف
+      return {
+        arabic: chapter.conjugations.ماضي.مجهول,
+        english: english?.ماضي.مجهول,
+      }
+    return {
+      arabic: chapter.conjugations.ماضي.معروف,
+      english: english?.ماضي.معروف,
+    }
   }, [chapter, verbCase, activeTab, english])
 
   const mudari = useMemo(() => {
@@ -50,15 +55,18 @@ const TasreefScreen = () => {
       particle = 'لم'
     }
 
-    if (!settings.showNasbJazmParticle || english) {
+    if (!settings.showNasbJazmParticle) {
       particle = ''
     }
 
-    const tasreef = (english || chapter.conjugations)[tense][voice]
+    const tasreef = chapter.conjugations[tense][voice]
 
     if (!tasreef) return null
 
-    return { tasreef, particle }
+    return {
+      particle,
+      tasreef: { arabic: tasreef, english: english?.[tense][voice] },
+    }
   }, [chapter, english, verbCase, activeTab, settings.showNasbJazmParticle])
 
   const amr = useMemo(() => {
@@ -66,7 +74,7 @@ const TasreefScreen = () => {
     if (activeTab !== 'معروف') return null
     if (verbCase !== 'مجزوم') return null
     if (!chapter) return null
-    return (english || chapter.conjugations).أمر
+    return { arabic: chapter.conjugations.أمر, english: english?.أمر }
   }, [settings.showAmr, activeTab, verbCase, chapter, english])
 
   const audioPath = useMemo(() => {
@@ -100,21 +108,24 @@ const TasreefScreen = () => {
             <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
               <Tasreef
                 title="ماضي"
-                tasreef={madi}
+                tasreef={madi?.arabic}
+                englishTasreef={madi?.english}
                 audioSrc={audioPath + '/ماضي.mp3'}
               />
 
               <Tasreef
                 title="مضارع"
-                tasreef={mudari?.tasreef || null}
                 particle={mudari?.particle}
+                tasreef={mudari?.tasreef.arabic || null}
+                englishTasreef={mudari?.tasreef.english || null}
                 audioSrc={audioPath + '/مضارع.mp3'}
               />
 
               {amr && (
                 <Tasreef
                   title="أمر"
-                  tasreef={amr}
+                  tasreef={amr.arabic}
+                  englishTasreef={amr.english}
                   audioSrc={audioPath + '/أمر.mp3'}
                 />
               )}

@@ -1,17 +1,18 @@
 import '../styles/Tasreef.scss'
 
-import { useCallback, useMemo } from 'preact/hooks'
-
 import { AppStateType } from '../AppState'
 import IconButton from './IconButton'
 import Text from './Text'
 import { VerbTasreef } from '../../data/types'
+import asEnglishPronoun from '../helpers/asEnglishPronoun'
 import useAppState from '../hooks/useAppState'
 import useAudioPlayer from '../hooks/useAudioPlayer'
+import { useMemo } from 'preact/hooks'
 
 export type TasreefProps = {
   title: string
   tasreef?: VerbTasreef | { '2nd': VerbTasreef['2nd'] } | null
+  englishTasreef?: VerbTasreef | { '2nd': VerbTasreef['2nd'] } | null
   particle?: string
   audioSrc?: string
   groupMode?: AppStateType['settings']['tasreefGroupMode']
@@ -20,6 +21,7 @@ export type TasreefProps = {
 const Tasreef = ({
   title,
   tasreef,
+  englishTasreef,
   particle,
   audioSrc,
   groupMode,
@@ -28,23 +30,11 @@ const Tasreef = ({
 
   const audioPlayer = useAudioPlayer()
 
-  const prefix = useMemo(() => (particle ? particle + ' ' : ''), [particle])
-
-  const getPronoun = useCallback(
-    (pronoun: string) => {
-      if (!showEnglish) return ''
-
-      if (pronoun === 'هُوَ') return 'he '
-      if (pronoun === 'هِيَ') return 'she '
-      if (['هُمَا', 'هُمْ', 'هُنَّ'].includes(pronoun)) return 'he '
-
-      if (pronoun === 'أَنَا') return 'I '
-      if (pronoun === 'نَحْنُ') return 'we '
-
-      return 'you '
-    },
-    [showEnglish],
-  )
+  const prefix = useMemo(() => {
+    if (showEnglish) return ''
+    if (!particle) return ''
+    return particle + ' '
+  }, [showEnglish, particle])
 
   const data = useMemo(() => {
     const persons = {
@@ -59,28 +49,39 @@ const Tasreef = ({
       '1st': ['أَنَا', 'نَحْنُ'],
     }
 
+    let seeghaNumber = 0
+
     return Object.entries(persons).map(([person, obj]) => {
       if (Array.isArray(obj)) {
         const pronouns = obj
         return [
-          pronouns.map(
-            (pronoun) =>
-              getPronoun(pronoun) + String(tasreef?.[person]?.[pronoun] ?? ''),
-          ),
+          pronouns.map((pronoun) => ({
+            pronoun,
+            seegha: String(tasreef?.[person]?.[pronoun] ?? ''),
+            english: englishTasreef
+              ? asEnglishPronoun(pronoun) +
+                ' ' +
+                String(englishTasreef?.[person]?.[pronoun])
+              : '',
+            seeghaNumber: ++seeghaNumber,
+          })),
         ]
       } else {
         return Object.entries(obj).map(([gender, pronouns]) =>
-          pronouns.map(
-            (pronoun) =>
-              getPronoun(pronoun) +
-              String(tasreef?.[person]?.[gender]?.[pronoun] ?? ''),
-          ),
+          pronouns.map((pronoun) => ({
+            pronoun,
+            seegha: String(tasreef?.[person]?.[gender]?.[pronoun] ?? ''),
+            english: englishTasreef
+              ? asEnglishPronoun(pronoun) +
+                ' ' +
+                String(englishTasreef?.[person]?.[gender]?.[pronoun])
+              : '',
+            seeghaNumber: ++seeghaNumber,
+          })),
         )
       }
     })
-  }, [tasreef])
-
-  let seeghaNumber = 0
+  }, [tasreef, englishTasreef])
 
   return (
     <div class={`tasreef ${groupMode || settings.tasreefGroupMode}`}>
@@ -111,15 +112,15 @@ const Tasreef = ({
             <div class="person" key={String(i)}>
               {person.map((gender, j) => (
                 <div class="gender" key={String(j)}>
-                  {gender.map((seegha, k) => (
-                    <div class="cell" key={String(k)}>
+                  {gender.map(({ seegha, english, seeghaNumber }, k) => (
+                    <div class="cell" key={String(k)} title={english}>
                       <div class="seegha">
                         <p>
                           {prefix && <span>{prefix}</span>}
-                          {seegha}
+                          {showEnglish ? english : seegha}
                         </p>
                       </div>
-                      <div class="seegha-number">{++seeghaNumber}</div>
+                      <div class="seegha-number">{seeghaNumber}</div>
                     </div>
                   ))}
                 </div>

@@ -134,16 +134,14 @@ const OverviewScreen = () => {
 
             mujarradMadi.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: (showEnglish ? english : chapter.conjugations)[
-                pastConjugation
-              ]?.[activeTab],
+              tasreef: chapter.conjugations[pastConjugation]?.[activeTab],
+              englishTasreef: english[pastConjugation]?.[activeTab],
             })
 
             mujarradMudari.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: (showEnglish ? english : chapter.conjugations)[
-                presentConjugation
-              ]?.[activeTab],
+              tasreef: chapter.conjugations[presentConjugation]?.[activeTab],
+              englishTasreef: english[presentConjugation]?.[activeTab],
             })
           }
         } else if (chapter) {
@@ -154,16 +152,14 @@ const OverviewScreen = () => {
 
           mazeedFihiMadi.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: (showEnglish ? english : archetype.conjugations)[
-              pastConjugation
-            ]?.[activeTab],
+            tasreef: archetype.conjugations[pastConjugation]?.[activeTab],
+            englishTasreef: english[pastConjugation]?.[activeTab],
           })
 
           mazeedFihiMudari.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: (showEnglish ? english : archetype.conjugations)[
-              presentConjugation
-            ]?.[activeTab],
+            tasreef: archetype.conjugations[presentConjugation]?.[activeTab],
+            englishTasreef: english[presentConjugation]?.[activeTab],
           })
         }
       }
@@ -268,6 +264,7 @@ const OverviewScreen = () => {
                     key={`section-${i}-tasreef-${j}`}
                     title={tasreef.title}
                     tasreef={tasreef.tasreef}
+                    englishTasreef={tasreef.englishTasreef}
                     particle={section.particle}
                     groupMode="list"
                   />
