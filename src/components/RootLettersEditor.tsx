@@ -1,10 +1,10 @@
 import '../styles/RootLettersEditor.scss'
 
-import { useCallback, useRef, useState } from 'preact/hooks'
+import { useCallback, useRef } from 'preact/hooks'
 
 import { JSX } from 'preact'
 
-export type RootLetters = { ف: string; ع: string; ل: string }
+export type RootLetters = { ف?: string; ع?: string; ل?: string }
 
 type Props = {
   rootLetters?: RootLetters
@@ -21,8 +21,6 @@ const RootLettersEditor = ({
   naqis,
   onChange,
 }: Props) => {
-  const [value, setValue] = useState(rootLetters)
-
   const inputsContainer = useRef<HTMLDivElement>(null)
 
   const handleFocus = useCallback(
@@ -84,11 +82,7 @@ const RootLettersEditor = ({
             return
           }
 
-          setValue((value) => {
-            const newValue = { ...value, [rootLetter]: event.data }
-            onChange?.(newValue)
-            return newValue
-          })
+          onChange?.({ ...rootLetters, [rootLetter]: event.data })
 
           nextIndex = currentIndex + 1
 
@@ -106,14 +100,14 @@ const RootLettersEditor = ({
           }
         }
       },
-    [onChange],
+    [onChange, rootLetters],
   )
 
   return (
     <div class="root-letters-editor" ref={inputsContainer}>
       <input
         id="input-ف"
-        value={mithaal ? 'و/ي' : value['ف']}
+        value={mithaal ? 'و/ي' : rootLetters['ف']}
         placeholder="ف"
         maxLength={1}
         disabled={mithaal}
@@ -123,7 +117,7 @@ const RootLettersEditor = ({
       />
       <input
         id="input-ع"
-        value={ajwaf ? 'و/ي' : value['ع']}
+        value={ajwaf ? 'و/ي' : rootLetters['ع']}
         placeholder="ع"
         maxLength={1}
         disabled={ajwaf}
@@ -133,7 +127,7 @@ const RootLettersEditor = ({
       />
       <input
         id="input-ل"
-        value={naqis ? 'و/ي' : value['ل']}
+        value={naqis ? 'و/ي' : rootLetters['ل']}
         placeholder="ل"
         maxLength={1}
         disabled={naqis}

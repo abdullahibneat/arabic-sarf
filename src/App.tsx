@@ -3,10 +3,11 @@ import {
   AudioPlayerContextType,
 } from './contexts/AudioPlayerContext'
 import { ModalContext, ModalProps } from './contexts/ModalContext'
-import { useCallback, useMemo, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
 import AudioPlayer from './components/AudioPlayer'
 import { ChapterStateContext } from './contexts/ChapterStateContext'
+import { EnglishVerb } from '../data/types'
 import IconButton from './components/IconButton'
 import { Outlet } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
@@ -23,30 +24,50 @@ const App = () => {
     close: () => null,
     setSrc: async () => {},
   })
+  const [persistRootLetters, setPersistRootLetters] = useState(false)
+  const [englishVerb, setEnglishVerb] = useState<EnglishVerb | null>(null)
   const [customRootLetters, setCustomRootLetters] = useState<{
     ف?: string
     ع?: string
     ل?: string
   } | null>(null)
 
-  const baseChapter = useRouteChapter()
+  const chapter = useRouteChapter()
 
-  const chapter = useMemo(() => {
-    if (baseChapter) return replaceRoots(baseChapter, customRootLetters)
-    return null
-  }, [baseChapter, customRootLetters])
+  useEffect(() => {
+    if (!chapter) return
+    if (persistRootLetters) return
+    const { arabic, english } = chapter.root_letters[0]
+    setCustomRootLetters({ ف: arabic[0], ع: arabic[1], ل: arabic[2] })
+    setEnglishVerb(english)
+  }, [chapter, persistRootLetters])
 
   const closeModal = useCallback(() => setModal(null), [])
+
+  const handleSetCustomRootLetters = useCallback(
+    (
+      rootLetters: { ف?: string; ع?: string; ل?: string } | null,
+      englishVerb: EnglishVerb | null = null,
+    ) => {
+      setCustomRootLetters(rootLetters)
+      setEnglishVerb(englishVerb)
+    },
+    [],
+  )
 
   return (
     <ModalContext.Provider value={{ open: setModal, close: closeModal }}>
       <AudioPlayerContext.Provider value={audioPlayer}>
         <ChapterStateContext.Provider
           value={{
-            baseChapter,
-            chapter,
+            baseChapter: chapter,
+            chapter: chapter ? replaceRoots(chapter, customRootLetters) : null,
+            englishVerb,
             customRootLetters,
-            setCustomRootLetters,
+            persistRootLetters,
+            setCustomRootLetters: handleSetCustomRootLetters,
+            togglePersistRootLetters: () =>
+              setPersistRootLetters(!persistRootLetters),
           }}
         >
           <div class="screen-wrapper">

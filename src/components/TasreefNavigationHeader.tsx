@@ -1,9 +1,10 @@
 import '../styles/TasreefNavigationHeader.scss'
 
-import { useEffect, useMemo } from 'preact/hooks'
+import { useCallback, useEffect, useMemo } from 'preact/hooks'
 
 import Flex from './Flex'
 import IconButton from './IconButton'
+import { JSX } from 'preact/jsx-runtime'
 import Popover from './Popover'
 import RootLettersEditor from './RootLettersEditor'
 import Segmented from './Segmented'
@@ -16,8 +17,13 @@ import { useSearchParams } from 'react-router-dom'
 const TasreefNavigationHeader = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const { chapter, customRootLetters, setCustomRootLetters } =
-    useChapterStateContext()
+  const {
+    chapter,
+    customRootLetters,
+    persistRootLetters,
+    setCustomRootLetters,
+    togglePersistRootLetters,
+  } = useChapterStateContext()
 
   const { settings } = useAppState()
 
@@ -55,6 +61,22 @@ const TasreefNavigationHeader = () => {
     return $verbCases.reverse()
   }, [settings.showNasb, settings.showJazm])
 
+  const onSelectRootLetters = useCallback(
+    (event: JSX.TargetedEvent<HTMLSelectElement>) => {
+      if (event.target instanceof HTMLSelectElement) {
+        const arabic = event.target.value
+        const rootLetters = chapter?.root_letters.find(
+          ($rootLetters) => $rootLetters.arabic === arabic,
+        )
+        setCustomRootLetters(
+          { ف: arabic[0], ع: arabic[1], ل: arabic[2] },
+          rootLetters?.english,
+        )
+      }
+    },
+    [chapter],
+  )
+
   return (
     <Flex column gap={16} paddingBottom={16}>
       <Flex column gap={16} paddingTop={16} backgroundColor="var(--white)">
@@ -67,18 +89,33 @@ const TasreefNavigationHeader = () => {
                 <div class="collapse-icon">
                   <Popover
                     content={
-                      <Flex column gap={8} alignItems="center">
+                      <Flex column gap={8} alignItems="center" width={200}>
                         <RootLettersEditor
-                          rootLetters={{
-                            ف: chapter.root_letters[0].arabic[0],
-                            ع: chapter.root_letters[0].arabic[1],
-                            ل: chapter.root_letters[0].arabic[2],
-                          }}
+                          rootLetters={customRootLetters || undefined}
                           mithaal={chapter.type === 'مثال'}
                           ajwaf={chapter.type === 'أجوف'}
                           naqis={chapter.type === 'ناقص'}
                           onChange={setCustomRootLetters}
                         />
+
+                        {chapter.root_letters.length > 0 && (
+                          <Flex column alignSelf="stretch">
+                            <label for="preset-root-letters">Presets</label>
+                            <select
+                              id="preset-root-letters"
+                              onChange={onSelectRootLetters}
+                            >
+                              {chapter.root_letters.map(
+                                ({ arabic, english }) => (
+                                  <option key={arabic} value={arabic}>
+                                    {arabic}
+                                  </option>
+                                ),
+                              )}
+                            </select>
+                          </Flex>
+                        )}
+
                         {customRootLetters && (
                           <div
                             class="reset-root-letters"
@@ -87,6 +124,21 @@ const TasreefNavigationHeader = () => {
                             <Text type="small">Reset</Text>
                           </div>
                         )}
+
+                        <Flex gap={8} alignItems="center">
+                          <input
+                            id="persistRootLetters"
+                            type="checkbox"
+                            checked={persistRootLetters}
+                            onChange={togglePersistRootLetters}
+                          />
+                          <label
+                            for="persistRootLetters"
+                            style={{ userSelect: 'none' }}
+                          >
+                            Remember root letters
+                          </label>
+                        </Flex>
                       </Flex>
                     }
                   >
