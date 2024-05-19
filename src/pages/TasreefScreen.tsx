@@ -11,11 +11,12 @@ import { useMemo } from 'preact/hooks'
 import { useSearchParams } from 'react-router-dom'
 
 const TasreefScreen = () => {
-  const { chapter, englishVerb, rootLetters } = useChapterStateContext()
+  const { chapter, englishVerb, rootLetters, baseChapter } =
+    useChapterStateContext()
 
   const [searchParams] = useSearchParams()
 
-  const activeTab = searchParams.get('activeTab') || 'معروف'
+  const voice = searchParams.get('voice') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
 
   const { settings } = useAppState()
@@ -28,22 +29,24 @@ const TasreefScreen = () => {
   const madi = useMemo(() => {
     if (!chapter) return null
     if (verbCase !== 'مرفوع') return null
-    if (activeTab === 'مجهول')
+    if (voice === 'مجهول')
       return {
+        base: baseChapter?.conjugations.ماضي.مجهول,
         arabic: chapter.conjugations.ماضي.مجهول,
         english: english?.ماضي.مجهول,
       }
     return {
+      base: baseChapter?.conjugations.ماضي.معروف,
       arabic: chapter.conjugations.ماضي.معروف,
       english: english?.ماضي.معروف,
     }
-  }, [chapter, verbCase, activeTab, english])
+  }, [chapter, baseChapter, verbCase, voice, english])
 
   const mudari = useMemo(() => {
     if (!chapter) return null
 
     let tense: keyof VerbConjugations = 'مضارع'
-    const voice = activeTab === 'مجهول' ? 'مجهول' : 'معروف'
+    const $voice = voice === 'مجهول' ? 'مجهول' : 'معروف'
     let particle = ''
 
     if (verbCase === 'منصوب') {
@@ -59,29 +62,38 @@ const TasreefScreen = () => {
       particle = ''
     }
 
-    const tasreef = chapter.conjugations[tense][voice]
+    const tasreef = chapter.conjugations[tense][$voice]
 
     if (!tasreef) return null
 
     return {
       particle,
-      tasreef: { arabic: tasreef, english: english?.[tense][voice] },
+      tasreef: {
+        base: baseChapter?.conjugations[tense][$voice],
+        arabic: tasreef,
+        english: english?.[tense][voice],
+      },
     }
-  }, [chapter, english, verbCase, activeTab, settings.showNasbJazmParticle])
-
-  const mudariBinya = useMemo(() => {
-    if (verbCase === 'منصوب') return 'نصب'
-    if (verbCase === 'مجزوم') return 'جزم'
-    return 'مضارع'
-  }, [verbCase])
+  }, [
+    chapter,
+    baseChapter,
+    english,
+    verbCase,
+    voice,
+    settings.showNasbJazmParticle,
+  ])
 
   const amr = useMemo(() => {
     if (!settings.showAmr) return null
-    if (activeTab !== 'معروف') return null
+    if (voice !== 'معروف') return null
     if (verbCase !== 'مجزوم') return null
     if (!chapter) return null
-    return { arabic: chapter.conjugations.أمر, english: english?.أمر }
-  }, [settings.showAmr, activeTab, verbCase, chapter, english])
+    return {
+      base: baseChapter?.conjugations.أمر,
+      arabic: chapter.conjugations.أمر,
+      english: english?.أمر,
+    }
+  }, [settings.showAmr, voice, verbCase, chapter, baseChapter, english])
 
   const audioPath = useMemo(() => {
     let path = `/recordings/${chapter?.type}/${chapter?.form}`
@@ -94,16 +106,16 @@ const TasreefScreen = () => {
   }, [chapter])
 
   const showVerbTasreefs = useMemo(
-    () => activeTab === 'معروف' || activeTab === 'مجهول',
-    [activeTab],
+    () => voice === 'معروف' || voice === 'مجهول',
+    [voice],
   )
 
-  if (!chapter) return <div>Not found</div>
+  if (!chapter || !baseChapter) return <div>Not found</div>
 
   return (
     <Flex flex={1} column gap={16}>
       <Flex column gap={16} justifyContent="center">
-        {activeTab === 'صرف صغير' && (
+        {voice === 'صرف صغير' && (
           <Flex column padding="0 1rem" alignItems="center">
             <SarfSagheer chapter={chapter} />
           </Flex>
@@ -122,10 +134,12 @@ const TasreefScreen = () => {
                 tasreef={madi?.arabic}
                 englishTasreef={madi?.english}
                 audioSrc={audioPath + '/ماضي.mp3'}
-                type={chapter.type}
-                form={chapter.form}
                 rootLetters={rootLetters}
-                binya="ماضي"
+                tense="ماضي"
+                baseTasreef={madi?.base}
+                baseChapter={baseChapter}
+                case={verbCase}
+                voice={voice}
               />
 
               <Tasreef
@@ -134,10 +148,12 @@ const TasreefScreen = () => {
                 tasreef={mudari?.tasreef.arabic || null}
                 englishTasreef={mudari?.tasreef.english || null}
                 audioSrc={audioPath + '/مضارع.mp3'}
-                type={chapter.type}
-                form={chapter.form}
                 rootLetters={rootLetters}
-                binya={mudariBinya}
+                tense="مضارع"
+                baseTasreef={mudari?.tasreef.base}
+                baseChapter={baseChapter}
+                case={verbCase}
+                voice={voice}
               />
 
               {amr && (
@@ -146,10 +162,12 @@ const TasreefScreen = () => {
                   tasreef={amr.arabic}
                   englishTasreef={amr.english}
                   audioSrc={audioPath + '/أمر.mp3'}
-                  type={chapter.type}
-                  form={chapter.form}
                   rootLetters={rootLetters}
-                  binya="أمر"
+                  tense="أمر"
+                  baseTasreef={amr.base}
+                  baseChapter={baseChapter}
+                  case={verbCase}
+                  voice={voice}
                 />
               )}
             </Flex>

@@ -27,7 +27,7 @@ const TasreefNavigationHeader = () => {
 
   const { settings } = useAppState()
 
-  const activeTab = searchParams.get('activeTab') || 'معروف'
+  const voice = searchParams.get('voice') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
 
   useEffect(() => {
@@ -39,8 +39,8 @@ const TasreefNavigationHeader = () => {
   }, [chapter])
 
   const showVerbTasreefs = useMemo(
-    () => activeTab === 'معروف' || activeTab === 'مجهول',
-    [activeTab],
+    () => voice === 'معروف' || voice === 'مجهول',
+    [voice],
   )
 
   const tabs = useMemo(() => {
@@ -159,9 +159,9 @@ const TasreefNavigationHeader = () => {
         {tabs.length > 1 && (
           <Tabs
             tabs={tabs}
-            activeTab={activeTab}
-            onTabClick={(activeTab) => {
-              searchParams.set('activeTab', activeTab)
+            activeTab={voice}
+            onTabClick={(voice) => {
+              searchParams.set('voice', voice)
               setSearchParams(searchParams)
             }}
           />

@@ -23,7 +23,7 @@ const OverviewScreen = () => {
 
   const { settings } = useAppState()
 
-  const activeTab = searchParams.get('activeTab') || 'معروف'
+  const voice = searchParams.get('voice') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
 
   const pastConjugation = useMemo(() => {
@@ -134,22 +134,24 @@ const OverviewScreen = () => {
 
             mujarradMadi.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: chapter.conjugations[pastConjugation]?.[activeTab],
-              englishTasreef: english[pastConjugation]?.[activeTab],
-              type: chapter.type,
-              form: chapter.form,
+              tasreef: chapter.conjugations[pastConjugation]?.[voice],
+              englishTasreef: english[pastConjugation]?.[voice],
               rootLetters: chapter.root_letters[0].arabic,
-              binya: 'ماضي',
+              tense: 'ماضي',
+              baseChapter: archetype!,
+              case: verbCase,
+              voice,
             })
 
             mujarradMudari.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: chapter.conjugations[presentConjugation]?.[activeTab],
-              englishTasreef: english[presentConjugation]?.[activeTab],
-              type: chapter.type,
-              form: chapter.form,
+              tasreef: chapter.conjugations[presentConjugation]?.[voice],
+              englishTasreef: english[presentConjugation]?.[voice],
               rootLetters: chapter.root_letters[0].arabic,
-              binya: 'مضارع',
+              tense: 'مضارع',
+              baseChapter: archetype!,
+              case: verbCase,
+              voice,
             })
           }
         } else if (chapter) {
@@ -160,22 +162,24 @@ const OverviewScreen = () => {
 
           mazeedFihiMadi.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: archetype.conjugations[pastConjugation]?.[activeTab],
-            englishTasreef: english[pastConjugation]?.[activeTab],
-            type: chapter.type,
-            form: chapter.form,
+            tasreef: archetype.conjugations[pastConjugation]?.[voice],
+            englishTasreef: english[pastConjugation]?.[voice],
             rootLetters: chapter.root_letters[0].arabic,
-            binya: 'ماضي',
+            tense: 'ماضي',
+            baseChapter: archetype,
+            case: verbCase,
+            voice,
           })
 
           mazeedFihiMudari.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: archetype.conjugations[presentConjugation]?.[activeTab],
-            englishTasreef: english[presentConjugation]?.[activeTab],
-            type: chapter.type,
-            form: chapter.form,
+            tasreef: archetype.conjugations[presentConjugation]?.[voice],
+            englishTasreef: english[presentConjugation]?.[voice],
             rootLetters: chapter.root_letters[0].arabic,
-            binya: 'مضارع',
+            tense: 'مضارع',
+            baseChapter: archetype,
+            case: verbCase,
+            voice,
           })
         }
       }
@@ -185,7 +189,7 @@ const OverviewScreen = () => {
     [
       settings.mujarradChapterHeadings,
       settings.mazeedFihiChapterHeadings,
-      activeTab,
+      voice,
       pastConjugation,
       presentConjugation,
       particle,
@@ -253,9 +257,9 @@ const OverviewScreen = () => {
   ])
 
   const sections = useMemo(() => {
-    if (activeTab === 'صرف صغير') return sarfSagheerSections
+    if (voice === 'صرف صغير') return sarfSagheerSections
     return tasreefSections
-  }, [activeTab, sarfSagheerSections, tasreefSections])
+  }, [voice, sarfSagheerSections, tasreefSections])
 
   return (
     <Flex column padding="16px 0 32px">
@@ -282,10 +286,11 @@ const OverviewScreen = () => {
                     englishTasreef={tasreef.englishTasreef}
                     particle={section.particle}
                     groupMode="list"
-                    type={tasreef.type}
-                    form={tasreef.form}
                     rootLetters={tasreef.rootLetters}
-                    binya={tasreef.binya}
+                    tense={tasreef.tense}
+                    baseChapter={tasreef.baseChapter}
+                    case={tasreef.case}
+                    voice={tasreef.voice}
                   />
                 ))}
               {'sarfSagheers' in section &&
