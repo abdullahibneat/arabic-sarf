@@ -136,12 +136,24 @@ const OverviewScreen = () => {
               title: getMujarradChapterHeading(chapter.باب),
               tasreef: chapter.conjugations[pastConjugation]?.[activeTab],
               englishTasreef: english[pastConjugation]?.[activeTab],
+              form: chapter.form,
+              rootLetters: {
+                ف: chapter.root_letters[0].arabic[0],
+                ع: chapter.root_letters[0].arabic[1],
+                ل: chapter.root_letters[0].arabic[2],
+              },
             })
 
             mujarradMudari.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
               tasreef: chapter.conjugations[presentConjugation]?.[activeTab],
               englishTasreef: english[presentConjugation]?.[activeTab],
+              form: chapter.form,
+              rootLetters: {
+                ف: chapter.root_letters[0].arabic[0],
+                ع: chapter.root_letters[0].arabic[1],
+                ل: chapter.root_letters[0].arabic[2],
+              },
             })
           }
         } else if (chapter) {
@@ -154,12 +166,24 @@ const OverviewScreen = () => {
             title: getMazeedFihiChapterHeading(archetype.form),
             tasreef: archetype.conjugations[pastConjugation]?.[activeTab],
             englishTasreef: english[pastConjugation]?.[activeTab],
+            form: chapter.form,
+            rootLetters: {
+              ف: chapter.root_letters[0].arabic[0],
+              ع: chapter.root_letters[0].arabic[1],
+              ل: chapter.root_letters[0].arabic[2],
+            },
           })
 
           mazeedFihiMudari.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
             tasreef: archetype.conjugations[presentConjugation]?.[activeTab],
             englishTasreef: english[presentConjugation]?.[activeTab],
+            form: chapter.form,
+            rootLetters: {
+              ف: chapter.root_letters[0].arabic[0],
+              ع: chapter.root_letters[0].arabic[1],
+              ل: chapter.root_letters[0].arabic[2],
+            },
           })
         }
       }
@@ -267,6 +291,8 @@ const OverviewScreen = () => {
                     englishTasreef={tasreef.englishTasreef}
                     particle={section.particle}
                     groupMode="list"
+                    form={tasreef.form}
+                    rootLetters={tasreef.rootLetters}
                   />
                 ))}
               {'sarfSagheers' in section &&

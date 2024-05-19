@@ -16,6 +16,17 @@ export type TasreefProps = {
   particle?: string
   audioSrc?: string
   groupMode?: AppStateType['settings']['tasreefGroupMode']
+  form: number
+  rootLetters?: { ف?: string; ع?: string; ل?: string } | null
+}
+
+type CellData = {
+  gender?: string
+  person: string
+  pronoun: string
+  conjugation: string
+  english: string
+  seeghaNumber: number
 }
 
 const Tasreef = ({
@@ -36,7 +47,7 @@ const Tasreef = ({
     return particle + ' '
   }, [showEnglish, particle])
 
-  const data = useMemo(() => {
+  const data: CellData[][][] = useMemo(() => {
     const persons = {
       '3rd': {
         masculine: ['هُوَ', 'هُمَا', 'هُمْ'],
@@ -56,8 +67,9 @@ const Tasreef = ({
         const pronouns = obj
         return [
           pronouns.map((pronoun) => ({
+            person,
             pronoun,
-            seegha: String(tasreef?.[person]?.[pronoun] ?? ''),
+            conjugation: String(tasreef?.[person]?.[pronoun] ?? ''),
             english: englishTasreef
               ? asEnglishPronoun(pronoun) +
                 ' ' +
@@ -69,8 +81,10 @@ const Tasreef = ({
       } else {
         return Object.entries(obj).map(([gender, pronouns]) =>
           pronouns.map((pronoun) => ({
+            gender,
+            person,
             pronoun,
-            seegha: String(tasreef?.[person]?.[gender]?.[pronoun] ?? ''),
+            conjugation: String(tasreef?.[person]?.[gender]?.[pronoun] ?? ''),
             english: englishTasreef
               ? asEnglishPronoun(pronoun) +
                 ' ' +
@@ -112,15 +126,18 @@ const Tasreef = ({
             <div class="person" key={String(i)}>
               {person.map((gender, j) => (
                 <div class="gender" key={String(j)}>
-                  {gender.map(({ seegha, english, seeghaNumber }, k) => (
-                    <div class="cell" key={String(k)} title={english}>
+                  {gender.map((cell, k) => (
+                    <div
+                      class={`cell ${cell.conjugation ? '' : 'disabled'}`}
+                      key={String(k)}
+                    >
                       <div class="seegha">
                         <p>
                           {prefix && <span>{prefix}</span>}
-                          {showEnglish ? english : seegha}
+                          {showEnglish ? cell.english : cell.conjugation}
                         </p>
                       </div>
-                      <div class="seegha-number">{seeghaNumber}</div>
+                      <div class="seegha-number">{cell.seeghaNumber}</div>
                     </div>
                   ))}
                 </div>

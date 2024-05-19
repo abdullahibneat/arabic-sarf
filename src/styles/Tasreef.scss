@@ -12,6 +12,10 @@
     flex-direction: row-reverse;
     height: 2.25rem;
     background-color: var(--white);
+
+    &:not(.disabled) {
+      cursor: pointer;
+    }
   }
 
   .header {

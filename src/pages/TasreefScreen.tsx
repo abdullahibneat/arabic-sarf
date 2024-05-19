@@ -11,7 +11,7 @@ import { useMemo } from 'preact/hooks'
 import { useSearchParams } from 'react-router-dom'
 
 const TasreefScreen = () => {
-  const { chapter, englishVerb } = useChapterStateContext()
+  const { chapter, englishVerb, customRootLetters } = useChapterStateContext()
 
   const [searchParams] = useSearchParams()
 
@@ -111,6 +111,8 @@ const TasreefScreen = () => {
                 tasreef={madi?.arabic}
                 englishTasreef={madi?.english}
                 audioSrc={audioPath + '/ماضي.mp3'}
+                form={chapter.form}
+                rootLetters={customRootLetters}
               />
 
               <Tasreef
@@ -119,6 +121,8 @@ const TasreefScreen = () => {
                 tasreef={mudari?.tasreef.arabic || null}
                 englishTasreef={mudari?.tasreef.english || null}
                 audioSrc={audioPath + '/مضارع.mp3'}
+                form={chapter.form}
+                rootLetters={customRootLetters}
               />
 
               {amr && (
@@ -127,6 +131,8 @@ const TasreefScreen = () => {
                   tasreef={amr.arabic}
                   englishTasreef={amr.english}
                   audioSrc={audioPath + '/أمر.mp3'}
+                  form={chapter.form}
+                  rootLetters={customRootLetters}
                 />
               )}
             </Flex>
