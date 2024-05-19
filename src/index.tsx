@@ -6,7 +6,7 @@ import OverviewScreen from './pages/OverviewScreen'
 import TasreefScreen from './pages/TasreefScreen'
 import { render } from 'preact'
 import useAppState from './hooks/useAppState'
-import { useEffect } from 'preact/hooks'
+import { useLayoutEffect } from 'preact/hooks'
 import useTheme from './hooks/useTheme'
 
 const router = createBrowserRouter([
@@ -32,7 +32,7 @@ const Entrypoint = () => {
 
   const theme = useTheme()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.querySelector<HTMLElement>(':root')
     if (root) {
       if (theme === 'dark') {
@@ -45,12 +45,12 @@ const Entrypoint = () => {
     }
   }, [theme])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.documentElement
     root.style.fontSize = `${appState.fontSize}px`
   }, [appState.fontSize])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.querySelector<HTMLElement>(':root')
     if (root) {
       root.style.setProperty('--arabic-font', appState.arabicFont)

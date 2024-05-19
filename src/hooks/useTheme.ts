@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks'
+import { useLayoutEffect, useState } from 'preact/hooks'
 
 import useAppState from './useAppState'
 
@@ -7,7 +7,7 @@ const useTheme = () => {
 
   const appState = useAppState()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (appState.theme !== 'system') {
       setTheme(appState.theme)
       return
