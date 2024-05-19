@@ -43,16 +43,15 @@ const Tasreef = ({
   form,
   rootLetters,
 }: TasreefProps) => {
-  const { settings, showEnglish } = useAppState()
+  const { settings } = useAppState()
 
   const audioPlayer = useAudioPlayer()
   const modal = useModal()
 
   const prefix = useMemo(() => {
-    if (showEnglish) return ''
     if (!particle) return ''
     return particle + ' '
-  }, [showEnglish, particle])
+  }, [particle])
 
   const data: CellData[][][] = useMemo(() => {
     const persons = {
@@ -173,7 +172,7 @@ const Tasreef = ({
                       <div class="seegha">
                         <p>
                           {prefix && <span>{prefix}</span>}
-                          {showEnglish ? cell.english : cell.conjugation}
+                          {cell.conjugation}
                         </p>
                       </div>
                       <div class="seegha-number">{cell.seeghaNumber}</div>

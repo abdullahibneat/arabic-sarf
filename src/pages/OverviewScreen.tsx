@@ -21,7 +21,7 @@ const OverviewScreen = () => {
 
   const [searchParams] = useSearchParams()
 
-  const { settings, showEnglish } = useAppState()
+  const { settings } = useAppState()
 
   const activeTab = searchParams.get('activeTab') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
@@ -175,7 +175,6 @@ const OverviewScreen = () => {
       return $sections
     },
     [
-      showEnglish,
       settings.mujarradChapterHeadings,
       settings.mazeedFihiChapterHeadings,
       activeTab,
