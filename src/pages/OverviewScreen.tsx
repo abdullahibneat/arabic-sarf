@@ -138,6 +138,7 @@ const OverviewScreen = () => {
               englishTasreef: english[pastConjugation]?.[activeTab],
               form: chapter.form,
               rootLetters: chapter.root_letters[0].arabic,
+              binya: 'ماضي',
             })
 
             mujarradMudari.tasreefs.push({
@@ -146,6 +147,7 @@ const OverviewScreen = () => {
               englishTasreef: english[presentConjugation]?.[activeTab],
               form: chapter.form,
               rootLetters: chapter.root_letters[0].arabic,
+              binya: 'مضارع',
             })
           }
         } else if (chapter) {
@@ -160,6 +162,7 @@ const OverviewScreen = () => {
             englishTasreef: english[pastConjugation]?.[activeTab],
             form: chapter.form,
             rootLetters: chapter.root_letters[0].arabic,
+            binya: 'ماضي',
           })
 
           mazeedFihiMudari.tasreefs.push({
@@ -168,6 +171,7 @@ const OverviewScreen = () => {
             englishTasreef: english[presentConjugation]?.[activeTab],
             form: chapter.form,
             rootLetters: chapter.root_letters[0].arabic,
+            binya: 'مضارع',
           })
         }
       }
@@ -276,6 +280,7 @@ const OverviewScreen = () => {
                     groupMode="list"
                     form={tasreef.form}
                     rootLetters={tasreef.rootLetters}
+                    binya={tasreef.binya}
                   />
                 ))}
               {'sarfSagheers' in section &&

@@ -21,7 +21,8 @@ export type TasreefProps = {
   audioSrc?: string
   groupMode?: AppStateType['settings']['tasreefGroupMode']
   form: number
-  rootLetters?: { ف: string; ع: string; ل: string } | null
+  rootLetters: { ف: string; ع: string; ل: string }
+  binya: string
 }
 
 type CellData = {
@@ -41,6 +42,7 @@ const Tasreef = ({
   groupMode,
   form,
   rootLetters,
+  binya,
 }: TasreefProps) => {
   const { settings } = useAppState()
 
@@ -115,6 +117,7 @@ const Tasreef = ({
                   {`Root letters: ${rootLetters.ف} ${rootLetters.ع} ${rootLetters.ل}`}
                 </li>
               )}
+              <li>Binya: {binya}</li>
               <li>Seegha: {cell.pronoun}</li>
               <li>
                 Pronoun: {asEnglishPronoun(cell.pronoun)} (
@@ -126,7 +129,7 @@ const Tasreef = ({
         ),
       })
     },
-    [form, rootLetters],
+    [form, rootLetters, binya],
   )
 
   return (

@@ -69,6 +69,12 @@ const TasreefScreen = () => {
     }
   }, [chapter, english, verbCase, activeTab, settings.showNasbJazmParticle])
 
+  const mudariBinya = useMemo(() => {
+    if (verbCase === 'منصوب') return 'نصب'
+    if (verbCase === 'مجزوم') return 'جزم'
+    return 'مضارع'
+  }, [verbCase])
+
   const amr = useMemo(() => {
     if (!settings.showAmr) return null
     if (activeTab !== 'معروف') return null
@@ -118,6 +124,7 @@ const TasreefScreen = () => {
                 audioSrc={audioPath + '/ماضي.mp3'}
                 form={chapter.form}
                 rootLetters={rootLetters}
+                binya="ماضي"
               />
 
               <Tasreef
@@ -128,6 +135,7 @@ const TasreefScreen = () => {
                 audioSrc={audioPath + '/مضارع.mp3'}
                 form={chapter.form}
                 rootLetters={rootLetters}
+                binya={mudariBinya}
               />
 
               {amr && (
@@ -138,6 +146,7 @@ const TasreefScreen = () => {
                   audioSrc={audioPath + '/أمر.mp3'}
                   form={chapter.form}
                   rootLetters={rootLetters}
+                  binya="أمر"
                 />
               )}
             </Flex>
