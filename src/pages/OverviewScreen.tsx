@@ -261,7 +261,7 @@ const OverviewScreen = () => {
             <Flex
               column={'sarfSagheers' in section}
               gap={32}
-              padding="0 64px"
+              padding="0 64px 32px"
               overflowX="auto"
               direction="rtl"
             >

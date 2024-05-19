@@ -95,7 +95,7 @@ const TasreefScreen = () => {
   if (!chapter) return <div>Not found</div>
 
   return (
-    <Flex flex={1} column gap={16} paddingBottom={32}>
+    <Flex flex={1} column gap={16}>
       <Flex column gap={16} justifyContent="center">
         {activeTab === 'صرف صغير' && (
           <Flex column padding="0 1rem" alignItems="center">
@@ -105,7 +105,12 @@ const TasreefScreen = () => {
 
         {showVerbTasreefs && (
           <Flex justifyContent="center">
-            <Flex gap={32} padding="0 64px" overflowX="auto" direction="rtl">
+            <Flex
+              gap={32}
+              padding="0 64px 32px"
+              overflowX="auto"
+              direction="rtl"
+            >
               <Tasreef
                 title="ماضي"
                 tasreef={madi?.arabic}
