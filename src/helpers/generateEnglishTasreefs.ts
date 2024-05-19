@@ -395,14 +395,14 @@ const generateAmrTasreef = (verb: {
 }): VerbConjugations['أمر'] => ({
   '2nd': {
     masculine: {
-      أَنْتَ: [verb.prefixToBe ? 'be' : '', verb.base].join(' '),
-      أَنْتُمَا: [verb.prefixToBe ? 'be' : '', verb.base].join(' '),
-      أَنْتُمْ: [verb.prefixToBe ? 'be' : '', verb.base].join(' '),
+      أَنْتَ: [verb.prefixToBe ? 'be' : '', verb.base + '!'].join(' '),
+      أَنْتُمَا: [verb.prefixToBe ? 'be' : '', verb.base + '!'].join(' '),
+      أَنْتُمْ: [verb.prefixToBe ? 'be' : '', verb.base + '!'].join(' '),
     },
     feminine: {
-      أَنْتِ: [verb.prefixToBe ? 'be' : '', verb.base].join(' '),
-      أَنْتُمَا: [verb.prefixToBe ? 'be' : '', verb.base].join(' '),
-      أَنْتُنَّ: [verb.prefixToBe ? 'be' : '', verb.base].join(' '),
+      أَنْتِ: [verb.prefixToBe ? 'be' : '', verb.base + '!'].join(' '),
+      أَنْتُمَا: [verb.prefixToBe ? 'be' : '', verb.base + '!'].join(' '),
+      أَنْتُنَّ: [verb.prefixToBe ? 'be' : '', verb.base + '!'].join(' '),
     },
   },
 })
