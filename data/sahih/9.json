@@ -5,7 +5,7 @@
   "title": "افْعَلَّ يَفْعَلُّ",
   "root_letters": [
     {
-      "arabic": "حمر",
+      "arabic": { "ف": "ح", "ع": "م", "ل": "ر" },
       "english": {
         "base": "become",
         "past": "became",

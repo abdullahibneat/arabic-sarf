@@ -5,18 +5,18 @@
   "title": "فَعِيَ يَفْعَى",
   "root_letters": [
     {
-      "arabic": "رضي",
+      "arabic": { "ف": "ر", "ع": "ض", "ل": "ي" },
       "english": {
         "base": "pleased",
         "prefixToBe": true
       }
     },
     {
-      "arabic": "خشي",
+      "arabic": { "ف": "خ", "ع": "ش", "ل": "ي" },
       "english": "fear"
     },
     {
-      "arabic": "نسي",
+      "arabic": { "ف": "ن", "ع": "س", "ل": "ي" },
       "english": {
         "base": "forget",
         "past": "forgot",

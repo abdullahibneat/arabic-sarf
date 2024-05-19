@@ -3,7 +3,9 @@
   "form": 3,
   "باب": "مُفَاعَلَة",
   "title": "فَاوَلَ يُفَاوِلُ",
-  "root_letters": [{ "arabic": "حول", "english": "try" }],
+  "root_letters": [
+    { "arabic": { "ف": "ح", "ع": "و", "ل": "ل" }, "english": "try" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَاوَلَ",

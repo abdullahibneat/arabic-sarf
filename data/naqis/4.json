@@ -5,7 +5,7 @@
   "title": "أَفْعَى يُفْعِيْ",
   "root_letters": [
     {
-      "arabic": "بكي",
+      "arabic": { "ف": "ب", "ع": "ك", "ل": "ي" },
       "english": {
         "base": "make",
         "past": "made",
@@ -16,7 +16,7 @@
       }
     },
     {
-      "arabic": "لقي",
+      "arabic": { "ف": "ل", "ع": "ق", "ل": "ي" },
       "english": {
         "base": "throw",
         "past": "threw",

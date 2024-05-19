@@ -4,9 +4,9 @@
   "باب": "تَفْعِيْل",
   "title": "فَعَّلَ يُفَعِّلُ",
   "root_letters": [
-    { "arabic": "كذب", "english": "deny" },
+    { "arabic": { "ف": "ك", "ع": "ذ", "ل": "ب" }, "english": "deny" },
     {
-      "arabic": "فهم",
+      "arabic": { "ف": "ف", "ع": "ه", "ل": "م" },
       "english": {
         "base": "make",
         "past": "made",
@@ -17,7 +17,7 @@
       }
     },
     {
-      "arabic": "سخن",
+      "arabic": { "ف": "س", "ع": "خ", "ل": "ن" },
       "english": {
         "base": "heat",
         "specifically": "up"

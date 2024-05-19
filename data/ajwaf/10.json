@@ -5,7 +5,7 @@
   "title": "اسْتَفَالَ يَسْتَفِيْلُ",
   "root_letters": [
     {
-      "arabic": "عوذ",
+      "arabic": { "ف": "ع", "ع": "و", "ل": "ذ" },
       "english": {
         "base": "seek",
         "past": "sought",
@@ -13,7 +13,7 @@
       }
     },
     {
-      "arabic": "طوع",
+      "arabic": { "ف": "ط", "ع": "و", "ل": "ع" },
       "english": {
         "base": "capable",
         "prefixToBe": true

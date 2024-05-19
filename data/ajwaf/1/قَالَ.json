@@ -5,7 +5,7 @@
   "title": "فَالَ يَفُوْلُ",
   "root_letters": [
     {
-      "arabic": "قول",
+      "arabic": { "ف": "ق", "ع": "و", "ل": "ل" },
       "english": { "base": "say", "past": "said", "passive": "told" }
     }
   ],

@@ -4,7 +4,10 @@
   "باب": "تَفَعُّل",
   "title": "تَفَعَّلَ يَتَفَعَّلُ",
   "root_letters": [
-    { "arabic": "كرر", "english": { "base": "repeated", "prefixToBe": true } }
+    {
+      "arabic": { "ف": "ك", "ع": "ر", "ل": "ر" },
+      "english": { "base": "repeated", "prefixToBe": true }
+    }
   ],
   "archetype": {
     "ماضي": {

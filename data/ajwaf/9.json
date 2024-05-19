@@ -4,8 +4,14 @@
   "باب": "افْعِلَال",
   "title": "افْوَلَّ يَفْوَلُّ",
   "root_letters": [
-    { "arabic": "سود", "english": { "base": "black", "prefixToBe": true } },
-    { "arabic": "حول", "english": { "base": "cross-eyed", "prefixToBe": true } }
+    {
+      "arabic": { "ف": "س", "ع": "و", "ل": "د" },
+      "english": { "base": "black", "prefixToBe": true }
+    },
+    {
+      "arabic": { "ف": "ح", "ع": "و", "ل": "ل" },
+      "english": { "base": "cross-eyed", "prefixToBe": true }
+    }
   ],
   "archetype": {
     "ماضي": {

@@ -3,7 +3,9 @@
   "form": 2,
   "باب": "تَفْعِيْل",
   "title": "فَعَّلَ يُفَعِّلُ",
-  "root_letters": [{ "arabic": "خفف", "english": "reduce" }],
+  "root_letters": [
+    { "arabic": { "ف": "خ", "ع": "ف", "ل": "ف" }, "english": "reduce" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَّلَ",

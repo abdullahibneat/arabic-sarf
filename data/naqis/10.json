@@ -5,14 +5,14 @@
   "title": "اسْتَفْعَى يَسْتَفْعِيْ",
   "root_letters": [
     {
-      "arabic": "غني",
+      "arabic": { "ف": "غ", "ع": "ن", "ل": "ي" },
       "english": {
         "base": "self-sufficient",
         "prefixToBe": true
       }
     },
     {
-      "arabic": "لقي",
+      "arabic": { "ف": "ل", "ع": "ق", "ل": "ي" },
       "english": {
         "base": "lie",
         "presentContinuous": "lying",

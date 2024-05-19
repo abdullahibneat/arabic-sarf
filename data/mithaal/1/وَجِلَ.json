@@ -5,7 +5,7 @@
   "title": "فَعِلَ يَفْعَلُ",
   "root_letters": [
     {
-      "arabic": "وجل",
+      "arabic": { "ف": "و", "ع": "ج", "ل": "ل" },
       "english": {
         "base": "afraid",
         "prefixToBe": true,

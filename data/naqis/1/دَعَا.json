@@ -4,12 +4,12 @@
   "باب": "نَصَرَ",
   "title": "فَعَا يَفْعُوْ",
   "root_letters": [
-    { "arabic": "دعو", "english": "call" },
+    { "arabic": { "ف": "د", "ع": "ع", "ل": "و" }, "english": "call" },
     {
-      "arabic": "عفو",
+      "arabic": { "ف": "ع", "ع": "ف", "ل": "و" },
       "english": { "base": "forgive", "past": "forgave", "passive": "forgiven" }
     },
-    { "arabic": "رجو", "english": "hope" }
+    { "arabic": { "ف": "ر", "ع": "ج", "ل": "و" }, "english": "hope" }
   ],
   "archetype": {
     "ماضي": {

@@ -132,25 +132,25 @@ const مثال: VerbTypeMap = {
   '2': {
     ...sahihForm2,
     type: 'مثال',
-    root_letters: [{ arabic: 'وحد', english: 'unite' }],
+    root_letters: [{ arabic: { ف: 'و', ع: 'ح', ل: 'د' }, english: 'unite' }],
   },
   '3': {
     ...sahihForm3,
     type: 'مثال',
-    root_letters: [{ arabic: 'وفق', english: 'agree' }],
+    root_letters: [{ arabic: { ف: 'و', ع: 'ف', ل: 'ق' }, english: 'agree' }],
   },
   '4': mithaalForm4,
   '5': {
     ...sahihForm5,
     type: 'مثال',
-    root_letters: [{ arabic: 'وكل', english: 'trust' }],
+    root_letters: [{ arabic: { ف: 'و', ع: 'ك', ل: 'ل' }, english: 'trust' }],
   },
   '6': {
     ...sahihForm6,
     type: 'مثال',
     root_letters: [
       {
-        arabic: 'وضع',
+        arabic: { ف: 'و', ع: 'ض', ل: 'ع' },
         english: {
           base: 'behave humbly',
           past: 'behaved humbly',

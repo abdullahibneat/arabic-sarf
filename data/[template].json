@@ -2,7 +2,9 @@
   "type": "صحيح",
   "باب": "فَتَحَ",
   "form": 1,
-  "root_letters": [{ "arabic": "فتح", "english": "open" }],
+  "root_letters": [
+    { "arabic": { "ف": "ف", "ع": "ت", "ل": "ح" }, "english": "open" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَعَلَ",

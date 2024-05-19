@@ -4,9 +4,9 @@
   "باب": "فَتَحَ",
   "title": "فَعَلَ يَفْعَلُ",
   "root_letters": [
-    { "arabic": "فتح", "english": "open" },
+    { "arabic": { "ف": "ف", "ع": "ت", "ل": "ح" }, "english": "open" },
     {
-      "arabic": "نصح",
+      "arabic": { "ف": "ن", "ع": "ص", "ل": "ح" },
       "english": {
         "base": "give",
         "past": "gave",

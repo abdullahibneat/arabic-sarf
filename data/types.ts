@@ -14,7 +14,7 @@ export type VerbChapter = {
 }
 
 export type RootLetter = {
-  arabic: string
+  arabic: { ف: string; ع: string; ل: string }
   english: EnglishVerb
 }
 

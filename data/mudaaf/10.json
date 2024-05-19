@@ -4,7 +4,10 @@
   "باب": "اسْتِفْعَال",
   "title": "اسْتَفَعَّ يَسْتَفِعُّ",
   "root_letters": [
-    { "arabic": "قرر", "english": { "base": "settle", "specifically": "down" } }
+    {
+      "arabic": { "ف": "ق", "ع": "ر", "ل": "ر" },
+      "english": { "base": "settle", "specifically": "down" }
+    }
   ],
   "archetype": {
     "ماضي": {
