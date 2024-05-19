@@ -30,7 +30,6 @@ type CellData = {
   pronoun: string
   conjugation: string
   english: string
-  seeghaNumber: number
 }
 
 const Tasreef = ({
@@ -66,8 +65,6 @@ const Tasreef = ({
       '1st': ['أَنَا', 'نَحْنُ'],
     }
 
-    let seeghaNumber = 0
-
     return Object.entries(persons).map(([person, obj]) => {
       if (Array.isArray(obj)) {
         const pronouns = obj
@@ -81,7 +78,6 @@ const Tasreef = ({
                 ' ' +
                 String(englishTasreef?.[person]?.[pronoun])
               : '(not available for custom root letters)',
-            seeghaNumber: ++seeghaNumber,
           })),
         ]
       } else {
@@ -96,7 +92,6 @@ const Tasreef = ({
                 ' ' +
                 String(englishTasreef?.[person]?.[gender]?.[pronoun])
               : '(not available for custom root letters)',
-            seeghaNumber: ++seeghaNumber,
           })),
         )
       }
@@ -175,7 +170,7 @@ const Tasreef = ({
                           {cell.conjugation}
                         </p>
                       </div>
-                      <div class="seegha-number">{cell.seeghaNumber}</div>
+                      <div class="seegha-number" />
                     </div>
                   ))}
                 </div>

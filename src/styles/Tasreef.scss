@@ -6,6 +6,7 @@
   flex-shrink: 0;
   direction: rtl;
   grid-template-rows: auto 1fr;
+  counter-reset: seegha-number;
 
   .cell {
     display: flex;
@@ -86,6 +87,10 @@
           color: var(--text-secondary);
           border-left: solid 1px var(--border);
           font-size: 14px;
+          &::before {
+            counter-increment: seegha-number;
+            content: counter(seegha-number);
+          }
         }
       }
 
