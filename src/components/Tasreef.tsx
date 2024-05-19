@@ -1,13 +1,17 @@
 import '../styles/Tasreef.scss'
 
+import { useCallback, useMemo } from 'preact/hooks'
+
 import { AppStateType } from '../AppState'
+import Flex from './Flex'
 import IconButton from './IconButton'
 import Text from './Text'
 import { VerbTasreef } from '../../data/types'
+import asDetailedEnglishPronoun from '../helpers/asDetailedEnglishPronoun'
 import asEnglishPronoun from '../helpers/asEnglishPronoun'
 import useAppState from '../hooks/useAppState'
 import useAudioPlayer from '../hooks/useAudioPlayer'
-import { useMemo } from 'preact/hooks'
+import useModal from '../hooks/useModal'
 
 export type TasreefProps = {
   title: string
@@ -36,10 +40,13 @@ const Tasreef = ({
   particle,
   audioSrc,
   groupMode,
+  form,
+  rootLetters,
 }: TasreefProps) => {
   const { settings, showEnglish } = useAppState()
 
   const audioPlayer = useAudioPlayer()
+  const modal = useModal()
 
   const prefix = useMemo(() => {
     if (showEnglish) return ''
@@ -97,6 +104,37 @@ const Tasreef = ({
     })
   }, [tasreef, englishTasreef])
 
+  const openModal = useCallback(
+    (cell: CellData) => () => {
+      const cellText = document.getSelection()
+      if (cellText?.type === 'Range') return
+
+      modal.open({
+        title: cell.conjugation,
+        width: 'fit-content',
+        children: (
+          <Flex column padding="16px 24px" paddingLeft={24 + 16}>
+            <ul style={{ padding: 0 }}>
+              <li>Form: {form}</li>
+              {rootLetters && (
+                <li>
+                  {`Root letters: ${rootLetters.ف} ${rootLetters.ع} ${rootLetters.ل}`}
+                </li>
+              )}
+              <li>Seegha: {cell.pronoun}</li>
+              <li>
+                Pronoun: {asEnglishPronoun(cell.pronoun)} (
+                {asDetailedEnglishPronoun(cell.pronoun, cell.gender)})
+              </li>
+              <li>Translation: {cell.english}</li>
+            </ul>
+          </Flex>
+        ),
+      })
+    },
+    [form, rootLetters],
+  )
+
   return (
     <div class={`tasreef ${groupMode || settings.tasreefGroupMode}`}>
       <div class="header cell">
@@ -130,6 +168,7 @@ const Tasreef = ({
                     <div
                       class={`cell ${cell.conjugation ? '' : 'disabled'}`}
                       key={String(k)}
+                      onClick={cell.conjugation ? openModal(cell) : undefined}
                     >
                       <div class="seegha">
                         <p>
