@@ -136,6 +136,7 @@ const OverviewScreen = () => {
               title: getMujarradChapterHeading(chapter.باب),
               tasreef: chapter.conjugations[pastConjugation]?.[activeTab],
               englishTasreef: english[pastConjugation]?.[activeTab],
+              type: chapter.type,
               form: chapter.form,
               rootLetters: chapter.root_letters[0].arabic,
               binya: 'ماضي',
@@ -145,6 +146,7 @@ const OverviewScreen = () => {
               title: getMujarradChapterHeading(chapter.باب),
               tasreef: chapter.conjugations[presentConjugation]?.[activeTab],
               englishTasreef: english[presentConjugation]?.[activeTab],
+              type: chapter.type,
               form: chapter.form,
               rootLetters: chapter.root_letters[0].arabic,
               binya: 'مضارع',
@@ -160,6 +162,7 @@ const OverviewScreen = () => {
             title: getMazeedFihiChapterHeading(archetype.form),
             tasreef: archetype.conjugations[pastConjugation]?.[activeTab],
             englishTasreef: english[pastConjugation]?.[activeTab],
+            type: chapter.type,
             form: chapter.form,
             rootLetters: chapter.root_letters[0].arabic,
             binya: 'ماضي',
@@ -169,6 +172,7 @@ const OverviewScreen = () => {
             title: getMazeedFihiChapterHeading(archetype.form),
             tasreef: archetype.conjugations[presentConjugation]?.[activeTab],
             englishTasreef: english[presentConjugation]?.[activeTab],
+            type: chapter.type,
             form: chapter.form,
             rootLetters: chapter.root_letters[0].arabic,
             binya: 'مضارع',
@@ -278,6 +282,7 @@ const OverviewScreen = () => {
                     englishTasreef={tasreef.englishTasreef}
                     particle={section.particle}
                     groupMode="list"
+                    type={tasreef.type}
                     form={tasreef.form}
                     rootLetters={tasreef.rootLetters}
                     binya={tasreef.binya}

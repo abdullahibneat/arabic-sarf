@@ -20,6 +20,7 @@ export type TasreefProps = {
   particle?: string
   audioSrc?: string
   groupMode?: AppStateType['settings']['tasreefGroupMode']
+  type: string
   form: number
   rootLetters: { ف: string; ع: string; ل: string }
   binya: string
@@ -40,6 +41,7 @@ const Tasreef = ({
   particle,
   audioSrc,
   groupMode,
+  type,
   form,
   rootLetters,
   binya,
@@ -111,6 +113,7 @@ const Tasreef = ({
         children: (
           <Flex column padding="16px 24px" paddingLeft={24 + 16}>
             <ul style={{ padding: 0 }}>
+              <li>Type: {type}</li>
               <li>Form: {form}</li>
               {rootLetters && (
                 <li>
@@ -129,7 +132,7 @@ const Tasreef = ({
         ),
       })
     },
-    [form, rootLetters, binya],
+    [type, form, rootLetters, binya],
   )
 
   return (

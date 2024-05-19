@@ -122,6 +122,7 @@ const TasreefScreen = () => {
                 tasreef={madi?.arabic}
                 englishTasreef={madi?.english}
                 audioSrc={audioPath + '/ماضي.mp3'}
+                type={chapter.type}
                 form={chapter.form}
                 rootLetters={rootLetters}
                 binya="ماضي"
@@ -133,6 +134,7 @@ const TasreefScreen = () => {
                 tasreef={mudari?.tasreef.arabic || null}
                 englishTasreef={mudari?.tasreef.english || null}
                 audioSrc={audioPath + '/مضارع.mp3'}
+                type={chapter.type}
                 form={chapter.form}
                 rootLetters={rootLetters}
                 binya={mudariBinya}
@@ -144,6 +146,7 @@ const TasreefScreen = () => {
                   tasreef={amr.arabic}
                   englishTasreef={amr.english}
                   audioSrc={audioPath + '/أمر.mp3'}
+                  type={chapter.type}
                   form={chapter.form}
                   rootLetters={rootLetters}
                   binya="أمر"
