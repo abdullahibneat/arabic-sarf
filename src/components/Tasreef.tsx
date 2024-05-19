@@ -92,8 +92,7 @@ const Tasreef = ({
             conjugation: String(tasreef?.[person]?.[pronoun] ?? ''),
             archetype: String(archetype?.[person]?.[pronoun] ?? ''),
             english: englishTasreef
-              ? asEnglishPronoun(pronoun) +
-                ' ' +
+              ? (tense === 'أمر' ? '' : asEnglishPronoun(pronoun) + ' ') +
                 String(englishTasreef?.[person]?.[pronoun])
               : '(not available for custom root letters)',
           })),
@@ -107,15 +106,14 @@ const Tasreef = ({
             conjugation: String(tasreef?.[person]?.[gender]?.[pronoun] ?? ''),
             archetype: String(archetype?.[person]?.[gender]?.[pronoun] ?? ''),
             english: englishTasreef
-              ? asEnglishPronoun(pronoun) +
-                ' ' +
+              ? (tense === 'أمر' ? '' : asEnglishPronoun(pronoun) + ' ') +
                 String(englishTasreef?.[person]?.[gender]?.[pronoun])
               : '(not available for custom root letters)',
           })),
         )
       }
     })
-  }, [tasreef, baseTasreef, baseChapter, englishTasreef])
+  }, [tasreef, baseTasreef, baseChapter, englishTasreef, tense])
 
   const openModal = useCallback(
     (cell: CellData) => () => {
@@ -123,20 +121,10 @@ const Tasreef = ({
       if (cellText?.type === 'Range') return
 
       const {
-        archetype: { ماضي, مضارع, مصضر, فاعل, مفعول, أمر, نهي },
+        archetype: { ماضي, مضارع },
       } = replaceRoots(baseChapter)
 
       const pattern = `${ماضي.معروف} ${مضارع.معروف}`
-
-      let sarfSagheer = [`${ماضي.معروف} ${مضارع.معروف} ${مصضر[0]} فهو ${فاعل}`]
-
-      if (ماضي.مجهول && مضارع.مجهول && مفعول) {
-        // majhool
-        sarfSagheer.push(`و ${ماضي.مجهول} ${مضارع.مجهول} ${مصضر[0]} فهو
-        ${مفعول}`)
-      }
-
-      sarfSagheer.push(`الأمر منه ${أمر} و النّهي عنه لا ${نهي}`)
 
       modal.open({
         title: cell.conjugation,
@@ -152,15 +140,7 @@ const Tasreef = ({
               <li>Type: {baseChapter.type}</li>
               <li>Form: {baseChapter.form}</li>
               <li>Pattern: {pattern}</li>
-              <li>
-                Sarf sagheer:
-                <ul style={{ padding: 0, paddingLeft: 32 }}>
-                  {sarfSagheer.map((line, i) => (
-                    <li key={`line-${i}`}>{line}</li>
-                  ))}
-                </ul>
-              </li>
-              <li>Tense: {tense}</li>
+              <li>Tasreef: {tense}</li>
               <li>Voice: {voice}</li>
               <li>Case: {verbCase}</li>
               <li>
