@@ -7,8 +7,8 @@ import { AppStateType } from '../AppState'
 import Flex from './Flex'
 import IconButton from './IconButton'
 import Text from './Text'
-import asDetailedEnglishPronoun from '../helpers/asDetailedEnglishPronoun'
 import asEnglishPronoun from '../helpers/asEnglishPronoun'
+import getNumberForPronoun from '../helpers/getNumberForPronoun'
 import replace from '../helpers/replace'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
@@ -164,8 +164,12 @@ const Tasreef = ({
               <li>Voice: {voice}</li>
               <li>Case: {verbCase}</li>
               <li>
-                Pronoun: {cell.pronoun} - (
-                {asDetailedEnglishPronoun(cell.pronoun, cell.gender)})
+                Pronoun: {cell.pronoun}
+                <ul style={{ padding: 0, paddingLeft: 32 }}>
+                  <li>Person: {cell.person}</li>
+                  <li>Gender: {cell.gender || 'N/A'}</li>
+                  <li>Number: {getNumberForPronoun(cell.pronoun)}</li>
+                </ul>
               </li>
               <li>
                 Archetype: {cell.conjugation} مثل {cell.archetype}
