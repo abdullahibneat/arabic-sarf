@@ -81,7 +81,7 @@ const Tasreef = ({
               ? asEnglishPronoun(pronoun) +
                 ' ' +
                 String(englishTasreef?.[person]?.[pronoun])
-              : '',
+              : '(not available for custom root letters)',
             seeghaNumber: ++seeghaNumber,
           })),
         ]
@@ -96,7 +96,7 @@ const Tasreef = ({
               ? asEnglishPronoun(pronoun) +
                 ' ' +
                 String(englishTasreef?.[person]?.[gender]?.[pronoun])
-              : '',
+              : '(not available for custom root letters)',
             seeghaNumber: ++seeghaNumber,
           })),
         )
