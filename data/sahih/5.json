@@ -4,9 +4,9 @@
   "باب": "تَفَعُّل",
   "title": "تَفَعَّلَ يَتَفَعَّلُ",
   "root_letters": [
-    { "arabic": "ذكر", "english": "remember" },
-    { "arabic": "حرك", "english": "move" },
-    { "arabic": "قبل", "english": "accept" }
+    { "arabic": { "ف": "ذ", "ع": "ك", "ل": "ر" }, "english": "remember" },
+    { "arabic": { "ف": "ح", "ع": "ر", "ل": "ك" }, "english": "move" },
+    { "arabic": { "ف": "ق", "ع": "ب", "ل": "ل" }, "english": "accept" }
   ],
   "archetype": {
     "ماضي": {

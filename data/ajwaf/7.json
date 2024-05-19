@@ -5,11 +5,11 @@
   "title": "انْفَالَ يَنْفَالُ",
   "root_letters": [
     {
-      "arabic": "هور",
+      "arabic": { "ف": "ه", "ع": "و", "ل": "ر" },
       "english": { "base": "collapse", "passive": "demolished" }
     },
     {
-      "arabic": "قود",
+      "arabic": { "ف": "ق", "ع": "و", "ل": "د" },
       "english": { "base": "follow", "passive": "led" }
     }
   ],

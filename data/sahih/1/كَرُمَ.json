@@ -4,8 +4,14 @@
   "باب": "كَرُمَ",
   "title": "فَعُلَ يَفْعُلُ",
   "root_letters": [
-    { "arabic": "كرم", "english": { "base": "noble", "prefixToBe": true } },
-    { "arabic": "قرب", "english": { "base": "near", "prefixToBe": true } }
+    {
+      "arabic": { "ف": "ك", "ع": "ر", "ل": "م" },
+      "english": { "base": "noble", "prefixToBe": true }
+    },
+    {
+      "arabic": { "ف": "ق", "ع": "ر", "ل": "ب" },
+      "english": { "base": "near", "prefixToBe": true }
+    }
   ],
   "archetype": {
     "ماضي": {

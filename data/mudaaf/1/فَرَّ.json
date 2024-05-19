@@ -4,7 +4,10 @@
   "باب": "ضَرَبَ",
   "title": "فَعَّ يَفِعُّ",
   "root_letters": [
-    { "arabic": "فرر", "english": { "base": "flee", "past": "fled" } }
+    {
+      "arabic": { "ف": "ف", "ع": "ر", "ل": "ر" },
+      "english": { "base": "flee", "past": "fled" }
+    }
   ],
   "archetype": {
     "ماضي": {

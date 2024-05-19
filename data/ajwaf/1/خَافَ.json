@@ -4,9 +4,12 @@
   "باب": "سَمِعَ",
   "title": "فَالَ يَفَالُ",
   "root_letters": [
-    { "arabic": "خوف", "english": "fear" },
-    { "arabic": "نوم", "english": { "base": "sleep", "past": "slept" } },
-    { "arabic": "شوا", "english": "want" }
+    { "arabic": { "ف": "خ", "ع": "و", "ل": "ف" }, "english": "fear" },
+    {
+      "arabic": { "ف": "ن", "ع": "و", "ل": "م" },
+      "english": { "base": "sleep", "past": "slept" }
+    },
+    { "arabic": { "ف": "ش", "ع": "و", "ل": "ا" }, "english": "want" }
   ],
   "archetype": {
     "ماضي": {

@@ -5,7 +5,7 @@
   "title": "فَعَى يَفْعِيْ",
   "root_letters": [
     {
-      "arabic": "رمي",
+      "arabic": { "ف": "ر", "ع": "م", "ل": "ي" },
       "english": {
         "base": "throw",
         "past": "threw",
@@ -13,11 +13,11 @@
       }
     },
     {
-      "arabic": "مشي",
+      "arabic": { "ف": "م", "ع": "ش", "ل": "ي" },
       "english": "walk"
     },
     {
-      "arabic": "هدي",
+      "arabic": { "ف": "ه", "ع": "د", "ل": "ي" },
       "english": "guide"
     }
   ],

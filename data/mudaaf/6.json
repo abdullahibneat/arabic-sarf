@@ -3,7 +3,9 @@
   "form": 6,
   "باب": "تَفَاعُل",
   "title": "تَفَاعَّ يَتَفَاعُّ",
-  "root_letters": [{ "arabic": "حجج", "english": "dispute" }],
+  "root_letters": [
+    { "arabic": { "ف": "ح", "ع": "ج", "ل": "ج" }, "english": "dispute" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "تَفَاعَّ",

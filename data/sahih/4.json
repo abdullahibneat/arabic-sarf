@@ -4,9 +4,15 @@
   "باب": "إِفْعَال",
   "title": "أَفْعَلَ يُفْعِلُ",
   "root_letters": [
-    { "arabic": "نزل", "english": "reveal" },
-    { "arabic": "رسل", "english": { "base": "send", "past": "sent" } },
-    { "arabic": "طعم", "english": { "base": "feed", "past": "fed" } }
+    { "arabic": { "ف": "ن", "ع": "ز", "ل": "ل" }, "english": "reveal" },
+    {
+      "arabic": { "ف": "ر", "ع": "س", "ل": "ل" },
+      "english": { "base": "send", "past": "sent" }
+    },
+    {
+      "arabic": { "ف": "ط", "ع": "ع", "ل": "م" },
+      "english": { "base": "feed", "past": "fed" }
+    }
   ],
   "archetype": {
     "ماضي": {

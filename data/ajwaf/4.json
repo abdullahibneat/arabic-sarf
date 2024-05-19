@@ -4,9 +4,9 @@
   "باب": "إِفْعَال",
   "title": "أَفَالَ يُفِيْلُ",
   "root_letters": [
-    { "arabic": "رود", "english": "intend" },
-    { "arabic": "جوب", "english": "answer" },
-    { "arabic": "حوط", "english": "surround" }
+    { "arabic": { "ف": "ر", "ع": "و", "ل": "د" }, "english": "intend" },
+    { "arabic": { "ف": "ج", "ع": "و", "ل": "ب" }, "english": "answer" },
+    { "arabic": { "ف": "ح", "ع": "و", "ل": "ط" }, "english": "surround" }
   ],
   "archetype": {
     "ماضي": {

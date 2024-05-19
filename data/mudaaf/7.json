@@ -3,7 +3,9 @@
   "form": 7,
   "باب": "انْفِعَال",
   "title": "انْفَعَّ يَنْفَعُّ",
-  "root_letters": [{ "arabic": "حلل", "english": "open" }],
+  "root_letters": [
+    { "arabic": { "ف": "ح", "ع": "ل", "ل": "ل" }, "english": "open" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "انْفَعَّ",

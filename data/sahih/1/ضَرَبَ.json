@@ -5,7 +5,7 @@
   "title": "فَعَلَ يَفْعِلُ",
   "root_letters": [
     {
-      "arabic": "ضرب",
+      "arabic": { "ف": "ض", "ع": "ر", "ل": "ب" },
       "english": {
         "base": "hit",
         "past": "hit",
@@ -13,7 +13,7 @@
       }
     },
     {
-      "arabic": "كسر",
+      "arabic": { "ف": "ك", "ع": "س", "ل": "ر" },
       "english": {
         "base": "break",
         "past": "broke"

@@ -4,7 +4,10 @@
   "باب": "إِفْعَال",
   "title": "أَفْعَلَ يُفْعِلُ",
   "root_letters": [
-    { "arabic": "ورد", "english": { "base": "bring", "past": "brought" } }
+    {
+      "arabic": { "ف": "و", "ع": "ر", "ل": "د" },
+      "english": { "base": "bring", "past": "brought" }
+    }
   ],
   "archetype": {
     "ماضي": {

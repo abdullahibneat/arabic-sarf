@@ -4,9 +4,12 @@
   "باب": "افْتِعَال",
   "title": "افْتَعَلَ يَفْتَعِلُ",
   "root_letters": [
-    { "arabic": "حرم", "english": "respect" },
-    { "arabic": "جهد", "english": { "base": "work", "specifically": "hard" } },
-    { "arabic": "غسل", "english": "bathe" }
+    { "arabic": { "ف": "ح", "ع": "ر", "ل": "م" }, "english": "respect" },
+    {
+      "arabic": { "ف": "ج", "ع": "ه", "ل": "د" },
+      "english": { "base": "work", "specifically": "hard" }
+    },
+    { "arabic": { "ف": "غ", "ع": "س", "ل": "ل" }, "english": "bathe" }
   ],
   "archetype": {
     "ماضي": {

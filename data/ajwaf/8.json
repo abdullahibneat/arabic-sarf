@@ -4,9 +4,9 @@
   "باب": "افْتِعَال",
   "title": "افْتَالَ يَفْتَالُ",
   "root_letters": [
-    { "arabic": "حوج", "english": "need" },
+    { "arabic": { "ف": "ح", "ع": "و", "ل": "ج" }, "english": "need" },
     {
-      "arabic": "شوق",
+      "arabic": { "ف": "ش", "ع": "و", "ل": "ق" },
       "english": { "base": "desire", "passive": "wished for" }
     }
   ],

@@ -4,8 +4,8 @@
   "باب": "مُفَاعَلَة",
   "title": "فَاعَى يُفَاعِيْ",
   "root_letters": [
-    { "arabic": "ندو", "english": "call" },
-    { "arabic": "نجو", "english": "whisper" }
+    { "arabic": { "ف": "ن", "ع": "د", "ل": "و" }, "english": "call" },
+    { "arabic": { "ف": "ن", "ع": "ج", "ل": "و" }, "english": "whisper" }
   ],
   "archetype": {
     "ماضي": {

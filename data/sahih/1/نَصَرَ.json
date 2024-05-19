@@ -4,8 +4,8 @@
   "باب": "نَصَرَ",
   "title": "فَعَلَ يَفْعُلُ",
   "root_letters": [
-    { "arabic": "نصر", "english": "help" },
-    { "arabic": "دخل", "english": "enter" }
+    { "arabic": { "ف": "ن", "ع": "ص", "ل": "ر" }, "english": "help" },
+    { "arabic": { "ف": "د", "ع": "خ", "ل": "ل" }, "english": "enter" }
   ],
   "archetype": {
     "ماضي": {

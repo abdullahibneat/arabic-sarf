@@ -4,8 +4,8 @@
   "باب": "تَفَاعُل",
   "title": "تَفَاوَلَ يَتَفَاوَلُ",
   "root_letters": [
-    { "arabic": "عون", "english": "help" },
-    { "arabic": "ضيق", "english": "help" }
+    { "arabic": { "ف": "ع", "ع": "و", "ل": "ن" }, "english": "help" },
+    { "arabic": { "ف": "ض", "ع": "ي", "ل": "ق" }, "english": "help" }
   ],
   "archetype": {
     "ماضي": {

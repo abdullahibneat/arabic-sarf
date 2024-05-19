@@ -4,8 +4,8 @@
   "باب": "تَفَعُّل",
   "title": "تَفَوَّلَ يَتَفَوَّلُ",
   "root_letters": [
-    { "arabic": "جول", "english": "roam" },
-    { "arabic": "طيب", "english": "perfume" }
+    { "arabic": { "ف": "ج", "ع": "و", "ل": "ل" }, "english": "roam" },
+    { "arabic": { "ف": "ط", "ع": "ي", "ل": "ب" }, "english": "perfume" }
   ],
   "archetype": {
     "ماضي": {

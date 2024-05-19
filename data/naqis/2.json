@@ -4,8 +4,8 @@
   "باب": "تَفْعِيْل",
   "title": "فَعَّى يُفَعِّيْ",
   "root_letters": [
-    { "arabic": "صلو", "english": "pray" },
-    { "arabic": "سمي", "english": "name" }
+    { "arabic": { "ف": "ص", "ع": "ل", "ل": "و" }, "english": "pray" },
+    { "arabic": { "ف": "س", "ع": "م", "ل": "ي" }, "english": "name" }
   ],
   "archetype": {
     "ماضي": {

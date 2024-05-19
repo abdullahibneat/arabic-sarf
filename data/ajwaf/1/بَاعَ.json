@@ -4,9 +4,12 @@
   "باب": "ضَرَبَ",
   "title": "فَالَ يَفِيْلُ",
   "root_letters": [
-    { "arabic": "بيع", "english": { "base": "sell", "past": "sold" } },
-    { "arabic": "زيد", "english": "increase" },
-    { "arabic": "عيش", "english": "live" }
+    {
+      "arabic": { "ف": "ب", "ع": "ي", "ل": "ع" },
+      "english": { "base": "sell", "past": "sold" }
+    },
+    { "arabic": { "ف": "ز", "ع": "ي", "ل": "د" }, "english": "increase" },
+    { "arabic": { "ف": "ع", "ع": "ي", "ل": "ش" }, "english": "live" }
   ],
   "archetype": {
     "ماضي": {

@@ -5,11 +5,11 @@
   "title": "انْفَعَى يَنْفَعِيْ",
   "root_letters": [
     {
-      "arabic": "جلو",
+      "arabic": { "ف": "ج", "ع": "ل", "ل": "و" },
       "english": "reveal"
     },
     {
-      "arabic": "حنو",
+      "arabic": { "ف": "ح", "ع": "ن", "ل": "و" },
       "english": "curve"
     }
   ],

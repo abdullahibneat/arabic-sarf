@@ -3,7 +3,9 @@
   "form": 2,
   "باب": "تَفْعِيْل",
   "title": "فَيَّلَ يُفَيِّلُ",
-  "root_letters": [{ "arabic": "غير", "english": "change" }],
+  "root_letters": [
+    { "arabic": { "ف": "غ", "ع": "ي", "ل": "ر" }, "english": "change" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "فَيَّلَ",

@@ -4,8 +4,11 @@
   "باب": "سَمِعَ",
   "title": "فَعِلَ يَفْعَلُ",
   "root_letters": [
-    { "arabic": "سمع", "english": { "base": "hear", "past": "heard" } },
-    { "arabic": "كره", "english": "dislike" }
+    {
+      "arabic": { "ف": "س", "ع": "م", "ل": "ع" },
+      "english": { "base": "hear", "past": "heard" }
+    },
+    { "arabic": { "ف": "ك", "ع": "ر", "ل": "ه" }, "english": "dislike" }
   ],
   "archetype": {
     "ماضي": {

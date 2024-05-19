@@ -3,7 +3,9 @@
   "form": 10,
   "باب": "اسْتِفْعَال",
   "title": "اسْتَفْعَلَ يَسْتَفْعِلُ",
-  "root_letters": [{ "arabic": "ودع", "english": "place" }],
+  "root_letters": [
+    { "arabic": { "ف": "و", "ع": "د", "ل": "ع" }, "english": "place" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "اسْتَفْعَلَ",

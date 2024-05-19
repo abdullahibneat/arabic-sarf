@@ -4,9 +4,9 @@
   "باب": "اسْتِفْعَال",
   "title": "اسْتَفْعَلَ يَسْتَفْعِلُ",
   "root_letters": [
-    { "arabic": "خدم", "english": "employ" },
+    { "arabic": { "ف": "خ", "ع": "د", "ل": "م" }, "english": "employ" },
     {
-      "arabic": "غفر",
+      "arabic": { "ف": "غ", "ع": "ف", "ل": "ر" },
       "english": {
         "base": "seek",
         "past": "sought",
@@ -17,7 +17,7 @@
       }
     },
     {
-      "arabic": "مسك",
+      "arabic": { "ف": "م", "ع": "س", "ل": "ك" },
       "english": {
         "base": "grab",
         "past": "grabbed",

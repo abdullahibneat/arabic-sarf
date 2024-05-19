@@ -3,7 +3,9 @@
   "form": 8,
   "باب": "افْتِعَال",
   "title": "اتَّعَلَ يَتَّعِلُ",
-  "root_letters": [{ "arabic": "وسع", "english": "expand" }],
+  "root_letters": [
+    { "arabic": { "ف": "و", "ع": "س", "ل": "ع" }, "english": "expand" }
+  ],
   "archetype": {
     "ماضي": {
       "معروف": "اتَّعَلَ",

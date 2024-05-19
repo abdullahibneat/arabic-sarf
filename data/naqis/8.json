@@ -5,11 +5,11 @@
   "title": "افْتَعَى يَفْتَعِيْ",
   "root_letters": [
     {
-      "arabic": "جبي",
+      "arabic": { "ف": "ج", "ع": "ب", "ل": "ي" },
       "english": { "base": "choose", "past": "chose", "passive": "chosen" }
     },
     {
-      "arabic": "ردي",
+      "arabic": { "ف": "ر", "ع": "د", "ل": "ي" },
       "english": { "base": "wear", "past": "worn" }
     }
   ],

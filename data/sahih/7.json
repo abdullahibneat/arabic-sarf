@@ -5,21 +5,21 @@
   "title": "انْفَعَلَ يَنْفَعِلُ",
   "root_letters": [
     {
-      "arabic": "صرف",
+      "arabic": { "ف": "ص", "ع": "ر", "ل": "ف" },
       "english": {
         "base": "turn",
         "specifically": "away"
       }
     },
     {
-      "arabic": "قسن",
+      "arabic": { "ف": "ق", "ع": "س", "ل": "ن" },
       "english": {
         "base": "divided",
         "prefixToBe": true
       }
     },
     {
-      "arabic": "كشف",
+      "arabic": { "ف": "ك", "ع": "ش", "ل": "ف" },
       "english": {
         "base": "revealed",
         "prefixToBe": true
