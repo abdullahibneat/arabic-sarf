@@ -137,11 +137,7 @@ const OverviewScreen = () => {
               tasreef: chapter.conjugations[pastConjugation]?.[activeTab],
               englishTasreef: english[pastConjugation]?.[activeTab],
               form: chapter.form,
-              rootLetters: {
-                ف: chapter.root_letters[0].arabic[0],
-                ع: chapter.root_letters[0].arabic[1],
-                ل: chapter.root_letters[0].arabic[2],
-              },
+              rootLetters: chapter.root_letters[0].arabic,
             })
 
             mujarradMudari.tasreefs.push({
@@ -149,11 +145,7 @@ const OverviewScreen = () => {
               tasreef: chapter.conjugations[presentConjugation]?.[activeTab],
               englishTasreef: english[presentConjugation]?.[activeTab],
               form: chapter.form,
-              rootLetters: {
-                ف: chapter.root_letters[0].arabic[0],
-                ع: chapter.root_letters[0].arabic[1],
-                ل: chapter.root_letters[0].arabic[2],
-              },
+              rootLetters: chapter.root_letters[0].arabic,
             })
           }
         } else if (chapter) {
@@ -167,11 +159,7 @@ const OverviewScreen = () => {
             tasreef: archetype.conjugations[pastConjugation]?.[activeTab],
             englishTasreef: english[pastConjugation]?.[activeTab],
             form: chapter.form,
-            rootLetters: {
-              ف: chapter.root_letters[0].arabic[0],
-              ع: chapter.root_letters[0].arabic[1],
-              ل: chapter.root_letters[0].arabic[2],
-            },
+            rootLetters: chapter.root_letters[0].arabic,
           })
 
           mazeedFihiMudari.tasreefs.push({
@@ -179,11 +167,7 @@ const OverviewScreen = () => {
             tasreef: archetype.conjugations[presentConjugation]?.[activeTab],
             englishTasreef: english[presentConjugation]?.[activeTab],
             form: chapter.form,
-            rootLetters: {
-              ف: chapter.root_letters[0].arabic[0],
-              ع: chapter.root_letters[0].arabic[1],
-              ل: chapter.root_letters[0].arabic[2],
-            },
+            rootLetters: chapter.root_letters[0].arabic,
           })
         }
       }

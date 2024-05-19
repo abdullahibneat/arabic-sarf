@@ -21,7 +21,7 @@ export type TasreefProps = {
   audioSrc?: string
   groupMode?: AppStateType['settings']['tasreefGroupMode']
   form: number
-  rootLetters?: { ف?: string; ع?: string; ل?: string } | null
+  rootLetters?: { ف: string; ع: string; ل: string } | null
 }
 
 type CellData = {

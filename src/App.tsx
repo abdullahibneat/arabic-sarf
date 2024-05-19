@@ -26,11 +26,11 @@ const App = () => {
   })
   const [persistRootLetters, setPersistRootLetters] = useState(false)
   const [englishVerb, setEnglishVerb] = useState<EnglishVerb | null>(null)
-  const [customRootLetters, setCustomRootLetters] = useState<{
-    ف?: string
-    ع?: string
-    ل?: string
-  } | null>(null)
+  const [rootLetters, setRootLetters] = useState<{
+    ف: string
+    ع: string
+    ل: string
+  }>({ ف: 'ف', ع: 'ع', ل: 'ل' })
 
   const chapter = useRouteChapter()
 
@@ -38,18 +38,18 @@ const App = () => {
     if (!chapter) return
     if (persistRootLetters) return
     const { arabic, english } = chapter.root_letters[0]
-    setCustomRootLetters({ ف: arabic[0], ع: arabic[1], ل: arabic[2] })
+    setRootLetters(arabic)
     setEnglishVerb(english)
   }, [chapter, persistRootLetters])
 
   const closeModal = useCallback(() => setModal(null), [])
 
-  const handleSetCustomRootLetters = useCallback(
+  const handlesetRootLetters = useCallback(
     (
-      rootLetters: { ف?: string; ع?: string; ل?: string } | null,
+      rootLetters: { ف: string; ع: string; ل: string },
       englishVerb: EnglishVerb | null = null,
     ) => {
-      setCustomRootLetters(rootLetters)
+      setRootLetters(rootLetters)
       setEnglishVerb(englishVerb)
     },
     [],
@@ -61,11 +61,11 @@ const App = () => {
         <ChapterStateContext.Provider
           value={{
             baseChapter: chapter,
-            chapter: chapter ? replaceRoots(chapter, customRootLetters) : null,
+            chapter: chapter ? replaceRoots(chapter, rootLetters) : null,
             englishVerb,
-            customRootLetters,
+            rootLetters,
             persistRootLetters,
-            setCustomRootLetters: handleSetCustomRootLetters,
+            setRootLetters: handlesetRootLetters,
             togglePersistRootLetters: () =>
               setPersistRootLetters(!persistRootLetters),
           }}

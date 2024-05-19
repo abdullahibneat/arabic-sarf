@@ -5,12 +5,7 @@ const replaceRoots = (
   obj: VerbChapter,
   rootLetters?: { ف?: string; ع?: string; ل?: string } | null,
 ) => {
-  if (!rootLetters)
-    rootLetters = {
-      ف: obj.root_letters[0].arabic[0],
-      ع: obj.root_letters[0].arabic[1],
-      ل: obj.root_letters[0].arabic[2],
-    }
+  if (!rootLetters) rootLetters = obj.root_letters[0].arabic
 
   const replaced = replace(obj, /[فعل]/g, rootLetters)
 

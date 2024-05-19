@@ -6,10 +6,10 @@ export type ChapterStateContextType = {
   baseChapter: VerbChapter | null
   chapter: VerbChapter | null
   englishVerb: EnglishVerb | null
-  customRootLetters?: { ف?: string; ع?: string; ل?: string } | null
+  rootLetters: { ف: string; ع: string; ل: string }
   persistRootLetters: boolean
-  setCustomRootLetters: (
-    rootLetters: { ف?: string; ع?: string; ل?: string } | null,
+  setRootLetters: (
+    rootLetters: { ف: string; ع: string; ل: string },
     englishVerb?: EnglishVerb | null,
   ) => void
   togglePersistRootLetters: () => void
@@ -19,7 +19,8 @@ export const ChapterStateContext = createContext<ChapterStateContextType>({
   baseChapter: null,
   chapter: null,
   englishVerb: null,
+  rootLetters: { ف: 'ف', ع: 'ع', ل: 'ل' },
   persistRootLetters: false,
-  setCustomRootLetters: () => null,
+  setRootLetters: () => null,
   togglePersistRootLetters: () => null,
 })

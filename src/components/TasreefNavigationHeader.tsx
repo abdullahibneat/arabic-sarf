@@ -19,9 +19,9 @@ const TasreefNavigationHeader = () => {
 
   const {
     chapter,
-    customRootLetters,
+    rootLetters,
     persistRootLetters,
-    setCustomRootLetters,
+    setRootLetters,
     togglePersistRootLetters,
   } = useChapterStateContext()
 
@@ -66,12 +66,11 @@ const TasreefNavigationHeader = () => {
       if (event.target instanceof HTMLSelectElement) {
         const arabic = event.target.value
         const rootLetters = chapter?.root_letters.find(
-          ($rootLetters) => $rootLetters.arabic === arabic,
+          ($rootLetters) => asValue($rootLetters.arabic) === arabic,
         )
-        setCustomRootLetters(
-          { ف: arabic[0], ع: arabic[1], ل: arabic[2] },
-          rootLetters?.english,
-        )
+        if (rootLetters) {
+          setRootLetters(rootLetters.arabic, rootLetters.english)
+        }
       }
     },
     [chapter],
@@ -91,11 +90,11 @@ const TasreefNavigationHeader = () => {
                     content={
                       <Flex column gap={8} alignItems="center" width={200}>
                         <RootLettersEditor
-                          rootLetters={customRootLetters || undefined}
+                          rootLetters={rootLetters || undefined}
                           mithaal={chapter.type === 'مثال'}
                           ajwaf={chapter.type === 'أجوف'}
                           naqis={chapter.type === 'ناقص'}
-                          onChange={setCustomRootLetters}
+                          onChange={setRootLetters}
                         />
 
                         {chapter.root_letters.length > 0 && (
@@ -103,23 +102,24 @@ const TasreefNavigationHeader = () => {
                             <label for="preset-root-letters">Presets</label>
                             <select
                               id="preset-root-letters"
+                              value={asValue(rootLetters)}
                               onChange={onSelectRootLetters}
                             >
-                              {chapter.root_letters.map(
-                                ({ arabic, english }) => (
-                                  <option key={arabic} value={arabic}>
-                                    {arabic}
-                                  </option>
-                                ),
-                              )}
+                              {chapter.root_letters.map(({ arabic }) => (
+                                <option key={arabic} value={asValue(arabic)}>
+                                  {asValue(arabic)}
+                                </option>
+                              ))}
                             </select>
                           </Flex>
                         )}
 
-                        {customRootLetters && (
+                        {rootLetters && (
                           <div
                             class="reset-root-letters"
-                            onClick={() => setCustomRootLetters(null)}
+                            onClick={() =>
+                              setRootLetters(chapter.root_letters[0].arabic)
+                            }
                           >
                             <Text type="small">Reset</Text>
                           </div>
@@ -188,3 +188,6 @@ const TasreefNavigationHeader = () => {
 }
 
 export default TasreefNavigationHeader
+
+const asValue = (rootLetters: { ف: string; ع: string; ل: string }) =>
+  rootLetters.ف + rootLetters.ع + rootLetters.ل
