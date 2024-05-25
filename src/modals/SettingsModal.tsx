@@ -107,8 +107,14 @@ const SettingsModal = () => {
       { key: 'showNasb', name: 'Nasb', value: settings.showNasb },
       { key: 'showJazm', name: 'Jazm', value: settings.showJazm },
       { key: 'showAmr', name: 'Amr', value: settings.showAmr },
+      { key: 'showMajhool', name: 'Majhool', value: settings.showMajhool },
     ],
-    [settings.showNasb, settings.showJazm, settings.showAmr],
+    [
+      settings.showNasb,
+      settings.showJazm,
+      settings.showAmr,
+      settings.showMajhool,
+    ],
   )
 
   const onArabicFontChange = useCallback(
@@ -331,20 +337,6 @@ const SettingsModal = () => {
             AppState.setItem('settings', {
               ...settings,
               showRootLettersEditor: value,
-            })
-          }
-        />
-      </Flex>
-
-      <Flex column gap={4}>
-        <Text>Show majhool</Text>
-        <Segmented
-          value={settings.showMajhool}
-          options={booleanOptions}
-          onChange={({ value }) =>
-            AppState.setItem('settings', {
-              ...settings,
-              showMajhool: value,
             })
           }
         />
