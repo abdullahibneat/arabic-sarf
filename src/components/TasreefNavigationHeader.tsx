@@ -1,6 +1,7 @@
 import '../styles/TasreefNavigationHeader.scss'
 
 import { useCallback, useEffect, useMemo } from 'preact/hooks'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 import Flex from './Flex'
 import IconButton from './IconButton'
@@ -12,7 +13,6 @@ import Tabs from './Tabs'
 import Text from './Text'
 import useAppState from '../hooks/useAppState'
 import useChapterStateContext from '../hooks/useChapterState'
-import { useSearchParams } from 'react-router-dom'
 
 const TasreefNavigationHeader = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -27,7 +27,18 @@ const TasreefNavigationHeader = () => {
 
   const { settings } = useAppState()
 
-  const voice = searchParams.get('voice') || 'معروف'
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const isFlashcardMode = useMemo(
+    () => location.pathname.includes('/flashcards'),
+    [location.pathname],
+  )
+
+  const tab = isFlashcardMode
+    ? 'Flashcards'
+    : searchParams.get('voice') || 'معروف'
+
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
 
   useEffect(() => {
@@ -39,8 +50,8 @@ const TasreefNavigationHeader = () => {
   }, [chapter])
 
   const showVerbTasreefs = useMemo(
-    () => voice === 'معروف' || voice === 'مجهول',
-    [voice],
+    () => tab === 'معروف' || tab === 'مجهول',
+    [tab],
   )
 
   const tabs = useMemo(() => {
@@ -48,6 +59,8 @@ const TasreefNavigationHeader = () => {
 
     if (settings.showMajhool) $tabs.push('مجهول')
     if (settings.showSarfSagheer) $tabs.push('صرف صغير')
+
+    $tabs.push('Flashcards')
 
     return $tabs.reverse()
   }, [settings.showMajhool, settings.showSarfSagheer])
@@ -76,9 +89,34 @@ const TasreefNavigationHeader = () => {
     [chapter],
   )
 
+  const handleTabClick = useCallback(
+    (tab: string) => {
+      if (tab === 'Flashcards') {
+        if (isFlashcardMode) return
+        navigate({
+          pathname: [
+            location.pathname,
+            location.pathname.endsWith('/') ? '' : '/',
+            'flashcards',
+          ].join(''),
+        })
+      } else {
+        searchParams.set('voice', tab)
+        setSearchParams(searchParams)
+        if (isFlashcardMode) {
+          navigate({
+            pathname: location.pathname.replace('/flashcards', '/'),
+            search: '?' + searchParams.toString(),
+          })
+        }
+      }
+    },
+    [isFlashcardMode, location.pathname, searchParams],
+  )
+
   return (
     <Flex column gap={16} paddingBottom={16}>
-      <Flex column gap={16} paddingTop={16} backgroundColor="var(--white)">
+      <Flex column gap={16} paddingTop={15} backgroundColor="var(--white)">
         {chapter && (
           <Flex column alignItems="center">
             <div class="title">
@@ -157,14 +195,7 @@ const TasreefNavigationHeader = () => {
         )}
 
         {tabs.length > 1 && (
-          <Tabs
-            tabs={tabs}
-            activeTab={voice}
-            onTabClick={(voice) => {
-              searchParams.set('voice', voice)
-              setSearchParams(searchParams)
-            }}
-          />
+          <Tabs tabs={tabs} activeTab={tab} onTabClick={handleTabClick} />
         )}
       </Flex>
 

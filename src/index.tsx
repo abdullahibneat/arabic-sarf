@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import App from './App'
+import FlashcardsScreen from './pages/FlashcardsScreen'
 import NotFound from './pages/_404'
 import OverviewScreen from './pages/OverviewScreen'
 import TasreefScreen from './pages/TasreefScreen'
@@ -13,15 +14,35 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <NotFound />,
     children: [
+      {
+        path: '/flashcards',
+        element: <FlashcardsScreen />,
+      },
       {
         path: '/:type?',
         element: <OverviewScreen />,
-        errorElement: <NotFound />,
       },
       {
-        path: '/:type/:form/:chapter?',
+        path: '/:type/flashcards',
+        element: <FlashcardsScreen />,
+      },
+      {
+        path: '/:type/:form',
         element: <TasreefScreen />,
+      },
+      {
+        path: '/:type/:form/flashcards',
+        element: <FlashcardsScreen />,
+      },
+      {
+        path: '/:type/:form/:chapter',
+        element: <TasreefScreen />,
+      },
+      {
+        path: '/:type/:form/:chapter/flashcards',
+        element: <FlashcardsScreen />,
       },
     ],
   },

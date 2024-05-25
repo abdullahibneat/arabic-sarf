@@ -1,0 +1,10 @@
+.flashcards-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 0 8px;
+  height: 47px;
+  border-top: solid 1px var(--border);
+  background-color: var(--white);
+}
