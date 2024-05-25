@@ -5,6 +5,7 @@ import { useMemo } from 'preact/hooks'
 import useTheme from '../hooks/useTheme'
 
 export type TextProps = {
+  class?: string
   type?: keyof typeof types
   ellipsis?: boolean
   color?: 'white' | 'text' | 'text' | 'text-secondary' | 'hover' | 'border'
@@ -18,6 +19,7 @@ const Text = ({
   color = 'text',
   style = {},
   children,
+  ...restProps
 }: TextProps) => {
   const theme = useTheme()
 
@@ -25,6 +27,7 @@ const Text = ({
 
   return (
     <div
+      {...restProps}
       style={{
         color: `var(--${color})`,
         transition: 'color 250ms',
