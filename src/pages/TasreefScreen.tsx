@@ -4,7 +4,7 @@ import Flex from '../components/Flex'
 import SarfSagheer from '../components/SarfSagheer'
 import Tasreef from '../components/Tasreef'
 import { VerbConjugations } from '../../data/types'
-import generateEnglishTasreefs from '../helpers/generateEnglishTasreefs'
+import generateEnglishConjugations from '../helpers/generateEnglishConjugations'
 import useAppState from '../hooks/useAppState'
 import useChapterStateContext from '../hooks/useChapterState'
 import { useMemo } from 'preact/hooks'
@@ -23,7 +23,7 @@ const TasreefScreen = () => {
 
   const english = useMemo(() => {
     if (!englishVerb) return null
-    return generateEnglishTasreefs(englishVerb)
+    return generateEnglishConjugations(englishVerb)
   }, [englishVerb])
 
   const madi = useMemo(() => {

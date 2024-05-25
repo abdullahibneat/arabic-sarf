@@ -1,6 +1,6 @@
 import { EnglishVerb, VerbConjugations } from '../../data/types'
 
-const generateEnglishTasreefs = (verb: EnglishVerb): VerbConjugations => {
+const generateEnglishConjugations = (verb: EnglishVerb): VerbConjugations => {
   if (typeof verb === 'string') {
     verb = { base: verb }
   }
@@ -58,7 +58,7 @@ const generateEnglishTasreefs = (verb: EnglishVerb): VerbConjugations => {
   }
 }
 
-export default generateEnglishTasreefs
+export default generateEnglishConjugations
 
 const generatePastTense = (verb: { base: string; prefixToBe?: boolean }) => {
   if (verb.prefixToBe) {

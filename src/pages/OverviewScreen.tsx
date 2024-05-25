@@ -8,7 +8,7 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import Flex from '../components/Flex'
 import Text from '../components/Text'
 import { VerbTypeMap } from '../../data/types'
-import generateEnglishTasreefs from '../helpers/generateEnglishTasreefs'
+import generateEnglishConjugations from '../helpers/generateEnglishConjugations'
 import getMazeedFihiChapterHeading from '../helpers/getMazeedFihiChapterHeading'
 import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
@@ -128,7 +128,7 @@ const OverviewScreen = () => {
         if (isMujarrad(chapter)) {
           for (const archetype of Object.values(chapter)) {
             const chapter = replaceRoots(archetype!)
-            const english = generateEnglishTasreefs(
+            const english = generateEnglishConjugations(
               chapter.root_letters[0].english,
             )
 
@@ -156,7 +156,7 @@ const OverviewScreen = () => {
           }
         } else if (chapter) {
           const archetype = replaceRoots(chapter)
-          const english = generateEnglishTasreefs(
+          const english = generateEnglishConjugations(
             chapter.root_letters[0].english,
           )
 
@@ -196,14 +196,14 @@ const OverviewScreen = () => {
     ],
   )
 
-  const tasreefSections = useMemo(() => {
-    const $verbTypes: Record<string, VerbTypeMap[]> = {}
+  const verbs = useMemo(() => {
+    const $verbs: Record<string, VerbTypeMap[]> = {}
 
     if (params.type) {
       const verbType = verbTypes[params.type]
 
       if (verbType) {
-        $verbTypes[params.type] = [verbType]
+        $verbs[params.type] = [verbType]
       }
     } else {
       for (const verbTypeKey of Object.keys(verbTypes)) {
@@ -211,50 +211,28 @@ const OverviewScreen = () => {
           continue
         }
 
-        $verbTypes[verbTypeKey] = [verbTypes[verbTypeKey]!]
+        $verbs[verbTypeKey] = [verbTypes[verbTypeKey]!]
       }
     }
 
-    return Object.entries($verbTypes).flatMap(([type, verbMap]) =>
+    return $verbs
+  }, [params.type, settings.hiddenVerbTypes])
+
+  const tasreefSections = useMemo(() => {
+    return Object.entries(verbs).flatMap(([type, verbMap]) =>
       verbMap.flatMap((verbType) =>
         generateTasreefOverviewForVerbType(type, verbType),
       ),
     )
-  }, [
-    params.type,
-    settings.hiddenVerbTypes,
-    generateTasreefOverviewForVerbType,
-  ])
+  }, [verbs, generateTasreefOverviewForVerbType])
 
   const sarfSagheerSections = useMemo(() => {
-    const $verbTypes: Record<string, VerbTypeMap[]> = {}
-
-    if (params.type) {
-      const verbType = verbTypes[params.type]
-
-      if (verbType) {
-        $verbTypes[params.type] = [verbType]
-      }
-    } else {
-      for (const verbTypeKey of Object.keys(verbTypes)) {
-        if (settings.hiddenVerbTypes.includes(verbTypeKey)) {
-          continue
-        }
-
-        $verbTypes[verbTypeKey] = [verbTypes[verbTypeKey]!]
-      }
-    }
-
-    return Object.entries($verbTypes).flatMap(([type, verbMap]) =>
+    return Object.entries(verbs).flatMap(([type, verbMap]) =>
       verbMap.flatMap((verbType) =>
         generateSarfSagheerOverviewForVerbType(type, verbType),
       ),
     )
-  }, [
-    params.type,
-    settings.hiddenVerbTypes,
-    generateTasreefOverviewForVerbType,
-  ])
+  }, [verbs, generateTasreefOverviewForVerbType])
 
   const sections = useMemo(() => {
     if (voice === 'صرف صغير') return sarfSagheerSections
