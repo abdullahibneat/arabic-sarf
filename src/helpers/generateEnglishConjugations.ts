@@ -1,20 +1,18 @@
 import { EnglishVerb, VerbConjugations } from '../../data/types'
 
 const generateEnglishConjugations = (verb: EnglishVerb): VerbConjugations => {
-  if (typeof verb === 'string') {
-    verb = { base: verb }
+  const english = typeof verb === 'string' ? { base: verb } : { ...verb }
+
+  if (!english.past) {
+    english.past = generatePastTense(english)
   }
 
-  if (!verb.past) {
-    verb.past = generatePastTense(verb)
+  if (!english.presentContinuous) {
+    english.presentContinuous = generatePresentContinuousTense(english)
   }
 
-  if (!verb.presentContinuous) {
-    verb.presentContinuous = generatePresentContinuousTense(verb)
-  }
-
-  if (!verb.passive) {
-    verb.passive = generatePassiveTense(verb)
+  if (!english.passive) {
+    english.passive = generatePassiveTense(english)
   }
 
   /**
@@ -23,38 +21,38 @@ const generateEnglishConjugations = (verb: EnglishVerb): VerbConjugations => {
    * Sometimes passive verbs need to be adjusted
    * e.g. he made <s.o. understand> => was was made <to understand>
    */
-  if (verb.specifically) {
-    if (typeof verb.specifically === 'string') {
-      verb.specifically = {
-        base: verb.specifically,
-        passive: verb.specifically,
+  if (english.specifically) {
+    if (typeof english.specifically === 'string') {
+      english.specifically = {
+        base: english.specifically,
+        passive: english.specifically,
       }
     }
 
-    verb.base += ' ' + verb.specifically.base
-    verb.past += ' ' + verb.specifically.base
-    verb.presentContinuous += ' ' + verb.specifically.base
-    verb.passive += ' ' + verb.specifically.passive
+    english.base += ' ' + english.specifically.base
+    english.past += ' ' + english.specifically.base
+    english.presentContinuous += ' ' + english.specifically.base
+    english.passive += ' ' + english.specifically.passive
   }
 
   return {
     ماضي: {
-      معروف: generateMadiMaroofTasreef(verb),
-      مجهول: generateMadiMajhoolTasreef(verb),
+      معروف: generateMadiMaroofTasreef(english),
+      مجهول: generateMadiMajhoolTasreef(english),
     },
     مضارع: {
-      معروف: generateMudariMaroofTasreef(verb),
-      مجهول: generateMudariMajhoolTasreef(verb),
+      معروف: generateMudariMaroofTasreef(english),
+      مجهول: generateMudariMajhoolTasreef(english),
     },
     نصب: {
-      معروف: generateNasbMaroofTasreef(verb),
-      مجهول: generateNasbMajhoolTasreef(verb),
+      معروف: generateNasbMaroofTasreef(english),
+      مجهول: generateNasbMajhoolTasreef(english),
     },
     جزم: {
-      معروف: generateJazmMaroofTasreef(verb),
-      مجهول: generateJazmMajhoolTasreef(verb),
+      معروف: generateJazmMaroofTasreef(english),
+      مجهول: generateJazmMajhoolTasreef(english),
     },
-    أمر: generateAmrTasreef(verb),
+    أمر: generateAmrTasreef(english),
   }
 }
 
