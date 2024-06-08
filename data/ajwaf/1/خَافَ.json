@@ -9,7 +9,7 @@
       "arabic": { "ف": "ن", "ع": "و", "ل": "م" },
       "english": { "base": "sleep", "past": "slept" }
     },
-    { "arabic": { "ف": "ش", "ع": "و", "ل": "ا" }, "english": "want" }
+    { "arabic": { "ف": "ش", "ع": "و", "ل": "ء" }, "english": "want" }
   ],
   "archetype": {
     "ماضي": {
