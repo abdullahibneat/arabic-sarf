@@ -1,15 +1,14 @@
 import '../styles/Tasreef.scss'
 
-import { VerbChapter, VerbTasreef } from '../../data/types'
+import { VerbChapter, VerbConjugations } from '../../data/types'
+import getSeeghas, { Seegha } from '../helpers/getSeeghas'
 import { useCallback, useMemo } from 'preact/hooks'
 
 import { AppStateType } from '../AppState'
 import Flex from './Flex'
 import IconButton from './IconButton'
 import Text from './Text'
-import asEnglishPronoun from '../helpers/asEnglishPronoun'
 import getNumberForPronoun from '../helpers/getNumberForPronoun'
-import replace from '../helpers/replace'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
 import useAudioPlayer from '../hooks/useAudioPlayer'
@@ -17,33 +16,18 @@ import useModal from '../hooks/useModal'
 
 export type TasreefProps = {
   title: string
-  tasreef?: VerbTasreef | { '2nd': VerbTasreef['2nd'] } | null
-  baseTasreef?: VerbTasreef | { '2nd': VerbTasreef['2nd'] } | null
-  englishTasreef?: VerbTasreef | { '2nd': VerbTasreef['2nd'] } | null
   particle?: string
   audioSrc?: string
   groupMode?: AppStateType['settings']['tasreefGroupMode']
   rootLetters: { ف: string; ع: string; ل: string }
-  tense: string
+  tense: keyof VerbConjugations
   baseChapter: VerbChapter
-  voice: string
+  voice?: string
   case: string
-}
-
-type CellData = {
-  gender?: string
-  person: string
-  pronoun: string
-  conjugation: string
-  archetype: string
-  english: string
 }
 
 const Tasreef = ({
   title,
-  tasreef,
-  baseTasreef,
-  englishTasreef,
   particle,
   audioSrc,
   groupMode,
@@ -63,7 +47,7 @@ const Tasreef = ({
     return particle + ' '
   }, [particle])
 
-  const data: CellData[][][] = useMemo(() => {
+  const data: Seegha[][][] = useMemo(() => {
     const persons = {
       '3rd': {
         masculine: ['هُوَ', 'هُمَا', 'هُمْ'],
@@ -76,47 +60,45 @@ const Tasreef = ({
       '1st': ['أَنَا', 'نَحْنُ'],
     }
 
-    const archetype = replace(
-      baseTasreef || {},
-      /[فعل]/g,
-      baseChapter.root_letters[0].arabic,
-    )
+    const archetypeChapter = replaceRoots(baseChapter)
+    const chapter = replaceRoots(baseChapter, rootLetters)
+    const seeghas = getSeeghas({
+      archetypeChapter,
+      chapter,
+      rootLetters,
+      tense,
+      voice,
+      case: verbCase,
+    })
 
-    return Object.entries(persons).map(([person, obj]) => {
+    let index = 0
+
+    return Object.entries(persons).map(([person, obj], personIndex) => {
       if (Array.isArray(obj)) {
         const pronouns = obj
-        return [
-          pronouns.map((pronoun) => ({
-            person,
-            pronoun,
-            conjugation: String(tasreef?.[person]?.[pronoun] ?? ''),
-            archetype: String(archetype?.[person]?.[pronoun] ?? ''),
-            english: englishTasreef
-              ? (tense === 'أمر' ? '' : asEnglishPronoun(pronoun) + ' ') +
-                String(englishTasreef?.[person]?.[pronoun])
-              : '(not available for custom root letters)',
-          })),
-        ]
+        return [pronouns.map(() => seeghas[index++])]
       } else {
-        return Object.entries(obj).map(([gender, pronouns]) =>
-          pronouns.map((pronoun) => ({
-            gender,
-            person,
-            pronoun,
-            conjugation: String(tasreef?.[person]?.[gender]?.[pronoun] ?? ''),
-            archetype: String(archetype?.[person]?.[gender]?.[pronoun] ?? ''),
-            english: englishTasreef
-              ? (tense === 'أمر' ? '' : asEnglishPronoun(pronoun) + ' ') +
-                String(englishTasreef?.[person]?.[gender]?.[pronoun])
-              : '(not available for custom root letters)',
-          })),
+        return Object.entries(obj).map(([_, pronouns]) =>
+          pronouns.map(() => seeghas[index++]),
         )
       }
     })
-  }, [tasreef, baseTasreef, baseChapter, englishTasreef, tense])
+  }, [baseChapter, rootLetters, tense, voice, verbCase])
+
+  const isEmpty = useMemo(() => {
+    if (tense === 'ماضي' && verbCase !== 'مرفوع') return true
+
+    const validSeeghas = data.flatMap((cells) =>
+      cells.flatMap((seeghas) =>
+        seeghas.filter((seegha) => seegha.conjugation),
+      ),
+    )
+
+    return validSeeghas.length === 0
+  }, [data])
 
   const openModal = useCallback(
-    (cell: CellData) => () => {
+    (cell: Seegha) => () => {
       const cellText = document.getSelection()
       if (cellText?.type === 'Range') return
 
@@ -188,13 +170,13 @@ const Tasreef = ({
         <div>{title}</div>
       </div>
 
-      {!tasreef && (
+      {isEmpty && (
         <div class="not-found">
           <Text color="text-secondary">N/A</Text>
         </div>
       )}
 
-      {tasreef && (
+      {!isEmpty && (
         <>
           {data.map((person, i) => (
             <div class="person" key={String(i)}>

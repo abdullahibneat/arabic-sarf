@@ -36,7 +36,7 @@ const getSeeghas = ({
   chapter?: VerbChapter
   rootLetters?: { ف: string; ع: string; ل: string }
   tense: keyof VerbConjugations
-  voice?: 'معروف' | 'مجهول'
+  voice?: string
   case: string
 }): Seegha[] => {
   const persons = {
@@ -65,6 +65,20 @@ const getSeeghas = ({
       rootLetters.arabic.ع === arabicRootLetters.ع &&
       rootLetters.arabic.ل === arabicRootLetters.ل,
   )
+
+  if (voice) {
+    if (voice !== 'معروف' && voice !== 'مجهول') {
+      voice = 'معروف'
+    }
+  }
+
+  if (verbCase) {
+    if (verbCase === 'منصوب') {
+      tense = 'نصب'
+    } else if (verbCase === 'مجزوم' && tense !== 'أمر') {
+      tense = 'جزم'
+    }
+  }
 
   const tasreef: VerbTasreef | { '2nd': VerbSighaSecondPerson } | null =
     tense === 'أمر'

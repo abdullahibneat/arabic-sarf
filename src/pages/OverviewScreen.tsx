@@ -8,7 +8,6 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import Flex from '../components/Flex'
 import Text from '../components/Text'
 import { VerbTypeMap } from '../../data/types'
-import generateEnglishConjugations from '../helpers/generateEnglishConjugations'
 import getMazeedFihiChapterHeading from '../helpers/getMazeedFihiChapterHeading'
 import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import isMujarrad from '../helpers/isMujarrad'
@@ -128,14 +127,9 @@ const OverviewScreen = () => {
         if (isMujarrad(chapter)) {
           for (const archetype of Object.values(chapter)) {
             const chapter = replaceRoots(archetype!)
-            const english = generateEnglishConjugations(
-              chapter.root_letters[0].english,
-            )
 
             mujarradMadi.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: chapter.conjugations[pastConjugation]?.[voice],
-              englishTasreef: english[pastConjugation]?.[voice],
               rootLetters: chapter.root_letters[0].arabic,
               tense: 'ماضي',
               baseChapter: archetype!,
@@ -145,8 +139,6 @@ const OverviewScreen = () => {
 
             mujarradMudari.tasreefs.push({
               title: getMujarradChapterHeading(chapter.باب),
-              tasreef: chapter.conjugations[presentConjugation]?.[voice],
-              englishTasreef: english[presentConjugation]?.[voice],
               rootLetters: chapter.root_letters[0].arabic,
               tense: 'مضارع',
               baseChapter: archetype!,
@@ -156,14 +148,9 @@ const OverviewScreen = () => {
           }
         } else if (chapter) {
           const archetype = replaceRoots(chapter)
-          const english = generateEnglishConjugations(
-            chapter.root_letters[0].english,
-          )
 
           mazeedFihiMadi.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: archetype.conjugations[pastConjugation]?.[voice],
-            englishTasreef: english[pastConjugation]?.[voice],
             rootLetters: chapter.root_letters[0].arabic,
             tense: 'ماضي',
             baseChapter: archetype,
@@ -173,8 +160,6 @@ const OverviewScreen = () => {
 
           mazeedFihiMudari.tasreefs.push({
             title: getMazeedFihiChapterHeading(archetype.form),
-            tasreef: archetype.conjugations[presentConjugation]?.[voice],
-            englishTasreef: english[presentConjugation]?.[voice],
             rootLetters: chapter.root_letters[0].arabic,
             tense: 'مضارع',
             baseChapter: archetype,
@@ -260,8 +245,6 @@ const OverviewScreen = () => {
                   <Tasreef
                     key={`section-${i}-tasreef-${j}`}
                     title={tasreef.title}
-                    tasreef={tasreef.tasreef}
-                    englishTasreef={tasreef.englishTasreef}
                     particle={section.particle}
                     groupMode="list"
                     rootLetters={tasreef.rootLetters}
