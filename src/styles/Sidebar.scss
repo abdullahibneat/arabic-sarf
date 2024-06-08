@@ -61,6 +61,7 @@ aside {
     height: 100%;
     z-index: 99;
     transition:
+      top 250ms,
       height 250ms,
       background-color 250ms;
 
@@ -74,6 +75,7 @@ aside {
     }
 
     &:not(.open) {
+      top: calc(100% - 60px);
       height: 60px;
       overflow: hidden;
       background-color: transparent;
