@@ -9,7 +9,7 @@ import { useMemo } from 'preact/hooks'
 import { useSearchParams } from 'react-router-dom'
 
 const TasreefScreen = () => {
-  const { rootLetters, baseChapter } = useChapterStateContext()
+  const { rootLetters, baseChapter, chapter } = useChapterStateContext()
 
   const [searchParams] = useSearchParams()
 
@@ -57,14 +57,14 @@ const TasreefScreen = () => {
     [voice],
   )
 
-  if (!baseChapter || !baseChapter) return <div>Not found</div>
+  if (!baseChapter || !baseChapter || !chapter) return <div>Not found</div>
 
   return (
     <Flex flex={1} column gap={16}>
       <Flex column gap={16} justifyContent="center">
         {voice === 'صرف صغير' && (
           <Flex column padding="0 1rem" alignItems="center">
-            <SarfSagheer chapter={baseChapter} />
+            <SarfSagheer chapter={chapter} />
           </Flex>
         )}
 
