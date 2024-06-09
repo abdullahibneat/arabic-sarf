@@ -10,25 +10,39 @@ export type SarfSagheerProps = {
 
 const SarfSagheer = ({ chapter }: SarfSagheerProps) => {
   const {
-    archetype: { ماضي, مضارع, مصضر, فاعل, مفعول, أمر, نهي },
+    فعل: { ماضي, مضارع, أمر },
+    مشتق: { مصضر, فاعل, مفعول },
   } = chapter
 
+  const معروف = useMemo(
+    () => ({
+      ماضي: ماضي.معروف.مرفوع['3rd'].masculine.هُوَ,
+      مضارع: مضارع.معروف.مرفوع['3rd'].masculine.هُوَ,
+      فاعل: فاعل.masculine.singular,
+    }),
+    [ماضي, مضارع, مفعول],
+  )
+
   const مجهول = useMemo(() => {
-    if (!ماضي.مجهول) return null
-    if (!مضارع.مجهول) return null
-    if (!مفعول) return null
+    if (!ماضي.مجهول.مرفوع) return null
+    if (!مضارع.مجهول.مرفوع) return null
+    if (!مفعول.masculine.singular) return null
 
     return {
-      ماضي: ماضي.مجهول,
-      مضارع: مضارع.مجهول,
-      مفعول,
+      ماضي: ماضي.مجهول.مرفوع['3rd'].masculine.هُمَا,
+      مضارع: مضارع.مجهول.مرفوع['3rd'].masculine.هُوَ,
+      مفعول: مفعول.masculine.singular,
     }
   }, [ماضي, مضارع, مفعول])
+
+  const amr = useMemo(() => أمر.معروف.مجزوم['2nd'].masculine.أَنْتَ, [أمر])
+
+  const nahy = useMemo(() => مضارع.معروف.مجزوم['2nd'].masculine.أَنْتَ, [أمر])
 
   return (
     <div class="sarf-sagheer">
       <Text>
-        {ماضي.معروف} {مضارع.معروف} {مصضر[0]} <span>فهو</span> {فاعل}
+        {معروف.ماضي} {معروف.مضارع} {مصضر[0]} <span>فهو</span> {معروف.فاعل}
       </Text>
 
       {مجهول && (
@@ -39,7 +53,7 @@ const SarfSagheer = ({ chapter }: SarfSagheerProps) => {
       )}
 
       <Text>
-        <span>الأمر منه</span> {أمر} <span>و النّهي عنه</span> لا {نهي}
+        <span>الأمر منه</span> {amr} <span>و النّهي عنه</span> لا {nahy}
       </Text>
     </div>
   )

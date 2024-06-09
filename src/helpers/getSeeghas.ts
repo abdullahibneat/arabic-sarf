@@ -66,32 +66,13 @@ const getSeeghas = ({
       rootLetters.arabic.ل === arabicRootLetters.ل,
   )
 
-  if (voice) {
-    if (voice !== 'معروف' && voice !== 'مجهول') {
-      voice = 'معروف'
-    }
-  }
-
-  if (verbCase) {
-    if (verbCase === 'منصوب') {
-      tense = 'نصب'
-    } else if (verbCase === 'مجزوم' && tense !== 'أمر') {
-      tense = 'جزم'
-    }
-  }
-
   const tasreef: VerbTasreef | { '2nd': VerbSighaSecondPerson } | null =
-    tense === 'أمر'
-      ? chapter.conjugations[tense]
-      : chapter.conjugations[tense][voice]
+    chapter.فعل[tense][voice][verbCase]
 
   const archetypeTasreef:
     | VerbTasreef
     | { '2nd': VerbSighaSecondPerson }
-    | null =
-    tense === 'أمر'
-      ? archetypeChapter.conjugations[tense]
-      : archetypeChapter.conjugations[tense][voice]
+    | null = archetypeChapter.فعل[tense][voice][verbCase]
 
   const englishConjugations = rootLetters
     ? generateEnglishConjugations(rootLetters.english)
@@ -113,7 +94,7 @@ const getSeeghas = ({
           rootLetters: rootLetters?.arabic || arabicRootLetters,
           type: chapter.type,
           form: chapter.form,
-          pattern: `${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
+          pattern: chapter.title,
           tasreef: tense,
           voice,
           case: verbCase,
@@ -136,7 +117,7 @@ const getSeeghas = ({
             rootLetters: rootLetters?.arabic || arabicRootLetters,
             type: chapter.type,
             form: chapter.form,
-            pattern: `${chapter.archetype.ماضي.معروف} ${chapter.archetype.مضارع.معروف}`,
+            pattern: chapter.title,
             tasreef: tense,
             voice,
             case: verbCase,

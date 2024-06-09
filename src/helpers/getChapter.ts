@@ -1,22 +1,15 @@
-import isMujarrad from './isMujarrad'
 import verbTypes from '../../data'
 
-const getChapter = (params: {
-  type?: string
-  form?: string
-  chapter?: string
-}) => {
-  const type = verbTypes[params.type || '']
+const getChapter = (params: { type?: string; form?: string }) => {
+  if (!params.type || !params.form) return null
+
+  const type = verbTypes.get(params.type)
 
   if (!type) return null
 
-  const form = type[params.form || '']
+  const form = type.get(params.form)
 
-  if (!form) return null
-
-  const chapter = isMujarrad(form) ? form[params.chapter || ''] : form
-
-  return chapter ?? null
+  return form ?? null
 }
 
 export default getChapter

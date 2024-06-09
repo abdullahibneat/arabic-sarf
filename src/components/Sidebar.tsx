@@ -16,7 +16,6 @@ import SettingsModal from '../modals/SettingsModal'
 import Text from './Text'
 import getMazeedFihiChapterHeading from '../helpers/getMazeedFihiChapterHeading'
 import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
-import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
 import useModal from '../hooks/useModal'
@@ -44,12 +43,12 @@ const Sidebar = () => {
   const accordionData = useMemo(() => {
     const accordionGroups: AccordionGroup[] = []
 
-    for (const type of Object.keys(verbTypes)) {
+    for (const [type, verbType] of verbTypes.entries()) {
       if (settings.hiddenVerbTypes.includes(type)) {
         continue
       }
 
-      const verbType = verbTypes[type]!
+      if (!verbType) continue
 
       const items: AccordionGroupItem[] = [
         {
@@ -59,22 +58,17 @@ const Sidebar = () => {
         },
       ]
 
-      for (const chapter of Object.values(verbType)) {
-        if (isMujarrad(chapter)) {
-          for (const [$chapter, mujarradChapter] of Object.entries(chapter)) {
-            items.push({
-              id: `/${type}/${mujarradChapter?.form}/${$chapter}`,
-              title: replaceRoots(mujarradChapter!).title,
-              tag: getMujarradChapterHeading(mujarradChapter!.باب),
-            })
-          }
-        } else if (chapter) {
-          items.push({
-            id: `/${type}/${chapter.form}`,
-            title: replaceRoots(chapter).title,
-            tag: getMazeedFihiChapterHeading(chapter.form),
-          })
-        }
+      for (const [id, chapter] of verbType.entries()) {
+        if (!chapter) continue
+
+        items.push({
+          id: `/${type}/${id}`,
+          title: replaceRoots(chapter).title,
+          tag:
+            chapter.form === 1
+              ? getMujarradChapterHeading(chapter.chapter)
+              : getMazeedFihiChapterHeading(chapter.form),
+        })
       }
 
       accordionGroups.push({

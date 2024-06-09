@@ -67,7 +67,7 @@ const SettingsModal = () => {
 
   const verbTypeOptions = useMemo(
     () =>
-      Object.keys(verbTypes).map((type) => ({
+      Array.from(verbTypes.keys()).map((type) => ({
         key: type,
         name: type,
         value: !settings.hiddenVerbTypes.includes(type),

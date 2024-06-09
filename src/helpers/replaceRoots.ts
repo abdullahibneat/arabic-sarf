@@ -9,8 +9,9 @@ const replaceRoots = (
 
   const replaced = replace(obj, /[فعل]/g, rootLetters)
 
-  replaced.باب = obj.باب
   replaced.type = obj.type
+  replaced.form = obj.form
+  replaced.chapter = obj.chapter
   replaced.root_letters = obj.root_letters
 
   return replaced

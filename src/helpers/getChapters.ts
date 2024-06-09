@@ -1,22 +1,13 @@
-import { VerbChapter, VerbTypeMap } from '../../data/types'
+import { VerbChapter } from '../../data/types'
 
-import isMujarrad from './isMujarrad'
-
-const getChapters = (verbType: VerbTypeMap | undefined) => {
+const getChapters = (verbType: Map<string, VerbChapter | null | undefined>) => {
   if (!verbType) return []
 
   const chapters: VerbChapter[] = []
 
-  for (const chapter of Object.values(verbType)) {
+  for (const chapter of verbType.values()) {
     if (!chapter) continue
-
-    if (isMujarrad(chapter)) {
-      for (const subChapter of Object.values(chapter)) {
-        if (subChapter) chapters.push(subChapter)
-      }
-    } else {
-      chapters.push(chapter)
-    }
+    chapters.push(chapter)
   }
 
   return chapters

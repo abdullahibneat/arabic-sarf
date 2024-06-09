@@ -102,11 +102,7 @@ const Tasreef = ({
       const cellText = document.getSelection()
       if (cellText?.type === 'Range') return
 
-      const {
-        archetype: { ماضي, مضارع },
-      } = replaceRoots(baseChapter)
-
-      const pattern = `${ماضي.معروف} ${مضارع.معروف}`
+      const archetypeChapter = replaceRoots(baseChapter)
 
       modal.open({
         title: cell.conjugation,
@@ -121,7 +117,7 @@ const Tasreef = ({
               )}
               <li>Type: {baseChapter.type}</li>
               <li>Form: {baseChapter.form}</li>
-              <li>Pattern: {pattern}</li>
+              <li>Pattern: {archetypeChapter.title}</li>
               <li>Tasreef: {tense}</li>
               <li>Voice: {voice}</li>
               <li>Case: {verbCase}</li>
@@ -142,15 +138,7 @@ const Tasreef = ({
         ),
       })
     },
-    [
-      baseChapter.archetype,
-      rootLetters,
-      baseChapter.type,
-      baseChapter.form,
-      tense,
-      voice,
-      verbCase,
-    ],
+    [baseChapter, rootLetters, tense, voice, verbCase],
   )
 
   return (

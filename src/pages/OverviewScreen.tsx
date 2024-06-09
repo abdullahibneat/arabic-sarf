@@ -7,10 +7,9 @@ import { useParams, useSearchParams } from 'react-router-dom'
 
 import Flex from '../components/Flex'
 import Text from '../components/Text'
-import { VerbTypeMap } from '../../data/types'
+import { VerbChapter } from '../../data/types'
 import getMazeedFihiChapterHeading from '../helpers/getMazeedFihiChapterHeading'
 import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
-import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
 import verbTypes from '../../data'
@@ -44,7 +43,7 @@ const OverviewScreen = () => {
   }, [settings.showNasbJazmParticle, verbCase])
 
   const generateSarfSagheerOverviewForVerbType = useCallback(
-    (type: string, verbMap: VerbTypeMap) => {
+    (type: string, verbMap: Map<string, VerbChapter | null | undefined>) => {
       const $sections: Array<{
         title: string
         sarfSagheers: SarfSagheerProps[]
@@ -66,16 +65,12 @@ const OverviewScreen = () => {
       const mujarrad = $sections[0]
       const mazeedFihi = $sections[1]
 
-      for (const chapter of Object.values(verbMap)) {
-        if (isMujarrad(chapter)) {
-          for (const archetype of Object.values(chapter)) {
-            const chapter = replaceRoots(archetype!)
-            mujarrad.sarfSagheers.push({ chapter })
-          }
-        } else if (chapter) {
-          const archetype = replaceRoots(chapter)
-          mazeedFihi.sarfSagheers.push({ chapter: archetype })
-        }
+      for (const chapter of verbMap.values()) {
+        if (!chapter) continue
+
+        const archetype = replaceRoots(chapter)
+        const collection = archetype.form === 1 ? mujarrad : mazeedFihi
+        collection.sarfSagheers.push({ chapter: archetype })
       }
 
       return $sections
@@ -84,7 +79,7 @@ const OverviewScreen = () => {
   )
 
   const generateTasreefOverviewForVerbType = useCallback(
-    (type: string, verbMap: VerbTypeMap) => {
+    (type: string, verbMap: Map<string, VerbChapter | null | undefined>) => {
       const $sections: Array<{
         title: string
         tasreefs: TasreefProps[]
@@ -123,50 +118,39 @@ const OverviewScreen = () => {
       const mazeedFihiMadi = $sections[2]
       const mazeedFihiMudari = $sections[3]
 
-      for (const chapter of Object.values(verbMap)) {
-        if (isMujarrad(chapter)) {
-          for (const archetype of Object.values(chapter)) {
-            const chapter = replaceRoots(archetype!)
+      for (const chapter of verbMap.values()) {
+        if (!chapter) continue
 
-            mujarradMadi.tasreefs.push({
-              title: getMujarradChapterHeading(chapter.باب),
-              rootLetters: chapter.root_letters[0].arabic,
-              tense: 'ماضي',
-              baseChapter: archetype!,
-              case: verbCase,
-              voice,
-            })
+        const archetype = replaceRoots(chapter)
 
-            mujarradMudari.tasreefs.push({
-              title: getMujarradChapterHeading(chapter.باب),
-              rootLetters: chapter.root_letters[0].arabic,
-              tense: 'مضارع',
-              baseChapter: archetype!,
-              case: verbCase,
-              voice,
-            })
-          }
-        } else if (chapter) {
-          const archetype = replaceRoots(chapter)
+        const madiCollection =
+          archetype.form === 1 ? mujarradMadi : mazeedFihiMadi
+        const mudariCollection =
+          archetype.form === 1 ? mujarradMudari : mazeedFihiMudari
 
-          mazeedFihiMadi.tasreefs.push({
-            title: getMazeedFihiChapterHeading(archetype.form),
-            rootLetters: chapter.root_letters[0].arabic,
-            tense: 'ماضي',
-            baseChapter: archetype,
-            case: verbCase,
-            voice,
-          })
+        madiCollection.tasreefs.push({
+          title:
+            archetype.form === 1
+              ? getMujarradChapterHeading(archetype.chapter)
+              : getMazeedFihiChapterHeading(archetype.form),
+          rootLetters: chapter.root_letters[0].arabic,
+          tense: 'ماضي',
+          baseChapter: archetype,
+          case: verbCase,
+          voice,
+        })
 
-          mazeedFihiMudari.tasreefs.push({
-            title: getMazeedFihiChapterHeading(archetype.form),
-            rootLetters: chapter.root_letters[0].arabic,
-            tense: 'مضارع',
-            baseChapter: archetype,
-            case: verbCase,
-            voice,
-          })
-        }
+        mudariCollection.tasreefs.push({
+          title:
+            archetype.form === 1
+              ? getMujarradChapterHeading(archetype.chapter)
+              : getMazeedFihiChapterHeading(archetype.form),
+          rootLetters: chapter.root_letters[0].arabic,
+          tense: 'مضارع',
+          baseChapter: archetype,
+          case: verbCase,
+          voice,
+        })
       }
 
       return $sections
@@ -182,21 +166,24 @@ const OverviewScreen = () => {
   )
 
   const verbs = useMemo(() => {
-    const $verbs: Record<string, VerbTypeMap[]> = {}
+    const $verbs: Record<
+      string,
+      Map<string, VerbChapter | null | undefined>[]
+    > = {}
 
     if (params.type) {
-      const verbType = verbTypes[params.type]
+      const verbType = verbTypes.get(params.type)
 
       if (verbType) {
         $verbs[params.type] = [verbType]
       }
     } else {
-      for (const verbTypeKey of Object.keys(verbTypes)) {
+      for (const [verbTypeKey, verbType] of verbTypes.entries()) {
         if (settings.hiddenVerbTypes.includes(verbTypeKey)) {
           continue
         }
 
-        $verbs[verbTypeKey] = [verbTypes[verbTypeKey]!]
+        $verbs[verbTypeKey] = [verbType]
       }
     }
 

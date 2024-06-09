@@ -9,7 +9,6 @@ import IconButton from '../components/IconButton'
 import Segmented from '../components/Segmented'
 import Text from '../components/Text'
 import getChapters from '../helpers/getChapters'
-import isMujarrad from '../helpers/isMujarrad'
 import replaceRoots from '../helpers/replaceRoots'
 import shuffle from '../helpers/shuffle'
 import useAppState from '../hooks/useAppState'
@@ -28,13 +27,13 @@ const FlashcardsScreen = () => {
   const params = useParams()
 
   const chapters = useMemo(() => {
-    const { type, form, chapter } = params
+    const { type, form } = params
 
     if (!type) {
-      return Object.values(verbTypes).flatMap(getChapters)
+      return Array.from(verbTypes.values()).flatMap(getChapters)
     }
 
-    const typeData = verbTypes[type]
+    const typeData = verbTypes.get(type)
 
     if (!typeData) {
       return []
@@ -44,17 +43,11 @@ const FlashcardsScreen = () => {
       return getChapters(typeData)
     }
 
-    const formData = typeData[form]
+    const formData = typeData.get(form)
 
     if (!formData) return []
 
-    if (!chapter) {
-      return isMujarrad(formData) ? getChapters(formData) : [formData]
-    }
-
-    const chapterData = isMujarrad(formData) ? formData[chapter] : null
-
-    return chapterData ? [chapterData] : []
+    return [formData]
   }, [params.type, params.form])
 
   const seeghas = useMemo(() => {

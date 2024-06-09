@@ -46,7 +46,7 @@ const TasreefScreen = () => {
     let path = `/recordings/${baseChapter?.type}/${baseChapter?.form}`
 
     if (baseChapter?.form === 1) {
-      path += `/${baseChapter.باب}`
+      path += `/${baseChapter.chapter}`
     }
 
     return path
