@@ -66,129 +66,134 @@ import mudaafForm7 from './mudaaf/7.json'
 import mudaafForm8 from './mudaaf/8.json'
 import mudaafForm10 from './mudaaf/10.json'
 
-import { VerbTypeMap } from './types'
+import { VerbChapter } from './types'
 
-const صحيح: VerbTypeMap = {
-  '1': {
-    نَصَرَ: nasara,
-    ضَرَبَ: daraba,
-    فَتَحَ: fataha,
-    سَمِعَ: samia,
-    حَسِبَ: hasiba,
-    كَرُمَ: karuma,
-  },
-  '2': sahihForm2,
-  '3': sahihForm3,
-  '4': sahihForm4,
-  '5': sahihForm5,
-  '6': sahihForm6,
-  '7': sahihForm7,
-  '8': sahihForm8,
-  '9': sahihForm9,
-  '10': sahihForm10,
-}
+const صحيح = new Map<string, VerbChapter | null | undefined>([
+  ['نَصَرَ', nasara],
+  ['ضَرَبَ', daraba],
+  ['فَتَحَ', fataha],
+  ['سَمِعَ', samia],
+  ['حَسِبَ', hasiba],
+  ['كَرُمَ', karuma],
+  ['2', sahihForm2],
+  ['3', sahihForm3],
+  ['4', sahihForm4],
+  ['5', sahihForm5],
+  ['6', sahihForm6],
+  ['7', sahihForm7],
+  ['8', sahihForm8],
+  ['9', sahihForm9],
+  ['10', sahihForm10],
+])
 
-const أجوف: VerbTypeMap = {
-  '1': {
-    قَالَ: qaala,
-    بَاعَ: baaa,
-    خَافَ: khaafa,
-  },
-  '2': ajwafForm2,
-  '3': ajwafForm3,
-  '4': ajwafForm4,
-  '5': ajwafForm5,
-  '6': ajwafForm6,
-  '7': ajwafForm7,
-  '8': ajwafForm8,
-  '9': ajwafForm9,
-  '10': ajwafForm10,
-}
+const أجوف = new Map<string, VerbChapter | null | undefined>([
+  ['قَالَ', qaala],
+  ['بَاعَ', baaa],
+  ['خَافَ', khaafa],
+  ['2', ajwafForm2],
+  ['3', ajwafForm3],
+  ['4', ajwafForm4],
+  ['5', ajwafForm5],
+  ['6', ajwafForm6],
+  ['7', ajwafForm7],
+  ['8', ajwafForm8],
+  ['9', ajwafForm9],
+  ['10', ajwafForm10],
+])
 
-const ناقص: VerbTypeMap = {
-  '1': {
-    دَعَا: daaa,
-    رَمَى: ramaa,
-    رَضِيَ: radia,
-    نَهَى: nahaa,
-  },
-  '2': naqisForm2,
-  '3': naqisForm3,
-  '4': naqisForm4,
-  '5': naqisForm5,
-  '6': naqisForm6,
-  '7': naqisForm7,
-  '8': naqisForm8,
-  '9': null,
-  '10': naqisForm10,
-}
+const ناقص = new Map<string, VerbChapter | null | undefined>([
+  ['دَعَا', daaa],
+  ['رَمَى', ramaa],
+  ['رَضِيَ', radia],
+  ['نَهَى', nahaa],
+  ['2', naqisForm2],
+  ['3', naqisForm3],
+  ['4', naqisForm4],
+  ['5', naqisForm5],
+  ['6', naqisForm6],
+  ['7', naqisForm7],
+  ['8', naqisForm8],
+  ['9', null],
+  ['10', naqisForm10],
+])
 
-const مثال: VerbTypeMap = {
-  '1': {
-    وَجَدَ: wajada,
-    وَجِلَ: wajala,
-    وَهَبَ: wahaba,
-  },
-  '2': {
-    ...sahihForm2,
-    type: 'مثال',
-    root_letters: [{ arabic: { ف: 'و', ع: 'ح', ل: 'د' }, english: 'unite' }],
-  },
-  '3': {
-    ...sahihForm3,
-    type: 'مثال',
-    root_letters: [{ arabic: { ف: 'و', ع: 'ف', ل: 'ق' }, english: 'agree' }],
-  },
-  '4': mithaalForm4,
-  '5': {
-    ...sahihForm5,
-    type: 'مثال',
-    root_letters: [{ arabic: { ف: 'و', ع: 'ك', ل: 'ل' }, english: 'trust' }],
-  },
-  '6': {
-    ...sahihForm6,
-    type: 'مثال',
-    root_letters: [
-      {
-        arabic: { ف: 'و', ع: 'ض', ل: 'ع' },
-        english: {
-          base: 'behave humbly',
-          past: 'behaved humbly',
-          presentContinuous: 'behaving humbly',
-          passive: 'made to behave humbly',
+const مثال = new Map<string, VerbChapter | null | undefined>([
+  ['وَجَدَ', wajada],
+  ['وَجِلَ', wajala],
+  ['وَهَبَ', wahaba],
+  [
+    '2',
+    {
+      ...sahihForm2,
+      type: 'مثال',
+      root_letters: [{ arabic: { ف: 'و', ع: 'ح', ل: 'د' }, english: 'unite' }],
+    },
+  ],
+  [
+    '3',
+    {
+      ...sahihForm3,
+      type: 'مثال',
+      root_letters: [{ arabic: { ف: 'و', ع: 'ف', ل: 'ق' }, english: 'agree' }],
+    },
+  ],
+  ['4', mithaalForm4],
+  [
+    '5',
+    {
+      ...sahihForm5,
+      type: 'مثال',
+      root_letters: [{ arabic: { ف: 'و', ع: 'ك', ل: 'ل' }, english: 'trust' }],
+    },
+  ],
+  [
+    '6',
+    {
+      ...sahihForm6,
+      type: 'مثال',
+      root_letters: [
+        {
+          arabic: { ف: 'و', ع: 'ض', ل: 'ع' },
+          english: {
+            base: 'behave humbly',
+            past: 'behaved humbly',
+            presentContinuous: 'behaving humbly',
+            passive: 'made to behave humbly',
+          },
         },
-      },
-    ],
-  },
-  '7': null,
-  '8': mithaalForm8,
-  '9': null,
-  '10': mithaalForm10,
-}
+      ],
+    },
+  ],
+  ['7', null],
+  ['8', mithaalForm8],
+  ['9', null],
+  ['10', mithaalForm10],
+])
 
-const مضاعف: VerbTypeMap = {
-  '1': {
-    مَدَّ: madda,
-    فَرَّ: farra,
-    مَسَّ: massa,
-  },
-  '2': mudaafForm2,
-  '3': mudaafForm3,
-  '4': mudaafForm4,
-  '5': mudaafForm5,
-  '6': mudaafForm6,
-  '7': mudaafForm7,
-  '8': mudaafForm8,
-  '9': null,
-  '10': mudaafForm10,
-}
+const مضاعف = new Map<string, VerbChapter | null | undefined>([
+  ['مَدَّ', madda],
+  ['فَرَّ', farra],
+  ['مَسَّ', massa],
+  ['2', mudaafForm2],
+  ['3', mudaafForm3],
+  ['4', mudaafForm4],
+  ['5', mudaafForm5],
+  ['6', mudaafForm6],
+  ['7', mudaafForm7],
+  ['8', mudaafForm8],
+  ['9', null],
+  ['10', mudaafForm10],
+])
 
-const verbTypes: Record<string, VerbTypeMap | undefined> = {
-  صحيح,
-  أجوف,
-  ناقص,
-  مثال,
-  مضاعف,
-}
+const verbTypes: Map<
+  string,
+  Map<string, VerbChapter | null | undefined>
+> = new Map([
+  ['صحيح', صحيح],
+  ['أجوف', أجوف],
+  ['ناقص', ناقص],
+  ['مثال', مثال],
+  ['مضاعف', مضاعف],
+])
 
 export default verbTypes

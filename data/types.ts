@@ -1,16 +1,74 @@
-export type VerbTypeMap = Record<
-  string,
-  Record<string, VerbChapter | undefined> | VerbChapter | null | undefined
->
-
 export type VerbChapter = {
   type: string
   form: number
-  باب: string
+  chapter: string
   title: string
   root_letters: RootLetter[]
-  archetype: VerbArchetype
-  conjugations: VerbConjugations
+  فعل: {
+    ماضي: {
+      معروف: {
+        مرفوع: VerbTasreef
+        منصوب: null
+        مجزوم: null
+      }
+      مجهول: {
+        مرفوع: VerbTasreef | null
+        منصوب: null
+        مجزوم: null
+      }
+    }
+    مضارع: {
+      معروف: {
+        مرفوع: VerbTasreef
+        منصوب: VerbTasreef
+        مجزوم: VerbTasreef
+      }
+      مجهول: {
+        مرفوع: VerbTasreef | null
+        منصوب: VerbTasreef | null
+        مجزوم: VerbTasreef | null
+      }
+    }
+    أمر: {
+      معروف: {
+        مرفوع: null
+        منصوب: null
+        مجزوم: { '2nd': VerbSighaSecondPerson }
+      }
+      مجهول: {
+        مرفوع: null
+        منصوب: null
+        مجزوم: null
+      }
+    }
+  }
+  مشتق: {
+    مصضر: string[]
+    فاعل: {
+      masculine: {
+        singular: string
+        dual: string
+        plural: string
+      }
+      feminine: {
+        singular: string
+        dual: string
+        plural: string
+      }
+    }
+    مفعول: {
+      masculine: {
+        singular: string | null
+        dual: string | null
+        plural: string | null
+      }
+      feminine: {
+        singular: string | null
+        dual: string | null
+        plural: string | null
+      }
+    }
+  }
 }
 
 export type RootLetter = {
