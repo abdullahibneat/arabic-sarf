@@ -1,6 +1,5 @@
 import {
   VerbChapter,
-  VerbConjugations,
   VerbSighaSecondPerson,
   VerbTasreef,
 } from '../../data/types'
@@ -35,7 +34,7 @@ const getSeeghas = ({
   archetypeChapter: VerbChapter
   chapter?: VerbChapter
   rootLetters?: { ف: string; ع: string; ل: string }
-  tense: keyof VerbConjugations
+  tense: string
   voice?: string
   case: string
 }): Seegha[] => {
@@ -66,13 +65,17 @@ const getSeeghas = ({
       rootLetters.arabic.ل === arabicRootLetters.ل,
   )
 
-  const tasreef: VerbTasreef | { '2nd': VerbSighaSecondPerson } | null =
-    chapter.فعل[tense][voice][verbCase]
+  const tasreef:
+    | VerbTasreef
+    | { '2nd': VerbSighaSecondPerson }
+    | null
+    | undefined = chapter.فعل[tense]?.[voice]?.[verbCase]
 
   const archetypeTasreef:
     | VerbTasreef
     | { '2nd': VerbSighaSecondPerson }
-    | null = archetypeChapter.فعل[tense][voice][verbCase]
+    | null
+    | undefined = archetypeChapter.فعل[tense]?.[voice]?.[verbCase]
 
   const englishConjugations = rootLetters
     ? generateEnglishConjugations(rootLetters.english)

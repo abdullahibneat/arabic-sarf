@@ -27,27 +27,20 @@ const FlashcardsScreen = () => {
   const params = useParams()
 
   const chapters = useMemo(() => {
-    const { type, form } = params
-
-    if (!type) {
+    if (!params.type) {
       return Array.from(verbTypes.values()).flatMap(getChapters)
     }
 
-    const typeData = verbTypes.get(type)
+    const type = verbTypes.get(params.type)
 
-    if (!typeData) {
-      return []
+    if (!type) return []
+
+    if (params.form) {
+      const form = type.get(params.form)
+      if (form) return [form]
     }
 
-    if (!form) {
-      return getChapters(typeData)
-    }
-
-    const formData = typeData.get(form)
-
-    if (!formData) return []
-
-    return [formData]
+    return getChapters(type)
   }, [params.type, params.form])
 
   const seeghas = useMemo(() => {
@@ -120,7 +113,7 @@ const FlashcardsScreen = () => {
               archetypeChapter,
               chapter,
               rootLetters,
-              tense: 'نصب',
+              tense: 'مضارع',
               voice: 'معروف',
               case: 'منصوب',
             }),
@@ -131,7 +124,7 @@ const FlashcardsScreen = () => {
                 archetypeChapter,
                 chapter,
                 rootLetters,
-                tense: 'نصب',
+                tense: 'مضارع',
                 voice: 'مجهول',
                 case: 'منصوب',
               }),
@@ -144,7 +137,7 @@ const FlashcardsScreen = () => {
               archetypeChapter,
               chapter,
               rootLetters,
-              tense: 'جزم',
+              tense: 'مضارع',
               voice: 'معروف',
               case: 'مجزوم',
             }),
@@ -155,7 +148,7 @@ const FlashcardsScreen = () => {
                 archetypeChapter,
                 chapter,
                 rootLetters,
-                tense: 'جزم',
+                tense: 'مضارع',
                 voice: 'مجهول',
                 case: 'مجزوم',
               }),
@@ -175,7 +168,13 @@ const FlashcardsScreen = () => {
     }
 
     return $seeghas.filter((seegha) => seegha.conjugation)
-  }, [chapters, archetypeMode])
+  }, [
+    chapters,
+    archetypeMode,
+    settings.showMajhool,
+    settings.showNasb,
+    settings.showJazm,
+  ])
 
   const indexes = useMemo(() => {
     setIndex(0)
