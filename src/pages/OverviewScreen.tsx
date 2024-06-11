@@ -2,20 +2,23 @@ import '../styles/OverviewScreen.scss'
 
 import SarfSagheer, { SarfSagheerProps } from '../components/SarfSagheer'
 import Tasreef, { TasreefProps } from '../components/Tasreef'
-import { useCallback, useMemo } from 'preact/hooks'
+import { useCallback, useEffect, useMemo } from 'preact/hooks'
 import { useParams, useSearchParams } from 'react-router-dom'
 
 import Flex from '../components/Flex'
+import TasreefToolbar from '../components/TasreefToolbar'
 import Text from '../components/Text'
 import { VerbChapter } from '../../data/types'
 import getMazeedFihiChapterHeading from '../helpers/getMazeedFihiChapterHeading'
 import getMujarradChapterHeading from '../helpers/getMujarradChapterHeading'
 import replaceRoots from '../helpers/replaceRoots'
 import useAppState from '../hooks/useAppState'
+import useToolbar from '../hooks/useToolbar'
 import verbTypes from '../../data'
 
 const OverviewScreen = () => {
   const params = useParams()
+  const toolbar = useToolbar()
 
   const [searchParams] = useSearchParams()
 
@@ -23,6 +26,11 @@ const OverviewScreen = () => {
 
   const voice = searchParams.get('voice') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
+
+  useEffect(() => {
+    toolbar.show(<TasreefToolbar />)
+    return () => toolbar.close()
+  }, [])
 
   const pastConjugation = useMemo(() => {
     if (verbCase === 'مرفوع') return 'ماضي'
