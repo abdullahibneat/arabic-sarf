@@ -7,17 +7,20 @@ import { useCallback, useEffect, useState } from 'preact/hooks'
 
 import AudioPlayer from './components/AudioPlayer'
 import { ChapterStateContext } from './contexts/ChapterStateContext'
+import { ComponentChildren } from 'preact'
 import { EnglishVerb } from '../data/types'
 import IconButton from './components/IconButton'
 import { Outlet } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import TasreefNavigationHeader from './components/TasreefNavigationHeader'
 import Text from './components/Text'
+import { ToolbarContext } from './contexts/ToolbarContext'
 import replaceRoots from './helpers/replaceRoots'
 import useRouteChapter from './hooks/useRouteChapter'
 
 const App = () => {
   const [modal, setModal] = useState<ModalProps | null>(null)
+  const [toolbar, setToolbar] = useState<ComponentChildren | null>(null)
   const [audioPlayer, setAudioPlayer] = useState<AudioPlayerContextType>({
     play: async () => {},
     pause: () => null,
@@ -42,6 +45,7 @@ const App = () => {
     setEnglishVerb(english)
   }, [chapter, persistRootLetters])
 
+  const closeToolbar = useCallback(() => setToolbar(null), [])
   const closeModal = useCallback(() => setModal(null), [])
 
   const handlesetRootLetters = useCallback(
@@ -57,62 +61,68 @@ const App = () => {
 
   return (
     <ModalContext.Provider value={{ open: setModal, close: closeModal }}>
-      <AudioPlayerContext.Provider value={audioPlayer}>
-        <ChapterStateContext.Provider
-          value={{
-            baseChapter: chapter,
-            chapter: chapter ? replaceRoots(chapter, rootLetters) : null,
-            englishVerb,
-            rootLetters,
-            persistRootLetters,
-            setRootLetters: handlesetRootLetters,
-            togglePersistRootLetters: () =>
-              setPersistRootLetters(!persistRootLetters),
-          }}
-        >
-          <div class="screen-wrapper">
-            <main>
-              <div class="screen-content">
-                <TasreefNavigationHeader />
-                <Outlet />
-              </div>
-
-              <AudioPlayer setAudioPlayer={setAudioPlayer} />
-            </main>
-
-            <Sidebar />
-          </div>
-
-          <div class="global-modal-overlay" onClick={closeModal}>
-            {modal && (
-              <div
-                class="global-modal"
-                style={{
-                  width: modal.width,
-                  maxWidth: modal.maxWidth,
-                  height: modal.height,
-                  maxHeight: modal.maxHeight,
-                }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div class="global-modal-header">
-                  <Text style={{ flex: 1 }} type="bold">
-                    {modal.title}
-                  </Text>
-                  <div class="global-modal-header-close">
-                    <IconButton
-                      size="micro"
-                      name="close"
-                      onClick={closeModal}
-                    />
-                  </div>
+      <ToolbarContext.Provider
+        value={{ show: setToolbar, close: closeToolbar }}
+      >
+        <AudioPlayerContext.Provider value={audioPlayer}>
+          <ChapterStateContext.Provider
+            value={{
+              baseChapter: chapter,
+              chapter: chapter ? replaceRoots(chapter, rootLetters) : null,
+              englishVerb,
+              rootLetters,
+              persistRootLetters,
+              setRootLetters: handlesetRootLetters,
+              togglePersistRootLetters: () =>
+                setPersistRootLetters(!persistRootLetters),
+            }}
+          >
+            <div class="screen-wrapper">
+              <main>
+                <div class="screen-content">
+                  <TasreefNavigationHeader />
+                  <Outlet />
                 </div>
-                <div class="global-modal-content">{modal.children}</div>
-              </div>
-            )}
-          </div>
-        </ChapterStateContext.Provider>
-      </AudioPlayerContext.Provider>
+
+                <AudioPlayer setAudioPlayer={setAudioPlayer} />
+
+                <div class="toolbar">{toolbar}</div>
+              </main>
+
+              <Sidebar />
+            </div>
+
+            <div class="global-modal-overlay" onClick={closeModal}>
+              {modal && (
+                <div
+                  class="global-modal"
+                  style={{
+                    width: modal.width,
+                    maxWidth: modal.maxWidth,
+                    height: modal.height,
+                    maxHeight: modal.maxHeight,
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div class="global-modal-header">
+                    <Text style={{ flex: 1 }} type="bold">
+                      {modal.title}
+                    </Text>
+                    <div class="global-modal-header-close">
+                      <IconButton
+                        size="micro"
+                        name="close"
+                        onClick={closeModal}
+                      />
+                    </div>
+                  </div>
+                  <div class="global-modal-content">{modal.children}</div>
+                </div>
+              )}
+            </div>
+          </ChapterStateContext.Provider>
+        </AudioPlayerContext.Provider>
+      </ToolbarContext.Provider>
     </ModalContext.Provider>
   )
 }
