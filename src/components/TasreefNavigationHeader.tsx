@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo } from 'preact/hooks'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 import Flex from './Flex'
-import Segmented from './Segmented'
 import Tabs from './Tabs'
 import useAppState from '../hooks/useAppState'
 import useChapterStateContext from '../hooks/useChapterState'
@@ -28,8 +27,6 @@ const TasreefNavigationHeader = () => {
     ? 'Flashcards'
     : searchParams.get('voice') || 'معروف'
 
-  const verbCase = searchParams.get('verbCase') || 'مرفوع'
-
   useEffect(() => {
     if (chapter) {
       document.title = chapter.title
@@ -37,11 +34,6 @@ const TasreefNavigationHeader = () => {
       document.title = 'Sarf'
     }
   }, [chapter])
-
-  const showVerbTasreefs = useMemo(
-    () => tab === 'معروف' || tab === 'مجهول',
-    [tab],
-  )
 
   const tabs = useMemo(() => {
     const $tabs = ['معروف']
@@ -53,15 +45,6 @@ const TasreefNavigationHeader = () => {
 
     return $tabs.reverse()
   }, [settings.showMajhool, settings.showSarfSagheer])
-
-  const verbCases = useMemo(() => {
-    const $verbCases = ['مرفوع']
-
-    if (settings.showNasb) $verbCases.push('منصوب')
-    if (settings.showJazm) $verbCases.push('مجزوم')
-
-    return $verbCases.reverse()
-  }, [settings.showNasb, settings.showJazm])
 
   const handleTabClick = useCallback(
     (tab: string) => {
@@ -95,22 +78,6 @@ const TasreefNavigationHeader = () => {
           <Tabs tabs={tabs} activeTab={tab} onTabClick={handleTabClick} />
         )}
       </Flex>
-
-      {showVerbTasreefs && verbCases.length > 1 && (
-        <Flex alignSelf="center">
-          <Segmented
-            value={verbCase}
-            options={verbCases.map((verbCase) => ({
-              label: verbCase,
-              value: verbCase,
-            }))}
-            onChange={({ value: verbCase }) => {
-              searchParams.set('verbCase', verbCase)
-              setSearchParams(searchParams)
-            }}
-          />
-        </Flex>
-      )}
     </Flex>
   )
 }
