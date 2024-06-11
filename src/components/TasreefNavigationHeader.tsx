@@ -116,7 +116,7 @@ const TasreefNavigationHeader = () => {
 
   return (
     <Flex column gap={16} paddingBottom={16}>
-      <Flex column gap={16} paddingTop={15} backgroundColor="var(--white)">
+      <Flex column gap={16} paddingTop={16} backgroundColor="var(--white)">
         {chapter && (
           <Flex column alignItems="center">
             <div class="title">
