@@ -220,7 +220,7 @@ const OverviewScreen = () => {
   }, [voice, sarfSagheerSections, tasreefSections])
 
   return (
-    <Flex column padding="16px 0 32px">
+    <Flex column>
       {sections.map((section, i) => (
         <div key={`section-${i}`} class="section">
           <Text type="bold" style={{ textAlign: 'center' }}>
@@ -230,7 +230,7 @@ const OverviewScreen = () => {
           <Flex justifyContent="center">
             <Flex
               gap={32}
-              padding="0 64px 32px"
+              padding="0 1rem 1rem"
               overflowX="auto"
               direction="rtl"
             >

@@ -72,12 +72,10 @@ const TasreefNavigationHeader = () => {
   )
 
   return (
-    <Flex column gap={16} paddingBottom={16}>
-      <Flex column gap={16} paddingTop={16} backgroundColor="var(--white)">
-        {tabs.length > 1 && (
-          <Tabs tabs={tabs} activeTab={tab} onTabClick={handleTabClick} />
-        )}
-      </Flex>
+    <Flex column gap={16} paddingTop={16} backgroundColor="var(--white)">
+      {tabs.length > 1 && (
+        <Tabs tabs={tabs} activeTab={tab} onTabClick={handleTabClick} />
+      )}
     </Flex>
   )
 }

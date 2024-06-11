@@ -69,58 +69,51 @@ const TasreefScreen = () => {
   if (!baseChapter || !baseChapter || !chapter) return <div>Not found</div>
 
   return (
-    <Flex flex={1} column gap={16}>
-      <Flex column gap={16} justifyContent="center">
-        {voice === 'صرف صغير' && (
-          <Flex column padding="0 1rem" alignItems="center">
-            <SarfSagheer chapter={chapter} />
-          </Flex>
-        )}
+    <Flex column gap={16} justifyContent="center">
+      {voice === 'صرف صغير' && (
+        <Flex column padding="1rem" alignItems="center">
+          <SarfSagheer chapter={chapter} />
+        </Flex>
+      )}
 
-        {showVerbTasreefs && (
-          <Flex justifyContent="center">
-            <Flex
-              gap={32}
-              padding="0 64px 32px"
-              overflowX="auto"
-              direction="rtl"
-            >
+      {showVerbTasreefs && (
+        <Flex justifyContent="center">
+          <Flex gap={32} padding="1rem" overflowX="auto" direction="rtl">
+            <Tasreef
+              title="ماضي"
+              audioSrc={audioPath + '/ماضي.mp3'}
+              rootLetters={rootLetters}
+              tense="ماضي"
+              baseChapter={baseChapter}
+              case={verbCase}
+              voice={voice}
+            />
+
+            <Tasreef
+              title="مضارع"
+              particle={mudariParticle}
+              audioSrc={audioPath + '/مضارع.mp3'}
+              rootLetters={rootLetters}
+              tense="مضارع"
+              baseChapter={baseChapter}
+              case={verbCase}
+              voice={voice}
+            />
+
+            {showAmr && (
               <Tasreef
-                title="ماضي"
-                audioSrc={audioPath + '/ماضي.mp3'}
+                title="أمر"
+                audioSrc={audioPath + '/أمر.mp3'}
                 rootLetters={rootLetters}
-                tense="ماضي"
+                tense="أمر"
                 baseChapter={baseChapter}
                 case={verbCase}
                 voice={voice}
               />
-
-              <Tasreef
-                title="مضارع"
-                particle={mudariParticle}
-                audioSrc={audioPath + '/مضارع.mp3'}
-                rootLetters={rootLetters}
-                tense="مضارع"
-                baseChapter={baseChapter}
-                case={verbCase}
-                voice={voice}
-              />
-
-              {showAmr && (
-                <Tasreef
-                  title="أمر"
-                  audioSrc={audioPath + '/أمر.mp3'}
-                  rootLetters={rootLetters}
-                  tense="أمر"
-                  baseChapter={baseChapter}
-                  case={verbCase}
-                  voice={voice}
-                />
-              )}
-            </Flex>
+            )}
           </Flex>
-        )}
-      </Flex>
+        </Flex>
+      )}
     </Flex>
   )
 }
