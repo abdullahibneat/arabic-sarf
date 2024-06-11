@@ -270,6 +270,7 @@ svg * {
 .global-modal-header-close {
   padding-top: 2px;
   line-height: 0;
+  margin: auto 0;
 }
 
 .global-modal-content {
