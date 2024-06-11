@@ -1,12 +1,15 @@
 import '../styles/TasreefScreen.scss'
 
+import { useEffect, useMemo } from 'preact/hooks'
+
 import Flex from '../components/Flex'
 import SarfSagheer from '../components/SarfSagheer'
 import Tasreef from '../components/Tasreef'
+import TasreefToolbar from '../components/TasreefToolbar'
 import useAppState from '../hooks/useAppState'
 import useChapterStateContext from '../hooks/useChapterState'
-import { useMemo } from 'preact/hooks'
 import { useSearchParams } from 'react-router-dom'
+import useToolbar from '../hooks/useToolbar'
 
 const TasreefScreen = () => {
   const { rootLetters, baseChapter, chapter } = useChapterStateContext()
@@ -16,7 +19,13 @@ const TasreefScreen = () => {
   const voice = searchParams.get('voice') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
 
+  const toolbar = useToolbar()
   const { settings } = useAppState()
+
+  useEffect(() => {
+    toolbar.show(<TasreefToolbar />)
+    return () => toolbar.close()
+  }, [])
 
   const mudariParticle = useMemo(() => {
     if (!settings.showNasbJazmParticle) {
