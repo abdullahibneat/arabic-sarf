@@ -28,9 +28,10 @@ const OverviewScreen = () => {
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
 
   useEffect(() => {
+    if (voice !== 'معروف' && voice !== 'مجهول') return
     toolbar.show(<TasreefToolbar />)
     return () => toolbar.close()
-  }, [])
+  }, [voice])
 
   const pastConjugation = useMemo(() => {
     if (verbCase === 'مرفوع') return 'ماضي'
