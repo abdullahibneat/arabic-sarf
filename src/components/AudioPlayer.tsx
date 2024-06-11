@@ -79,8 +79,6 @@ const AudioPlayer = ({ setAudioPlayer }: Props) => {
 
   return (
     <div class={`audio-player ${visible ? 'visible' : ''}`}>
-      <div class="gap" />
-
       <div class="main-controls">
         {playing && <IconButton name="pause" onClick={pause} />}
 

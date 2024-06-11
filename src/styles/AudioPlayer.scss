@@ -3,7 +3,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: solid 1px var(--border);
   gap: 4px;
   padding: 0 16px;
   transition: height 250ms;
@@ -12,6 +11,7 @@
 
   &.visible {
     height: 48px;
+    border-top: solid 1px var(--border);
   }
 
   .main-controls {
