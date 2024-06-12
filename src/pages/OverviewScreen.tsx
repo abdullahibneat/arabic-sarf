@@ -130,33 +130,31 @@ const OverviewScreen = () => {
       for (const chapter of verbMap.values()) {
         if (!chapter) continue
 
-        const archetype = replaceRoots(chapter)
-
         const madiCollection =
-          archetype.form === 1 ? mujarradMadi : mazeedFihiMadi
+          chapter.form === 1 ? mujarradMadi : mazeedFihiMadi
         const mudariCollection =
-          archetype.form === 1 ? mujarradMudari : mazeedFihiMudari
+          chapter.form === 1 ? mujarradMudari : mazeedFihiMudari
 
         madiCollection.tasreefs.push({
           title:
-            archetype.form === 1
-              ? getMujarradChapterHeading(archetype.chapter)
-              : getMazeedFihiChapterHeading(archetype.form),
+            chapter.form === 1
+              ? getMujarradChapterHeading(chapter.chapter)
+              : getMazeedFihiChapterHeading(chapter.form),
           rootLetters: chapter.root_letters[0].arabic,
           tense: 'ماضي',
-          baseChapter: archetype,
+          baseChapter: chapter,
           case: verbCase,
           voice,
         })
 
         mudariCollection.tasreefs.push({
           title:
-            archetype.form === 1
-              ? getMujarradChapterHeading(archetype.chapter)
-              : getMazeedFihiChapterHeading(archetype.form),
+            chapter.form === 1
+              ? getMujarradChapterHeading(chapter.chapter)
+              : getMazeedFihiChapterHeading(chapter.form),
           rootLetters: chapter.root_letters[0].arabic,
           tense: 'مضارع',
-          baseChapter: archetype,
+          baseChapter: chapter,
           case: verbCase,
           voice,
         })
