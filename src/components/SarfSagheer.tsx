@@ -29,7 +29,7 @@ const SarfSagheer = ({ chapter }: SarfSagheerProps) => {
     if (!مفعول.masculine.singular) return null
 
     return {
-      ماضي: ماضي.مجهول.مرفوع['3rd'].masculine.هُمَا,
+      ماضي: ماضي.مجهول.مرفوع['3rd'].masculine.هُوَ,
       مضارع: مضارع.مجهول.مرفوع['3rd'].masculine.هُوَ,
       مفعول: مفعول.masculine.singular,
     }
