@@ -17,11 +17,23 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
+        path: '/',
+        element: <OverviewScreen />,
+      },
+      {
+        path: '/sarf_sagheer',
+        element: <OverviewScreen />,
+      },
+      {
         path: '/flashcards',
         element: <FlashcardsScreen />,
       },
       {
-        path: '/:type?',
+        path: '/:type',
+        element: <OverviewScreen />,
+      },
+      {
+        path: '/:type/sarf_sagheer',
         element: <OverviewScreen />,
       },
       {
@@ -33,15 +45,11 @@ const router = createBrowserRouter([
         element: <TasreefScreen />,
       },
       {
-        path: '/:type/:form/flashcards',
-        element: <FlashcardsScreen />,
-      },
-      {
-        path: '/:type/:form/:chapter',
+        path: '/:type/:form/sarf_sagheer',
         element: <TasreefScreen />,
       },
       {
-        path: '/:type/:form/:chapter/flashcards',
+        path: '/:type/:form/flashcards',
         element: <FlashcardsScreen />,
       },
     ],

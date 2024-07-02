@@ -1,6 +1,7 @@
 import '../styles/TasreefScreen.scss'
 
 import { useEffect, useMemo } from 'preact/hooks'
+import { useLocation, useSearchParams } from 'react-router-dom'
 
 import Flex from '../components/Flex'
 import SarfSagheer from '../components/SarfSagheer'
@@ -8,13 +9,14 @@ import Tasreef from '../components/Tasreef'
 import TasreefToolbar from '../components/TasreefToolbar'
 import useAppState from '../hooks/useAppState'
 import useChapterStateContext from '../hooks/useChapterState'
-import { useSearchParams } from 'react-router-dom'
 import useToolbar from '../hooks/useToolbar'
 
 const TasreefScreen = () => {
   const { rootLetters, baseChapter, chapter } = useChapterStateContext()
 
   const [searchParams] = useSearchParams()
+
+  const location = useLocation()
 
   const voice = searchParams.get('voice') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
@@ -62,15 +64,15 @@ const TasreefScreen = () => {
   }, [baseChapter])
 
   const showVerbTasreefs = useMemo(
-    () => voice === 'معروف' || voice === 'مجهول',
-    [voice],
+    () => (location.pathname.includes('/sarf_sagheer') ? false : true),
+    [location.pathname],
   )
 
   if (!baseChapter || !baseChapter || !chapter) return <div>Not found</div>
 
   return (
     <Flex column gap={16} justifyContent="center">
-      {voice === 'صرف صغير' && (
+      {!showVerbTasreefs && (
         <Flex column padding="1rem" alignItems="center">
           <SarfSagheer chapter={chapter} />
         </Flex>

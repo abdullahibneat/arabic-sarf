@@ -1,4 +1,5 @@
 import Close from './Close'
+import Flashcards from './Flashcards'
 import GroupByGender from './GroupByGender'
 import GroupByPerson from './GroupByPerson'
 import List from './List'
@@ -12,6 +13,7 @@ import Translate from './Translate'
 
 export default {
   close: Close,
+  flashcards: Flashcards,
   'group-by-gender': GroupByGender,
   'group-by-person': GroupByPerson,
   list: List,

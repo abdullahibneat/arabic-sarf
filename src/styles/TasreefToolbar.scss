@@ -1,0 +1,35 @@
+.tasreef-toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding-bottom: 16px;
+  background: linear-gradient(0deg, var(--background) 60%, transparent);
+
+  .tasreef-toolbar-section {
+    display: flex;
+    gap: 3px;
+    border: solid 1px var(--border);
+    background-color: var(--white);
+    padding: 3px;
+    border-radius: 6px;
+  }
+
+  .tasreef-toolbar-section-button {
+    padding: 2px 6px;
+    border-radius: 6px;
+    transition: background-color 250ms;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background-color: var(--hover);
+    }
+
+    &.active {
+      background-color: var(--hover);
+    }
+  }
+}

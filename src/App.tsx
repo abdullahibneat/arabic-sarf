@@ -12,7 +12,7 @@ import { EnglishVerb } from '../data/types'
 import IconButton from './components/IconButton'
 import { Outlet } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
-import TasreefNavigationHeader from './components/TasreefNavigationHeader'
+import TasreefToolbar from './components/TasreefToolbar'
 import Text from './components/Text'
 import { ToolbarContext } from './contexts/ToolbarContext'
 import replaceRoots from './helpers/replaceRoots'
@@ -80,13 +80,14 @@ const App = () => {
             <div class="screen-wrapper">
               <main>
                 <div class="screen-content">
-                  <TasreefNavigationHeader />
                   <Outlet />
                 </div>
 
                 <AudioPlayer setAudioPlayer={setAudioPlayer} />
 
-                <div class="toolbar">{toolbar}</div>
+                <div class="toolbar">
+                  <TasreefToolbar />
+                </div>
               </main>
 
               <Sidebar />

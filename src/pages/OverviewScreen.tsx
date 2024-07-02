@@ -3,7 +3,7 @@ import '../styles/OverviewScreen.scss'
 import SarfSagheer, { SarfSagheerProps } from '../components/SarfSagheer'
 import Tasreef, { TasreefProps } from '../components/Tasreef'
 import { useCallback, useEffect, useMemo } from 'preact/hooks'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useLocation, useParams, useSearchParams } from 'react-router-dom'
 
 import Flex from '../components/Flex'
 import TasreefToolbar from '../components/TasreefToolbar'
@@ -23,6 +23,8 @@ const OverviewScreen = () => {
   const [searchParams] = useSearchParams()
 
   const { settings } = useAppState()
+
+  const location = useLocation()
 
   const voice = searchParams.get('voice') || 'معروف'
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
@@ -214,9 +216,9 @@ const OverviewScreen = () => {
   }, [verbs, generateTasreefOverviewForVerbType])
 
   const sections = useMemo(() => {
-    if (voice === 'صرف صغير') return sarfSagheerSections
+    if (location.pathname.includes('/sarf_sagheer')) return sarfSagheerSections
     return tasreefSections
-  }, [voice, sarfSagheerSections, tasreefSections])
+  }, [location.pathname, sarfSagheerSections, tasreefSections])
 
   return (
     <Flex column>
