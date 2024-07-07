@@ -312,25 +312,25 @@
     "فاعل": {
       "masculine": {
         "singular": "مُفْتَالٌ",
-        "dual": "",
-        "plural": ""
+        "dual": "مُفْتَالَانِ",
+        "plural": "مُفْتَالُوْنَ"
       },
       "feminine": {
-        "singular": "",
-        "dual": "",
-        "plural": ""
+        "singular": "مُفْتَالَةٌ",
+        "dual": "مُفْتَالَتَانِ",
+        "plural": "مُفْتَالَاتٌ"
       }
     },
     "مفعول": {
       "masculine": {
         "singular": "مُفْتَالٌ",
-        "dual": "",
-        "plural": ""
+        "dual": "مُفْتَالَانِ",
+        "plural": "مُفْتَالُوْنَ"
       },
       "feminine": {
-        "singular": "",
-        "dual": "",
-        "plural": ""
+        "singular": "مُفْتَالَةٌ",
+        "dual": "مُفْتَالَتَانِ",
+        "plural": "مُفْتَالَاتٌ"
       }
     }
   }

@@ -309,25 +309,25 @@
     "فاعل": {
       "masculine": {
         "singular": "مُتَفَاوِلٌ",
-        "dual": "",
-        "plural": ""
+        "dual": "مُتَفَاوِلَانِ",
+        "plural": "مُتَفَاوِلُوْنَ"
       },
       "feminine": {
-        "singular": "",
-        "dual": "",
-        "plural": ""
+        "singular": "مُتَفَاوِلَةٌ",
+        "dual": "مُتَفَاوِلَتَانِ",
+        "plural": "مُتَفَاوِلَاتٌ"
       }
     },
     "مفعول": {
       "masculine": {
         "singular": "مُتَفَاوَلٌ",
-        "dual": "",
-        "plural": ""
+        "dual": "مُتَفَاوَلَانِ",
+        "plural": "مُتَفَاوَلُوْنَ"
       },
       "feminine": {
-        "singular": "",
-        "dual": "",
-        "plural": ""
+        "singular": "مُتَفَاوَلَةٌ",
+        "dual": "مُتَفَاوَلَتَانِ",
+        "plural": "مُتَفَاوَلَاتٌ"
       }
     }
   }

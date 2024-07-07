@@ -199,13 +199,13 @@
     "فاعل": {
       "masculine": {
         "singular": "فَعِيْلٌ",
-        "dual": "",
-        "plural": ""
+        "dual": "فَعِيْلَانِ",
+        "plural": "فَعِيْلُوْنَ"
       },
       "feminine": {
-        "singular": "",
-        "dual": "",
-        "plural": ""
+        "singular": "فَعِيْلَةٌ",
+        "dual": "فَعِيْلَتَانِ",
+        "plural": "فَعِيْلَاتٌ"
       }
     },
     "مفعول": {

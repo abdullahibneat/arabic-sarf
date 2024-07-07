@@ -193,13 +193,13 @@
     "فاعل": {
       "masculine": {
         "singular": "مُنْفَعٍ",
-        "dual": "",
-        "plural": ""
+        "dual": "مُنْفَعَانِ",
+        "plural": "مُنْفَعُوْنَ"
       },
       "feminine": {
-        "singular": "",
-        "dual": "",
-        "plural": ""
+        "singular": "مُنْفَعَةٌ",
+        "dual": "مُنْفَعَتَانِ",
+        "plural": "مُنْفَعَاتٌ"
       }
     },
     "مفعول": {
