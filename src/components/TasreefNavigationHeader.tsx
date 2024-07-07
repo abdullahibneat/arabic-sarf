@@ -40,11 +40,12 @@ const TasreefNavigationHeader = () => {
 
     if (settings.showMajhool) $tabs.push('مجهول')
     if (settings.showSarfSagheer) $tabs.push('صرف صغير')
+    if (settings.showMushtaqq) $tabs.push('مشتق')
 
     $tabs.push('Flashcards')
 
     return $tabs.reverse()
-  }, [settings.showMajhool, settings.showSarfSagheer])
+  }, [settings.showMajhool, settings.showSarfSagheer, settings.showMushtaqq])
 
   const handleTabClick = useCallback(
     (tab: string) => {

@@ -5,7 +5,10 @@ import Tasreef, { TasreefProps } from '../components/Tasreef'
 import { useCallback, useEffect, useMemo } from 'preact/hooks'
 import { useParams, useSearchParams } from 'react-router-dom'
 
+import Faail from '../components/Faail'
 import Flex from '../components/Flex'
+import Mafool from '../components/Mafool'
+import Masdar from '../components/Masdar'
 import TasreefToolbar from '../components/TasreefToolbar'
 import Text from '../components/Text'
 import { VerbChapter } from '../../data/types'
@@ -172,6 +175,42 @@ const OverviewScreen = () => {
     ],
   )
 
+  const generateMushtaqqOverviewForVerbType = useCallback(
+    (type: string, verbMap: Map<string, VerbChapter | null | undefined>) => {
+      const $sections: Array<{
+        title: string
+        chapters: VerbChapter[]
+      }> = [
+        {
+          title: `${type} / ${
+            settings.mujarradChapterHeadings === 'arabic' ? `مجرّد` : ''
+          }`,
+          chapters: [],
+        },
+        {
+          title: `${type} / ${
+            settings.mujarradChapterHeadings === 'arabic' ? `مزيد فيه` : ''
+          }`,
+          chapters: [],
+        },
+      ]
+
+      const mujarrad = $sections[0]
+      const mazeedFihi = $sections[1]
+
+      for (const chapter of verbMap.values()) {
+        if (!chapter) continue
+
+        const archetype = replaceRoots(chapter)
+        const collection = archetype.form === 1 ? mujarrad : mazeedFihi
+        collection.chapters.push(archetype)
+      }
+
+      return $sections
+    },
+    [settings.mujarradChapterHeadings],
+  )
+
   const verbs = useMemo(() => {
     const $verbs: Record<
       string,
@@ -213,10 +252,19 @@ const OverviewScreen = () => {
     )
   }, [verbs, generateTasreefOverviewForVerbType])
 
+  const mushtaqqSections = useMemo(() => {
+    return Object.entries(verbs).flatMap(([type, verbMap]) =>
+      verbMap.flatMap((verbType) =>
+        generateMushtaqqOverviewForVerbType(type, verbType),
+      ),
+    )
+  }, [verbs, generateTasreefOverviewForVerbType])
+
   const sections = useMemo(() => {
     if (voice === 'صرف صغير') return sarfSagheerSections
+    if (voice === 'مشتق') return mushtaqqSections
     return tasreefSections
-  }, [voice, sarfSagheerSections, tasreefSections])
+  }, [voice, sarfSagheerSections, mushtaqqSections, tasreefSections])
 
   return (
     <Flex column>
@@ -253,6 +301,14 @@ const OverviewScreen = () => {
                     key={`section-${i}-tasreef-${j}`}
                     chapter={sarfSagheer.chapter}
                   />
+                ))}
+              {'chapters' in section &&
+                section.chapters.map((chapter, j) => (
+                  <Flex key={`section-${i}-mushtaqq-${j}`} gap={4}>
+                    <Masdar chapter={chapter} />
+                    <Faail chapter={chapter} />
+                    <Mafool chapter={chapter} />
+                  </Flex>
                 ))}
             </Flex>
           </Flex>

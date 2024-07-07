@@ -2,7 +2,10 @@ import '../styles/TasreefScreen.scss'
 
 import { useEffect, useMemo } from 'preact/hooks'
 
+import Faail from '../components/Faail'
 import Flex from '../components/Flex'
+import Mafool from '../components/Mafool'
+import Masdar from '../components/Masdar'
 import SarfSagheer from '../components/SarfSagheer'
 import Tasreef from '../components/Tasreef'
 import TasreefToolbar from '../components/TasreefToolbar'
@@ -66,6 +69,8 @@ const TasreefScreen = () => {
     [voice],
   )
 
+  const showMushtaqq = useMemo(() => voice === 'مشتق', [voice])
+
   if (!baseChapter || !baseChapter || !chapter) return <div>Not found</div>
 
   return (
@@ -111,6 +116,15 @@ const TasreefScreen = () => {
                 voice={voice}
               />
             )}
+          </Flex>
+        </Flex>
+      )}
+      {showMushtaqq && (
+        <Flex column padding="1rem" alignItems="center">
+          <Flex gap={32} padding="1rem" overflowX="auto" direction="rtl">
+            <Masdar chapter={chapter} />
+            <Faail chapter={chapter} />
+            <Mafool chapter={chapter} />
           </Flex>
         </Flex>
       )}

@@ -16,6 +16,7 @@ export type AppStateType = {
     mazeedFihiChapterHeadings: 'english' | 'roman' // [2, 3, 4] / [II, III, IV]
     showRootLettersEditor: boolean
     showSarfSagheer: boolean
+    showMushtaqq: boolean
     showNasb: boolean
     showJazm: boolean
     showAmr: boolean
@@ -39,6 +40,7 @@ const defaultState: AppStateType = {
     mazeedFihiChapterHeadings: 'roman',
     showRootLettersEditor: true,
     showSarfSagheer: true,
+    showMushtaqq: true,
     showNasb: true,
     showJazm: true,
     showAmr: true,
