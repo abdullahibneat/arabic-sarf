@@ -320,25 +320,25 @@
     "فاعل": {
       "masculine": {
         "singular": "فُتَفَعٍّ",
-        "dual": "",
-        "plural": ""
+        "dual": "فُتَفَعَّانِ",
+        "plural": "فُتَفَعُّوْنَ"
       },
       "feminine": {
-        "singular": "",
-        "dual": "",
-        "plural": ""
+        "singular": "فُتَفَعَّةٌ",
+        "dual": "فُتَفَعَّتَانِ",
+        "plural": "فُتَفَعَّاتٌ"
       }
     },
     "مفعول": {
       "masculine": {
         "singular": "فُتَفَعًّى",
-        "dual": "",
-        "plural": ""
+        "dual": "فُتَفَعًَّانِ",
+        "plural": "فُتَفَعًُّوْنَ"
       },
       "feminine": {
-        "singular": "",
-        "dual": "",
-        "plural": ""
+        "singular": "فُتَفَعًَّةٌ",
+        "dual": "فُتَفَعًَّتَانِ",
+        "plural": "فُتَفَعًَّاتٌ"
       }
     }
   }
