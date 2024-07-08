@@ -11,7 +11,7 @@ export type SarfSagheerProps = {
 const SarfSagheer = ({ chapter }: SarfSagheerProps) => {
   const {
     فعل: { ماضي, مضارع, أمر },
-    مشتق: { مصضر, فاعل, مفعول },
+    مشتق: { مصدر, فاعل, مفعول },
   } = chapter
 
   const معروف = useMemo(
@@ -42,12 +42,12 @@ const SarfSagheer = ({ chapter }: SarfSagheerProps) => {
   return (
     <div class="sarf-sagheer">
       <Text>
-        {معروف.ماضي} {معروف.مضارع} {مصضر[0]} <span>فهو</span> {معروف.فاعل}
+        {معروف.ماضي} {معروف.مضارع} {مصدر[0]} <span>فهو</span> {معروف.فاعل}
       </Text>
 
       {مجهول && (
         <Text>
-          <span>و</span> {مجهول.ماضي} {مجهول.مضارع} {مصضر[0]} <span>فهو</span>{' '}
+          <span>و</span> {مجهول.ماضي} {مجهول.مضارع} {مصدر[0]} <span>فهو</span>{' '}
           {مجهول.مفعول}
         </Text>
       )}

@@ -7,10 +7,10 @@ type Props = {
 
 const Masdar = ({
   chapter: {
-    مشتق: { مصضر },
+    مشتق: { مصدر },
   },
 }: Props) => {
-  return <List header="مصضر" cells={مصضر} />
+  return <List header="مصدر" cells={مصدر} />
 }
 
 export default Masdar
