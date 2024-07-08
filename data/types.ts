@@ -43,7 +43,7 @@ export type VerbChapter = {
     }
   }
   مشتق: {
-    مصضر: string[]
+    مصدر: string[]
     فاعل: {
       masculine: {
         singular: string
@@ -101,7 +101,7 @@ export type VerbArchetype = {
     معروف: string
     مجهول: string | null
   }
-  مصضر: string[]
+  مصدر: string[]
   فاعل: string
   مفعول: string | null
   أمر: string
