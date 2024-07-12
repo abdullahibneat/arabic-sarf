@@ -20,7 +20,7 @@ const TasreefToolbar = () => {
   const modal = useModal()
 
   const verbCase = searchParams.get('verbCase') || 'مرفوع'
-  const voice = searchParams.get('voice')
+  const voice = searchParams.get('voice') || 'معروف'
 
   const showVerbTasreefs = useMemo(
     () => voice === 'معروف' || voice === 'مجهول',
