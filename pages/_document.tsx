@@ -2,9 +2,9 @@ import { Head, Html, Main, NextScript } from 'next/document'
 
 const Document = () => {
   return (
-    <Html lang="en">
+    <Html lang="en" className="flex h-full flex-col">
       <Head />
-      <body dir="rtl" className="flex h-screen overflow-y-hidden">
+      <body className="flex h-full flex-col overflow-y-hidden">
         <Main />
         <NextScript />
       </body>

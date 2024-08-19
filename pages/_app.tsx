@@ -14,11 +14,11 @@ const App = ({ Component, pageProps }: AppProps) => (
       'flex h-full overflow-hidden overflow-x-hidden bg-zinc-50 p-2 text-zinc-900',
     )}
   >
-    <Sidebar />
-
     <main className="flex-grow overflow-auto rounded-lg bg-white p-4">
       <Component {...pageProps} />
     </main>
+
+    <Sidebar />
   </div>
 )
 
