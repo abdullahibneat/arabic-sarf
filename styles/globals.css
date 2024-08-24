@@ -6,3 +6,16 @@ div#__next {
   flex: 1;
   height: 0;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(212 212 216);
+  border-radius: 8px;
+  border: transparent;
+}
