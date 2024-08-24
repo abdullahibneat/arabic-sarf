@@ -24,9 +24,9 @@ const Island = () => {
 
   const sarfTypeOptions = useMemo(() => {
     const allSarfTypeOptions: SegmentedOption[] = [
+      { id: 'مشتق', label: 'مشتق' },
       { id: 'صرف كبير', label: 'صرف كبير' },
       { id: 'صرف صغير', label: 'صرف صغير' },
-      { id: 'مشتق', label: 'مشتق' },
     ] as const
 
     // On small screens, only show the selected option, unless the active section is sarf-type
@@ -39,14 +39,14 @@ const Island = () => {
 
   const verbCaseOptions = useMemo(() => {
     const allVerbCaseOptions: SegmentedOption[] = [
-      { id: 'مرفوع', label: 'ـُ' },
-      { id: 'منصوب', label: 'ـَ' },
       { id: 'مجزوم', label: 'ـْ' },
+      { id: 'منصوب', label: 'ـَ' },
+      { id: 'مرفوع', label: 'ـُ' },
     ] as const
 
     // On small screens, only show the selected option, unless the active section is verb-case
     if (!lg && activeSection !== Section.VERB_CASE) {
-      if (verbCase === null) return allVerbCaseOptions.slice(0, 1)
+      if (verbCase === null) return allVerbCaseOptions.slice(-1)
       return allVerbCaseOptions.filter((option) => option.id == verbCase)
     }
 
