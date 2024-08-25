@@ -25,8 +25,8 @@ const Island = () => {
   const sarfTypeOptions = useMemo(() => {
     const allSarfTypeOptions: SegmentedOption[] = [
       { id: 'مشتق', label: 'مشتق' },
-      { id: 'صرف كبير', label: 'صرف كبير' },
       { id: 'صرف صغير', label: 'صرف صغير' },
+      { id: 'صرف كبير', label: 'صرف كبير' },
     ] as const
 
     // On small screens, only show the selected option, unless the active section is sarf-type
