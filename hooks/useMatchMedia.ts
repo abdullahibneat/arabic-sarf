@@ -7,6 +7,9 @@ const useMatchMedia = (query: string) => {
     const media = window.matchMedia(query)
     const listener = () => setMatches(media.matches)
 
+    // Call listener right away so state gets updated with initial value
+    listener()
+
     if (media.addListener) {
       media.addListener(listener)
     } else {
