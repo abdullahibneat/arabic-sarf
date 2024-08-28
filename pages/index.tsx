@@ -1,39 +1,24 @@
 import Tasreef from '@/components/Tasreef'
-import { VerbTasreef } from '@/data/types'
 import { useMemo } from 'react'
-import verbTypes from '@/data'
+import useSarfKabeers from '@/hooks/useSarfKabeers'
 
 const Home = () => {
+  const { simpleSarfKabeers } = useSarfKabeers()
+
   const sections = useMemo(() => {
-    const $sections: Array<{
-      name: string
-      tasreefs: Array<{ name: string; tasreef: VerbTasreef }>
-    }> = []
+    const madi = []
+    const mudari = []
 
-    for (const verbTypeName of Array.from(verbTypes.keys())) {
-      const verbType = verbTypes.get(verbTypeName)
-
-      if (!verbType) continue
-
-      const section: (typeof $sections)[number] = {
-        name: verbTypeName,
-        tasreefs: [],
-      }
-
-      for (const chapterName of Array.from(verbType.keys())) {
-        const chapter = verbType.get(chapterName)
-        if (!chapter) continue
-        section.tasreefs.push({
-          name: chapterName,
-          tasreef: chapter.فعل.ماضي.معروف.مرفوع,
-        })
-      }
-
-      $sections.push(section)
+    for (const sarfKabeer of simpleSarfKabeers) {
+      madi.push(sarfKabeer.ماضي)
+      mudari.push(sarfKabeer.مضارع)
     }
 
-    return $sections
-  }, [])
+    return [
+      { name: 'ماضي', tasreefs: madi },
+      { name: 'مضارع', tasreefs: mudari },
+    ]
+  }, [simpleSarfKabeers])
 
   return (
     <div className="flex flex-col gap-4 p-4">

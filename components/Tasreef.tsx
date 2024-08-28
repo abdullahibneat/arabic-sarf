@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 
 export type TasreefProps = {
   name: string
-  tasreef: VerbTasreef | { '2nd': VerbSighaSecondPerson } | null
+  tasreef?: VerbTasreef | { '2nd': VerbSighaSecondPerson } | null
   mode?: 'list' | 'by-person' | 'by-gender'
 }
 

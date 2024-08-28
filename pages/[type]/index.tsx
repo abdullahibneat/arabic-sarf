@@ -1,50 +1,42 @@
 import Tasreef from '@/components/Tasreef'
-import { VerbTasreef } from '@/data/types'
 import { useMemo } from 'react'
-import { useRouter } from 'next/router'
-import verbTypes from '@/data'
+import useSarfKabeers from '@/hooks/useSarfKabeers'
 
 const Type = () => {
-  const { type } = useRouter().query
+  const { simpleSarfKabeers } = useSarfKabeers()
 
-  const tasreefs = useMemo(() => {
-    if (!type) return null
+  const sections = useMemo(() => {
+    const madi = []
+    const mudari = []
 
-    const $tasreefs: Array<{ name: string; tasreef: VerbTasreef }> = []
-
-    const verbType = verbTypes.get(String(type))
-
-    if (!verbType) return null
-
-    for (const chapterName of Array.from(verbType.keys())) {
-      const chapter = verbType.get(chapterName)
-      if (!chapter) continue
-      $tasreefs.push({
-        name: chapterName,
-        tasreef: chapter.فعل.ماضي.معروف.مرفوع,
-      })
+    for (const sarfKabeer of simpleSarfKabeers) {
+      madi.push(sarfKabeer.ماضي)
+      mudari.push(sarfKabeer.مضارع)
     }
 
-    return $tasreefs
-  }, [type])
-
-  if (!tasreefs) return <div className="p-4">not found</div>
+    return [
+      { name: 'ماضي', tasreefs: madi },
+      { name: 'مضارع', tasreefs: mudari },
+    ]
+  }, [simpleSarfKabeers])
 
   return (
-    <div className="p-4">
-      <div>
-        <h2>{type}</h2>
-        <div className="flex gap-1">
-          {tasreefs.map(({ name, tasreef }, tasreefIndex) => (
-            <Tasreef
-              key={tasreefIndex}
-              name={name}
-              tasreef={tasreef}
-              mode="list"
-            />
-          ))}
+    <div className="flex flex-col gap-4 p-4">
+      {sections.map((section, sectionIndex) => (
+        <div key={sectionIndex}>
+          <h2>{section.name}</h2>
+          <div className="flex gap-1">
+            {section.tasreefs.map(({ name, tasreef }, tasreefIndex) => (
+              <Tasreef
+                key={tasreefIndex}
+                name={name}
+                tasreef={tasreef}
+                mode="list"
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   )
 }

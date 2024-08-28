@@ -1,56 +1,13 @@
-import { VerbSighaSecondPerson, VerbTasreef } from '@/data/types'
-
 import Tasreef from '@/components/Tasreef'
-import { useMemo } from 'react'
 import { useRouter } from 'next/router'
-import verbTypes from '@/data'
+import useSarfKabeers from '@/hooks/useSarfKabeers'
 
 const Chapter = () => {
   const { type, chapter } = useRouter().query
 
-  const tasreefs = useMemo(() => {
-    if (!type) return null
+  const { simpleSarfKabeers } = useSarfKabeers()
 
-    const $tasreefs: Array<{
-      name: string
-      tasreef:
-        | VerbTasreef
-        | {
-            '2nd': VerbSighaSecondPerson
-          }
-    }> = []
-
-    const verbType = verbTypes.get(String(type))
-
-    if (!verbType) return null
-
-    const verbChapter = verbType.get(String(chapter))
-
-    if (!verbChapter) return null
-
-    $tasreefs.push({
-      name: 'ماضي',
-      tasreef: verbChapter.فعل.ماضي.معروف.مرفوع,
-    })
-
-    $tasreefs.push({
-      name: 'مضارع',
-      tasreef: verbChapter.فعل.مضارع.معروف.مرفوع,
-    })
-
-    const amr = verbChapter.فعل.أمر.معروف.مجزوم
-
-    if (amr) {
-      $tasreefs.push({
-        name: 'أمر',
-        tasreef: amr,
-      })
-    }
-
-    return $tasreefs
-  }, [type, chapter])
-
-  if (!tasreefs) return <div className="p-4">not found</div>
+  const tasreef = simpleSarfKabeers.length === 0 ? null : simpleSarfKabeers[0]
 
   return (
     <div className="p-4">
@@ -59,14 +16,9 @@ const Chapter = () => {
           {type} - {chapter}
         </h2>
         <div className="flex gap-1">
-          {tasreefs.map(({ name, tasreef }, tasreefIndex) => (
-            <Tasreef
-              key={tasreefIndex}
-              name={name}
-              tasreef={tasreef}
-              mode="list"
-            />
-          ))}
+          <Tasreef name="ماضي" tasreef={tasreef?.ماضي.tasreef} mode="list" />
+          <Tasreef name="مضارع" tasreef={tasreef?.مضارع.tasreef} mode="list" />
+          <Tasreef name="أمر" tasreef={tasreef?.أمر.tasreef} mode="list" />
         </div>
       </div>
     </div>

@@ -13,12 +13,27 @@ enum Section {
   SARF_TYPE = 'sarf-type',
 }
 
-const Island = () => {
+type IslandProps = {
+  sarfType?: string
+  verbCase?: string | null
+  passive?: boolean
+  setSarfType?: (sarfType: string | ((sarfType: string) => string)) => void
+  setVerbCase?: (
+    verbCase: string | null | ((verbCase: string | null) => string | null),
+  ) => void
+  setPassive?: (passive: boolean | ((passive: boolean) => boolean)) => void
+}
+
+const Island = ({
+  sarfType,
+  verbCase,
+  passive,
+  setSarfType,
+  setVerbCase,
+  setPassive,
+}: IslandProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<Section | null>(null)
-
-  const [sarfType, setSarfType] = useState('صرف كبير')
-  const [verbCase, setVerbCase] = useState<string | undefined | null>(null)
 
   const lg = useLargeBreakpoint()
 
@@ -64,7 +79,7 @@ const Island = () => {
   const handleSelectVerbCase = useCallback(
     (option: SegmentedOption) => {
       const selectOption = () =>
-        setVerbCase((currentOption) =>
+        setVerbCase?.((currentOption) =>
           currentOption === option.id ? null : option.id,
         )
 
@@ -77,12 +92,12 @@ const Island = () => {
         setActiveSection(Section.VERB_CASE)
       }
     },
-    [lg, activeSection],
+    [setVerbCase, lg, activeSection],
   )
 
   const handleSelectSarfType = useCallback(
     (option: SegmentedOption) => {
-      const selectOption = () => setSarfType(option.id)
+      const selectOption = () => setSarfType?.(option.id)
 
       // On large screens, select the option straight away
       if (lg || activeSection === Section.SARF_TYPE) {
@@ -93,7 +108,7 @@ const Island = () => {
         setActiveSection(Section.SARF_TYPE)
       }
     },
-    [lg, activeSection],
+    [setSarfType, lg, activeSection],
   )
 
   return (
@@ -120,10 +135,12 @@ const Island = () => {
           <IslandSection name={Section.MAJHOOL} activeSection={activeSection}>
             <div className="flex p-1">
               <input
-                type="checkbox"
-                name={Section.MAJHOOL}
                 id={Section.MAJHOOL}
+                name={Section.MAJHOOL}
+                type="checkbox"
+                checked={passive}
                 className="appearance-none [&:checked+label]:bg-white"
+                onChange={(e) => setPassive?.(e.target.checked)}
               />
               <label
                 htmlFor={Section.MAJHOOL}
