@@ -25,59 +25,37 @@ const useSarfKabeers = () => {
       for (const [chapterName, chapter] of Array.from(chapterMap.entries())) {
         const sarfKabeersForChapter: FullSarfKabeer[] = []
 
-        if (chapter) {
-          const hasMajhool = !!chapter.فعل.ماضي.مجهول.مرفوع
+        const hasMajhool = !!chapter?.فعل.ماضي.مجهول.مرفوع
 
-          const sarfKabeer: FullSarfKabeer = {
-            معروف: {
-              ماضي: {
-                name: chapterName,
-                tasreef: chapter.فعل.ماضي.معروف.مرفوع,
-              },
-              مضارع: {
-                مرفوع: {
-                  name: chapterName,
-                  tasreef: chapter.فعل.مضارع.معروف.مرفوع,
-                },
-                منصوب: {
-                  name: chapterName,
-                  tasreef: chapter.فعل.مضارع.معروف.منصوب,
-                },
-                مجزوم: {
-                  name: chapterName,
-                  tasreef: chapter.فعل.مضارع.معروف.مجزوم,
-                },
-              },
+        const sarfKabeer: FullSarfKabeer = {
+          type,
+          mujarrad: chapter?.form === 1,
+          mazeedFihi: chapter?.form !== 2,
+          باب: chapterName,
+          معروف: {
+            ماضي: chapter?.فعل.ماضي.معروف.مرفوع || null,
+            مضارع: {
+              مرفوع: chapter?.فعل.مضارع.معروف.مرفوع || null,
+              منصوب: chapter?.فعل.مضارع.معروف.منصوب || null,
+              مجزوم: chapter?.فعل.مضارع.معروف.مجزوم || null,
             },
-            مجهول: hasMajhool
-              ? {
-                  ماضي: {
-                    name: chapterName,
-                    tasreef: chapter.فعل.ماضي.مجهول.مرفوع as VerbTasreef,
-                  },
-                  مضارع: {
-                    مرفوع: {
-                      name: chapterName,
-                      tasreef: chapter.فعل.مضارع.مجهول.مرفوع as VerbTasreef,
-                    },
-                    منصوب: {
-                      name: chapterName,
-                      tasreef: chapter.فعل.مضارع.مجهول.منصوب as VerbTasreef,
-                    },
-                    مجزوم: {
-                      name: chapterName,
-                      tasreef: chapter.فعل.مضارع.مجهول.مجزوم as VerbTasreef,
-                    },
-                  },
-                }
-              : null,
-            أمر: { name: chapterName, tasreef: chapter.فعل.أمر.معروف.مجزوم },
-          }
-
-          all.push(sarfKabeer)
-          sarfKabeersForChapter.push(sarfKabeer)
-          sarfKabeersForType.push(sarfKabeer)
+          },
+          مجهول: hasMajhool
+            ? {
+                ماضي: chapter.فعل.ماضي.مجهول.مرفوع as VerbTasreef,
+                مضارع: {
+                  مرفوع: chapter.فعل.مضارع.مجهول.مرفوع as VerbTasreef,
+                  منصوب: chapter.فعل.مضارع.مجهول.منصوب as VerbTasreef,
+                  مجزوم: chapter.فعل.مضارع.مجهول.مجزوم as VerbTasreef,
+                },
+              }
+            : null,
+          أمر: chapter?.فعل.أمر.معروف.مجزوم || null,
         }
+
+        all.push(sarfKabeer)
+        sarfKabeersForChapter.push(sarfKabeer)
+        sarfKabeersForType.push(sarfKabeer)
 
         map.set(`${type}/${chapterName}`, sarfKabeersForChapter)
       }
@@ -92,21 +70,23 @@ const useSarfKabeers = () => {
 
   const simpleSarfKabeers = useMemo<SimpleSarfKabeer[]>(() => {
     const sarfKabeers = fullSarfKabeers.get(key) || []
-    return sarfKabeers.map(({ معروف, مجهول, أمر }) => {
-      const ماضي = (passive ? مجهول : معروف)?.ماضي || {
-        name: 'asd',
-        tasreef: null,
-      }
-      const مضارع = (passive ? مجهول : معروف)?.مضارع?.[verbCase || 'مرفوع'] || {
-        name: 'asd',
-        tasreef: null,
-      }
-      return {
-        ماضي,
-        مضارع,
-        أمر,
-      }
-    })
+    return sarfKabeers.map(
+      ({ type, mujarrad, mazeedFihi, باب, معروف, مجهول, أمر }) => {
+        const ماضي = (passive ? مجهول : معروف)?.ماضي || null
+        const مضارع =
+          (passive ? مجهول : معروف)?.مضارع?.[verbCase || 'مرفوع'] || null
+
+        return {
+          type,
+          mujarrad,
+          mazeedFihi,
+          باب,
+          ماضي,
+          مضارع,
+          أمر,
+        }
+      },
+    )
   }, [key, passive, verbCase])
 
   return {
@@ -117,30 +97,30 @@ const useSarfKabeers = () => {
 
 export default useSarfKabeers
 
-export type Tasreef = {
-  name: string
-  tasreef: VerbTasreef
-}
-
-export type OptionalTasreef = {
-  name: string
-  tasreef: VerbTasreef | null | undefined
-}
+type Tasreef = VerbTasreef | null
 
 export type FullSarfKabeer = {
+  type: string
+  mujarrad: boolean
+  mazeedFihi: boolean
+  باب: string
   معروف: {
     ماضي: Tasreef
-    مضارع: Record<string, OptionalTasreef>
+    مضارع: Record<string, Tasreef>
   }
   مجهول: {
     ماضي: Tasreef
-    مضارع: Record<string, OptionalTasreef>
+    مضارع: Record<string, Tasreef>
   } | null
-  أمر: Omit<Tasreef, 'tasreef'> & { tasreef: AmrTasreef }
+  أمر: AmrTasreef | null
 }
 
 export type SimpleSarfKabeer = {
-  ماضي: OptionalTasreef
-  مضارع: OptionalTasreef
-  أمر: Omit<Tasreef, 'tasreef'> & { tasreef: AmrTasreef }
+  type: string
+  mujarrad: boolean
+  mazeedFihi: boolean
+  باب: string
+  ماضي: Tasreef | null
+  مضارع: Tasreef | null
+  أمر: AmrTasreef | null
 }

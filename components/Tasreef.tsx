@@ -10,8 +10,8 @@ export type TasreefProps = {
 }
 
 const Tasreef = ({ name, tasreef, mode = 'list' }: TasreefProps) => {
-  const tableData = useMemo<TableProps['data'] | null>(() => {
-    if (tasreef == null) return null
+  const tableData = useMemo<TableProps['data']>(() => {
+    if (tasreef == null) return [[['N/A']]]
 
     const thirdPersonMasculine = [
       {
@@ -82,8 +82,6 @@ const Tasreef = ({ name, tasreef, mode = 'list' }: TasreefProps) => {
       [firstPerson],
     ]
   }, [tasreef, mode])
-
-  if (!tableData) return null
 
   return <Table header={name} data={tableData} column={mode === 'list'} />
 }

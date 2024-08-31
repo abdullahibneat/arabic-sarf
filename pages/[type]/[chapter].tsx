@@ -11,15 +11,22 @@ const Chapter = () => {
 
   return (
     <div className="p-4">
-      <div>
-        <h2>
-          {type} - {chapter}
-        </h2>
-        <div className="flex gap-1">
-          <Tasreef name="ماضي" tasreef={tasreef?.ماضي.tasreef} mode="list" />
-          <Tasreef name="مضارع" tasreef={tasreef?.مضارع.tasreef} mode="list" />
-          <Tasreef name="أمر" tasreef={tasreef?.أمر.tasreef} mode="list" />
-        </div>
+      <div className="flex flex-col gap-1">
+        {!tasreef && <div>Not found</div>}
+
+        {tasreef && (
+          <>
+            <h2>
+              {type} - {chapter}
+            </h2>
+
+            <div className="flex gap-1">
+              <Tasreef name="ماضي" tasreef={tasreef?.ماضي} mode="list" />
+              <Tasreef name="مضارع" tasreef={tasreef?.مضارع} mode="list" />
+              <Tasreef name="أمر" tasreef={tasreef?.أمر} mode="list" />
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
