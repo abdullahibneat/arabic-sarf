@@ -1,4 +1,4 @@
-import { VerbSighaSecondPerson, VerbTasreef } from '@/data/types'
+import { AmrTasreef, VerbChapter, VerbTasreef } from '@/data/types'
 import { useContext, useMemo } from 'react'
 
 import { SarfContext } from '@/contexts/SarfProvider'
@@ -127,11 +127,6 @@ export type OptionalTasreef = {
   tasreef: VerbTasreef | null | undefined
 }
 
-export type AmrTasreef = {
-  name: string
-  tasreef: { '2nd': VerbSighaSecondPerson }
-}
-
 export type FullSarfKabeer = {
   معروف: {
     ماضي: Tasreef
@@ -141,11 +136,11 @@ export type FullSarfKabeer = {
     ماضي: Tasreef
     مضارع: Record<string, OptionalTasreef>
   } | null
-  أمر: AmrTasreef
+  أمر: Omit<Tasreef, 'tasreef'> & { tasreef: AmrTasreef }
 }
 
 export type SimpleSarfKabeer = {
   ماضي: OptionalTasreef
   مضارع: OptionalTasreef
-  أمر: AmrTasreef
+  أمر: Omit<Tasreef, 'tasreef'> & { tasreef: AmrTasreef }
 }

@@ -33,7 +33,7 @@ export type VerbChapter = {
       معروف: {
         مرفوع: null
         منصوب: null
-        مجزوم: { '2nd': VerbSighaSecondPerson }
+        مجزوم: AmrTasreef
       }
       مجهول: {
         مرفوع: null
@@ -125,13 +125,17 @@ export type VerbConjugations = {
     معروف: VerbTasreef
     مجهول: VerbTasreef | null
   }
-  أمر: { '2nd': VerbSighaSecondPerson }
+  أمر: AmrTasreef
 }
 
 export type VerbTasreef = {
   '1st': VerbSighaFirstPerson
   '2nd': VerbSighaSecondPerson
   '3rd': VerbSighaThirdPerson
+}
+
+export type AmrTasreef = {
+  '2nd': VerbSighaSecondPerson
 }
 
 export type VerbSighaThirdPerson = {

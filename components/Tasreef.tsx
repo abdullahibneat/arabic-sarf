@@ -1,11 +1,11 @@
+import { AmrTasreef, VerbTasreef } from '@/data/types'
 import Table, { TableProps } from './Table'
-import { VerbSighaSecondPerson, VerbTasreef } from '@/data/types'
 
 import { useMemo } from 'react'
 
 export type TasreefProps = {
   name: string
-  tasreef?: VerbTasreef | { '2nd': VerbSighaSecondPerson } | null
+  tasreef?: VerbTasreef | AmrTasreef | null
   mode?: 'list' | 'by-person' | 'by-gender'
 }
 
