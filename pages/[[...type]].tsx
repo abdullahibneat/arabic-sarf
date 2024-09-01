@@ -1,8 +1,10 @@
 import { RootLetter, VerbTasreef } from '@/data/types'
+import useMushtaqqs, { Mushtaqq } from '@/hooks/useMushtaqqs'
 import useSarfSagheers, {
   SarfSagheer as SarfSagheerType,
 } from '@/hooks/useSarfSagheers'
 
+import IsmFail from '@/components/IsmFail'
 import SarfSagheer from '@/components/SarfSagheer'
 import Tasreef from '@/components/Tasreef'
 import { useMemo } from 'react'
@@ -12,6 +14,8 @@ import useSarfKabeers from '@/hooks/useSarfKabeers'
 const Home = () => {
   const simpleSarfKabeers = useSarfKabeers()
   const sarfSagheers = useSarfSagheers()
+  const mushtaqqs = useMushtaqqs()
+
   const { sarfType } = useSarf()
 
   const sections = useMemo(() => {
@@ -24,12 +28,14 @@ const Home = () => {
             tasreef: VerbTasreef | null
             sarfSagheer: SarfSagheerType | null
             rootLetters: RootLetter[]
+            mushtaqq: Mushtaqq | null
           }>
           mudari: Array<{
             chapter: string
             tasreef: VerbTasreef | null
             sarfSagheer: SarfSagheerType | null
             rootLetters: RootLetter[]
+            mushtaqq: Mushtaqq | null
           }>
         }
         mazeedFihi: {
@@ -38,21 +44,25 @@ const Home = () => {
             tasreef: VerbTasreef | null
             sarfSagheer: SarfSagheerType | null
             rootLetters: RootLetter[]
+            mushtaqq: Mushtaqq | null
           }>
           mudari: Array<{
             chapter: string
             tasreef: VerbTasreef | null
             sarfSagheer: SarfSagheerType | null
             rootLetters: RootLetter[]
+            mushtaqq: Mushtaqq | null
           }>
         }
       }
     > = new Map()
 
     const $sarfSagheers = sarfSagheers.values()
+    const $mushtaqqs = mushtaqqs.values()
 
     for (const sarfKabeer of simpleSarfKabeers) {
       const sarfSagheer = $sarfSagheers.next().value
+      const mushtaqq = $mushtaqqs.next().value
 
       const section = $sections.get(sarfKabeer.type) || {
         mujarrad: {
@@ -71,12 +81,14 @@ const Home = () => {
           tasreef: sarfKabeer.ماضي,
           sarfSagheer,
           rootLetters: sarfKabeer.rootLetters,
+          mushtaqq,
         })
         section.mujarrad.mudari.push({
           chapter: sarfKabeer.باب,
           tasreef: sarfKabeer.مضارع,
           sarfSagheer,
           rootLetters: sarfKabeer.rootLetters,
+          mushtaqq,
         })
       } else {
         section.mazeedFihi.madi.push({
@@ -84,12 +96,14 @@ const Home = () => {
           tasreef: sarfKabeer.ماضي,
           sarfSagheer,
           rootLetters: sarfKabeer.rootLetters,
+          mushtaqq,
         })
         section.mazeedFihi.mudari.push({
           chapter: sarfKabeer.باب,
           tasreef: sarfKabeer.مضارع,
           sarfSagheer,
           rootLetters: sarfKabeer.rootLetters,
+          mushtaqq,
         })
       }
 
@@ -152,6 +166,25 @@ const Home = () => {
               </div>
             )}
 
+            {sarfType === 'مشتق' && (
+              <div className="flex gap-1">
+                {mujarrad.madi.map(({ chapter, mushtaqq, rootLetters }) => (
+                  <IsmFail
+                    key={`${type}-${chapter}`}
+                    ismFail={mushtaqq?.فاعل}
+                    defaultRootLetters={rootLetters[0]?.arabic}
+                  />
+                ))}
+                {mazeedFihi.madi.map(({ chapter, mushtaqq, rootLetters }) => (
+                  <IsmFail
+                    key={`${type}-${chapter}`}
+                    ismFail={mushtaqq?.فاعل}
+                    defaultRootLetters={rootLetters[0]?.arabic}
+                  />
+                ))}
+              </div>
+            )}
+
             <h2>{type} - مضارع</h2>
 
             {sarfType === 'صرف كبير' && (
@@ -197,6 +230,25 @@ const Home = () => {
                     />
                   ),
                 )}
+              </div>
+            )}
+
+            {sarfType === 'مشتق' && (
+              <div className="flex gap-1">
+                {mujarrad.mudari.map(({ chapter, mushtaqq, rootLetters }) => (
+                  <IsmFail
+                    key={`${type}-${chapter}`}
+                    ismFail={mushtaqq?.فاعل}
+                    defaultRootLetters={rootLetters[0]?.arabic}
+                  />
+                ))}
+                {mazeedFihi.mudari.map(({ chapter, mushtaqq, rootLetters }) => (
+                  <IsmFail
+                    key={`${type}-${chapter}`}
+                    ismFail={mushtaqq?.فاعل}
+                    defaultRootLetters={rootLetters[0]?.arabic}
+                  />
+                ))}
               </div>
             )}
           </div>

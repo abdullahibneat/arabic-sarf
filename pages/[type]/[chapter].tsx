@@ -1,5 +1,7 @@
+import IsmFail from '@/components/IsmFail'
 import SarfSagheer from '@/components/SarfSagheer'
 import Tasreef from '@/components/Tasreef'
+import useMushtaqqs from '@/hooks/useMushtaqqs'
 import { useRouter } from 'next/router'
 import useSarf from '@/hooks/useSarf'
 import useSarfKabeers from '@/hooks/useSarfKabeers'
@@ -10,10 +12,13 @@ const Chapter = () => {
 
   const simpleSarfKabeers = useSarfKabeers()
   const sarfSagheers = useSarfSagheers()
+  const mushtaqqs = useMushtaqqs()
+
   const { sarfType } = useSarf()
 
   const tasreef = simpleSarfKabeers.length === 0 ? null : simpleSarfKabeers[0]
   const sarfSagheer = sarfSagheers.length === 0 ? null : sarfSagheers[0]
+  const mushtaqq = mushtaqqs.length === 0 ? null : mushtaqqs[0]
 
   return (
     <div className="p-4">
@@ -53,6 +58,15 @@ const Chapter = () => {
               <div className="mx-auto flex gap-1">
                 <SarfSagheer
                   sarfSagheer={sarfSagheer}
+                  defaultRootLetters={tasreef.rootLetters[0].arabic}
+                />
+              </div>
+            )}
+
+            {sarfType === 'مشتق' && (
+              <div className="mx-auto flex gap-1">
+                <IsmFail
+                  ismFail={mushtaqq?.فاعل}
                   defaultRootLetters={tasreef.rootLetters[0].arabic}
                 />
               </div>
