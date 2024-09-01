@@ -91,10 +91,7 @@ const useSarfKabeers = () => {
     )
   }, [key, passive, verbCase])
 
-  return {
-    sarfKabeers: fullSarfKabeers.get(key),
-    simpleSarfKabeers,
-  }
+  return simpleSarfKabeers
 }
 
 export default useSarfKabeers

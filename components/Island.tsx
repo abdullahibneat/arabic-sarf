@@ -139,7 +139,7 @@ const Island = ({
             />
           </IslandSection>
 
-          {rootLetters.length > 0 && (
+          {rootLetters.length > 1 && (
             <IslandSection name={Section.VERB} activeSection={activeSection}>
               <select
                 className="m-1 h-8 rounded-md bg-zinc-900 px-1 text-white"
@@ -159,33 +159,40 @@ const Island = ({
             </IslandSection>
           )}
 
-          <IslandSection name={Section.MAJHOOL} activeSection={activeSection}>
-            <div className="flex p-1">
-              <input
-                id={Section.MAJHOOL}
-                name={Section.MAJHOOL}
-                type="checkbox"
-                checked={passive}
-                className="appearance-none [&:checked+label]:bg-white"
-                onChange={(e) => setPassive?.(e.target.checked)}
-              />
-              <label
-                htmlFor={Section.MAJHOOL}
-                className="cursor-pointer select-none rounded-md px-2 py-1"
-                style={{ transition: 'background-color 250ms' }}
-              >
-                مجهول
-              </label>
-            </div>
-          </IslandSection>
+          {sarfType === 'صرف كبير' && (
+            <IslandSection name={Section.MAJHOOL} activeSection={activeSection}>
+              <div className="flex p-1">
+                <input
+                  id={Section.MAJHOOL}
+                  name={Section.MAJHOOL}
+                  type="checkbox"
+                  checked={passive}
+                  className="appearance-none [&:checked+label]:bg-white"
+                  onChange={(e) => setPassive?.(e.target.checked)}
+                />
+                <label
+                  htmlFor={Section.MAJHOOL}
+                  className="cursor-pointer select-none rounded-md px-2 py-1"
+                  style={{ transition: 'background-color 250ms' }}
+                >
+                  مجهول
+                </label>
+              </div>
+            </IslandSection>
+          )}
 
-          <IslandSection name={Section.VERB_CASE} activeSection={activeSection}>
-            <Segmented
-              options={verbCaseOptions}
-              selectedId={verbCase}
-              onSelectOption={handleSelectVerbCase}
-            />
-          </IslandSection>
+          {sarfType === 'صرف كبير' && (
+            <IslandSection
+              name={Section.VERB_CASE}
+              activeSection={activeSection}
+            >
+              <Segmented
+                options={verbCaseOptions}
+                selectedId={verbCase}
+                onSelectOption={handleSelectVerbCase}
+              />
+            </IslandSection>
+          )}
 
           <IslandSection
             mobileOnly
