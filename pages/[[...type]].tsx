@@ -114,13 +114,13 @@ const Home = () => {
   }, [simpleSarfKabeers])
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="flex flex-col gap-8 p-4">
       {sections.size === 0 && <div>Not found</div>}
 
       {Array.from(sections.entries()).map(
         ([type, { mujarrad, mazeedFihi }]) => (
           <div key={type} className="flex flex-col gap-1">
-            <h2>{type} - ماضي</h2>
+            <h2>{type} - مجرّد</h2>
 
             {sarfType === 'صرف كبير' && (
               <div className="flex gap-1">
@@ -133,7 +133,12 @@ const Home = () => {
                     mode="list"
                   />
                 ))}
-                {mazeedFihi.madi.map(({ chapter, tasreef, rootLetters }) => (
+              </div>
+            )}
+
+            {sarfType === 'صرف كبير' && (
+              <div className="flex gap-1">
+                {mujarrad.mudari.map(({ chapter, tasreef, rootLetters }) => (
                   <Tasreef
                     key={`${type}-${chapter}`}
                     name={chapter}
@@ -154,15 +159,6 @@ const Home = () => {
                     defaultRootLetters={rootLetters[0]?.arabic}
                   />
                 ))}
-                {mazeedFihi.madi.map(
-                  ({ chapter, sarfSagheer, rootLetters }) => (
-                    <SarfSagheer
-                      key={`${type}-${chapter}`}
-                      sarfSagheer={sarfSagheer}
-                      defaultRootLetters={rootLetters[0]?.arabic}
-                    />
-                  ),
-                )}
               </div>
             )}
 
@@ -175,21 +171,14 @@ const Home = () => {
                     defaultRootLetters={rootLetters[0]?.arabic}
                   />
                 ))}
-                {mazeedFihi.madi.map(({ chapter, mushtaqq, rootLetters }) => (
-                  <IsmFail
-                    key={`${type}-${chapter}`}
-                    ismFail={mushtaqq?.فاعل}
-                    defaultRootLetters={rootLetters[0]?.arabic}
-                  />
-                ))}
               </div>
             )}
 
-            <h2>{type} - مضارع</h2>
+            <h2>{type} - مزيد فيه</h2>
 
             {sarfType === 'صرف كبير' && (
               <div className="flex gap-1">
-                {mujarrad.mudari.map(({ chapter, tasreef, rootLetters }) => (
+                {mazeedFihi.madi.map(({ chapter, tasreef, rootLetters }) => (
                   <Tasreef
                     key={`${type}-${chapter}`}
                     name={chapter}
@@ -198,6 +187,11 @@ const Home = () => {
                     mode="list"
                   />
                 ))}
+              </div>
+            )}
+
+            {sarfType === 'صرف كبير' && (
+              <div className="flex gap-1">
                 {mazeedFihi.mudari.map(({ chapter, tasreef, rootLetters }) => (
                   <Tasreef
                     key={`${type}-${chapter}`}
@@ -212,16 +206,7 @@ const Home = () => {
 
             {sarfType === 'صرف صغير' && (
               <div className="flex gap-1">
-                {mujarrad.mudari.map(
-                  ({ chapter, sarfSagheer, rootLetters }) => (
-                    <SarfSagheer
-                      key={`${type}-${chapter}`}
-                      sarfSagheer={sarfSagheer}
-                      defaultRootLetters={rootLetters[0]?.arabic}
-                    />
-                  ),
-                )}
-                {mazeedFihi.mudari.map(
+                {mazeedFihi.madi.map(
                   ({ chapter, sarfSagheer, rootLetters }) => (
                     <SarfSagheer
                       key={`${type}-${chapter}`}
@@ -235,14 +220,7 @@ const Home = () => {
 
             {sarfType === 'مشتق' && (
               <div className="flex gap-1">
-                {mujarrad.mudari.map(({ chapter, mushtaqq, rootLetters }) => (
-                  <IsmFail
-                    key={`${type}-${chapter}`}
-                    ismFail={mushtaqq?.فاعل}
-                    defaultRootLetters={rootLetters[0]?.arabic}
-                  />
-                ))}
-                {mazeedFihi.mudari.map(({ chapter, mushtaqq, rootLetters }) => (
+                {mazeedFihi.madi.map(({ chapter, mushtaqq, rootLetters }) => (
                   <IsmFail
                     key={`${type}-${chapter}`}
                     ismFail={mushtaqq?.فاعل}
