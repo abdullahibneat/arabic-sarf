@@ -1,4 +1,4 @@
-import { AmrTasreef, VerbChapter, VerbTasreef } from '@/data/types'
+import { AmrTasreef, RootLetter, VerbChapter, VerbTasreef } from '@/data/types'
 import { useContext, useMemo } from 'react'
 
 import { SarfContext } from '@/contexts/SarfProvider'
@@ -31,6 +31,7 @@ const useSarfKabeers = () => {
           type,
           mujarrad: chapter?.form === 1,
           mazeedFihi: chapter?.form !== 2,
+          rootLetters: chapter?.root_letters || [],
           باب: chapterName,
           معروف: {
             ماضي: chapter?.فعل.ماضي.معروف.مرفوع || null,
@@ -71,7 +72,7 @@ const useSarfKabeers = () => {
   const simpleSarfKabeers = useMemo<SimpleSarfKabeer[]>(() => {
     const sarfKabeers = fullSarfKabeers.get(key) || []
     return sarfKabeers.map(
-      ({ type, mujarrad, mazeedFihi, باب, معروف, مجهول, أمر }) => {
+      ({ type, mujarrad, mazeedFihi, rootLetters, باب, معروف, مجهول, أمر }) => {
         const ماضي = (passive ? مجهول : معروف)?.ماضي || null
         const مضارع =
           (passive ? مجهول : معروف)?.مضارع?.[verbCase || 'مرفوع'] || null
@@ -80,6 +81,7 @@ const useSarfKabeers = () => {
           type,
           mujarrad,
           mazeedFihi,
+          rootLetters,
           باب,
           ماضي,
           مضارع,
@@ -103,6 +105,7 @@ export type FullSarfKabeer = {
   type: string
   mujarrad: boolean
   mazeedFihi: boolean
+  rootLetters: RootLetter[]
   باب: string
   معروف: {
     ماضي: Tasreef
@@ -119,6 +122,7 @@ export type SimpleSarfKabeer = {
   type: string
   mujarrad: boolean
   mazeedFihi: boolean
+  rootLetters: RootLetter[]
   باب: string
   ماضي: Tasreef | null
   مضارع: Tasreef | null

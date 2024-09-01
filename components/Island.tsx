@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from 'react'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 import useLargeBreakpoint from '@/hooks/useLargeBreakpoint'
+import useRootLetters from '@/hooks/useRootLetters'
 
 enum Section {
   SIDEBAR = 'sidebar',
@@ -17,25 +18,37 @@ type IslandProps = {
   sarfType?: string
   verbCase?: string | null
   passive?: boolean
+  rootLetters?: { ف?: string; ع?: string; ل?: string } | null
   setSarfType?: (sarfType: string | ((sarfType: string) => string)) => void
   setVerbCase?: (
     verbCase: string | null | ((verbCase: string | null) => string | null),
   ) => void
   setPassive?: (passive: boolean | ((passive: boolean) => boolean)) => void
+  setRootLetters?: (
+    rootLetters:
+      | { ف?: string; ع?: string; ل?: string }
+      | null
+      | ((
+          rootLetters: { ف?: string; ع?: string; ل?: string } | null,
+        ) => { ف?: string; ع?: string; ل?: string } | null),
+  ) => void
 }
 
 const Island = ({
   sarfType,
   verbCase,
   passive,
+  rootLetters: currentRootLetters,
   setSarfType,
   setVerbCase,
   setPassive,
+  setRootLetters,
 }: IslandProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<Section | null>(null)
 
   const lg = useLargeBreakpoint()
+  const rootLetters = useRootLetters()
 
   const sarfTypeOptions = useMemo(() => {
     const allSarfTypeOptions: SegmentedOption[] = [
@@ -126,11 +139,25 @@ const Island = ({
             />
           </IslandSection>
 
-          <IslandSection name={Section.VERB} activeSection={activeSection}>
-            <select className="m-1 h-8 rounded-md bg-zinc-900 px-1 text-white">
-              <option>نَصَرَ يَنْصُرُ</option>
-            </select>
-          </IslandSection>
+          {rootLetters.length > 0 && (
+            <IslandSection name={Section.VERB} activeSection={activeSection}>
+              <select
+                className="m-1 h-8 rounded-md bg-zinc-900 px-1 text-white"
+                value={
+                  currentRootLetters
+                    ? JSON.stringify(currentRootLetters)
+                    : undefined
+                }
+                onChange={(e) => setRootLetters?.(JSON.parse(e.target.value))}
+              >
+                {rootLetters.map((rootLetters, index) => (
+                  <option key={index} value={JSON.stringify(rootLetters)}>
+                    {`${rootLetters.ف}${rootLetters.ع}${rootLetters.ل}`}
+                  </option>
+                ))}
+              </select>
+            </IslandSection>
+          )}
 
           <IslandSection name={Section.MAJHOOL} activeSection={activeSection}>
             <div className="flex p-1">

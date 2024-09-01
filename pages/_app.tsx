@@ -1,5 +1,7 @@
 import '@/styles/globals.css'
 
+import { useEffect, useState } from 'react'
+
 import type { AppProps } from 'next/app'
 import Island from '@/components/Island'
 import { Noto_Sans_Arabic } from 'next/font/google'
@@ -7,7 +9,6 @@ import { SarfContext } from '@/contexts/SarfProvider'
 import Sidebar from '@/components/Sidebar'
 import cx from 'classix'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 
 const notoSansArabic = Noto_Sans_Arabic({ subsets: ['arabic'] })
 
@@ -15,10 +16,22 @@ const App = ({ Component, pageProps }: AppProps) => {
   const [sarfType, setSarfType] = useState('صرف كبير')
   const [verbCase, setVerbCase] = useState<string | null>(null)
   const [passive, setPassive] = useState(false)
+  const [rootLetters, setRootLetters] = useState<{
+    ف?: string
+    ع?: string
+    ل?: string
+  } | null>(null)
+  const [customRootLetters, setCustomRootLetters] = useState(false)
 
   const router = useRouter()
 
   const { type, chapter } = router.query
+
+  useEffect(() => {
+    if (!customRootLetters) {
+      setRootLetters(null)
+    }
+  }, [type, chapter, customRootLetters])
 
   return (
     <SarfContext.Provider
@@ -28,6 +41,8 @@ const App = ({ Component, pageProps }: AppProps) => {
         verbCase,
         sarfType,
         passive,
+        rootLetters,
+        customRootLetters,
       }}
     >
       <div
@@ -45,9 +60,11 @@ const App = ({ Component, pageProps }: AppProps) => {
             sarfType={sarfType}
             verbCase={verbCase}
             passive={passive}
+            rootLetters={rootLetters}
             setSarfType={setSarfType}
             setVerbCase={setVerbCase}
             setPassive={setPassive}
+            setRootLetters={setRootLetters}
           />
         </main>
 

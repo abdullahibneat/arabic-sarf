@@ -21,9 +21,24 @@ const Chapter = () => {
             </h2>
 
             <div className="flex gap-1">
-              <Tasreef name="ماضي" tasreef={tasreef?.ماضي} mode="list" />
-              <Tasreef name="مضارع" tasreef={tasreef?.مضارع} mode="list" />
-              <Tasreef name="أمر" tasreef={tasreef?.أمر} mode="list" />
+              <Tasreef
+                name="ماضي"
+                tasreef={tasreef?.ماضي}
+                mode="list"
+                defaultRootLetters={tasreef.rootLetters[0].arabic}
+              />
+              <Tasreef
+                name="مضارع"
+                tasreef={tasreef?.مضارع}
+                mode="list"
+                defaultRootLetters={tasreef.rootLetters[0].arabic}
+              />
+              <Tasreef
+                name="أمر"
+                tasreef={tasreef?.أمر}
+                mode="list"
+                defaultRootLetters={tasreef.rootLetters[0].arabic}
+              />
             </div>
           </>
         )}

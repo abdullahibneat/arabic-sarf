@@ -6,6 +6,8 @@ export type SarfContextType = {
   verbCase: string | null // e.g. 'منصوب'
   sarfType: string // e.g. 'صرف كبير'
   passive: boolean
+  rootLetters: { ف?: string; ع?: string; ل?: string } | null
+  customRootLetters: boolean
 }
 
 export const SarfContext = createContext<SarfContextType>({
@@ -14,4 +16,6 @@ export const SarfContext = createContext<SarfContextType>({
   verbCase: null,
   sarfType: 'صرف كبير',
   passive: false,
+  rootLetters: null,
+  customRootLetters: false,
 })

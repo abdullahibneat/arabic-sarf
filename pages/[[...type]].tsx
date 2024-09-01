@@ -1,5 +1,6 @@
+import { RootLetter, VerbTasreef } from '@/data/types'
+
 import Tasreef from '@/components/Tasreef'
-import { VerbTasreef } from '@/data/types'
 import { useMemo } from 'react'
 import useSarfKabeers from '@/hooks/useSarfKabeers'
 
@@ -11,12 +12,28 @@ const Home = () => {
       string,
       {
         mujarrad: {
-          madi: Array<{ chapter: string; tasreef: VerbTasreef | null }>
-          mudari: Array<{ chapter: string; tasreef: VerbTasreef | null }>
+          madi: Array<{
+            chapter: string
+            tasreef: VerbTasreef | null
+            rootLetters: RootLetter[]
+          }>
+          mudari: Array<{
+            chapter: string
+            tasreef: VerbTasreef | null
+            rootLetters: RootLetter[]
+          }>
         }
         mazeedFihi: {
-          madi: Array<{ chapter: string; tasreef: VerbTasreef | null }>
-          mudari: Array<{ chapter: string; tasreef: VerbTasreef | null }>
+          madi: Array<{
+            chapter: string
+            tasreef: VerbTasreef | null
+            rootLetters: RootLetter[]
+          }>
+          mudari: Array<{
+            chapter: string
+            tasreef: VerbTasreef | null
+            rootLetters: RootLetter[]
+          }>
         }
       }
     > = new Map()
@@ -37,19 +54,23 @@ const Home = () => {
         section.mujarrad.madi.push({
           chapter: sarfKabeer.باب,
           tasreef: sarfKabeer.ماضي,
+          rootLetters: sarfKabeer.rootLetters,
         })
         section.mujarrad.mudari.push({
           chapter: sarfKabeer.باب,
           tasreef: sarfKabeer.مضارع,
+          rootLetters: sarfKabeer.rootLetters,
         })
       } else {
         section.mazeedFihi.madi.push({
           chapter: sarfKabeer.باب,
           tasreef: sarfKabeer.ماضي,
+          rootLetters: sarfKabeer.rootLetters,
         })
         section.mazeedFihi.mudari.push({
           chapter: sarfKabeer.باب,
           tasreef: sarfKabeer.مضارع,
+          rootLetters: sarfKabeer.rootLetters,
         })
       }
 
@@ -69,19 +90,21 @@ const Home = () => {
             <h2>{type} - ماضي</h2>
 
             <div className="flex gap-1">
-              {mujarrad.madi.map(({ chapter, tasreef }) => (
+              {mujarrad.madi.map(({ chapter, tasreef, rootLetters }) => (
                 <Tasreef
                   key={`${type}-${chapter}`}
                   name={chapter}
                   tasreef={tasreef}
+                  defaultRootLetters={rootLetters[0]?.arabic}
                   mode="list"
                 />
               ))}
-              {mazeedFihi.madi.map(({ chapter, tasreef }) => (
+              {mazeedFihi.madi.map(({ chapter, tasreef, rootLetters }) => (
                 <Tasreef
                   key={`${type}-${chapter}`}
                   name={chapter}
                   tasreef={tasreef}
+                  defaultRootLetters={rootLetters[0]?.arabic}
                   mode="list"
                 />
               ))}
@@ -90,19 +113,21 @@ const Home = () => {
             <h2>{type} - مضارع</h2>
 
             <div className="flex gap-1">
-              {mujarrad.mudari.map(({ chapter, tasreef }) => (
+              {mujarrad.mudari.map(({ chapter, tasreef, rootLetters }) => (
                 <Tasreef
                   key={`${type}-${chapter}`}
                   name={chapter}
                   tasreef={tasreef}
+                  defaultRootLetters={rootLetters[0]?.arabic}
                   mode="list"
                 />
               ))}
-              {mazeedFihi.mudari.map(({ chapter, tasreef }) => (
+              {mazeedFihi.mudari.map(({ chapter, tasreef, rootLetters }) => (
                 <Tasreef
                   key={`${type}-${chapter}`}
                   name={chapter}
                   tasreef={tasreef}
+                  defaultRootLetters={rootLetters[0]?.arabic}
                   mode="list"
                 />
               ))}

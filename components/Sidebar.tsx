@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import SidebarItem from './SidebarItem'
+import replaceRoots from '@/helpers/replaceRoots'
 import { usePathname } from 'next/navigation'
 import verbTypes from '@/data'
 
@@ -27,17 +28,24 @@ const Sidebar = () => {
               </SidebarItem>
 
               <ul className="flex flex-col gap-2">
-                {Array.from(value.entries()).map(([chapter, value]) => (
-                  <li key={chapter}>
-                    <SidebarItem
-                      key={`${type}-${chapter}`}
-                      href={`/${type}/${chapter}`}
-                      pathname={pathname}
-                    >
-                      {`${chapter} - ${value?.title}`}
-                    </SidebarItem>
-                  </li>
-                ))}
+                {Array.from(value.entries())
+                  .filter(([, value]) => value)
+                  .map(([chapter, value]) => {
+                    const form = value?.form || chapter
+                    const title = value
+                      ? replaceRoots(value, value.root_letters[0].arabic).title
+                      : null
+                    return (
+                      <li key={chapter}>
+                        <SidebarItem
+                          href={`/${type}/${chapter}`}
+                          pathname={pathname}
+                        >
+                          {`${form} - ${title}`}
+                        </SidebarItem>
+                      </li>
+                    )
+                  })}
               </ul>
             </li>
           ))}
