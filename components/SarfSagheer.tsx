@@ -18,7 +18,7 @@ const SarfSagheer = ({ sarfSagheer, defaultRootLetters }: SarfSagheerProps) => {
 
   return (
     <div className="flex flex-shrink-0 flex-col items-center justify-center rounded-md border-[1px] border-zinc-300 px-4 py-2">
-      {!data && <div>Not found</div>}
+      {!data && <div>N/A</div>}
 
       {data && (
         <>
