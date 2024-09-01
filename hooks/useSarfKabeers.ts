@@ -1,4 +1,4 @@
-import { AmrTasreef, RootLetter, VerbChapter, VerbTasreef } from '@/data/types'
+import { AmrTasreef, RootLetter, VerbTasreef } from '@/data/types'
 import { useContext, useMemo } from 'react'
 
 import { SarfContext } from '@/contexts/SarfProvider'

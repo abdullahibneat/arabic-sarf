@@ -1,12 +1,11 @@
-import { AmrTasreef, RootLetter, VerbChapter, VerbTasreef } from '@/data/types'
 import { useContext, useMemo } from 'react'
 
+import { RootLetter } from '@/data/types'
 import { SarfContext } from '@/contexts/SarfProvider'
 import verbTypes from '@/data'
 
 const useSarfSagheers = () => {
-  const { verbType, verbChapter, verbCase, passive, sarfType } =
-    useContext(SarfContext)
+  const { verbType, verbChapter } = useContext(SarfContext)
 
   const key = useMemo(() => {
     if (!verbType) return 'all'

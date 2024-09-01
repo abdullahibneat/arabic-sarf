@@ -1,7 +1,5 @@
-import { AmrTasreef, RootLetter, VerbChapter, VerbTasreef } from '@/data/types'
-import { useContext, useMemo } from 'react'
-
-import { SarfContext } from '@/contexts/SarfProvider'
+import { RootLetter } from '@/data/types'
+import { useMemo } from 'react'
 import useSarf from './useSarf'
 import verbTypes from '@/data'
 
@@ -25,8 +23,6 @@ const useMushtaqqs = () => {
 
       for (const [chapterName, chapter] of Array.from(chapterMap.entries())) {
         const sarfSagheersForChapter: Mushtaqq[] = []
-
-        const hasMajhool = !!chapter?.فعل.ماضي.مجهول.مرفوع
 
         const sarfSagheer: Mushtaqq = {
           type,
