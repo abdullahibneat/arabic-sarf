@@ -27,7 +27,7 @@ const Chapter = () => {
 
         {tasreef && (
           <>
-            <h2>
+            <h2 className="text-center">
               {type} - {chapter}
             </h2>
 

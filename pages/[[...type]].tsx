@@ -120,113 +120,133 @@ const Home = () => {
       {Array.from(sections.entries()).map(
         ([type, { mujarrad, mazeedFihi }]) => (
           <div key={type} className="flex flex-col gap-1">
-            <h2>{type} - مجرّد</h2>
+            <h2 className="text-center">{type} - مجرّد</h2>
 
             {sarfType === 'صرف كبير' && (
-              <div className="flex gap-1">
-                {mujarrad.madi.map(({ chapter, tasreef, rootLetters }) => (
-                  <Tasreef
-                    key={`${type}-${chapter}`}
-                    name={chapter}
-                    tasreef={tasreef}
-                    defaultRootLetters={rootLetters[0]?.arabic}
-                    mode="list"
-                  />
-                ))}
+              <div className="flex w-full">
+                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                  {mujarrad.madi.map(({ chapter, tasreef, rootLetters }) => (
+                    <Tasreef
+                      key={`${type}-${chapter}`}
+                      name={chapter}
+                      tasreef={tasreef}
+                      defaultRootLetters={rootLetters[0]?.arabic}
+                      mode="list"
+                    />
+                  ))}
+                </div>
               </div>
             )}
 
             {sarfType === 'صرف كبير' && (
-              <div className="flex gap-1">
-                {mujarrad.mudari.map(({ chapter, tasreef, rootLetters }) => (
-                  <Tasreef
-                    key={`${type}-${chapter}`}
-                    name={chapter}
-                    tasreef={tasreef}
-                    defaultRootLetters={rootLetters[0]?.arabic}
-                    mode="list"
-                  />
-                ))}
+              <div className="flex w-full">
+                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                  {mujarrad.mudari.map(({ chapter, tasreef, rootLetters }) => (
+                    <Tasreef
+                      key={`${type}-${chapter}`}
+                      name={chapter}
+                      tasreef={tasreef}
+                      defaultRootLetters={rootLetters[0]?.arabic}
+                      mode="list"
+                    />
+                  ))}
+                </div>
               </div>
             )}
 
             {sarfType === 'صرف صغير' && (
-              <div className="flex gap-1">
-                {mujarrad.madi.map(({ chapter, sarfSagheer, rootLetters }) => (
-                  <SarfSagheer
-                    key={`${type}-${chapter}`}
-                    sarfSagheer={sarfSagheer}
-                    defaultRootLetters={rootLetters[0]?.arabic}
-                  />
-                ))}
+              <div className="flex w-full">
+                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                  {mujarrad.madi.map(
+                    ({ chapter, sarfSagheer, rootLetters }) => (
+                      <SarfSagheer
+                        key={`${type}-${chapter}`}
+                        sarfSagheer={sarfSagheer}
+                        defaultRootLetters={rootLetters[0]?.arabic}
+                      />
+                    ),
+                  )}
+                </div>
               </div>
             )}
 
             {sarfType === 'مشتق' && (
-              <div className="flex gap-1">
-                {mujarrad.madi.map(({ chapter, mushtaqq, rootLetters }) => (
-                  <IsmFail
-                    key={`${type}-${chapter}`}
-                    ismFail={mushtaqq?.فاعل}
-                    defaultRootLetters={rootLetters[0]?.arabic}
-                  />
-                ))}
-              </div>
-            )}
-
-            <h2>{type} - مزيد فيه</h2>
-
-            {sarfType === 'صرف كبير' && (
-              <div className="flex gap-1">
-                {mazeedFihi.madi.map(({ chapter, tasreef, rootLetters }) => (
-                  <Tasreef
-                    key={`${type}-${chapter}`}
-                    name={chapter}
-                    tasreef={tasreef}
-                    defaultRootLetters={rootLetters[0]?.arabic}
-                    mode="list"
-                  />
-                ))}
-              </div>
-            )}
-
-            {sarfType === 'صرف كبير' && (
-              <div className="flex gap-1">
-                {mazeedFihi.mudari.map(({ chapter, tasreef, rootLetters }) => (
-                  <Tasreef
-                    key={`${type}-${chapter}`}
-                    name={chapter}
-                    tasreef={tasreef}
-                    defaultRootLetters={rootLetters[0]?.arabic}
-                    mode="list"
-                  />
-                ))}
-              </div>
-            )}
-
-            {sarfType === 'صرف صغير' && (
-              <div className="flex gap-1">
-                {mazeedFihi.madi.map(
-                  ({ chapter, sarfSagheer, rootLetters }) => (
-                    <SarfSagheer
+              <div className="flex w-full">
+                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                  {mujarrad.madi.map(({ chapter, mushtaqq, rootLetters }) => (
+                    <IsmFail
                       key={`${type}-${chapter}`}
-                      sarfSagheer={sarfSagheer}
+                      ismFail={mushtaqq?.فاعل}
                       defaultRootLetters={rootLetters[0]?.arabic}
                     />
-                  ),
-                )}
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <h2 className="text-center">{type} - مزيد فيه</h2>
+
+            {sarfType === 'صرف كبير' && (
+              <div className="flex w-full">
+                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                  {mazeedFihi.madi.map(({ chapter, tasreef, rootLetters }) => (
+                    <Tasreef
+                      key={`${type}-${chapter}`}
+                      name={chapter}
+                      tasreef={tasreef}
+                      defaultRootLetters={rootLetters[0]?.arabic}
+                      mode="list"
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {sarfType === 'صرف كبير' && (
+              <div className="flex w-full">
+                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                  {mazeedFihi.mudari.map(
+                    ({ chapter, tasreef, rootLetters }) => (
+                      <Tasreef
+                        key={`${type}-${chapter}`}
+                        name={chapter}
+                        tasreef={tasreef}
+                        defaultRootLetters={rootLetters[0]?.arabic}
+                        mode="list"
+                      />
+                    ),
+                  )}
+                </div>
+              </div>
+            )}
+
+            {sarfType === 'صرف صغير' && (
+              <div className="flex w-full">
+                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                  {mazeedFihi.madi.map(
+                    ({ chapter, sarfSagheer, rootLetters }) => (
+                      <SarfSagheer
+                        key={`${type}-${chapter}`}
+                        sarfSagheer={sarfSagheer}
+                        defaultRootLetters={rootLetters[0]?.arabic}
+                      />
+                    ),
+                  )}
+                </div>
               </div>
             )}
 
             {sarfType === 'مشتق' && (
-              <div className="flex gap-1">
-                {mazeedFihi.madi.map(({ chapter, mushtaqq, rootLetters }) => (
-                  <IsmFail
-                    key={`${type}-${chapter}`}
-                    ismFail={mushtaqq?.فاعل}
-                    defaultRootLetters={rootLetters[0]?.arabic}
-                  />
-                ))}
+              <div className="flex w-full">
+                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                  {mazeedFihi.madi.map(({ chapter, mushtaqq, rootLetters }) => (
+                    <IsmFail
+                      key={`${type}-${chapter}`}
+                      ismFail={mushtaqq?.فاعل}
+                      defaultRootLetters={rootLetters[0]?.arabic}
+                    />
+                  ))}
+                </div>
               </div>
             )}
           </div>
