@@ -1,11 +1,19 @@
+import Icon from './Icon'
+import { IconName } from '@/icons'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 
 export type SegmentedOption = {
   id: string
-  label: string
   shortLabel?: string
-}
+} & (
+  | {
+      label: string
+    }
+  | {
+      icon: IconName
+    }
+)
 
 export type SegmentedProps = {
   options: SegmentedOption[]
@@ -24,7 +32,9 @@ const Segmented = ({
         key={option.id}
         className={twMerge(
           cx(
-            'flex min-w-8 cursor-pointer select-none justify-center rounded-md px-2 py-1',
+            'flex min-w-8 cursor-pointer select-none justify-center rounded-md py-1',
+            'label' in option && 'px-2',
+            'icon' in option && selectedId !== option.id && 'text-zinc-300',
             selectedId === option.id && 'bg-white',
             selectedId !== option.id &&
               'bg-zinc-100 hover:bg-zinc-200 active:bg-zinc-300',
@@ -33,7 +43,8 @@ const Segmented = ({
         style={{ transition: 'background-color 250ms' }}
         onClick={() => onSelectOption?.(option)}
       >
-        {option.label}
+        {'label' in option && option.label}
+        {'icon' in option && <Icon name={option.icon} />}
       </button>
     ))}
   </div>
