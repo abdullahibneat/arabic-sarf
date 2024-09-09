@@ -30,7 +30,7 @@ const Table = ({ header, data, column }: TableProps) => {
     <div
       dir="ltr"
       className={twMerge(
-        cx('flex w-80 flex-shrink-0 flex-col gap-1', column && 'w-44'),
+        cx('flex w-72 flex-shrink-0 flex-col gap-1', column && 'w-36'),
       )}
     >
       {header && (
