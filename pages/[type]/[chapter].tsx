@@ -25,8 +25,11 @@ const Chapter = () => {
   const sarfSagheer = sarfSagheers.length === 0 ? null : sarfSagheers[0]
   const mushtaqq = mushtaqqs.length === 0 ? null : mushtaqqs[0]
 
-  const chapterName =
-    mazeedFihiNumbering === 'roman' ? toRoman(Number(chapter)) : chapter
+  let chapterName = chapter
+
+  if (Number(chapter) && mazeedFihiNumbering === 'roman') {
+    chapterName = toRoman(Number(chapter))
+  }
 
   return (
     <div className="p-4">
