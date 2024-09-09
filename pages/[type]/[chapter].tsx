@@ -1,6 +1,9 @@
 import IsmFail from '@/components/IsmFail'
 import SarfSagheer from '@/components/SarfSagheer'
 import Tasreef from '@/components/Tasreef'
+import { mazeedFihiNumberingAtom } from '@/atoms'
+import toRoman from '@/helpers/toRoman'
+import { useAtom } from 'jotai'
 import useMushtaqqs from '@/hooks/useMushtaqqs'
 import { useRouter } from 'next/router'
 import useSarf from '@/hooks/useSarf'
@@ -16,9 +19,14 @@ const Chapter = () => {
 
   const { sarfType } = useSarf()
 
+  const [mazeedFihiNumbering] = useAtom(mazeedFihiNumberingAtom)
+
   const tasreef = simpleSarfKabeers.length === 0 ? null : simpleSarfKabeers[0]
   const sarfSagheer = sarfSagheers.length === 0 ? null : sarfSagheers[0]
   const mushtaqq = mushtaqqs.length === 0 ? null : mushtaqqs[0]
+
+  const chapterName =
+    mazeedFihiNumbering === 'roman' ? toRoman(Number(chapter)) : chapter
 
   return (
     <div className="p-4">
@@ -28,7 +36,7 @@ const Chapter = () => {
         {tasreef && (
           <>
             <h2 className="text-center">
-              {type} - {chapter}
+              {type} - {chapterName}
             </h2>
 
             {sarfType === 'صرف كبير' && (
@@ -36,19 +44,16 @@ const Chapter = () => {
                 <Tasreef
                   name="ماضي"
                   tasreef={tasreef?.ماضي}
-                  mode="list"
                   defaultRootLetters={tasreef.rootLetters[0].arabic}
                 />
                 <Tasreef
                   name="مضارع"
                   tasreef={tasreef?.مضارع}
-                  mode="list"
                   defaultRootLetters={tasreef.rootLetters[0].arabic}
                 />
                 <Tasreef
                   name="أمر"
                   tasreef={tasreef?.أمر}
-                  mode="list"
                   defaultRootLetters={tasreef.rootLetters[0].arabic}
                 />
               </div>

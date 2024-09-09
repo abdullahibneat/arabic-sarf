@@ -131,7 +131,6 @@ const Home = () => {
                       name={chapter}
                       tasreef={tasreef}
                       defaultRootLetters={rootLetters[0]?.arabic}
-                      mode="list"
                     />
                   ))}
                 </div>
@@ -147,7 +146,6 @@ const Home = () => {
                       name={chapter}
                       tasreef={tasreef}
                       defaultRootLetters={rootLetters[0]?.arabic}
-                      mode="list"
                     />
                   ))}
                 </div>
@@ -195,7 +193,6 @@ const Home = () => {
                       name={chapter}
                       tasreef={tasreef}
                       defaultRootLetters={rootLetters[0]?.arabic}
-                      mode="list"
                     />
                   ))}
                 </div>
@@ -212,7 +209,6 @@ const Home = () => {
                         name={chapter}
                         tasreef={tasreef}
                         defaultRootLetters={rootLetters[0]?.arabic}
-                        mode="list"
                       />
                     ),
                   )}

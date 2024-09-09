@@ -16,6 +16,7 @@ const SidebarItem = ({ href, pathname = '', children }: SidebarItemProps) => {
 
   return (
     <Link
+      dir="rtl"
       href={href}
       draggable={false}
       className={cx(

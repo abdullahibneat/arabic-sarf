@@ -1,11 +1,17 @@
 import { AmrTasreef, RootLetter, VerbTasreef } from '@/data/types'
+import { mazeedFihiNumberingAtom, mujarradHeadingsAtom } from '@/atoms'
 import { useContext, useMemo } from 'react'
 
 import { SarfContext } from '@/contexts/SarfProvider'
+import toRoman from '@/helpers/toRoman'
+import { useAtom } from 'jotai'
 import verbTypes from '@/data'
 
 const useSarfKabeers = () => {
   const { verbType, verbChapter, verbCase, passive } = useContext(SarfContext)
+
+  const [mujarradHeadings] = useAtom(mujarradHeadingsAtom)
+  const [mazeedFihiNumbering] = useAtom(mazeedFihiNumberingAtom)
 
   const key = useMemo(() => {
     if (!verbType) return 'all'
@@ -22,17 +28,35 @@ const useSarfKabeers = () => {
     for (const [type, chapterMap] of Array.from(verbTypes.entries())) {
       const sarfKabeersForType: FullSarfKabeer[] = []
 
+      let index = -1
+
       for (const [chapterName, chapter] of Array.from(chapterMap.entries())) {
+        index++
+
         const sarfKabeersForChapter: FullSarfKabeer[] = []
 
         const hasMajhool = !!chapter?.فعل.ماضي.مجهول.مرفوع
+
+        let baab = chapterName
+
+        if (chapter) {
+          if (chapter.form === 1) {
+            if (mujarradHeadings === 'english') {
+              baab = `1${String.fromCharCode(index + 97)}`
+            } else {
+              baab = chapter.chapter[0]
+            }
+          } else if (mazeedFihiNumbering === 'roman') {
+            baab = toRoman(chapter.form)
+          }
+        }
 
         const sarfKabeer: FullSarfKabeer = {
           type,
           mujarrad: chapter?.form === 1,
           mazeedFihi: chapter?.form !== 2,
           rootLetters: chapter?.root_letters || [],
-          باب: chapterName,
+          باب: baab,
           معروف: {
             ماضي: chapter?.فعل.ماضي.معروف.مرفوع || null,
             مضارع: {
@@ -67,7 +91,7 @@ const useSarfKabeers = () => {
     map.set('all', all)
 
     return map
-  }, [])
+  }, [mujarradHeadings, mazeedFihiNumbering])
 
   const simpleSarfKabeers = useMemo<SimpleSarfKabeer[]>(() => {
     const sarfKabeers = fullSarfKabeers.get(key) || []
@@ -89,7 +113,7 @@ const useSarfKabeers = () => {
         }
       },
     )
-  }, [key, passive, verbCase])
+  }, [key, fullSarfKabeers, passive, verbCase])
 
   return simpleSarfKabeers
 }

@@ -2,23 +2,21 @@ import { AmrTasreef, VerbTasreef } from '@/data/types'
 import Table, { TableProps } from './Table'
 
 import replaceRoots from '@/helpers/replaceRoots'
+import { tasreefDisplayModeAtom } from '@/atoms'
+import { useAtom } from 'jotai'
 import { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
 
 export type TasreefProps = {
   name: string
   tasreef?: VerbTasreef | AmrTasreef | null
-  mode?: 'list' | 'by-person' | 'by-gender'
   defaultRootLetters?: { ف?: string; ع?: string; ل?: string } | null
 }
 
-const Tasreef = ({
-  name,
-  tasreef,
-  mode = 'list',
-  defaultRootLetters,
-}: TasreefProps) => {
+const Tasreef = ({ name, tasreef, defaultRootLetters }: TasreefProps) => {
   const { rootLetters } = useSarf()
+
+  const [mode] = useAtom(tasreefDisplayModeAtom)
 
   const tableData = useMemo<TableProps['data']>(() => {
     if (tasreef == null) return [[['N/A']]]

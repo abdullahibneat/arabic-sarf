@@ -1,8 +1,16 @@
 import Segmented, { SegmentedOption } from './Segmented'
+import {
+  showJazmAtom,
+  showMajhoolAtom,
+  showMushtaqqAtom,
+  showNasbAtom,
+  showSarfSahegerAtom,
+} from '@/atoms'
 import { useCallback, useMemo, useState } from 'react'
 
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
+import { useAtom } from 'jotai'
 import useLargeBreakpoint from '@/hooks/useLargeBreakpoint'
 import useRootLetters from '@/hooks/useRootLetters'
 
@@ -47,15 +55,24 @@ const Island = ({
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<Section | null>(null)
 
+  const [showMushtaqq] = useAtom(showMushtaqqAtom)
+  const [showSarfSaheger] = useAtom(showSarfSahegerAtom)
+
+  const [showMajhool] = useAtom(showMajhoolAtom)
+
+  const [showJazm] = useAtom(showJazmAtom)
+  const [showNasb] = useAtom(showNasbAtom)
+
   const lg = useLargeBreakpoint()
   const rootLetters = useRootLetters()
 
   const sarfTypeOptions = useMemo(() => {
-    const allSarfTypeOptions: SegmentedOption[] = [
-      { id: 'مشتق', label: 'مشتق' },
-      { id: 'صرف صغير', label: 'صرف صغير' },
-      { id: 'صرف كبير', label: 'صرف كبير' },
-    ] as const
+    const allSarfTypeOptions: SegmentedOption[] = []
+
+    if (showMushtaqq) allSarfTypeOptions.push({ id: 'مشتق', label: 'مشتق' })
+    if (showSarfSaheger)
+      allSarfTypeOptions.push({ id: 'صرف صغير', label: 'صرف صغير' })
+    allSarfTypeOptions.push({ id: 'صرف كبير', label: 'صرف كبير' })
 
     // On small screens, only show the selected option, unless the active section is sarf-type
     if (!lg && activeSection !== Section.SARF_TYPE) {
@@ -63,14 +80,14 @@ const Island = ({
     }
 
     return allSarfTypeOptions
-  }, [activeSection, lg, sarfType])
+  }, [showMushtaqq, showSarfSaheger, activeSection, lg, sarfType])
 
   const verbCaseOptions = useMemo(() => {
-    const allVerbCaseOptions: SegmentedOption[] = [
-      { id: 'مجزوم', label: 'ـْ' },
-      { id: 'منصوب', label: 'ـَ' },
-      { id: 'مرفوع', label: 'ـُ' },
-    ] as const
+    const allVerbCaseOptions: SegmentedOption[] = []
+
+    if (showJazm) allVerbCaseOptions.push({ id: 'مجزوم', label: 'ـْ' })
+    if (showNasb) allVerbCaseOptions.push({ id: 'منصوب', label: 'ـَ' })
+    allVerbCaseOptions.push({ id: 'مرفوع', label: 'ـُ' })
 
     // On small screens, only show the selected option, unless the active section is verb-case
     if (!lg && activeSection !== Section.VERB_CASE) {
@@ -79,7 +96,7 @@ const Island = ({
     }
 
     return allVerbCaseOptions
-  }, [activeSection, lg, verbCase])
+  }, [showJazm, showNasb, activeSection, lg, verbCase])
 
   const toggleSidebar = useCallback(() => {
     const sidebar = document.querySelector('aside')?.classList
@@ -131,13 +148,18 @@ const Island = ({
     >
       <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-200 bg-zinc-100 shadow-xl drop-shadow-xl">
         <div className="flex divide-x overflow-x-auto [&>*]:shrink-0">
-          <IslandSection name={Section.SARF_TYPE} activeSection={activeSection}>
-            <Segmented
-              options={sarfTypeOptions}
-              selectedId={sarfType}
-              onSelectOption={handleSelectSarfType}
-            />
-          </IslandSection>
+          {sarfTypeOptions.length > 1 && (
+            <IslandSection
+              name={Section.SARF_TYPE}
+              activeSection={activeSection}
+            >
+              <Segmented
+                options={sarfTypeOptions}
+                selectedId={sarfType}
+                onSelectOption={handleSelectSarfType}
+              />
+            </IslandSection>
+          )}
 
           {rootLetters.length > 1 && (
             <IslandSection name={Section.VERB} activeSection={activeSection}>
@@ -159,7 +181,7 @@ const Island = ({
             </IslandSection>
           )}
 
-          {sarfType === 'صرف كبير' && (
+          {sarfType === 'صرف كبير' && showMajhool && (
             <IslandSection name={Section.MAJHOOL} activeSection={activeSection}>
               <div className="flex p-1">
                 <input
@@ -181,7 +203,7 @@ const Island = ({
             </IslandSection>
           )}
 
-          {sarfType === 'صرف كبير' && (
+          {sarfType === 'صرف كبير' && verbCaseOptions.length > 1 && (
             <IslandSection
               name={Section.VERB_CASE}
               activeSection={activeSection}
