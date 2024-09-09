@@ -60,7 +60,7 @@ const Sidebar = () => {
           )}
           style={{ transition: 'flex-grow 250ms' }}
         >
-          <div className="ml-4 mr-2 flex flex-col gap-2 rounded-lg bg-white p-4">
+          <div className="ml-4 mr-2 flex flex-col gap-2 rounded-lg bg-white p-4 pb-12 sm:pb-4">
             <h2 className="text-sm font-bold">Settings</h2>
             <Settings />
           </div>
@@ -72,7 +72,7 @@ const Sidebar = () => {
           )}
           style={{ transition: 'flex-grow 250ms' }}
         >
-          <ul className="flex flex-col gap-2 pl-4 pr-2">
+          <ul className="flex flex-col gap-2 pb-12 pl-4 pr-2 sm:pb-0">
             {Array.from(verbTypes.entries())
               .filter(([type]) => enabledVerbTypes.includes(type))
               .map(([type, value]) => (
