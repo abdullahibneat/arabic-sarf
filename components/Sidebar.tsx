@@ -73,8 +73,9 @@ const Sidebar = () => {
                         <SidebarItem
                           href={`/${chapter.key}`}
                           pathname={pathname}
+                          pre={chapter.form}
                         >
-                          {`${chapter.form} - ${chapter.name}`}
+                          {chapter.name}
                         </SidebarItem>
                       </li>
                     )

@@ -8,10 +8,16 @@ import cx from 'classix'
 type SidebarItemProps = {
   href: string
   pathname?: string
+  pre?: string
   children: React.ReactNode
 }
 
-const SidebarItem = ({ href, pathname = '', children }: SidebarItemProps) => {
+const SidebarItem = ({
+  href,
+  pathname = '',
+  pre,
+  children,
+}: SidebarItemProps) => {
   const isActive = useMemo(() => decodeURI(pathname) === href, [pathname, href])
 
   return (
@@ -25,7 +31,14 @@ const SidebarItem = ({ href, pathname = '', children }: SidebarItemProps) => {
         !isActive && 'hover:border-zinc-300 hover:bg-zinc-100',
       )}
     >
-      {children}
+      <div className="relative flex gap-3">
+        {pre && (
+          <div className="flex w-4 items-center justify-center">
+            <span className="absolute text-center">{pre}</span>
+          </div>
+        )}
+        {children}
+      </div>
     </Link>
   )
 }
