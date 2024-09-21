@@ -1,29 +1,16 @@
-import {
-  enabledVerbTypesAtom,
-  mazeedFihiNumberingAtom,
-  mujarradHeadingsAtom,
-  showMazeedFihiAtom,
-} from '@/atoms'
-
 import Link from 'next/link'
 import Settings from './Settings'
 import SidebarItem from './SidebarItem'
 import cx from 'classix'
-import replaceRoots from '@/helpers/replaceRoots'
-import toRoman from '@/helpers/toRoman'
 import { twMerge } from 'tailwind-merge'
-import { useAtom } from 'jotai'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import verbTypes from '@/data'
+import useVerbTypes from '@/hooks/useVerbTypes'
 
 const Sidebar = () => {
   const [showSettings, setShowSettings] = useState(false)
 
-  const [mujarradHeadings] = useAtom(mujarradHeadingsAtom)
-  const [mazeedFihiNumbering] = useAtom(mazeedFihiNumberingAtom)
-  const [enabledVerbTypes] = useAtom(enabledVerbTypesAtom)
-  const [showMazeedFihi] = useAtom(showMazeedFihiAtom)
+  const verbTypes = useVerbTypes()
 
   const pathname = usePathname()
 
@@ -73,51 +60,28 @@ const Sidebar = () => {
           style={{ transition: 'flex-grow 250ms' }}
         >
           <ul className="flex flex-col gap-2 pb-12 pl-4 pr-2 sm:pb-0">
-            {Array.from(verbTypes.entries())
-              .filter(([type]) => enabledVerbTypes.includes(type))
-              .map(([type, value]) => (
-                <li key={type} className="flex flex-col gap-2">
-                  <SidebarItem href={`/${type}`} pathname={pathname}>
-                    {type}
-                  </SidebarItem>
+            {Object.entries(verbTypes).map(([type, chapters]) => (
+              <li key={type} className="flex flex-col gap-2">
+                <SidebarItem href={`/${type}`} pathname={pathname}>
+                  {type}
+                </SidebarItem>
 
-                  <ul className="flex flex-col gap-2">
-                    {Array.from(value.entries())
-                      .filter(([, value]) =>
-                        showMazeedFihi ? !!value : value?.form === 1,
-                      )
-                      .map(([chapter, value], index) => {
-                        let form = value?.form || chapter
-
-                        if (value) {
-                          if (form === 1) {
-                            if (mujarradHeadings === 'english') {
-                              form = `1${String.fromCharCode(index + 97)}`
-                            } else {
-                              form = value.chapter[0]
-                            }
-                          } else if (mazeedFihiNumbering === 'roman') {
-                            form = toRoman(value.form)
-                          }
-                        }
-                        const title = value
-                          ? replaceRoots(value, value.root_letters[0].arabic)
-                              .title
-                          : null
-                        return (
-                          <li key={chapter}>
-                            <SidebarItem
-                              href={`/${type}/${chapter}`}
-                              pathname={pathname}
-                            >
-                              {`${form} - ${title}`}
-                            </SidebarItem>
-                          </li>
-                        )
-                      })}
-                  </ul>
-                </li>
-              ))}
+                <ul className="flex flex-col gap-2">
+                  {chapters.map((chapter) => {
+                    return (
+                      <li key={chapter.form}>
+                        <SidebarItem
+                          href={`/${chapter.key}`}
+                          pathname={pathname}
+                        >
+                          {`${chapter.form} - ${chapter.name}`}
+                        </SidebarItem>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { SarfSagheer as SarfSagheerType } from '@/hooks/useSarfSagheers'
+import { SarfSagheer as SarfSagheerType } from '@/helpers/getChapters'
 import replaceRoots from '@/helpers/replaceRoots'
 import { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'

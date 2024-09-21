@@ -1,63 +1,56 @@
 import IsmFail from '@/components/IsmFail'
 import SarfSagheer from '@/components/SarfSagheer'
 import Tasreef from '@/components/Tasreef'
-import { mazeedFihiNumberingAtom } from '@/atoms'
-import toRoman from '@/helpers/toRoman'
-import { useAtom } from 'jotai'
-import useMushtaqqs from '@/hooks/useMushtaqqs'
-import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
-import useSarfKabeers from '@/hooks/useSarfKabeers'
-import useSarfSagheers from '@/hooks/useSarfSagheers'
+import useVerbTypes from '@/hooks/useVerbTypes'
 
 const Chapter = () => {
-  const { type, chapter } = useRouter().query
+  const { sarfType, verbType, verbChapter, passive, verbCase } = useSarf()
 
-  const simpleSarfKabeers = useSarfKabeers()
-  const sarfSagheers = useSarfSagheers()
-  const mushtaqqs = useMushtaqqs()
+  const verbTypes = useVerbTypes()
 
-  const { sarfType } = useSarf()
-
-  const [mazeedFihiNumbering] = useAtom(mazeedFihiNumberingAtom)
-
-  const tasreef = simpleSarfKabeers.length === 0 ? null : simpleSarfKabeers[0]
-  const sarfSagheer = sarfSagheers.length === 0 ? null : sarfSagheers[0]
-  const mushtaqq = mushtaqqs.length === 0 ? null : mushtaqqs[0]
-
-  let chapterName = chapter
-
-  if (Number(chapter) && mazeedFihiNumbering === 'roman') {
-    chapterName = toRoman(Number(chapter))
-  }
+  const chapter = useMemo(() => {
+    if (!verbType) return null
+    const chapters = verbTypes[verbType] || []
+    return chapters.find(
+      (chapter) => chapter.key === `${verbType}/${verbChapter}`,
+    )
+  }, [verbTypes, verbType, verbChapter])
 
   return (
     <div className="p-4">
       <div className="flex flex-col gap-1">
-        {!tasreef && <div>Not found</div>}
+        {!chapter?.sarfKabeer && <div>Not found</div>}
 
-        {tasreef && (
+        {chapter?.sarfKabeer && (
           <>
             <h2 className="text-center">
-              {type} - {chapterName}
+              {chapter.form} - {chapter.name}
             </h2>
 
             {sarfType === 'صرف كبير' && (
               <div className="mx-auto flex gap-1">
                 <Tasreef
                   name="ماضي"
-                  tasreef={tasreef?.ماضي}
-                  defaultRootLetters={tasreef.rootLetters[0].arabic}
+                  tasreef={
+                    chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي
+                  }
+                  defaultRootLetters={chapter.rootLetters[0]?.arabic}
                 />
                 <Tasreef
                   name="مضارع"
-                  tasreef={tasreef?.مضارع}
-                  defaultRootLetters={tasreef.rootLetters[0].arabic}
+                  tasreef={
+                    chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.مضارع[
+                      verbCase || 'مرفوع'
+                    ]
+                  }
+                  defaultRootLetters={chapter.rootLetters[0]?.arabic}
                 />
                 <Tasreef
                   name="أمر"
-                  tasreef={tasreef?.أمر}
-                  defaultRootLetters={tasreef.rootLetters[0].arabic}
+                  tasreef={chapter.sarfKabeer?.أمر}
+                  defaultRootLetters={chapter.rootLetters[0]?.arabic}
                 />
               </div>
             )}
@@ -65,8 +58,8 @@ const Chapter = () => {
             {sarfType === 'صرف صغير' && (
               <div className="mx-auto flex gap-1">
                 <SarfSagheer
-                  sarfSagheer={sarfSagheer}
-                  defaultRootLetters={tasreef.rootLetters[0].arabic}
+                  sarfSagheer={chapter.sarfSagheer}
+                  defaultRootLetters={chapter.rootLetters[0]?.arabic}
                 />
               </div>
             )}
@@ -74,8 +67,8 @@ const Chapter = () => {
             {sarfType === 'مشتق' && (
               <div className="mx-auto flex gap-1">
                 <IsmFail
-                  ismFail={mushtaqq?.فاعل}
-                  defaultRootLetters={tasreef.rootLetters[0].arabic}
+                  ismFail={chapter.mushtaqq.فاعل}
+                  defaultRootLetters={chapter.rootLetters[0]?.arabic}
                 />
               </div>
             )}

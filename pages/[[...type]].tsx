@@ -1,255 +1,130 @@
-import { RootLetter, VerbTasreef } from '@/data/types'
-import useMushtaqqs, { Mushtaqq } from '@/hooks/useMushtaqqs'
-import useSarfSagheers, {
-  SarfSagheer as SarfSagheerType,
-} from '@/hooks/useSarfSagheers'
-
+import { Chapter } from '@/helpers/getChapters'
 import IsmFail from '@/components/IsmFail'
 import SarfSagheer from '@/components/SarfSagheer'
 import Tasreef from '@/components/Tasreef'
 import { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
-import useSarfKabeers from '@/hooks/useSarfKabeers'
+import useVerbTypes from '@/hooks/useVerbTypes'
 
 const Home = () => {
-  const simpleSarfKabeers = useSarfKabeers()
-  const sarfSagheers = useSarfSagheers()
-  const mushtaqqs = useMushtaqqs()
+  const { sarfType, verbType } = useSarf()
 
-  const { sarfType } = useSarf()
+  const verbTypes = useVerbTypes()
 
   const sections = useMemo(() => {
-    const $sections: Map<
-      string,
-      {
-        mujarrad: {
-          madi: Array<{
-            chapter: string
-            tasreef: VerbTasreef | null
-            sarfSagheer: SarfSagheerType | null
-            rootLetters: RootLetter[]
-            mushtaqq: Mushtaqq | null
-          }>
-          mudari: Array<{
-            chapter: string
-            tasreef: VerbTasreef | null
-            sarfSagheer: SarfSagheerType | null
-            rootLetters: RootLetter[]
-            mushtaqq: Mushtaqq | null
-          }>
-        }
-        mazeedFihi: {
-          madi: Array<{
-            chapter: string
-            tasreef: VerbTasreef | null
-            sarfSagheer: SarfSagheerType | null
-            rootLetters: RootLetter[]
-            mushtaqq: Mushtaqq | null
-          }>
-          mudari: Array<{
-            chapter: string
-            tasreef: VerbTasreef | null
-            sarfSagheer: SarfSagheerType | null
-            rootLetters: RootLetter[]
-            mushtaqq: Mushtaqq | null
-          }>
+    const $sections: Array<{
+      key: string
+      name: string
+      chapters: Chapter[]
+    }> = []
+
+    for (const [type, chapters] of Object.entries(verbTypes)) {
+      // If viewing a single verb type (e.g. صحيح), only show that type
+      if (verbType && type !== verbType) continue
+
+      for (const chapter of chapters) {
+        const sectionKey = `${type}-${chapter.mazeedFihi ? 'mazeed-fihi' : 'mujarrad'}`
+
+        const section = $sections.find((section) => section.key === sectionKey)
+
+        if (section) {
+          section.chapters.push(chapter)
+        } else {
+          $sections.push({
+            key: sectionKey,
+            name: `${type} - ${chapter.mazeedFihi ? 'مزيد فيه' : 'مجرّد'}`,
+            chapters: [chapter],
+          })
         }
       }
-    > = new Map()
-
-    const $sarfSagheers = sarfSagheers.values()
-    const $mushtaqqs = mushtaqqs.values()
-
-    for (const sarfKabeer of simpleSarfKabeers) {
-      const sarfSagheer = $sarfSagheers.next().value
-      const mushtaqq = $mushtaqqs.next().value
-
-      const section = $sections.get(sarfKabeer.type) || {
-        mujarrad: {
-          madi: [],
-          mudari: [],
-        },
-        mazeedFihi: {
-          madi: [],
-          mudari: [],
-        },
-      }
-
-      if (sarfKabeer.mujarrad) {
-        section.mujarrad.madi.push({
-          chapter: sarfKabeer.باب,
-          tasreef: sarfKabeer.ماضي,
-          sarfSagheer,
-          rootLetters: sarfKabeer.rootLetters,
-          mushtaqq,
-        })
-        section.mujarrad.mudari.push({
-          chapter: sarfKabeer.باب,
-          tasreef: sarfKabeer.مضارع,
-          sarfSagheer,
-          rootLetters: sarfKabeer.rootLetters,
-          mushtaqq,
-        })
-      } else {
-        section.mazeedFihi.madi.push({
-          chapter: sarfKabeer.باب,
-          tasreef: sarfKabeer.ماضي,
-          sarfSagheer,
-          rootLetters: sarfKabeer.rootLetters,
-          mushtaqq,
-        })
-        section.mazeedFihi.mudari.push({
-          chapter: sarfKabeer.باب,
-          tasreef: sarfKabeer.مضارع,
-          sarfSagheer,
-          rootLetters: sarfKabeer.rootLetters,
-          mushtaqq,
-        })
-      }
-
-      $sections.set(sarfKabeer.type, section)
     }
 
     return $sections
-  }, [simpleSarfKabeers])
+  }, [verbTypes, verbType])
 
   return (
     <div className="flex flex-col gap-8 p-4">
-      {sections.size === 0 && <div>Not found</div>}
+      {sections.length === 0 && <div>Not found</div>}
 
-      {Array.from(sections.entries()).map(
-        ([type, { mujarrad, mazeedFihi }]) => (
-          <div key={type} className="flex flex-col gap-1">
-            <h2 className="text-center">{type} - مجرّد</h2>
+      {sections.map((section) => (
+        <div key={section.key} className="flex flex-col gap-1">
+          <h2 className="text-center">{section.name}</h2>
 
-            {sarfType === 'صرف كبير' && (
-              <div className="flex w-full">
-                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
-                  {mujarrad.madi.map(({ chapter, tasreef, rootLetters }) => (
-                    <Tasreef
-                      key={`${type}-${chapter}`}
-                      name={chapter}
-                      tasreef={tasreef}
-                      defaultRootLetters={rootLetters[0]?.arabic}
-                    />
-                  ))}
-                </div>
+          {sarfType === 'صرف كبير' && (
+            <VerbOverview chapters={section.chapters} />
+          )}
+
+          {sarfType === 'صرف صغير' && (
+            <div className="flex w-full">
+              <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                {section.chapters.map((chapter) => (
+                  <SarfSagheer
+                    key={chapter.key}
+                    sarfSagheer={chapter.sarfSagheer}
+                    defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+                  />
+                ))}
               </div>
-            )}
+            </div>
+          )}
 
-            {sarfType === 'صرف كبير' && (
-              <div className="flex w-full">
-                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
-                  {mujarrad.mudari.map(({ chapter, tasreef, rootLetters }) => (
-                    <Tasreef
-                      key={`${type}-${chapter}`}
-                      name={chapter}
-                      tasreef={tasreef}
-                      defaultRootLetters={rootLetters[0]?.arabic}
-                    />
-                  ))}
-                </div>
+          {sarfType === 'مشتق' && (
+            <div className="flex w-full">
+              <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
+                {section.chapters.map((chapter) => (
+                  <IsmFail
+                    key={chapter.key}
+                    ismFail={chapter.mushtaqq.فاعل}
+                    defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+                  />
+                ))}
               </div>
-            )}
-
-            {sarfType === 'صرف صغير' && (
-              <div className="flex w-full">
-                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
-                  {mujarrad.madi.map(
-                    ({ chapter, sarfSagheer, rootLetters }) => (
-                      <SarfSagheer
-                        key={`${type}-${chapter}`}
-                        sarfSagheer={sarfSagheer}
-                        defaultRootLetters={rootLetters[0]?.arabic}
-                      />
-                    ),
-                  )}
-                </div>
-              </div>
-            )}
-
-            {sarfType === 'مشتق' && (
-              <div className="flex w-full">
-                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
-                  {mujarrad.madi.map(({ chapter, mushtaqq, rootLetters }) => (
-                    <IsmFail
-                      key={`${type}-${chapter}`}
-                      ismFail={mushtaqq?.فاعل}
-                      defaultRootLetters={rootLetters[0]?.arabic}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <h2 className="text-center">{type} - مزيد فيه</h2>
-
-            {sarfType === 'صرف كبير' && (
-              <div className="flex w-full">
-                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
-                  {mazeedFihi.madi.map(({ chapter, tasreef, rootLetters }) => (
-                    <Tasreef
-                      key={`${type}-${chapter}`}
-                      name={chapter}
-                      tasreef={tasreef}
-                      defaultRootLetters={rootLetters[0]?.arabic}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {sarfType === 'صرف كبير' && (
-              <div className="flex w-full">
-                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
-                  {mazeedFihi.mudari.map(
-                    ({ chapter, tasreef, rootLetters }) => (
-                      <Tasreef
-                        key={`${type}-${chapter}`}
-                        name={chapter}
-                        tasreef={tasreef}
-                        defaultRootLetters={rootLetters[0]?.arabic}
-                      />
-                    ),
-                  )}
-                </div>
-              </div>
-            )}
-
-            {sarfType === 'صرف صغير' && (
-              <div className="flex w-full">
-                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
-                  {mazeedFihi.madi.map(
-                    ({ chapter, sarfSagheer, rootLetters }) => (
-                      <SarfSagheer
-                        key={`${type}-${chapter}`}
-                        sarfSagheer={sarfSagheer}
-                        defaultRootLetters={rootLetters[0]?.arabic}
-                      />
-                    ),
-                  )}
-                </div>
-              </div>
-            )}
-
-            {sarfType === 'مشتق' && (
-              <div className="flex w-full">
-                <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
-                  {mazeedFihi.madi.map(({ chapter, mushtaqq, rootLetters }) => (
-                    <IsmFail
-                      key={`${type}-${chapter}`}
-                      ismFail={mushtaqq?.فاعل}
-                      defaultRootLetters={rootLetters[0]?.arabic}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        ),
-      )}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   )
 }
 
 export default Home
+
+const VerbOverview = ({ chapters }: { chapters: Chapter[] }) => {
+  const { passive, verbCase } = useSarf()
+
+  const showMadi = !verbCase || verbCase === 'مرفوع'
+
+  return (
+    <div className="flex w-full flex-col gap-1 overflow-x-auto overflow-y-hidden">
+      <div className="mx-auto flex gap-1">
+        {chapters.map((chapter) => (
+          <Tasreef
+            key={chapter.key}
+            name={chapter.form}
+            tasreef={
+              showMadi
+                ? chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي
+                : null
+            }
+            defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+          />
+        ))}
+      </div>
+
+      <div className="mx-auto flex gap-1">
+        {chapters.map((chapter) => (
+          <Tasreef
+            key={chapter.key}
+            name={chapter.form}
+            tasreef={
+              chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.مضارع[
+                verbCase || 'مرفوع'
+              ]
+            }
+            defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}

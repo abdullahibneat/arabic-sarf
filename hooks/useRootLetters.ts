@@ -1,25 +1,21 @@
 import { useMemo } from 'react'
 import useSarf from './useSarf'
-import verbTypes from '@/data'
+import useVerbTypes from './useVerbTypes'
 
 const useRootLetters = () => {
   const { verbType, verbChapter } = useSarf()
 
-  const rootLetters = useMemo(() => {
-    if (!verbType || !verbChapter) return []
+  const verbTypes = useVerbTypes()
 
-    const type = verbTypes.get(verbType)
+  const chapter = useMemo(() => {
+    if (!verbType) return null
+    const chapters = verbTypes[verbType] || []
+    return chapters.find(
+      (chapter) => chapter.key === `${verbType}/${verbChapter}`,
+    )
+  }, [verbTypes, verbType, verbChapter])
 
-    if (!type) return []
-
-    const chapter = type.get(verbChapter)
-
-    if (!chapter) return []
-
-    return chapter.root_letters.map((rootLetters) => rootLetters.arabic)
-  }, [verbType, verbChapter])
-
-  return rootLetters
+  return chapter?.rootLetters.map((rootLetters) => rootLetters.arabic) || []
 }
 
 export default useRootLetters
