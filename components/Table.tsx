@@ -5,6 +5,7 @@ import { useMemo } from 'react'
 export type TableCell = {
   annotation?: string | number | null
   content: string
+  disabled?: boolean
 }
 
 export type TableProps = {
@@ -55,7 +56,13 @@ const Table = ({ header, data, column }: TableProps) => {
                           : 'left'
                       }
                     >
-                      {cell.content}
+                      <p
+                        className={twMerge(
+                          cx(cell.disabled && 'text-zinc-300'),
+                        )}
+                      >
+                        {cell.content}
+                      </p>
                     </Cell>
                   ))}
                 </Section>

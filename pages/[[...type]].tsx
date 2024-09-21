@@ -92,8 +92,6 @@ export default Home
 const VerbOverview = ({ chapters }: { chapters: Chapter[] }) => {
   const { passive, verbCase } = useSarf()
 
-  const showMadi = !verbCase || verbCase === 'مرفوع'
-
   return (
     <div className="flex w-full flex-col gap-1 overflow-x-auto overflow-y-hidden">
       <div className="mx-auto flex gap-1">
@@ -101,12 +99,9 @@ const VerbOverview = ({ chapters }: { chapters: Chapter[] }) => {
           <Tasreef
             key={chapter.key}
             name={chapter.form}
-            tasreef={
-              showMadi
-                ? chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي
-                : null
-            }
+            tasreef={chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي}
             defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+            disabled={verbCase ? verbCase !== 'مرفوع' : false}
           />
         ))}
       </div>

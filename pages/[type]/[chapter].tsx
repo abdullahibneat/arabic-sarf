@@ -18,6 +18,17 @@ const Chapter = () => {
     )
   }, [verbTypes, verbType, verbChapter])
 
+  const madiDisabled = useMemo(
+    () => (verbCase ? verbCase !== 'مرفوع' : false),
+    [verbCase],
+  )
+
+  const amrDisabled = useMemo(() => {
+    if (passive) return true
+    if (verbCase) return verbCase !== 'مجزوم'
+    return false
+  }, [passive, verbCase])
+
   return (
     <div className="p-4">
       <div className="flex flex-col gap-1">
@@ -37,6 +48,7 @@ const Chapter = () => {
                     chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي
                   }
                   defaultRootLetters={chapter.rootLetters[0]?.arabic}
+                  disabled={madiDisabled}
                 />
                 <Tasreef
                   name="مضارع"
@@ -51,6 +63,7 @@ const Chapter = () => {
                   name="أمر"
                   tasreef={chapter.sarfKabeer?.أمر}
                   defaultRootLetters={chapter.rootLetters[0]?.arabic}
+                  disabled={amrDisabled}
                 />
               </div>
             )}
