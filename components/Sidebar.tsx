@@ -1,7 +1,7 @@
 import IconButton from './IconButton'
 import Link from 'next/link'
 import Settings from './Settings'
-import SidebarItem from './SidebarItem'
+import SidebarGroup from './SidebarGroup'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 import { usePathname } from 'next/navigation'
@@ -20,8 +20,8 @@ const Sidebar = () => {
       className="flex w-0 shrink-0 flex-col md:w-[280px] [&.open]:w-[280px]"
       style={{ transition: 'width 250ms, padding 250ms' }}
     >
-      <div className="flex w-[280px] flex-1 flex-col gap-2 py-4">
-        <div dir="rtl" className="flex px-4">
+      <div className="flex w-[280px] flex-1 flex-col pt-4">
+        <div dir="rtl" className="mb-2 flex px-4">
           <Link
             href="/"
             className="flex cursor-pointer select-none items-center gap-2"
@@ -44,11 +44,14 @@ const Sidebar = () => {
 
         <div
           className={twMerge(
-            cx('h-0 overflow-auto', showSettings ? 'flex-grow' : 'flex-grow-0'),
+            cx(
+              'flex h-0 flex-col overflow-auto',
+              showSettings ? 'flex-grow' : 'flex-grow-0',
+            ),
           )}
           style={{ transition: 'flex-grow 250ms' }}
         >
-          <div className="ml-4 mr-2 flex flex-col gap-2 rounded-lg bg-white p-4 pb-12 sm:pb-4">
+          <div className="ml-4 mr-2 flex flex-1 flex-col gap-2 rounded-lg bg-white p-4 pb-16 sm:pb-4">
             <h2 className="text-sm font-bold">Settings</h2>
             <Settings />
           </div>
@@ -56,35 +59,29 @@ const Sidebar = () => {
 
         <div
           className={twMerge(
-            cx('h-0 overflow-auto', showSettings ? 'flex-grow-0' : 'flex-grow'),
+            cx(
+              'flex h-0 flex-col overflow-auto',
+              showSettings ? 'flex-grow-0' : 'flex-grow',
+            ),
           )}
           style={{ transition: 'flex-grow 250ms' }}
         >
-          <ul className="flex flex-col gap-2 pb-12 pl-4 pr-2 sm:pb-0">
+          <div className="flex flex-1 flex-col gap-2 px-4 pb-16 sm:pb-0">
             {Object.entries(verbTypes).map(([type, chapters]) => (
-              <li key={type} className="flex flex-col gap-2">
-                <SidebarItem href={`/${type}`} pathname={pathname}>
-                  {type}
-                </SidebarItem>
-
-                <ul className="flex flex-col gap-2">
-                  {chapters.map((chapter) => {
-                    return (
-                      <li key={chapter.form}>
-                        <SidebarItem
-                          href={`/${chapter.key}`}
-                          pathname={pathname}
-                          pre={chapter.form}
-                        >
-                          {chapter.name}
-                        </SidebarItem>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </li>
+              <SidebarGroup
+                key={type}
+                name={type}
+                href={`/${type}`}
+                pathname={pathname}
+                items={chapters.map((chapter) => ({
+                  href: `/${chapter.key}`,
+                  pathname: pathname,
+                  pre: chapter.form,
+                  children: chapter.name,
+                }))}
+              />
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </aside>

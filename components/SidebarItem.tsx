@@ -5,10 +5,10 @@ import React, { useMemo } from 'react'
 import Link from 'next/link'
 import cx from 'classix'
 
-type SidebarItemProps = {
+export type SidebarItemProps = {
   href: string
   pathname?: string
-  pre?: string
+  pre?: React.ReactNode
   children: React.ReactNode
 }
 
