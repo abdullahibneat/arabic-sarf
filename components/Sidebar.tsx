@@ -1,3 +1,4 @@
+import IconButton from './IconButton'
 import Link from 'next/link'
 import Settings from './Settings'
 import SidebarItem from './SidebarItem'
@@ -33,12 +34,12 @@ const Sidebar = () => {
 
           <div className="flex-1" />
 
-          <button
+          <IconButton
             className="text-zinc-300 hover:text-zinc-500"
+            size="small"
+            name={showSettings ? 'close' : 'settings'}
             onClick={() => setShowSettings(!showSettings)}
-          >
-            {showSettings ? '×' : '⚙'}
-          </button>
+          />
         </div>
 
         <div

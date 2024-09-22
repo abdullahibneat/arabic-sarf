@@ -8,6 +8,7 @@ import {
 } from '@/atoms'
 import { useCallback, useMemo, useState } from 'react'
 
+import IconButton from './IconButton'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 import { useAtom } from 'jotai'
@@ -89,9 +90,9 @@ const Island = ({
 
     const allVerbCaseOptions: SegmentedOption[] = []
 
-    if (showJazm) allVerbCaseOptions.push({ id: 'مجزوم', label: 'ـْ' })
-    if (showNasb) allVerbCaseOptions.push({ id: 'منصوب', label: 'ـَ' })
-    allVerbCaseOptions.push({ id: 'مرفوع', label: 'ـُ' })
+    if (showJazm) allVerbCaseOptions.push({ id: 'مجزوم', icon: 'sukoon' })
+    if (showNasb) allVerbCaseOptions.push({ id: 'منصوب', icon: 'fatha' })
+    allVerbCaseOptions.push({ id: 'مرفوع', icon: 'damma' })
 
     // On small screens, only show the selected option, unless the active section is verb-case
     if (!lg && activeSection !== Section.VERB_CASE) {
@@ -225,22 +226,20 @@ const Island = ({
             name={Section.SIDEBAR}
             activeSection={activeSection}
           >
-            <button
-              className="m-1 flex w-8 cursor-pointer select-none items-center justify-center rounded-md px-2 py-1 hover:bg-zinc-200 active:bg-zinc-300"
+            <IconButton
+              className="m-1"
+              name={sidebarOpen ? 'close' : 'menu'}
               onClick={toggleSidebar}
-            >
-              {sidebarOpen ? '×' : '≡'}
-            </button>
+            />
           </IslandSection>
 
           {!lg && activeSection && activeSection !== Section.SIDEBAR && (
             <IslandSection>
-              <button
-                className="m-1 flex w-8 cursor-pointer select-none items-center justify-center rounded-md px-2 py-1 hover:bg-zinc-200 active:bg-zinc-300"
+              <IconButton
+                className="m-1"
+                name="close"
                 onClick={() => setActiveSection(null)}
-              >
-                ×
-              </button>
+              />
             </IslandSection>
           )}
         </div>
