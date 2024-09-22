@@ -1,18 +1,25 @@
 import '@/styles/globals.css'
 
 import { Modal, ModalContext } from '@/contexts/ModalContext'
+import { Noto_Sans, Noto_Sans_Arabic } from 'next/font/google'
 import { useEffect, useState } from 'react'
 
 import type { AppProps } from 'next/app'
 import Island from '@/components/Island'
-import { Noto_Sans_Arabic } from 'next/font/google'
 import { SarfContext } from '@/contexts/SarfProvider'
 import Sidebar from '@/components/Sidebar'
 import { createPortal } from 'react-dom'
-import cx from 'classix'
 import { useRouter } from 'next/router'
 
-const notoSansArabic = Noto_Sans_Arabic({ subsets: ['arabic'] })
+const notoSansArabic = Noto_Sans_Arabic({
+  subsets: ['arabic'],
+  display: 'swap',
+  adjustFontFallback: false,
+})
+
+const notoSans = Noto_Sans({
+  subsets: ['latin'],
+})
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [sarfType, setSarfType] = useState('صرف كبير')
@@ -50,12 +57,14 @@ const App = ({ Component, pageProps }: AppProps) => {
           customRootLetters,
         }}
       >
-        <div
-          className={cx(
-            notoSansArabic.className,
-            'flex h-full overflow-hidden bg-zinc-50 p-2 text-zinc-900',
-          )}
-        >
+        <style jsx global>{`
+          html {
+            font-family: ${notoSansArabic.style.fontFamily},
+              ${notoSans.style.fontFamily}, sans-serif;
+          }
+        `}</style>
+
+        <div className="flex h-full overflow-hidden bg-zinc-50 p-2 text-zinc-900">
           <main
             dir="rtl"
             className="relative flex-grow rounded-lg bg-white p-4"
