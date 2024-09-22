@@ -1,4 +1,4 @@
-import { SarfContext } from '@/contexts/SarfProvider'
+import { SarfContext } from '@/contexts/SarfContext'
 import { useContext } from 'react'
 
 const useSarf = () => {

@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import type { AppProps } from 'next/app'
 import Island from '@/components/Island'
-import { SarfContext } from '@/contexts/SarfProvider'
+import { SarfContext } from '@/contexts/SarfContext'
 import Sidebar from '@/components/Sidebar'
 import { createPortal } from 'react-dom'
 import { useRouter } from 'next/router'
