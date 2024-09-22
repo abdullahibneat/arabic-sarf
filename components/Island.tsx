@@ -67,6 +67,8 @@ const Island = ({
   const rootLetters = useRootLetters()
 
   const sarfTypeOptions = useMemo(() => {
+    if (!showMushtaqq && !showSarfSaheger) return []
+
     const allSarfTypeOptions: SegmentedOption[] = []
 
     if (showMushtaqq) allSarfTypeOptions.push({ id: 'مشتق', label: 'مشتق' })
@@ -83,6 +85,8 @@ const Island = ({
   }, [showMushtaqq, showSarfSaheger, activeSection, lg, sarfType])
 
   const verbCaseOptions = useMemo(() => {
+    if (!showJazm && !showNasb) return []
+
     const allVerbCaseOptions: SegmentedOption[] = []
 
     if (showJazm) allVerbCaseOptions.push({ id: 'مجزوم', label: 'ـْ' })
@@ -148,7 +152,7 @@ const Island = ({
     >
       <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-200 bg-zinc-100 shadow-xl drop-shadow-xl">
         <div className="flex divide-x overflow-x-auto [&>*]:shrink-0">
-          {sarfTypeOptions.length > 1 && (
+          {sarfTypeOptions.length > 0 && (
             <IslandSection
               name={Section.SARF_TYPE}
               activeSection={activeSection}
@@ -203,7 +207,7 @@ const Island = ({
             </IslandSection>
           )}
 
-          {sarfType === 'صرف كبير' && verbCaseOptions.length > 1 && (
+          {sarfType === 'صرف كبير' && verbCaseOptions.length > 0 && (
             <IslandSection
               name={Section.VERB_CASE}
               activeSection={activeSection}
