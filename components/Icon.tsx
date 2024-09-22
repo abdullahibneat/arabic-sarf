@@ -3,6 +3,7 @@ import smallIcons, { SmallIconName } from '@/icons/small'
 
 export type IconProps = {
   className?: string
+  rotate?: number
 } & (
   | {
       size?: 'large'
@@ -14,11 +15,17 @@ export type IconProps = {
     }
 )
 
-const Icon = ({ name, size, className }: IconProps) => {
+const Icon = ({ className, name, size, rotate = 0 }: IconProps) => {
   const IconComponent = size === 'small' ? smallIcons[name] : largeIcons[name]
 
   return (
-    <div className={className}>
+    <div
+      className={className}
+      style={{
+        transform: `rotate(${rotate}deg)`,
+        transition: 'transform 250ms, color 250ms',
+      }}
+    >
       <IconComponent />
     </div>
   )
