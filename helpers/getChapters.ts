@@ -102,53 +102,53 @@ const getChapters = (
         }
       }
 
-      const hasMajhool = !!chapter?.فعل.ماضي.مجهول.مرفوع
+      const hasMajhool = !!baseChapter?.فعل.ماضي.مجهول.مرفوع
 
-      const sarfKabeer: Chapter['sarfKabeer'] = chapter
+      const sarfKabeer: Chapter['sarfKabeer'] = baseChapter
         ? {
             معروف: {
-              ماضي: chapter.فعل.ماضي.معروف.مرفوع,
+              ماضي: baseChapter.فعل.ماضي.معروف.مرفوع,
               مضارع: {
-                مرفوع: chapter.فعل.مضارع.معروف.مرفوع,
-                منصوب: chapter.فعل.مضارع.معروف.منصوب,
-                مجزوم: chapter.فعل.مضارع.معروف.مجزوم,
+                مرفوع: baseChapter.فعل.مضارع.معروف.مرفوع,
+                منصوب: baseChapter.فعل.مضارع.معروف.منصوب,
+                مجزوم: baseChapter.فعل.مضارع.معروف.مجزوم,
               },
             },
             مجهول: hasMajhool
               ? {
-                  ماضي: chapter.فعل.ماضي.مجهول.مرفوع as VerbTasreef,
+                  ماضي: baseChapter.فعل.ماضي.مجهول.مرفوع as VerbTasreef,
                   مضارع: {
-                    مرفوع: chapter.فعل.مضارع.مجهول.مرفوع as VerbTasreef,
-                    منصوب: chapter.فعل.مضارع.مجهول.منصوب as VerbTasreef,
-                    مجزوم: chapter.فعل.مضارع.مجهول.مجزوم as VerbTasreef,
+                    مرفوع: baseChapter.فعل.مضارع.مجهول.مرفوع as VerbTasreef,
+                    منصوب: baseChapter.فعل.مضارع.مجهول.منصوب as VerbTasreef,
+                    مجزوم: baseChapter.فعل.مضارع.مجهول.مجزوم as VerbTasreef,
                   },
                 }
               : null,
-            أمر: chapter.فعل.أمر.معروف.مجزوم,
+            أمر: baseChapter.فعل.أمر.معروف.مجزوم,
           }
         : null
 
-      const sarfSagheer: Chapter['sarfSagheer'] = chapter
+      const sarfSagheer: Chapter['sarfSagheer'] = baseChapter
         ? {
-            مصدر: chapter.مشتق.مصدر[0],
+            مصدر: baseChapter.مشتق.مصدر[0],
             معروف: {
-              ماضي: chapter.فعل.ماضي.معروف.مرفوع['3rd'].masculine.هُوَ,
-              مضارع: chapter.فعل.مضارع.معروف.مرفوع['3rd'].masculine.هُوَ,
-              فاعل: chapter.مشتق.فاعل.masculine.singular,
+              ماضي: baseChapter.فعل.ماضي.معروف.مرفوع['3rd'].masculine.هُوَ,
+              مضارع: baseChapter.فعل.مضارع.معروف.مرفوع['3rd'].masculine.هُوَ,
+              فاعل: baseChapter.مشتق.فاعل.masculine.singular,
             },
             مجهول: hasMajhool
               ? {
                   ماضي: String(
-                    chapter.فعل.ماضي.مجهول.مرفوع?.['3rd'].masculine.هُوَ,
+                    baseChapter.فعل.ماضي.مجهول.مرفوع?.['3rd'].masculine.هُوَ,
                   ),
                   مضارع: String(
-                    chapter.فعل.مضارع.مجهول.مرفوع?.['3rd'].masculine.هُوَ,
+                    baseChapter.فعل.مضارع.مجهول.مرفوع?.['3rd'].masculine.هُوَ,
                   ),
-                  مفعول: String(chapter.مشتق.مفعول.masculine.singular),
+                  مفعول: String(baseChapter.مشتق.مفعول.masculine.singular),
                 }
               : null,
-            أمر: chapter.فعل.أمر.معروف.مجزوم['2nd'].masculine.أَنْتَ,
-            نهي: chapter.فعل.مضارع.معروف.مجزوم['2nd'].masculine.أَنْتَ,
+            أمر: baseChapter.فعل.أمر.معروف.مجزوم['2nd'].masculine.أَنْتَ,
+            نهي: baseChapter.فعل.مضارع.معروف.مجزوم['2nd'].masculine.أَنْتَ,
           }
         : null
 
