@@ -1,12 +1,21 @@
-import icons from '@/icons'
+import largeIcons, { LargeIconName } from '@/icons/large'
+import smallIcons, { SmallIconName } from '@/icons/small'
 
 export type IconProps = {
-  name: keyof typeof icons
   className?: string
-}
+} & (
+  | {
+      size?: 'large'
+      name: LargeIconName
+    }
+  | {
+      size: 'small'
+      name: SmallIconName
+    }
+)
 
-const Icon = ({ name, className }: IconProps) => {
-  const IconComponent = icons[name]
+const Icon = ({ name, size, className }: IconProps) => {
+  const IconComponent = size === 'small' ? smallIcons[name] : largeIcons[name]
 
   return (
     <div className={className}>

@@ -1,5 +1,5 @@
 import Icon from './Icon'
-import { IconName } from '@/icons'
+import { LargeIconName } from '@/icons/large'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 
@@ -11,7 +11,7 @@ export type SegmentedOption = {
       label: string
     }
   | {
-      icon: IconName
+      icon: LargeIconName
     }
 )
 
