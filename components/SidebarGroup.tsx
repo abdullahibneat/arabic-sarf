@@ -1,10 +1,9 @@
+import { MouseEventHandler, useCallback, useState } from 'react'
 import SidebarItem, { SidebarItemProps } from './SidebarItem'
 
-import Icon from './Icon'
 import IconButton from './IconButton'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
-import { useState } from 'react'
 
 type SidebarGroupProps = {
   name: string
@@ -14,10 +13,18 @@ type SidebarGroupProps = {
 }
 
 const SidebarGroup = ({ name, href, pathname, items }: SidebarGroupProps) => {
-  const [open, setOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(true)
+
+  const open = useCallback(() => setIsOpen(true), [])
+
+  const toggleOpen = useCallback<MouseEventHandler<HTMLButtonElement>>((e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsOpen((open) => !open)
+  }, [])
 
   return (
-    <div onClick={() => setOpen(true)}>
+    <div onClick={open}>
       <SidebarItem
         href={href}
         pathname={pathname}
@@ -25,11 +32,8 @@ const SidebarGroup = ({ name, href, pathname, items }: SidebarGroupProps) => {
           <IconButton
             size="small"
             name="chevron"
-            rotate={open ? 0 : 180}
-            onClick={(e) => {
-              e.preventDefault()
-              setOpen(!open)
-            }}
+            rotate={isOpen ? 0 : 180}
+            onClick={toggleOpen}
           />
         }
       >
@@ -38,7 +42,7 @@ const SidebarGroup = ({ name, href, pathname, items }: SidebarGroupProps) => {
 
       <div
         className={twMerge(
-          cx('grid grid-rows-[0fr]', open && 'grid-rows-[1fr]'),
+          cx('grid grid-rows-[0fr]', isOpen && 'grid-rows-[1fr]'),
         )}
         style={{ transition: 'grid-template-rows 250ms' }}
       >
