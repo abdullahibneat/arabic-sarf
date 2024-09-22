@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 
 import { Modal, ModalContext } from '@/contexts/ModalContext'
 import { Noto_Sans, Noto_Sans_Arabic } from 'next/font/google'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import type { AppProps } from 'next/app'
 import Island from '@/components/Island'
@@ -44,8 +44,33 @@ const App = ({ Component, pageProps }: AppProps) => {
     }
   }, [type, chapter, customRootLetters])
 
+  /**
+   * Modal helpers
+   */
+
+  const getDialog = useCallback((id: string) => {
+    return document.querySelector<HTMLDialogElement>(`dialog#${id}`)
+  }, [])
+
+  const presentModal = useCallback((modal: Modal) => {
+    setModals((modals) => modals.concat(modal))
+    setTimeout(() => getDialog(modal.id)?.showModal(), 0)
+    return () => dismissModal(modal.id)
+  }, [])
+
+  const dismissModal = useCallback((id: string) => {
+    getDialog(id)?.close()
+    setModals((modals) => modals.filter((modal) => modal.id !== id))
+  }, [])
+
+  /**
+   * End of modal helpers
+   */
+
   return (
-    <ModalContext.Provider value={{ modals, setModals }}>
+    <ModalContext.Provider
+      value={{ present: presentModal, dismiss: dismissModal }}
+    >
       <SarfContext.Provider
         value={{
           verbType: !type ? null : String(type),
@@ -92,6 +117,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           createPortal(
             <dialog
               id={modal.id}
+              onCancel={() => dismissModal(modal.id)}
               className="m-0 h-full max-h-full w-full max-w-full items-center justify-center bg-zinc-900/50 backdrop:bg-transparent open:flex"
             >
               {modal.content}

@@ -6,11 +6,11 @@ export type Modal = {
 }
 
 export type ModalContextType = {
-  modals: Modal[]
-  setModals: (modals: Modal[] | ((modals: Modal[]) => Modal[])) => void
+  present: (modal: Modal) => () => void
+  dismiss: (id: string) => void
 }
 
 export const ModalContext = createContext<ModalContextType>({
-  modals: [],
-  setModals: () => null,
+  present: () => () => null,
+  dismiss: () => null,
 })
