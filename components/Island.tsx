@@ -152,7 +152,7 @@ const Island = ({
       className="fixed bottom-6 left-4 right-4 flex h-[42px] md:sticky md:top-[calc(100%-42px)]"
     >
       <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-200 bg-zinc-100 shadow-xl drop-shadow-xl">
-        <div className="flex divide-x overflow-x-auto [&>*]:shrink-0">
+        <div className="flex divide-x overflow-hidden [&>*]:shrink-0">
           {sarfTypeOptions.length > 0 && (
             <IslandSection
               name={Section.SARF_TYPE}
