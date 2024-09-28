@@ -121,7 +121,6 @@ const Island = ({
       // On large screens, select the option straight away
       if (lg || activeSection === Section.VERB_CASE) {
         selectOption()
-        setActiveSection(null)
       } else {
         // On small screens, first set this as the active section
         setActiveSection(Section.VERB_CASE)
@@ -137,7 +136,6 @@ const Island = ({
       // On large screens, select the option straight away
       if (lg || activeSection === Section.SARF_TYPE) {
         selectOption()
-        setActiveSection(null)
       } else {
         // On small screens, first set this as the active section
         setActiveSection(Section.SARF_TYPE)
