@@ -11,7 +11,6 @@ export type SarfContextType = {
   sarfType: string
   passive: boolean
   rootLetters: { ف?: string; ع?: string; ل?: string } | null
-  customRootLetters: boolean
 }
 
 export const SarfContext = createContext<SarfContextType>({
@@ -21,5 +20,4 @@ export const SarfContext = createContext<SarfContextType>({
   sarfType: 'صرف كبير',
   passive: false,
   rootLetters: null,
-  customRootLetters: false,
 })

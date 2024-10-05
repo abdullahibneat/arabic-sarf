@@ -30,19 +30,12 @@ const App = ({ Component, pageProps }: AppProps) => {
     ع?: string
     ل?: string
   } | null>(null)
-  const [customRootLetters, setCustomRootLetters] = useState(false)
 
   const [modals, setModals] = useState<Modal[]>([])
 
   const router = useRouter()
 
   const { type, chapter } = router.query
-
-  useEffect(() => {
-    if (!customRootLetters) {
-      setRootLetters(null)
-    }
-  }, [type, chapter, customRootLetters])
 
   /**
    * Modal helpers
@@ -79,7 +72,6 @@ const App = ({ Component, pageProps }: AppProps) => {
           sarfType,
           passive,
           rootLetters,
-          customRootLetters,
         }}
       >
         <style jsx global>{`
