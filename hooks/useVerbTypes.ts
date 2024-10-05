@@ -21,12 +21,18 @@ const useVerbTypes = () => {
     [enabledVerbTypes],
   )
 
-  return Object.fromEntries(
-    availableVerbTypes.map((verbType) => [
-      verbType,
-      getChapters(verbType, { mujarradHeadings, mazeedFihiNumbering }),
-    ]),
+  const $verbTypes = useMemo(
+    () =>
+      Object.fromEntries(
+        availableVerbTypes.map((verbType) => [
+          verbType,
+          getChapters(verbType, { mujarradHeadings, mazeedFihiNumbering }),
+        ]),
+      ),
+    [availableVerbTypes, mujarradHeadings, mazeedFihiNumbering],
   )
+
+  return $verbTypes
 }
 
 export default useVerbTypes

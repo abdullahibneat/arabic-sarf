@@ -15,7 +15,12 @@ const useRootLetters = () => {
     )
   }, [verbTypes, verbType, verbChapter])
 
-  return chapter?.rootLetters.map((rootLetters) => rootLetters.arabic) || []
+  const rootLetters = useMemo(() => {
+    if (!chapter) return []
+    return chapter.rootLetters.map((rootLetters) => rootLetters.arabic) || []
+  }, [chapter])
+
+  return rootLetters
 }
 
 export default useRootLetters
