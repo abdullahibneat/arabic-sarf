@@ -9,11 +9,11 @@ import {
 import { useCallback, useMemo, useState } from 'react'
 
 import IconButton from './IconButton'
+import RootLetters from './RootLetters'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 import { useAtom } from 'jotai'
 import useLargeBreakpoint from '@/hooks/useLargeBreakpoint'
-import useRootLetters from '@/hooks/useRootLetters'
 
 enum Section {
   SIDEBAR = 'sidebar',
@@ -47,7 +47,7 @@ const Island = ({
   sarfType,
   verbCase,
   passive,
-  rootLetters: currentRootLetters,
+  rootLetters,
   setSarfType,
   setVerbCase,
   setPassive,
@@ -65,7 +65,6 @@ const Island = ({
   const [showNasb] = useAtom(showNasbAtom)
 
   const lg = useLargeBreakpoint()
-  const rootLetters = useRootLetters()
 
   const sarfTypeOptions = useMemo(() => {
     if (!showMushtaqq && !showSarfSaheger) return []
@@ -150,7 +149,7 @@ const Island = ({
       className="fixed bottom-6 left-4 right-4 flex h-[42px] md:sticky md:top-[calc(100%-42px)]"
     >
       <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-200 bg-zinc-100 shadow-xl drop-shadow-xl">
-        <div className="flex divide-x overflow-hidden [&>*]:shrink-0">
+        <div className="flex divide-x [&>*]:shrink-0">
           {sarfTypeOptions.length > 0 && (
             <IslandSection
               name={Section.SARF_TYPE}
@@ -164,25 +163,12 @@ const Island = ({
             </IslandSection>
           )}
 
-          {rootLetters.length > 1 && (
-            <IslandSection name={Section.VERB} activeSection={activeSection}>
-              <select
-                className="m-1 h-8 rounded-md bg-zinc-900 px-1 text-white"
-                value={
-                  currentRootLetters
-                    ? JSON.stringify(currentRootLetters)
-                    : undefined
-                }
-                onChange={(e) => setRootLetters?.(JSON.parse(e.target.value))}
-              >
-                {rootLetters.map((rootLetters, index) => (
-                  <option key={index} value={JSON.stringify(rootLetters)}>
-                    {`${rootLetters.ف}${rootLetters.ع}${rootLetters.ل}`}
-                  </option>
-                ))}
-              </select>
-            </IslandSection>
-          )}
+          <IslandSection name={Section.VERB} activeSection={activeSection}>
+            <RootLetters
+              rootLetters={rootLetters}
+              setRootLetters={setRootLetters}
+            />
+          </IslandSection>
 
           {sarfType === 'صرف كبير' && showMajhool && (
             <IslandSection name={Section.MAJHOOL} activeSection={activeSection}>
