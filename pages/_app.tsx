@@ -110,7 +110,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             <dialog
               id={modal.id}
               onCancel={() => dismissModal(modal.id)}
-              className="m-0 h-full max-h-full w-full max-w-full items-center justify-center bg-zinc-900/50 backdrop:bg-transparent open:flex"
+              className="m-0 h-full max-h-full w-full max-w-full items-center justify-center open:flex"
             >
               {modal.content}
             </dialog>,

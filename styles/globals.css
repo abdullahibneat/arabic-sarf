@@ -19,3 +19,39 @@ div#__next {
   border-radius: 8px;
   border: transparent;
 }
+
+/**
+ * Dialog animations:
+ * - Background fades in
+ * - Content slides up
+ */
+
+dialog {
+  animation: slideUp 250ms forwards;
+  animation-delay: 150ms;
+  background-color: transparent;
+  transform: translateY(1rem);
+  opacity: 0;
+  transition:
+    transform 250ms,
+    opacity 250ms;
+}
+
+dialog::backdrop {
+  animation: fadeIn 250ms forwards;
+  background-color: transparent;
+  transition: background-color 250ms;
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    @apply bg-zinc-900/50;
+  }
+}
