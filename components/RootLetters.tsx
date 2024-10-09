@@ -30,6 +30,8 @@ type Props = {
 const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
   const [open, setOpen] = useState(false)
   const [persist, setPersist] = useState(false)
+  const [isUsingCustomRootLetters, setIsUsingCustomRootLetters] =
+    useState(false)
   const [customRootLetters, setCustomRootLetters] = useState({
     ف: 'ف',
     ع: 'ع',
@@ -47,15 +49,25 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
     /**
      * When persisting is disabled, default to the first root letters whenever user navigates to a different chapter
      */
-    if (!persist) reset()
-  }, [availableRootLetters])
+    if (persist) {
+      // If you persist without selecting any root letters (i.e. `rootLetters === null`),
+      // then a reset is needed because otherwise the component is persisting `null`, but
+      // on each page change, the root letters will default to the first available set of root letters
+      if (!rootLetters) reset()
+    } else {
+      reset()
+    }
+  }, [
+    // Note: this useEffect should only be called when the array of `availableRootLetters` changes, and not exactly when the dependencies change.
+    availableRootLetters,
+  ])
 
   useEffect(() => {
     /**
      * Update the root letters whenever the custom root letters change
      */
-    setRootLetters?.(customRootLetters)
-  }, [customRootLetters])
+    if (isUsingCustomRootLetters) setRootLetters?.(customRootLetters)
+  }, [isUsingCustomRootLetters, customRootLetters])
 
   useOnClickOutside(dropdownRef, (e) => {
     /**
@@ -71,6 +83,8 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
   })
 
   const reset = () => {
+    setIsUsingCustomRootLetters(false)
+
     if (availableRootLetters.length > 0) {
       setRootLetters?.(availableRootLetters[0])
     } else {
@@ -85,6 +99,8 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
         const arabic = /^[\sء-ي]$/.test(event.target.value)
 
         if (!arabic) return
+
+        setIsUsingCustomRootLetters(true)
 
         setCustomRootLetters((customRootLetters) => ({
           ...customRootLetters,
@@ -103,6 +119,19 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
     [],
   )
 
+  const handleSelectCustomRootLetters = useCallback(() => {
+    setIsUsingCustomRootLetters(true)
+    setRootLetters?.(customRootLetters)
+  }, [setRootLetters, customRootLetters])
+
+  const handleSelectRootLetters = useCallback(
+    (rootLetters: { ف?: string; ع?: string; ل?: string }) => () => {
+      setIsUsingCustomRootLetters(false)
+      setRootLetters?.(rootLetters)
+    },
+    [setRootLetters],
+  )
+
   return (
     <div key="root-letters" className="relative">
       <button
@@ -117,7 +146,7 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
           ),
         )}
         style={{ transition: 'background-color 250ms' }}
-        onClick={() => setOpen((open) => !open)}
+        onClick={() => setOpen(true)}
       >
         <span className="flex-1">
           {rootLetters
@@ -136,12 +165,8 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
           <div className="flex flex-col divide-y">
             {showRootLetterEditor && (
               <DropdownOption
-                selected={
-                  !!rootLetters &&
-                  JSON.stringify(rootLetters) ===
-                    JSON.stringify(customRootLetters)
-                }
-                onClick={() => setRootLetters?.(customRootLetters)}
+                selected={isUsingCustomRootLetters}
+                onClick={handleSelectCustomRootLetters}
               >
                 <div className="flex flex-row-reverse">
                   <CustomRootLetterInput
@@ -170,7 +195,7 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
                   !!rootLetters &&
                   JSON.stringify(rootLetters) === JSON.stringify($rootLetters)
                 }
-                onClick={() => setRootLetters?.($rootLetters)}
+                onClick={handleSelectRootLetters($rootLetters)}
               >
                 {`${$rootLetters.ف}${$rootLetters.ع}${$rootLetters.ل}`}
               </DropdownOption>
