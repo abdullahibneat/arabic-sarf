@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 
 import { Modal, ModalContext } from '@/contexts/ModalContext'
 import { Noto_Sans, Noto_Sans_Arabic } from 'next/font/google'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import type { AppProps } from 'next/app'
 import Island from '@/components/Island'

@@ -1,4 +1,3 @@
-import Icon from './Icon'
 import IconButton from './IconButton'
 import { LargeIconName } from '@/icons/large'
 import cx from 'classix'
