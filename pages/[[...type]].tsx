@@ -9,6 +9,7 @@ import verbTypes from '@/data'
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
 import IsmMafool from '@/components/IsmMafool'
 import Masdar from '@/components/Masdar'
+import Table from '@/components/Table'
 
 export const getStaticPaths: GetStaticPaths = () => {
   const allVerbTypes = Array.from(verbTypes.keys())
@@ -136,6 +137,22 @@ const MushtaqqOverview = ({ chapters }: { chapters: Chapter[] }) => (
   <div className="flex w-full flex-col gap-1 overflow-x-auto overflow-y-hidden">
     <div className="mx-auto flex gap-1">
       {chapters.map((chapter) => (
+        <Table column key={chapter.key} header={chapter.form} data={[]} />
+      ))}
+    </div>
+
+    <div className="mx-auto flex gap-1">
+      {chapters.map((chapter) => (
+        <Masdar
+          key={chapter.key}
+          masdars={chapter.mushtaqq.مصدر}
+          defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+        />
+      ))}
+    </div>
+
+    <div className="mx-auto flex gap-1">
+      {chapters.map((chapter) => (
         <IsmFail
           key={chapter.key}
           ismFail={chapter.mushtaqq.فاعل}
@@ -149,16 +166,6 @@ const MushtaqqOverview = ({ chapters }: { chapters: Chapter[] }) => (
         <IsmMafool
           key={chapter.key}
           ismMafool={chapter.mushtaqq.مفعول}
-          defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
-        />
-      ))}
-    </div>
-
-    <div className="mx-auto flex gap-1">
-      {chapters.map((chapter) => (
-        <Masdar
-          key={chapter.key}
-          masdars={chapter.mushtaqq.مصدر}
           defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
         />
       ))}
