@@ -4,6 +4,31 @@ import Tasreef from '@/components/Tasreef'
 import { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
 import useVerbTypes from '@/hooks/useVerbTypes'
+import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
+import verbTypes from '@/data'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allVerbTypes = Array.from(verbTypes.keys())
+  const paths: GetStaticPathsResult['paths'] = []
+  for (const type of allVerbTypes) {
+    const verbType = verbTypes.get(type)
+    if (!verbType) continue
+    const chapters = Array.from(verbType.keys())
+    for (const chapter of chapters) {
+      const exists = verbType.get(chapter)
+      if (!exists) continue
+      paths.push({
+        params: { type, chapter },
+      })
+    }
+  }
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps = (() => ({ props: {} })) satisfies GetStaticProps
 
 const Chapter = () => {
   const { sarfType, verbType, verbChapter, passive, verbCase } = useSarf()

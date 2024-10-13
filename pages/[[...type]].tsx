@@ -5,6 +5,22 @@ import Tasreef from '@/components/Tasreef'
 import { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
 import useVerbTypes from '@/hooks/useVerbTypes'
+import verbTypes from '@/data'
+import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
+
+export const getStaticPaths: GetStaticPaths = () => {
+  const allVerbTypes = Array.from(verbTypes.keys())
+  const paths: GetStaticPathsResult['paths'] = [{ params: { type: undefined } }]
+  for (const verbType of allVerbTypes) {
+    paths.push({ params: { type: [verbType] } })
+  }
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps = (() => ({ props: {} })) satisfies GetStaticProps
 
 const Home = () => {
   const { sarfType, verbType } = useSarf()
