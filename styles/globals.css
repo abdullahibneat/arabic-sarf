@@ -21,17 +21,14 @@ div#__next {
 }
 
 /**
- * Dialog animations:
+ * Dialog open animations:
  * - Background fades in
  * - Content slides up
  */
 
 dialog {
   animation: slideUp 250ms forwards;
-  animation-delay: 150ms;
   background-color: transparent;
-  transform: translateY(1rem);
-  opacity: 0;
   transition:
     transform 250ms,
     opacity 250ms;
@@ -39,19 +36,59 @@ dialog {
 
 dialog::backdrop {
   animation: fadeIn 250ms forwards;
-  background-color: transparent;
   transition: background-color 250ms;
 }
 
+/**
+ * Dialog close animation:
+ * - Background fades out
+ * - Content slides down
+ */
+
+dialog.close {
+  animation: slideDown 250ms forwards;
+}
+
+dialog.close::backdrop {
+  animation: fadeOut 250ms forwards;
+}
+
 @keyframes slideUp {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
   to {
     transform: translateY(0);
     opacity: 1;
   }
 }
 
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
 @keyframes fadeIn {
+  from {
+    background-color: transparent;
+  }
   to {
     @apply bg-zinc-900/50;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    @apply bg-zinc-900/50;
+  }
+  to {
+    background-color: transparent;
   }
 }

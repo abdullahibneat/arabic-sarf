@@ -52,8 +52,12 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, [])
 
   const dismissModal = useCallback((id: string) => {
-    getDialog(id)?.close()
-    setModals((modals) => modals.filter((modal) => modal.id !== id))
+    const dialog = getDialog(id)
+    dialog?.classList.add('close')
+    setTimeout(() => {
+      getDialog(id)?.close()
+      setModals((modals) => modals.filter((modal) => modal.id !== id))
+    }, 250)
   }, [])
 
   /**
