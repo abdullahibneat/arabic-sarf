@@ -60,6 +60,18 @@ export type Mushtaqq = {
       plural: string
     }
   } | null
+  مفعول: {
+    masculine: {
+      singular: string | null
+      dual: string | null
+      plural: string | null
+    }
+    feminine: {
+      singular: string | null
+      dual: string | null
+      plural: string | null
+    }
+  } | null
 }
 
 type Options = {
@@ -144,7 +156,7 @@ const getChapters = (
                   مضارع: String(
                     baseChapter.فعل.مضارع.مجهول.مرفوع?.['3rd'].masculine.هُوَ,
                   ),
-                  مفعول: String(baseChapter.مشتق.مفعول.masculine.singular),
+                  مفعول: String(baseChapter.مشتق.مفعول?.masculine.singular),
                 }
               : null,
             أمر: baseChapter.فعل.أمر.معروف.مجزوم['2nd'].masculine.أَنْتَ,
@@ -154,6 +166,7 @@ const getChapters = (
 
       const mushtaqq: Mushtaqq = {
         فاعل: baseChapter?.مشتق.فاعل || null,
+        مفعول: baseChapter?.مشتق.مفعول || null,
       }
 
       return {

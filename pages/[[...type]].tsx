@@ -2,11 +2,12 @@ import { Chapter } from '@/helpers/getChapters'
 import IsmFail from '@/components/IsmFail'
 import SarfSagheer from '@/components/SarfSagheer'
 import Tasreef from '@/components/Tasreef'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
 import useVerbTypes from '@/hooks/useVerbTypes'
 import verbTypes from '@/data'
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
+import IsmMafool from '@/components/IsmMafool'
 
 export const getStaticPaths: GetStaticPaths = () => {
   const allVerbTypes = Array.from(verbTypes.keys())
@@ -85,17 +86,7 @@ const Home = () => {
           )}
 
           {sarfType === 'مشتق' && (
-            <div className="flex w-full">
-              <div className="mx-auto flex gap-1 overflow-x-auto overflow-y-hidden">
-                {section.chapters.map((chapter) => (
-                  <IsmFail
-                    key={chapter.key}
-                    ismFail={chapter.mushtaqq.فاعل}
-                    defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
-                  />
-                ))}
-              </div>
-            </div>
+            <MushtaqqOverview chapters={section.chapters} />
           )}
         </div>
       ))}
@@ -139,3 +130,27 @@ const VerbOverview = ({ chapters }: { chapters: Chapter[] }) => {
     </div>
   )
 }
+
+const MushtaqqOverview = ({ chapters }: { chapters: Chapter[] }) => (
+  <div className="flex w-full flex-col gap-1 overflow-x-auto overflow-y-hidden">
+    <div className="mx-auto flex gap-1">
+      {chapters.map((chapter) => (
+        <IsmFail
+          key={chapter.key}
+          ismFail={chapter.mushtaqq.فاعل}
+          defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+        />
+      ))}
+    </div>
+
+    <div className="mx-auto flex gap-1">
+      {chapters.map((chapter) => (
+        <IsmMafool
+          key={chapter.key}
+          ismMafool={chapter.mushtaqq.مفعول}
+          defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+        />
+      ))}
+    </div>
+  </div>
+)
