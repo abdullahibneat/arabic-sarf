@@ -58,16 +58,16 @@ export type VerbChapter = {
     }
     مفعول: {
       masculine: {
-        singular: string | null
-        dual: string | null
-        plural: string | null
+        singular: string
+        dual: string
+        plural: string
       }
       feminine: {
-        singular: string | null
-        dual: string | null
-        plural: string | null
+        singular: string
+        dual: string
+        plural: string
       }
-    }
+    } | null
   }
 }
 

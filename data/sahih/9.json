@@ -199,17 +199,6 @@
         "plural": "مُفْعَلَّاتٌ"
       }
     },
-    "مفعول": {
-      "masculine": {
-        "singular": null,
-        "dual": null,
-        "plural": null
-      },
-      "feminine": {
-        "singular": null,
-        "dual": null,
-        "plural": null
-      }
-    }
+    "مفعول": null
   }
 }

@@ -24,7 +24,7 @@ const IsmFail = ({ ismFail, defaultRootLetters }: IsmFailProps) => {
   const { rootLetters } = useSarf()
 
   const tableData = useMemo<TableProps['data']>(() => {
-    if (ismFail == null) return [[['N/A']]]
+    if (!ismFail) return [[['N/A']]]
 
     const $ismFail = replaceRoots(ismFail, rootLetters || defaultRootLetters)
 

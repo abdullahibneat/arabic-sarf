@@ -24,7 +24,7 @@ const IsmMafool = ({ ismMafool, defaultRootLetters }: IsmMafoolProps) => {
   const { rootLetters } = useSarf()
 
   const tableData = useMemo<TableProps['data']>(() => {
-    if (ismMafool == null) return [[['N/A']]]
+    if (!ismMafool) return [[['N/A']]]
 
     const $ismMafool = replaceRoots(
       ismMafool,
