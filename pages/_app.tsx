@@ -9,6 +9,8 @@ import Island from '@/components/Island'
 import { SarfContext } from '@/contexts/SarfContext'
 import Sidebar from '@/components/Sidebar'
 import { createPortal } from 'react-dom'
+import { fontSizeAtom } from '@/atoms'
+import { useAtom } from 'jotai'
 import { useRouter } from 'next/router'
 
 const notoSansArabic = Noto_Sans_Arabic({
@@ -32,6 +34,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   } | null>(null)
 
   const [modals, setModals] = useState<Modal[]>([])
+
+  const [fontSize] = useAtom(fontSizeAtom)
 
   const router = useRouter()
 
@@ -82,13 +86,14 @@ const App = ({ Component, pageProps }: AppProps) => {
           html {
             font-family: ${notoSansArabic.style.fontFamily},
               ${notoSans.style.fontFamily}, sans-serif;
+            font-size: ${fontSize}px;
           }
         `}</style>
 
         <div className="flex h-full overflow-hidden bg-zinc-50 p-2 text-zinc-900">
           <main
             dir="rtl"
-            className="relative flex-grow rounded-lg bg-white p-4"
+            className="relative w-0 flex-grow rounded-lg bg-white p-4"
           >
             <div className="absolute inset-0 overflow-auto">
               <Component {...pageProps} />

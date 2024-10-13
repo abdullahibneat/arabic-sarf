@@ -12,6 +12,7 @@ import {
   showSarfSahegerAtom,
   tasreefDisplayModeAtom,
 } from '@/atoms'
+import { useEffect, useState } from 'react'
 import usePresets, { presets } from '@/hooks/usePresets'
 
 import Radio from './Radio'
@@ -20,6 +21,8 @@ import { useAtom } from 'jotai'
 import verbTypes from '@/data'
 
 const Settings = () => {
+  const [previewFontSize, setPreviewFontSize] = useState(0)
+
   const [tasreefDisplayMode, setTasreefDisplayMode] = useAtom(
     tasreefDisplayModeAtom,
   )
@@ -41,6 +44,10 @@ const Settings = () => {
 
   const { preset, setPreset } = usePresets()
 
+  useEffect(() => {
+    setPreviewFontSize(fontSize)
+  }, [fontSize])
+
   return (
     <div className="flex flex-col gap-8">
       <FieldWrapper title="Tasreef display mode">
@@ -55,12 +62,11 @@ const Settings = () => {
         />
       </FieldWrapper>
 
-      <FieldWrapper title={`Font size (${fontSize}px)`}>
-        <p className="border-l-4 border-zinc-300 pl-2 text-sm italic text-zinc-500">
-          This feature is not yet implemented
-        </p>
-
-        <div className="flex flex-shrink-0 flex-col items-center justify-center rounded-md border-[1px] border-zinc-300 bg-white px-4 py-2">
+      <FieldWrapper title={`Font size (${previewFontSize}px)`}>
+        <div
+          className="flex flex-shrink-0 flex-col items-center justify-center rounded-md border-[1px] border-zinc-300 bg-white px-4 py-2"
+          style={{ fontSize: previewFontSize }}
+        >
           نَصَرَ يَنْصَرَ نَصْرًا
         </div>
 
@@ -69,9 +75,9 @@ const Settings = () => {
           type="range"
           min={8}
           max={32}
-          value={fontSize}
-          disabled
-          onChange={(e) => setFontSize(parseInt(e.target.value))}
+          value={previewFontSize}
+          onChange={(e) => setPreviewFontSize(parseInt(e.target.value))}
+          onMouseUp={() => setFontSize(previewFontSize)}
         />
       </FieldWrapper>
 
