@@ -7,6 +7,7 @@ import useVerbTypes from '@/hooks/useVerbTypes'
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
 import verbTypes from '@/data'
 import IsmMafool from '@/components/IsmMafool'
+import Masdar from '@/components/Masdar'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allVerbTypes = Array.from(verbTypes.keys())
@@ -105,6 +106,10 @@ const Chapter = () => {
 
             {sarfType === 'مشتق' && (
               <div className="mx-auto flex gap-1">
+                <Masdar
+                  masdars={chapter.mushtaqq.مصدر}
+                  defaultRootLetters={chapter.rootLetters[0]?.arabic}
+                />
                 <IsmFail
                   ismFail={chapter.mushtaqq.فاعل}
                   defaultRootLetters={chapter.rootLetters[0]?.arabic}

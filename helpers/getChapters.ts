@@ -48,6 +48,7 @@ export type SarfSagheer = {
 }
 
 export type Mushtaqq = {
+  مصدر: string[] | null
   فاعل: {
     masculine: {
       singular: string
@@ -165,6 +166,7 @@ const getChapters = (
         : null
 
       const mushtaqq: Mushtaqq = {
+        مصدر: baseChapter?.مشتق.مصدر || null,
         فاعل: baseChapter?.مشتق.فاعل || null,
         مفعول: baseChapter?.مشتق.مفعول || null,
       }
