@@ -78,6 +78,7 @@ const Settings = () => {
           value={previewFontSize}
           onChange={(e) => setPreviewFontSize(parseInt(e.target.value))}
           onMouseUp={() => setFontSize(previewFontSize)}
+          onTouchEnd={() => setFontSize(previewFontSize)}
         />
       </FieldWrapper>
 
