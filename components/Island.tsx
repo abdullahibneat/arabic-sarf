@@ -6,14 +6,15 @@ import {
   showNasbAtom,
   showSarfSahegerAtom,
 } from '@/atoms'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import IconButton from './IconButton'
 import RootLetters from './RootLetters'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 import { useAtom } from 'jotai'
-import useLargeBreakpoint from '@/hooks/useLargeBreakpoint'
+import useBreakpoint from '@/hooks/useBreakpoint'
+import useModals from '@/hooks/useModals'
 
 enum Section {
   SIDEBAR = 'sidebar',
@@ -64,7 +65,14 @@ const Island = ({
   const [showJazm] = useAtom(showJazmAtom)
   const [showNasb] = useAtom(showNasbAtom)
 
-  const lg = useLargeBreakpoint()
+  const modals = useModals()
+
+  const md = useBreakpoint('md')
+  const lg = useBreakpoint('lg')
+
+  useEffect(() => {
+    if (md && !sidebarOpen) toggleSidebar()
+  }, [md])
 
   const sarfTypeOptions = useMemo(() => {
     if (!showMushtaqq && !showSarfSaheger) return []
@@ -146,10 +154,10 @@ const Island = ({
   return (
     <div
       dir="ltr" // "rtl" doesn't work well with divide-x
-      className="fixed bottom-6 left-4 right-4 flex h-[42px] md:sticky md:top-[calc(100%-42px)]"
+      className="fixed bottom-6 left-4 right-4 flex md:sticky md:top-[calc(100%-42px)]"
     >
       <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-200 bg-zinc-100 shadow-xl drop-shadow-xl">
-        <div className="flex divide-x [&>*]:shrink-0">
+        <div className="flex divide-x overflow-x-auto [&>*]:shrink-0">
           {sarfTypeOptions.length > 0 && (
             <IslandSection
               name={Section.SARF_TYPE}
@@ -205,11 +213,7 @@ const Island = ({
             </IslandSection>
           )}
 
-          <IslandSection
-            mobileOnly
-            name={Section.SIDEBAR}
-            activeSection={activeSection}
-          >
+          <IslandSection name={Section.SIDEBAR} activeSection={activeSection}>
             <IconButton
               className="m-1"
               name={sidebarOpen ? 'close' : 'menu'}

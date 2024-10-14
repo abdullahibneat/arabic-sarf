@@ -17,7 +17,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className="flex w-0 shrink-0 flex-col md:w-72 [&.open]:w-72"
+      className="flex w-0 shrink-0 flex-col [&.open]:w-72"
       style={{ transition: 'width 250ms, padding 250ms' }}
     >
       <div className="flex w-72 flex-1 flex-col pt-4">
