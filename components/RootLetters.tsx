@@ -160,7 +160,7 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
       {open && (
         <div
           ref={dropdownRef}
-          className="absolute inset-x-[-25%] bottom-12 flex flex-col divide-y rounded-md border-[1px] border-zinc-300 bg-white"
+          className="fixed bottom-12 flex flex-col divide-y rounded-md border-[1px] border-zinc-300 bg-white"
         >
           <div className="flex flex-col divide-y">
             {showRootLetterEditor && (
