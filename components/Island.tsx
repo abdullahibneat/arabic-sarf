@@ -213,7 +213,8 @@ const Island = ({
           <IslandSection name={Section.SIDEBAR} activeSection={activeSection}>
             <IconButton
               className="m-1"
-              name={sidebarOpen ? 'close' : 'menu'}
+              name="sidebar"
+              rotate={sidebarOpen ? 0 : 180}
               onClick={toggleSidebar}
             />
           </IslandSection>
