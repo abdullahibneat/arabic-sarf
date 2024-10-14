@@ -14,7 +14,6 @@ import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 import { useAtom } from 'jotai'
 import useBreakpoint from '@/hooks/useBreakpoint'
-import useModals from '@/hooks/useModals'
 
 enum Section {
   SIDEBAR = 'sidebar',
@@ -64,8 +63,6 @@ const Island = ({
 
   const [showJazm] = useAtom(showJazmAtom)
   const [showNasb] = useAtom(showNasbAtom)
-
-  const modals = useModals()
 
   const md = useBreakpoint('md')
   const lg = useBreakpoint('lg')
