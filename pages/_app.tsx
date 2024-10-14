@@ -93,7 +93,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <div className="flex h-full overflow-hidden bg-zinc-50 p-2 text-zinc-900">
           <main
             dir="rtl"
-            className="relative w-0 flex-grow rounded-lg bg-white p-4"
+            className="relative z-[1] w-0 flex-grow rounded-lg bg-white p-4"
           >
             <div className="absolute inset-0 overflow-auto">
               <Component {...pageProps} />
