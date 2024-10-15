@@ -1,7 +1,7 @@
 const Chevron = () => (
   <svg
-    width="12"
-    height="12"
+    width="0.75rem"
+    height="0.75rem"
     viewBox="0 0 12 12"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
