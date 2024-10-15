@@ -20,6 +20,26 @@ div#__next {
   border: transparent;
 }
 
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0.75em;
+  width: 0.75em;
+  border-radius: 100%;
+  background-color: currentColor;
+  transition: color 250ms;
+}
+
+input[type='range']::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0.75em;
+  width: 0.75em;
+  border-radius: 100%;
+  background-color: currentColor;
+  transition: color 250ms;
+}
+
 /**
  * Dialog open animations:
  * - Background fades in
