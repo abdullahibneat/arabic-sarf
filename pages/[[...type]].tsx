@@ -5,7 +5,7 @@ import Tasreef from '@/components/Tasreef'
 import React, { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
 import useVerbTypes from '@/hooks/useVerbTypes'
-import verbTypes from '@/data'
+import verbTypes, { audios } from '@/data'
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
 import IsmMafool from '@/components/IsmMafool'
 import Masdar from '@/components/Masdar'
@@ -108,6 +108,7 @@ const VerbOverview = ({ chapters }: { chapters: Chapter[] }) => {
           <Tasreef
             key={chapter.key}
             name={chapter.form}
+            audio={audios.get(chapter.key)?.ماضي}
             tasreef={chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي}
             defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
             disabled={verbCase ? verbCase !== 'مرفوع' : false}
@@ -120,6 +121,7 @@ const VerbOverview = ({ chapters }: { chapters: Chapter[] }) => {
           <Tasreef
             key={chapter.key}
             name={chapter.form}
+            audio={audios.get(chapter.key)?.مضارع}
             tasreef={
               chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.مضارع[
                 verbCase || 'مرفوع'

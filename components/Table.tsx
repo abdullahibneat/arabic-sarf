@@ -9,7 +9,7 @@ export type TableCell = {
 }
 
 export type TableProps = {
-  header?: string | null
+  header?: React.ReactNode | null
   data: (TableCell | string)[][][]
   column?: boolean
 }
@@ -35,7 +35,15 @@ const Table = ({ header, data, column }: TableProps) => {
       )}
     >
       {header && (
-        <div className="flex h-8 items-center justify-center rounded-md border-[1px] border-zinc-300 bg-zinc-300">
+        <div
+          className={twMerge(
+            cx(
+              'flex min-h-8 rounded-md border-[1px] border-zinc-300',
+              typeof header === 'string' &&
+                'items-center justify-center bg-zinc-300',
+            ),
+          )}
+        >
           {header}
         </div>
       )}

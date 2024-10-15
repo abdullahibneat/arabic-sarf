@@ -1,6 +1,7 @@
 import { AmrTasreef, VerbTasreef } from '@/data/types'
 import Table, { TableProps } from './Table'
 
+import AudioPlayer from './AudioPlayer'
 import replaceRoots from '@/helpers/replaceRoots'
 import { tasreefDisplayModeAtom } from '@/atoms'
 import { useAtom } from 'jotai'
@@ -9,6 +10,7 @@ import useSarf from '@/hooks/useSarf'
 
 export type TasreefProps = {
   name: string
+  audio?: string | null
   tasreef?: VerbTasreef | AmrTasreef | null
   defaultRootLetters?: { ف?: string; ع?: string; ل?: string } | null
   disabled?: boolean
@@ -16,6 +18,7 @@ export type TasreefProps = {
 
 const Tasreef = ({
   name,
+  audio,
   tasreef,
   defaultRootLetters,
   disabled,
@@ -104,7 +107,23 @@ const Tasreef = ({
     ]
   }, [tasreef, rootLetters, defaultRootLetters, mode, disabled])
 
-  return <Table header={name} data={tableData} column={mode === 'list'} />
+  return (
+    <Table
+      header={
+        <div className="flex flex-1 flex-col px-2 py-1">
+          <p className="flex items-center justify-center">{name}</p>
+          {audio && <AudioPlayer src={audio} />}
+          {!audio && (
+            <p className="h-4 select-none text-center text-sm text-zinc-300">
+              No recording yet
+            </p>
+          )}
+        </div>
+      }
+      data={tableData}
+      column={mode === 'list'}
+    />
+  )
 }
 
 export default Tasreef

@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
 import useVerbTypes from '@/hooks/useVerbTypes'
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
-import verbTypes from '@/data'
+import verbTypes, { audios } from '@/data'
 import IsmMafool from '@/components/IsmMafool'
 import Masdar from '@/components/Masdar'
 
@@ -71,6 +71,7 @@ const Chapter = () => {
               <div className="mx-auto flex gap-1">
                 <Tasreef
                   name="ماضي"
+                  audio={audios.get(chapter.key)?.ماضي}
                   tasreef={
                     chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي
                   }
@@ -79,6 +80,7 @@ const Chapter = () => {
                 />
                 <Tasreef
                   name="مضارع"
+                  audio={audios.get(chapter.key)?.مضارع}
                   tasreef={
                     chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.مضارع[
                       verbCase || 'مرفوع'
