@@ -20,7 +20,6 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
   const audio = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    console.log({ src })
     audio.current = new Audio(src || undefined)
 
     audio.current.addEventListener('timeupdate', () => {
