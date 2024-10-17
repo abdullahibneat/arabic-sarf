@@ -51,7 +51,7 @@ const Sidebar = () => {
           )}
           style={{ transition: 'flex-grow 250ms' }}
         >
-          <div className="ml-4 mr-2 flex flex-1 flex-col gap-2 rounded-lg bg-white p-4 pb-16 sm:pb-4 dark:bg-neutral-900">
+          <div className="ml-4 mr-2 flex flex-1 flex-col gap-2 rounded-lg bg-white p-4 pb-20 md:pb-4 dark:bg-neutral-900">
             <h2 className="text-sm font-bold">Settings</h2>
             <Settings />
           </div>
@@ -66,7 +66,7 @@ const Sidebar = () => {
           )}
           style={{ transition: 'flex-grow 250ms' }}
         >
-          <div className="flex flex-1 flex-col gap-2 px-4 pb-16 sm:pb-0">
+          <div className="flex flex-1 flex-col gap-2 px-4 pb-20 md:pb-4">
             {Object.entries(verbTypes).map(([type, chapters]) => (
               <SidebarGroup
                 key={type}

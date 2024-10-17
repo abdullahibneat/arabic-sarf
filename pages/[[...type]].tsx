@@ -62,7 +62,7 @@ const Home = () => {
   }, [verbTypes, verbType])
 
   return (
-    <div className="flex flex-col gap-8 p-4">
+    <div className="flex flex-col gap-8 p-4 pb-20">
       {sections.length === 0 && <div>Not found</div>}
 
       {sections.map((section) => (

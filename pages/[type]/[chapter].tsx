@@ -57,7 +57,7 @@ const Chapter = () => {
   }, [passive, verbCase])
 
   return (
-    <div className="p-4">
+    <div className="p-4 pb-20">
       <div className="flex flex-col gap-1">
         {!chapter?.sarfKabeer && <div>Not found</div>}
 
