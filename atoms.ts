@@ -1,6 +1,11 @@
 import { atomWithStorage } from 'jotai/utils'
 import verbTypes from './data'
 
+export const themeAtom = atomWithStorage<'system' | 'light' | 'dark'>(
+  'theme',
+  'system',
+)
+
 export const tasreefDisplayModeAtom = atomWithStorage(
   'tasreefDisplayMode',
   'list',

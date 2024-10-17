@@ -11,6 +11,7 @@ import {
   showRootLetterEditorAtom,
   showSarfSahegerAtom,
   tasreefDisplayModeAtom,
+  themeAtom,
 } from '@/atoms'
 import { useEffect, useState } from 'react'
 import usePresets, { presets } from '@/hooks/usePresets'
@@ -23,6 +24,7 @@ import verbTypes from '@/data'
 const Settings = () => {
   const [previewFontSize, setPreviewFontSize] = useState(0)
 
+  const [theme, setTheme] = useAtom(themeAtom)
   const [tasreefDisplayMode, setTasreefDisplayMode] = useAtom(
     tasreefDisplayModeAtom,
   )
@@ -50,6 +52,20 @@ const Settings = () => {
 
   return (
     <div className="flex flex-col gap-8">
+      <FieldWrapper title="Theme">
+        <Segmented
+          options={
+            [
+              { id: 'system', label: 'System' },
+              { id: 'light', label: 'Light' },
+              { id: 'dark', label: 'Dark' },
+            ] as const
+          }
+          selectedId={theme}
+          onSelectOption={(option) => setTheme(option.id)}
+        />
+      </FieldWrapper>
+
       <FieldWrapper title="Tasreef display mode">
         <Segmented
           options={[

@@ -2,15 +2,16 @@ import '@/styles/globals.css'
 
 import { Modal, ModalContext } from '@/contexts/ModalContext'
 import { Noto_Sans, Noto_Sans_Arabic } from 'next/font/google'
-import { useCallback, useState } from 'react'
+import { fontSizeAtom, themeAtom } from '@/atoms'
+import { useCallback, useEffect, useState } from 'react'
 
 import type { AppProps } from 'next/app'
 import Island from '@/components/Island'
 import { SarfContext } from '@/contexts/SarfContext'
 import Sidebar from '@/components/Sidebar'
 import { createPortal } from 'react-dom'
-import { fontSizeAtom } from '@/atoms'
 import { useAtom } from 'jotai'
+import useMatchMedia from '@/hooks/useMatchMedia'
 import { useRouter } from 'next/router'
 
 const notoSansArabic = Noto_Sans_Arabic({
@@ -35,11 +36,22 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   const [modals, setModals] = useState<Modal[]>([])
 
+  const [theme] = useAtom(themeAtom)
   const [fontSize] = useAtom(fontSizeAtom)
 
   const router = useRouter()
 
   const { type, chapter } = router.query
+
+  const systemPrefersDark = useMatchMedia('(prefers-color-scheme: dark)')
+
+  /**
+   * Dark mode
+   */
+  useEffect(() => {
+    const dark = theme === 'dark' || (theme === 'system' && systemPrefersDark)
+    window.document.documentElement.classList.toggle('dark', dark)
+  }, [theme, systemPrefersDark])
 
   /**
    * Modal helpers
