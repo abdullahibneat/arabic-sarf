@@ -93,7 +93,7 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
       />
 
       <input
-        className="h-0.5 w-full cursor-pointer appearance-none rounded-lg bg-zinc-200 text-sm dark:bg-neutral-700"
+        className="h-0.5 w-full cursor-pointer touch-none appearance-none rounded-lg bg-zinc-200 text-sm dark:bg-neutral-700"
         type="range"
         min={0}
         max={100}
