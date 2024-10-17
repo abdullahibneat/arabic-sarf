@@ -3,8 +3,8 @@ import { LargeIconName } from '@/icons/large'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 
-export type SegmentedOption = {
-  id: string
+export type SegmentedOption<T> = {
+  id: T
   shortLabel?: string
 } & (
   | {
@@ -15,22 +15,22 @@ export type SegmentedOption = {
     }
 )
 
-export type SegmentedProps = {
-  options: SegmentedOption[]
-  selectedId?: SegmentedOption['id'] | null
-  onSelectOption?: (option: SegmentedOption) => void
+export type SegmentedProps<T> = {
+  options: SegmentedOption<T>[]
+  selectedId?: T | null
+  onSelectOption?: (option: SegmentedOption<T>) => void
 }
 
-const Segmented = ({
+const Segmented = <T,>({
   options,
   selectedId = null,
   onSelectOption,
-}: SegmentedProps) => (
+}: SegmentedProps<T>) => (
   <div className="flex gap-1 rounded-md bg-zinc-100 p-1 dark:bg-neutral-800">
     {options.map((option) =>
       'icon' in option ? (
         <IconButton
-          key={option.id}
+          key={String(option.id)}
           className={twMerge(
             cx(
               'flex min-w-8 cursor-pointer select-none justify-center rounded-md py-1',
@@ -43,7 +43,7 @@ const Segmented = ({
         />
       ) : (
         <button
-          key={option.id}
+          key={String(option.id)}
           className={twMerge(
             cx(
               'flex min-w-8 cursor-pointer select-none justify-center rounded-md py-1',
