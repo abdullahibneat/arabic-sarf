@@ -3,7 +3,7 @@ import { LargeIconName } from '@/icons/large'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
 
-export type SegmentedOption<T> = {
+export type SegmentedOption<T = string> = {
   id: T
   shortLabel?: string
 } & (
