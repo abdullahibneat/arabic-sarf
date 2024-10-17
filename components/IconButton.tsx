@@ -12,7 +12,7 @@ const IconButton = ({ className, onClick, ...iconProps }: IconButtonProps) => {
     <button
       className={twMerge(
         cx(
-          'flex flex-shrink-0 cursor-pointer items-center justify-center rounded-md hover:bg-zinc-200 active:bg-zinc-300',
+          'flex flex-shrink-0 cursor-pointer items-center justify-center rounded-md hover:bg-zinc-200 active:bg-zinc-300 dark:hover:bg-neutral-700 dark:active:bg-neutral-600',
           iconProps.size === 'small' && 'h-6 w-6',
           iconProps.size !== 'small' && 'h-8 w-8',
           className,

@@ -26,7 +26,7 @@ const Segmented = ({
   selectedId = null,
   onSelectOption,
 }: SegmentedProps) => (
-  <div className="flex gap-1 rounded-md bg-zinc-100 p-1">
+  <div className="flex gap-1 rounded-md bg-zinc-100 p-1 dark:bg-neutral-800">
     {options.map((option) =>
       'icon' in option ? (
         <IconButton
@@ -34,7 +34,8 @@ const Segmented = ({
           className={twMerge(
             cx(
               'flex min-w-8 cursor-pointer select-none justify-center rounded-md py-1',
-              selectedId === option.id && 'bg-white hover:bg-white',
+              selectedId === option.id &&
+                'bg-white hover:bg-white dark:bg-neutral-600 dark:hover:bg-neutral-600',
             ),
           )}
           name={option.icon}
@@ -47,10 +48,9 @@ const Segmented = ({
             cx(
               'flex min-w-8 cursor-pointer select-none justify-center rounded-md py-1',
               'label' in option && 'px-2',
-              'icon' in option && selectedId !== option.id && 'text-zinc-300',
-              selectedId === option.id && 'bg-white',
+              selectedId === option.id && 'bg-white dark:bg-neutral-600',
               selectedId !== option.id &&
-                'bg-zinc-100 hover:bg-zinc-200 active:bg-zinc-300',
+                'bg-zinc-100 hover:bg-zinc-200 active:bg-zinc-300 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:active:bg-neutral-600',
             ),
           )}
           style={{ transition: 'background-color 250ms' }}

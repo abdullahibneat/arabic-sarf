@@ -38,9 +38,9 @@ const Table = ({ header, data, column }: TableProps) => {
         <div
           className={twMerge(
             cx(
-              'flex min-h-8 rounded-md border-[1px] border-zinc-300',
+              'flex min-h-8 rounded-md border-[1px] border-zinc-300 dark:border-neutral-600',
               typeof header === 'string' &&
-                'items-center justify-center bg-zinc-300',
+                'items-center justify-center bg-zinc-300 dark:bg-neutral-600',
             ),
           )}
         >
@@ -66,7 +66,10 @@ const Table = ({ header, data, column }: TableProps) => {
                     >
                       <p
                         className={twMerge(
-                          cx(cell.disabled && 'text-zinc-300'),
+                          cx(
+                            cell.disabled &&
+                              'text-zinc-300 dark:text-neutral-400',
+                          ),
                         )}
                       >
                         {cell.content}
@@ -107,7 +110,7 @@ const Section = ({
   <div
     className={twMerge(
       cx(
-        'flex flex-col divide-y rounded-md border-[1px] border-zinc-300',
+        'flex flex-col divide-y rounded-md border-[1px] border-zinc-300 dark:divide-neutral-600 dark:border-neutral-600',
         !column && 'flex-grow',
       ),
     )}
@@ -131,7 +134,7 @@ const Cell = ({
       <div
         className={twMerge(
           cx(
-            'absolute bottom-0 top-0 flex w-4 select-none items-center justify-center text-sm text-zinc-300',
+            'absolute bottom-0 top-0 flex w-4 select-none items-center justify-center text-sm text-zinc-300 dark:text-neutral-400',
             alignAnnotation === 'left' && 'left-2',
             alignAnnotation === 'right' && 'right-2',
           ),

@@ -139,10 +139,9 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
         className={twMerge(
           cx(
             'm-1 flex h-8 w-16 items-center justify-center gap-1 rounded-md px-1',
-            rootLetters &&
-              'bg-zinc-900 text-white hover:bg-zinc-700 active:bg-zinc-500',
+            rootLetters && 'bg-white dark:bg-neutral-600',
             !rootLetters &&
-              'bg-zinc-100 text-zinc-300 hover:bg-zinc-200 active:bg-zinc-300',
+              'bg-zinc-100 text-zinc-300 hover:bg-zinc-200 active:bg-zinc-300 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:active:bg-neutral-600',
           ),
         )}
         style={{ transition: 'background-color 250ms' }}
@@ -160,9 +159,9 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
       {open && (
         <div
           ref={dropdownRef}
-          className="fixed bottom-12 flex flex-col divide-y rounded-md border-[1px] border-zinc-300 bg-white"
+          className="fixed bottom-12 flex flex-col divide-y rounded-md border-[1px] border-zinc-300 bg-zinc-100 dark:divide-neutral-600 dark:border-neutral-600 dark:bg-neutral-800"
         >
-          <div className="flex flex-col divide-y">
+          <div className="flex flex-col divide-y dark:divide-neutral-600">
             {showRootLetterEditor && (
               <DropdownOption
                 selected={isUsingCustomRootLetters}
@@ -212,7 +211,7 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
             <input
               id="persist-root-letters"
               type="checkbox"
-              className="accent-zinc-900"
+              className="accent-zinc-900 dark:accent-neutral-300"
               checked={persist}
               onChange={(e) => setPersist(e.target.checked)}
             />
@@ -259,7 +258,7 @@ const CustomRootLetterInput = <T extends { ف: string; ع: string; ل: string }>
   onChange?: ChangeEventHandler<HTMLInputElement>
 }) => (
   <input
-    className="h-6 w-6 rounded-full border-[1px] border-zinc-300 text-center"
+    className="h-6 w-6 rounded-full border-[1px] border-zinc-300 text-center dark:bg-neutral-800"
     type="text"
     minLength={1}
     maxLength={1}

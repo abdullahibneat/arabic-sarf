@@ -114,7 +114,7 @@ const Tasreef = ({
           <p className="flex items-center justify-center">{name}</p>
           {audio && <AudioPlayer src={audio} />}
           {!audio && (
-            <p className="h-4 select-none text-center text-sm text-zinc-300">
+            <p className="h-4 select-none text-center text-sm text-zinc-300 dark:text-neutral-400">
               No recording yet
             </p>
           )}

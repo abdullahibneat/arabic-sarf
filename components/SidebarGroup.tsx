@@ -57,11 +57,12 @@ const SidebarGroup = ({ name, href, pathname, items }: SidebarGroupProps) => {
                 className={twMerge(
                   cx(
                     'flex flex-col border-r-[1px] border-transparent',
-                    index !== items.length - 1 && 'border-zinc-300',
+                    index !== items.length - 1 &&
+                      'border-zinc-300 dark:border-neutral-600',
                   ),
                 )}
               >
-                <div className="mr-[-1px] w-2 flex-1 rounded-br border-b-[1px] border-r-[1px] border-zinc-300" />
+                <div className="mr-[-1px] w-2 flex-1 rounded-br border-b-[1px] border-r-[1px] border-zinc-300 dark:border-neutral-600" />
                 <div className="flex-1" />
               </div>
             </div>

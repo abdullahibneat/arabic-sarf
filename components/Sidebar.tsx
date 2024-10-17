@@ -26,7 +26,7 @@ const Sidebar = () => {
             href="/"
             className="flex cursor-pointer select-none items-center gap-2"
           >
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-zinc-950 text-xs font-semibold leading-none text-white">
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-zinc-900 text-xs font-semibold leading-none text-white">
               ص
             </div>
             <span className="flex-grow text-xl font-bold">صرف</span>
@@ -35,7 +35,7 @@ const Sidebar = () => {
           <div className="flex-1" />
 
           <IconButton
-            className="text-zinc-300 hover:text-zinc-500"
+            className="text-zinc-300 hover:text-zinc-500 dark:text-neutral-400 dark:hover:text-neutral-200"
             size="small"
             name={showSettings ? 'close' : 'settings'}
             onClick={() => setShowSettings(!showSettings)}
@@ -51,7 +51,7 @@ const Sidebar = () => {
           )}
           style={{ transition: 'flex-grow 250ms' }}
         >
-          <div className="ml-4 mr-2 flex flex-1 flex-col gap-2 rounded-lg bg-white p-4 pb-16 sm:pb-4">
+          <div className="ml-4 mr-2 flex flex-1 flex-col gap-2 rounded-lg bg-white p-4 pb-16 sm:pb-4 dark:bg-neutral-900">
             <h2 className="text-sm font-bold">Settings</h2>
             <Settings />
           </div>

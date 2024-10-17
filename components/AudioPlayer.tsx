@@ -80,8 +80,8 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
     <div
       className={twMerge(
         cx(
-          'flex items-center text-zinc-300 [&>*:hover]:text-zinc-600',
-          playing && 'text-zinc-600',
+          'flex items-center text-zinc-300 dark:text-neutral-400 [&>*:hover]:text-zinc-900 [&>*:hover]:dark:text-neutral-100',
+          playing && 'text-zinc-900 dark:text-neutral-100',
         ),
       )}
     >
@@ -93,7 +93,7 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
       />
 
       <input
-        className="h-0.5 w-full cursor-pointer appearance-none rounded-lg bg-zinc-200 text-sm"
+        className="h-0.5 w-full cursor-pointer appearance-none rounded-lg bg-zinc-200 text-sm dark:bg-neutral-700"
         type="range"
         min={0}
         max={100}
@@ -103,7 +103,12 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
 
       <IconButton
         className={twMerge(
-          cx('h-4 w-4', playing && audioLoop && 'bg-zinc-300 text-zinc-600'),
+          cx(
+            'h-4 w-4',
+            playing &&
+              audioLoop &&
+              'bg-zinc-300 text-zinc-900 dark:bg-neutral-600 dark:text-neutral-100',
+          ),
         )}
         size="small"
         name="loop"

@@ -64,14 +64,14 @@ const Settings = () => {
 
       <FieldWrapper title={`Font size (${previewFontSize}px)`}>
         <div
-          className="flex flex-shrink-0 flex-col items-center justify-center rounded-md border-[1px] border-zinc-300 bg-white px-4 py-2"
+          className="flex flex-shrink-0 flex-col items-center justify-center rounded-md border-[1px] border-zinc-300 px-4 py-2 dark:border-neutral-600"
           style={{ fontSize: previewFontSize }}
         >
           نَصَرَ يَنْصَرَ نَصْرًا
         </div>
 
         <input
-          className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-zinc-200 accent-zinc-900"
+          className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-zinc-200 dark:bg-neutral-700"
           type="range"
           min={8}
           max={32}
@@ -84,7 +84,7 @@ const Settings = () => {
 
       <FieldWrapper title="Presets">
         <select
-          className="w-full rounded-md border-[1px] border-zinc-300 px-1 text-sm"
+          className="w-full rounded-md border-[1px] border-zinc-300 bg-zinc-200 px-1 text-sm dark:border-neutral-600 dark:bg-neutral-700"
           value={preset}
           onChange={(e) => setPreset(e.target.value)}
         >
@@ -135,7 +135,7 @@ const Settings = () => {
               <input
                 id={`settings-${verbType}`}
                 type="checkbox"
-                className="accent-zinc-900"
+                className="accent-zinc-900 dark:accent-neutral-300"
                 checked={enabledVerbTypes.includes(verbType)}
                 onChange={() =>
                   setEnabledVerbTypes((prev) =>
@@ -161,7 +161,7 @@ const Settings = () => {
           <input
             id="settings-mazeed-fihi"
             type="checkbox"
-            className="accent-zinc-900"
+            className="accent-zinc-900 dark:accent-neutral-300"
             checked={showMazeedFihi}
             onChange={(e) => setShowMazeedFihi(e.target.checked)}
           />
@@ -177,7 +177,7 @@ const Settings = () => {
           <input
             id="settings-sarf-saheger"
             type="checkbox"
-            className="accent-zinc-900"
+            className="accent-zinc-900 dark:accent-neutral-300"
             checked={showSarfSaheger}
             onChange={(e) => setShowSarfSaheger(e.target.checked)}
           />
@@ -193,7 +193,7 @@ const Settings = () => {
           <input
             id="settings-mushtaqq"
             type="checkbox"
-            className="accent-zinc-900"
+            className="accent-zinc-900 dark:accent-neutral-300"
             checked={showMushtaqq}
             onChange={(e) => setShowMushtaqq(e.target.checked)}
           />
@@ -208,7 +208,7 @@ const Settings = () => {
           <input
             id="settings-nasb"
             type="checkbox"
-            className="accent-zinc-900"
+            className="accent-zinc-900 dark:accent-neutral-300"
             checked={showNasb}
             onChange={(e) => setShowNasb(e.target.checked)}
           />
@@ -221,7 +221,7 @@ const Settings = () => {
           <input
             id="settings-jazm"
             type="checkbox"
-            className="accent-zinc-900"
+            className="accent-zinc-900 dark:accent-neutral-300"
             checked={showJazm}
             onChange={(e) => setShowJazm(e.target.checked)}
           />
@@ -237,7 +237,7 @@ const Settings = () => {
           <input
             id="settings-majhool"
             type="checkbox"
-            className="accent-zinc-900"
+            className="accent-zinc-900 dark:accent-neutral-300"
             checked={showMajhool}
             onChange={(e) => setShowMajhool(e.target.checked)}
           />
@@ -254,7 +254,7 @@ const Settings = () => {
         <input
           id="settings-root-letter-editor"
           type="checkbox"
-          className="accent-zinc-900"
+          className="accent-zinc-900 dark:accent-neutral-300"
           checked={showRootLetterEditor}
           onChange={(e) => setShowRootLetterEditor(e.target.checked)}
         />
@@ -273,7 +273,9 @@ const FieldWrapper = ({
   children: React.ReactNode
 }) => (
   <div className="flex flex-col items-center gap-2">
-    <p className="self-stretch text-sm text-zinc-500">{title}</p>
+    <p className="self-stretch text-sm text-zinc-500 dark:text-neutral-200">
+      {title}
+    </p>
     {children}
   </div>
 )
