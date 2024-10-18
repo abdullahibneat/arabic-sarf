@@ -15,7 +15,7 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
   const [currentTime, setCurrentTime] = useState(0)
 
   const [audioLoop, setAudioLoop] = useAtom(audioLoopAtom)
-  const [audioPlaybackRate] = useAtom(audioPlaybackRateAtom)
+  const [playbackRate, setPlaybackRate] = useAtom(audioPlaybackRateAtom)
 
   const audio = useRef<HTMLAudioElement | null>(null)
 
@@ -47,8 +47,8 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
     if (!audio.current) {
       return alert('no audio source')
     }
-    audio.current.playbackRate = audioPlaybackRate
-  }, [audioPlaybackRate])
+    audio.current.playbackRate = playbackRate
+  }, [playbackRate])
 
   const play = useCallback(async () => {
     if (!audio.current?.src) {
@@ -71,6 +71,13 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
     },
     [audio],
   )
+
+  const togglePlaybackRate = useCallback(() => {
+    setPlaybackRate((playbackRate) =>
+      // min: 0.5, max: 2, increment: 0.5
+      Math.max(0.5, (playbackRate + 0.5) % 2.5),
+    )
+  }, [])
 
   const toggleLoop = useCallback(() => {
     setAudioLoop((audioLoop) => !audioLoop)
@@ -100,6 +107,22 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
         value={currentTime}
         onChange={handleSliderChange}
       />
+
+      <button
+        className={twMerge(
+          cx(
+            'flex h-4 w-6 flex-shrink-0 cursor-pointer items-center justify-center rounded-md text-[10px] hover:bg-zinc-200 active:bg-zinc-300 dark:hover:bg-neutral-700 dark:active:bg-neutral-600',
+
+            playing &&
+              playbackRate !== 1 &&
+              'bg-zinc-300 text-zinc-900 dark:bg-neutral-600 dark:text-neutral-100',
+          ),
+        )}
+        style={{ transition: 'background-color 250ms' }}
+        onClick={togglePlaybackRate}
+      >
+        {`x${playbackRate}`}
+      </button>
 
       <IconButton
         className={twMerge(
