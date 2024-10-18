@@ -67,9 +67,47 @@ const Island = ({
   const md = useBreakpoint('md')
   const lg = useBreakpoint('lg')
 
+  /**
+   * Open sidebar automatically on medium/large screens
+   */
+
   useEffect(() => {
     if (md && !sidebarOpen) toggleSidebar()
   }, [md])
+
+  /**
+   * Reset options to default when enabled settings are turned off
+   */
+
+  useEffect(() => {
+    if (!showMushtaqq && sarfType === 'مشتق') {
+      setSarfType?.('صرف كبير')
+    }
+  }, [showMushtaqq, sarfType, setSarfType])
+
+  useEffect(() => {
+    if (!showSarfSaheger && sarfType === 'صرف صغير') {
+      setSarfType?.('صرف كبير')
+    }
+  }, [showSarfSaheger, sarfType, setSarfType])
+
+  useEffect(() => {
+    if (!showMajhool && passive) {
+      setPassive?.(false)
+    }
+  }, [showMajhool, passive, setPassive])
+
+  useEffect(() => {
+    if (!showJazm && verbCase === 'مجزوم') {
+      setVerbCase?.(null)
+    }
+  }, [showJazm, verbCase, setVerbCase])
+
+  useEffect(() => {
+    if (!showNasb && verbCase === 'منصوب') {
+      setVerbCase?.(null)
+    }
+  }, [showNasb, verbCase, setVerbCase])
 
   const sarfTypeOptions = useMemo(() => {
     if (!showMushtaqq && !showSarfSaheger) return []
