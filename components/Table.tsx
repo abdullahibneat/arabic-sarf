@@ -38,7 +38,7 @@ const Table = ({ header, data, column }: TableProps) => {
         <div
           className={twMerge(
             cx(
-              'flex min-h-8 rounded-md border-[1px] border-zinc-300 dark:border-neutral-600',
+              'flex min-h-8 rounded-md border-[1px] border-zinc-300 dark:border-neutral-500',
               typeof header === 'string' &&
                 'items-center justify-center bg-zinc-300 dark:bg-neutral-600',
             ),
@@ -110,7 +110,7 @@ const Section = ({
   <div
     className={twMerge(
       cx(
-        'flex flex-col divide-y rounded-md border-[1px] border-zinc-300 dark:divide-neutral-600 dark:border-neutral-600',
+        'flex flex-col divide-y rounded-md border-[1px] border-zinc-300 dark:divide-neutral-500 dark:border-neutral-500',
         !column && 'flex-grow',
       ),
     )}

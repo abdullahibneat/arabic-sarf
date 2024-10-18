@@ -17,7 +17,7 @@ const SarfSagheer = ({ sarfSagheer, defaultRootLetters }: SarfSagheerProps) => {
   }, [sarfSagheer, rootLetters, defaultRootLetters])
 
   return (
-    <div className="flex flex-shrink-0 flex-col items-center justify-center gap-2 rounded-md border-[1px] border-zinc-300 px-6 py-4 dark:border-neutral-600">
+    <div className="flex flex-shrink-0 flex-col items-center justify-center gap-2 rounded-md border-[1px] border-zinc-300 px-6 py-4 dark:border-neutral-500">
       {!data && <div>N/A</div>}
 
       {data && (

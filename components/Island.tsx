@@ -153,8 +153,8 @@ const Island = ({
       dir="ltr" // "rtl" doesn't work well with divide-x
       className="fixed bottom-6 left-4 right-4 flex md:sticky md:top-[calc(100%-42px)]"
     >
-      <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-300 bg-zinc-100 shadow-xl drop-shadow-xl dark:border-neutral-600 dark:bg-neutral-800">
-        <div className="flex divide-x overflow-x-auto dark:divide-neutral-600 [&>*]:shrink-0">
+      <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-300 bg-zinc-100 shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-neutral-800">
+        <div className="flex divide-x overflow-x-auto dark:divide-neutral-500 [&>*]:shrink-0">
           {sarfTypeOptions.length > 0 && (
             <IslandSection
               name={Section.SARF_TYPE}

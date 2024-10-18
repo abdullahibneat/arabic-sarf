@@ -159,9 +159,9 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
       {open && (
         <div
           ref={dropdownRef}
-          className="fixed bottom-12 flex flex-col divide-y rounded-md border-[1px] border-zinc-300 bg-zinc-100 dark:divide-neutral-600 dark:border-neutral-600 dark:bg-neutral-800"
+          className="fixed bottom-12 flex flex-col divide-y rounded-md border-[1px] border-zinc-300 bg-zinc-100 dark:divide-neutral-500 dark:border-neutral-500 dark:bg-neutral-800"
         >
-          <div className="flex flex-col divide-y dark:divide-neutral-600">
+          <div className="flex flex-col divide-y dark:divide-neutral-500">
             {showRootLetterEditor && (
               <DropdownOption
                 selected={isUsingCustomRootLetters}

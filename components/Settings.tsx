@@ -80,7 +80,7 @@ const Settings = () => {
 
       <FieldWrapper title={`Font size (${previewFontSize}px)`}>
         <div
-          className="flex flex-shrink-0 flex-col items-center justify-center rounded-md border-[1px] border-zinc-300 px-4 py-2 dark:border-neutral-600"
+          className="flex flex-shrink-0 flex-col items-center justify-center rounded-md border-[1px] border-zinc-300 px-4 py-2 dark:border-neutral-500"
           style={{ fontSize: previewFontSize }}
         >
           نَصَرَ يَنْصَرَ نَصْرًا
@@ -100,7 +100,7 @@ const Settings = () => {
 
       <FieldWrapper title="Presets">
         <select
-          className="w-full rounded-md border-[1px] border-zinc-300 bg-zinc-200 px-1 text-sm dark:border-neutral-600 dark:bg-neutral-700"
+          className="w-full rounded-md border-[1px] border-zinc-300 bg-zinc-200 px-1 text-sm dark:border-neutral-500 dark:bg-neutral-700"
           value={preset}
           onChange={(e) => setPreset(e.target.value)}
         >

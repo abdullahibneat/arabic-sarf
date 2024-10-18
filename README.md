@@ -67,13 +67,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 | Light Mode        | Dark Mode            |
 | ----------------- | -------------------- |
-| `border-zinc-300` | `border-neutral-600` |
+| `border-zinc-300` | `border-neutral-500` |
 
 ### Divider Colors
 
 | Light Mode | Dark Mode            |
 | ---------- | -------------------- |
-| `divide-*` | `divide-neutral-600` |
+| `divide-*` | `divide-neutral-500` |
 
 ### Accent Colors
 
