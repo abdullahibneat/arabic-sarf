@@ -3,6 +3,7 @@ import {
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -47,20 +48,10 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
 
   useEffect(() => {
     /**
-     * When persisting is disabled, default to the first root letters whenever user navigates to a different chapter
+     * Reset root letters when changing page
      */
-    if (persist) {
-      // If you persist without selecting any root letters (i.e. `rootLetters === null`),
-      // then a reset is needed because otherwise the component is persisting `null`, but
-      // on each page change, the root letters will default to the first available set of root letters
-      if (!rootLetters) reset()
-    } else {
-      reset()
-    }
-  }, [
-    // Note: this useEffect should only be called when the array of `availableRootLetters` changes, and not exactly when the dependencies change.
-    availableRootLetters,
-  ])
+    if (!persist) reset()
+  }, [availableRootLetters])
 
   useEffect(() => {
     /**
@@ -82,16 +73,18 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
     setOpen(false)
   })
 
-  const reset = () => {
-    setIsUsingCustomRootLetters(false)
-
+  const placeholder = useMemo(() => {
     if (availableRootLetters.length > 0) {
-      setRootLetters?.(availableRootLetters[0])
-    } else {
-      // `null` is used in the overview pages, so that each tasreef is rendered using each chapter's root letters
-      setRootLetters?.(null)
+      const { ف, ع, ل } = availableRootLetters[0]
+      return `${ف}${ع}${ل}`
     }
-  }
+    return 'فعل'
+  }, [availableRootLetters])
+
+  const reset = useCallback(() => {
+    setIsUsingCustomRootLetters(false)
+    setRootLetters?.(null)
+  }, [])
 
   const handleRootLetterChange = useCallback(
     (letter: keyof typeof customRootLetters) =>
@@ -150,7 +143,7 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
         <span className="flex-1">
           {rootLetters
             ? `${rootLetters.ف}${rootLetters.ع}${rootLetters.ل}`
-            : 'فعل'}
+            : placeholder}
         </span>
 
         <Icon size="small" name="chevron" />
