@@ -125,6 +125,16 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
     [setRootLetters],
   )
 
+  const enablePersist = useCallback(
+    (persist: boolean) => {
+      setPersist(persist)
+      if (persist && !rootLetters) {
+        setRootLetters?.(availableRootLetters[0] || null)
+      }
+    },
+    [persist, rootLetters, setRootLetters],
+  )
+
   return (
     <div key="root-letters" className="relative">
       <button
@@ -206,7 +216,7 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
               type="checkbox"
               className="accent-zinc-900 dark:accent-neutral-300"
               checked={persist}
-              onChange={(e) => setPersist(e.target.checked)}
+              onChange={(e) => enablePersist(e.target.checked)}
             />
           </div>
 
