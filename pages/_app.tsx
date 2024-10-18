@@ -102,7 +102,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           }
         `}</style>
 
-        <div className="flex h-full overflow-hidden bg-zinc-50 p-2 text-zinc-900 dark:bg-neutral-800 dark:text-neutral-100">
+        <div className="flex h-full overflow-hidden">
           <main
             dir="rtl"
             className="relative z-[1] w-0 flex-grow rounded-lg bg-white p-4 dark:bg-neutral-900"
