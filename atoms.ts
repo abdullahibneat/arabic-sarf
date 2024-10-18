@@ -45,6 +45,6 @@ export const showRootLetterEditorAtom = atomWithStorage(
   false,
 )
 
-export const audioLoopAtom = atomWithStorage('audioLoop', true)
+export const audioLoopAtom = atomWithStorage('audioLoop', false)
 
 export const audioPlaybackRateAtom = atomWithStorage('audioPlaybackRate', 1)
