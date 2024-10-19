@@ -6,11 +6,13 @@ import { fontSizeAtom, themeAtom } from '@/atoms'
 import { useCallback, useEffect, useState } from 'react'
 
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import Island from '@/components/Island'
 import { SarfContext } from '@/contexts/SarfContext'
 import Sidebar from '@/components/Sidebar'
 import { createPortal } from 'react-dom'
 import { useAtom } from 'jotai'
+import useHead from '@/hooks/useHead'
 import useMatchMedia from '@/hooks/useMatchMedia'
 import { useRouter } from 'next/router'
 
@@ -39,6 +41,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   const [theme] = useAtom(themeAtom)
   const [fontSize] = useAtom(fontSizeAtom)
 
+  const head = useHead()
   const router = useRouter()
 
   const { type, chapter } = router.query
@@ -101,6 +104,15 @@ const App = ({ Component, pageProps }: AppProps) => {
             font-size: ${fontSize}px;
           }
         `}</style>
+
+        <Head>
+          <title>{head.title}</title>
+          <meta name="description" content={head.description} />
+
+          <meta property="og:title" content={head.title} />
+          <meta property="og:description" content={head.description} />
+          <meta property="og:image" content={head.image} />
+        </Head>
 
         <div className="flex h-full overflow-hidden">
           <main
