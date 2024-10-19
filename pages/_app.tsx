@@ -112,6 +112,16 @@ const App = ({ Component, pageProps }: AppProps) => {
           <meta property="og:title" content={head.title} />
           <meta property="og:description" content={head.description} />
           <meta property="og:image" content={head.image} />
+
+          {/* Favicon */}
+          <link rel="icon" href="/favicon.ico" sizes="48x48" />
+          <link
+            rel="icon"
+            href="/favicon.svg"
+            sizes="any"
+            type="image/svg+xml"
+          />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         </Head>
 
         <div className="flex h-full overflow-hidden">
