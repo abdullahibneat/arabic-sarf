@@ -71,6 +71,17 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, [theme, systemPrefersDark])
 
   /**
+   * Page view tracking
+   */
+  useEffect(() => {
+    const handleRouteChange = () => posthog.capture('$pageview')
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
+
+  /**
    * Modal helpers
    */
 

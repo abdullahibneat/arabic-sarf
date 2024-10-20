@@ -1,3 +1,10 @@
+import {
+  ChangeEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import Segmented, { SegmentedOption } from './Segmented'
 import {
   showJazmAtom,
@@ -6,11 +13,11 @@ import {
   showNasbAtom,
   showSarfSahegerAtom,
 } from '@/atoms'
-import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import IconButton from './IconButton'
 import RootLetters from './RootLetters'
 import cx from 'classix'
+import posthog from 'posthog-js'
 import { twMerge } from 'tailwind-merge'
 import { useAtom } from 'jotai'
 import useBreakpoint from '@/hooks/useBreakpoint'
@@ -155,10 +162,12 @@ const Island = ({
 
   const handleSelectVerbCase = useCallback(
     (option: SegmentedOption) => {
-      const selectOption = () =>
+      const selectOption = () => {
         setVerbCase?.((currentOption) =>
           currentOption === option.id ? null : option.id,
         )
+        posthog.capture('Verb Case', { verbCase: option.id })
+      }
 
       // On large screens, select the option straight away
       if (lg || activeSection === Section.VERB_CASE) {
@@ -173,7 +182,10 @@ const Island = ({
 
   const handleSelectSarfType = useCallback(
     (option: SegmentedOption) => {
-      const selectOption = () => setSarfType?.(option.id)
+      const selectOption = () => {
+        setSarfType?.(option.id)
+        posthog.capture('Sarf Type', { sarfType: option.id })
+      }
 
       // On large screens, select the option straight away
       if (lg || activeSection === Section.SARF_TYPE) {
@@ -184,6 +196,14 @@ const Island = ({
       }
     },
     [setSarfType, lg, activeSection],
+  )
+
+  const handleMajhoolChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+    (e) => {
+      setPassive?.(e.target.checked)
+      posthog.capture('Majhool', { showMajhool: e.target.checked })
+    },
+    [],
   )
 
   return (
@@ -222,7 +242,7 @@ const Island = ({
                   type="checkbox"
                   checked={passive}
                   className="appearance-none [&:checked+label]:bg-white [&:checked+label]:dark:bg-neutral-600"
-                  onChange={(e) => setPassive?.(e.target.checked)}
+                  onChange={handleMajhoolChange}
                 />
                 <label
                   htmlFor={Section.MAJHOOL}

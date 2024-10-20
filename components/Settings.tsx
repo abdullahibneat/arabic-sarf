@@ -1,3 +1,5 @@
+import { ChangeEventHandler, useCallback, useEffect, useState } from 'react'
+import Segmented, { SegmentedOption } from './Segmented'
 import {
   enabledVerbTypesAtom,
   fontSizeAtom,
@@ -13,11 +15,10 @@ import {
   tasreefDisplayModeAtom,
   themeAtom,
 } from '@/atoms'
-import { useEffect, useState } from 'react'
 import usePresets, { presets } from '@/hooks/usePresets'
 
 import Radio from './Radio'
-import Segmented from './Segmented'
+import posthog from 'posthog-js'
 import { useAtom } from 'jotai'
 import verbTypes from '@/data'
 
@@ -50,6 +51,129 @@ const Settings = () => {
     setPreviewFontSize(fontSize)
   }, [fontSize])
 
+  const handleTasreefDisplayModeChange = useCallback(
+    (option: SegmentedOption<string>) => {
+      setTasreefDisplayMode(option.id)
+      posthog.capture('Tasreef Display Mode Changed', {
+        tasreefDisplayMode: option.id,
+      })
+    },
+    [],
+  )
+
+  const handleFontSizeChange = useCallback(() => {
+    setFontSize(previewFontSize)
+    posthog.capture('Font Size Changed', { fontSize: previewFontSize })
+  }, [previewFontSize])
+
+  const handlePresetChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
+    (e) => {
+      setPreset(e.target.value)
+      posthog.capture('Preset Changed', { preset: e.target.value })
+    },
+    [],
+  )
+
+  const handleMujarradHeadingChange = useCallback(
+    (option: SegmentedOption<string>) => {
+      setMujarradHeadings(option.id)
+      posthog.capture('Mujarrad Headings Changed', {
+        mujarradHeadings: option.id,
+      })
+    },
+    [],
+  )
+
+  const handleMazeedFihiNumberingChange = useCallback(
+    (option: SegmentedOption<string>) => {
+      setMazeedFihiNumbering(option.id)
+      posthog.capture('Mazeed Fihi Numbering Changed', {
+        mazeedFihiNumbering: option.id,
+      })
+    },
+    [],
+  )
+
+  const toggleVerbType = useCallback(
+    (verbType: string) => () =>
+      setEnabledVerbTypes((prev) => {
+        const enabled = prev.includes(verbType)
+        let newEnabledVerbTypes = prev
+
+        if (enabled) {
+          newEnabledVerbTypes = prev.filter((v) => v !== verbType)
+        } else {
+          newEnabledVerbTypes = prev.concat(verbType)
+        }
+
+        posthog.capture('Enabled Verb Types changed', {
+          verbType,
+          action: enabled ? 'Disabled' : 'Enabled',
+          enabledVerbTypes: newEnabledVerbTypes,
+        })
+
+        return newEnabledVerbTypes
+      }),
+    [],
+  )
+
+  const handleMazeedFihiEnabledChange = useCallback<
+    ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setShowMazeedFihi(e.target.checked)
+    posthog.capture('Show Mazeed Fihi Changed', {
+      showMazeedFihi: e.target.checked,
+    })
+  }, [])
+
+  const handleSarfSagheerEnabledChange = useCallback<
+    ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setShowSarfSaheger(e.target.checked)
+    posthog.capture('Show Sarf Sagheer Changed', {
+      showSarfSaheger: e.target.checked,
+    })
+  }, [])
+
+  const handleMushtaqqEnabledChange = useCallback<
+    ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setShowMushtaqq(e.target.checked)
+    posthog.capture('Show Mushtaqq Changed', {
+      showMushtaqq: e.target.checked,
+    })
+  }, [])
+
+  const handleNasbEnabledChange = useCallback<
+    ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setShowNasb(e.target.checked)
+    posthog.capture('Show Nasb Changed', { showNasb: e.target.checked })
+  }, [])
+
+  const handleJazmEnabledChange = useCallback<
+    ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setShowJazm(e.target.checked)
+    posthog.capture('Show Jazm Changed', { showJazm: e.target.checked })
+  }, [])
+
+  const handleMajhoolEnabledChange = useCallback<
+    ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setShowMajhool(e.target.checked)
+    posthog.capture('Show Majhool Changed', { showMajhool: e.target.checked })
+  }, [])
+
+  const handleShowRootLetterEditorChange = useCallback<
+    ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    setShowRootLetterEditor(e.target.checked)
+    posthog.capture('Show Root Letters Editor Changed', {
+      showRootLetterEditor: e.target.checked,
+    })
+  }, [])
+
   return (
     <div className="flex flex-col gap-8">
       <FieldWrapper title="Theme">
@@ -74,7 +198,7 @@ const Settings = () => {
             { id: 'by-gender', icon: 'group-by-gender' },
           ]}
           selectedId={tasreefDisplayMode}
-          onSelectOption={(option) => setTasreefDisplayMode(option.id)}
+          onSelectOption={handleTasreefDisplayModeChange}
         />
       </FieldWrapper>
 
@@ -93,8 +217,8 @@ const Settings = () => {
           max={32}
           value={previewFontSize}
           onChange={(e) => setPreviewFontSize(parseInt(e.target.value))}
-          onMouseUp={() => setFontSize(previewFontSize)}
-          onTouchEnd={() => setFontSize(previewFontSize)}
+          onMouseUp={handleFontSizeChange}
+          onTouchEnd={handleFontSizeChange}
         />
       </FieldWrapper>
 
@@ -102,7 +226,7 @@ const Settings = () => {
         <select
           className="w-full rounded-md border-[1px] border-zinc-300 bg-zinc-200 px-1 text-sm dark:border-neutral-500 dark:bg-neutral-700"
           value={preset}
-          onChange={(e) => setPreset(e.target.value)}
+          onChange={handlePresetChange}
         >
           {presets.map((preset) => (
             <option key={preset.name} value={preset.name}>
@@ -121,7 +245,7 @@ const Settings = () => {
             { id: 'english', label: 'English (1a, 1b, 1c)' },
           ]}
           selectedId={mujarradHeadings}
-          onSelectOption={(option) => setMujarradHeadings(option.id)}
+          onSelectOption={handleMujarradHeadingChange}
         />
       </FieldWrapper>
 
@@ -133,7 +257,7 @@ const Settings = () => {
             { id: 'roman', label: 'Roman (II, III, IV)' },
           ]}
           selectedId={mazeedFihiNumbering}
-          onSelectOption={(option) => setMazeedFihiNumbering(option.id)}
+          onSelectOption={handleMazeedFihiNumberingChange}
         />
       </FieldWrapper>
 
@@ -153,13 +277,7 @@ const Settings = () => {
                 type="checkbox"
                 className="accent-zinc-900 dark:accent-neutral-300"
                 checked={enabledVerbTypes.includes(verbType)}
-                onChange={() =>
-                  setEnabledVerbTypes((prev) =>
-                    prev.includes(verbType)
-                      ? prev.filter((v) => v !== verbType)
-                      : [...prev, verbType],
-                  )
-                }
+                onChange={toggleVerbType(verbType)}
               />
             </div>
           ))}
@@ -179,7 +297,7 @@ const Settings = () => {
             type="checkbox"
             className="accent-zinc-900 dark:accent-neutral-300"
             checked={showMazeedFihi}
-            onChange={(e) => setShowMazeedFihi(e.target.checked)}
+            onChange={handleMazeedFihiEnabledChange}
           />
         </div>
 
@@ -195,7 +313,7 @@ const Settings = () => {
             type="checkbox"
             className="accent-zinc-900 dark:accent-neutral-300"
             checked={showSarfSaheger}
-            onChange={(e) => setShowSarfSaheger(e.target.checked)}
+            onChange={handleSarfSagheerEnabledChange}
           />
         </div>
 
@@ -211,7 +329,7 @@ const Settings = () => {
             type="checkbox"
             className="accent-zinc-900 dark:accent-neutral-300"
             checked={showMushtaqq}
-            onChange={(e) => setShowMushtaqq(e.target.checked)}
+            onChange={handleMushtaqqEnabledChange}
           />
         </div>
       </div>
@@ -226,7 +344,7 @@ const Settings = () => {
             type="checkbox"
             className="accent-zinc-900 dark:accent-neutral-300"
             checked={showNasb}
-            onChange={(e) => setShowNasb(e.target.checked)}
+            onChange={handleNasbEnabledChange}
           />
         </div>
 
@@ -239,7 +357,7 @@ const Settings = () => {
             type="checkbox"
             className="accent-zinc-900 dark:accent-neutral-300"
             checked={showJazm}
-            onChange={(e) => setShowJazm(e.target.checked)}
+            onChange={handleJazmEnabledChange}
           />
         </div>
 
@@ -255,7 +373,7 @@ const Settings = () => {
             type="checkbox"
             className="accent-zinc-900 dark:accent-neutral-300"
             checked={showMajhool}
-            onChange={(e) => setShowMajhool(e.target.checked)}
+            onChange={handleMajhoolEnabledChange}
           />
         </div>
       </div>
@@ -272,7 +390,7 @@ const Settings = () => {
           type="checkbox"
           className="accent-zinc-900 dark:accent-neutral-300"
           checked={showRootLetterEditor}
-          onChange={(e) => setShowRootLetterEditor(e.target.checked)}
+          onChange={handleShowRootLetterEditorChange}
         />
       </div>
     </div>

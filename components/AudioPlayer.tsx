@@ -3,6 +3,7 @@ import { audioLoopAtom, audioPlaybackRateAtom } from '@/atoms'
 
 import IconButton from './IconButton'
 import cx from 'classix'
+import posthog from 'posthog-js'
 import { twMerge } from 'tailwind-merge'
 import { useAtom } from 'jotai'
 
@@ -54,7 +55,8 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
     if (!audio.current?.src) {
       return alert('no audio source')
     }
-    await audio.current?.play()
+    await audio.current.play()
+    posthog.capture('Play Audio', { src: audio.current.src })
     setPlaying(true)
   }, [])
 

@@ -1,11 +1,13 @@
+import { useCallback, useState } from 'react'
+
 import IconButton from './IconButton'
 import Link from 'next/link'
 import Settings from './Settings'
 import SidebarGroup from './SidebarGroup'
 import cx from 'classix'
+import posthog from 'posthog-js'
 import { twMerge } from 'tailwind-merge'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
 import useVerbTypes from '@/hooks/useVerbTypes'
 
 const Sidebar = () => {
@@ -14,6 +16,13 @@ const Sidebar = () => {
   const verbTypes = useVerbTypes()
 
   const pathname = usePathname()
+
+  const toggleSettings = useCallback(() => {
+    setShowSettings((showSettings) => {
+      if (!showSettings) posthog.capture('Open Settings')
+      return !showSettings
+    })
+  }, [])
 
   return (
     <aside
@@ -38,7 +47,7 @@ const Sidebar = () => {
             className="text-zinc-300 hover:text-zinc-500 dark:text-neutral-400 dark:hover:text-neutral-200"
             size="small"
             name={showSettings ? 'close' : 'settings'}
-            onClick={() => setShowSettings(!showSettings)}
+            onClick={toggleSettings}
           />
         </div>
 

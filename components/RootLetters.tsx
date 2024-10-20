@@ -10,6 +10,7 @@ import {
 
 import Icon from './Icon'
 import cx from 'classix'
+import posthog from 'posthog-js'
 import { showRootLetterEditorAtom } from '@/atoms'
 import { twMerge } from 'tailwind-merge'
 import { useAtom } from 'jotai'
@@ -81,6 +82,11 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
     return 'فعل'
   }, [availableRootLetters])
 
+  const handleOpenDropdown = useCallback(() => {
+    setOpen(true)
+    posthog.capture('Open Root Letters Dropdown')
+  }, [])
+
   const reset = useCallback(() => {
     setIsUsingCustomRootLetters(false)
     setRootLetters?.(null)
@@ -115,12 +121,17 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
   const handleSelectCustomRootLetters = useCallback(() => {
     setIsUsingCustomRootLetters(true)
     setRootLetters?.(customRootLetters)
+    posthog.capture('Root Letters Changed', {
+      rootLetters: customRootLetters,
+      custom: true,
+    })
   }, [setRootLetters, customRootLetters])
 
   const handleSelectRootLetters = useCallback(
     (rootLetters: { ف?: string; ع?: string; ل?: string }) => () => {
       setIsUsingCustomRootLetters(false)
       setRootLetters?.(rootLetters)
+      posthog.capture('Root Letters Changed', { rootLetters, custom: false })
     },
     [setRootLetters],
   )
@@ -128,6 +139,7 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
   const enablePersist = useCallback(
     (persist: boolean) => {
       setPersist(persist)
+      posthog.capture('Persist Root Letters Changed', { persist })
       if (persist && !rootLetters) {
         setRootLetters?.(availableRootLetters[0] || null)
       }
@@ -148,7 +160,7 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
           ),
         )}
         style={{ transition: 'background-color 250ms' }}
-        onClick={() => setOpen(true)}
+        onClick={handleOpenDropdown}
       >
         <span className="flex-1">
           {rootLetters
