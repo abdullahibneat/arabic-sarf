@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 1,
   "chapter": "كَرُمَ",
+  "transliteratedChapter": "karuma",
   "title": "فَعُلَ يَفْعُلُ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "noble",
         "prefixToBe": true
-      }
+      },
+      "transliterated": "karuma"
     },
     {
       "arabic": {
@@ -24,7 +27,8 @@
       "english": {
         "base": "near",
         "prefixToBe": true
-      }
+      },
+      "transliterated": "qaruba"
     }
   ],
   "فعل": {

@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 6,
   "chapter": "تَفَاعُل",
+  "transliteratedChapter": "tafaa'ul",
   "title": "تَفَاوَلَ يَتَفَاوَلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "و",
         "ل": "ن"
       },
-      "english": "help"
+      "english": "help",
+      "transliterated": "ta'aawana"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "ي",
         "ل": "ق"
       },
-      "english": "help"
+      "english": "help",
+      "transliterated": "tadaawaqa"
     }
   ],
   "فعل": {

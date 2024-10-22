@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 1,
   "chapter": "حَسِبَ",
+  "transliteratedChapter": "hasiba",
   "title": "فَعِلَ يَفْعِلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "س",
         "ل": "ب"
       },
-      "english": "calculate"
+      "english": "calculate",
+      "transliterated": "hasiba"
     }
   ],
   "فعل": {

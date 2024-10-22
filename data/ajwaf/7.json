@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 7,
   "chapter": "انْفِعَال",
+  "transliteratedChapter": "infi'aal",
   "title": "انْفَالَ يَنْفَالُ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "collapse",
         "passive": "demolished"
-      }
+      },
+      "transliterated": "inhaara"
     },
     {
       "arabic": {
@@ -24,7 +27,8 @@
       "english": {
         "base": "follow",
         "passive": "led"
-      }
+      },
+      "transliterated": "inqaada"
     }
   ],
   "فعل": {

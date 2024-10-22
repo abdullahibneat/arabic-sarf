@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 8,
   "chapter": "افْتِعَال",
+  "transliteratedChapter": "ifti'aal",
   "title": "افْتَعَلَ يَفْتَعِلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ر",
         "ل": "م"
       },
-      "english": "respect"
+      "english": "respect",
+      "transliterated": "ihtarama"
     },
     {
       "arabic": {
@@ -21,7 +24,8 @@
       "english": {
         "base": "work",
         "specifically": "hard"
-      }
+      },
+      "transliterated": "ijtahada"
     },
     {
       "arabic": {
@@ -29,7 +33,8 @@
         "ع": "س",
         "ل": "ل"
       },
-      "english": "bathe"
+      "english": "bathe",
+      "transliterated": "ightasala"
     }
   ],
   "فعل": {

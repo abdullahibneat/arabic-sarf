@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 1,
   "chapter": "نَصَرَ",
+  "transliteratedChapter": "nasara",
   "title": "فَعَلَ يَفْعُلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ص",
         "ل": "ر"
       },
-      "english": "help"
+      "english": "help",
+      "transliterated": "nasara"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "خ",
         "ل": "ل"
       },
-      "english": "enter"
+      "english": "enter",
+      "transliterated": "dakhala"
     }
   ],
   "فعل": {

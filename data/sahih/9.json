@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 9,
   "chapter": "افْعِلَال",
+  "transliteratedChapter": "if'ilaal",
   "title": "افْعَلَّ يَفْعَلُّ",
   "root_letters": [
     {
@@ -15,7 +17,8 @@
         "past": "became",
         "passive": "turned",
         "specifically": "red"
-      }
+      },
+      "transliterated": "ihmarra"
     }
   ],
   "فعل": {

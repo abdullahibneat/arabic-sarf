@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 1,
   "chapter": "فَتَحَ",
+  "transliteratedChapter": "fataha",
   "title": "فَعَى يَفْعَى",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ه",
         "ل": "ي"
       },
-      "english": "prohibit"
+      "english": "prohibit",
+      "transliterated": "nahaa"
     }
   ],
   "فعل": {

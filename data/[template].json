@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 1,
   "chapter": "فَتَحَ",
+  "transliteratedChapter": "fataha",
   "root_letters": [
     {
       "arabic": {
@@ -9,7 +11,8 @@
         "ع": "ت",
         "ل": "ح"
       },
-      "english": "open"
+      "english": "open",
+      "transliterated": "fataha"
     }
   ],
   "فعل": {

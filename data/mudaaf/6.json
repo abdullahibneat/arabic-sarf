@@ -1,7 +1,9 @@
 {
   "type": "مضاعف",
+  "transliteratedType": "mudaaf",
   "form": 6,
   "chapter": "تَفَاعُل",
+  "transliteratedChapter": "tafaa'ul",
   "title": "تَفَاعَّ يَتَفَاعُّ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ج",
         "ل": "ج"
       },
-      "english": "dispute"
+      "english": "dispute",
+      "transliterated": "tahaajja"
     }
   ],
   "فعل": {

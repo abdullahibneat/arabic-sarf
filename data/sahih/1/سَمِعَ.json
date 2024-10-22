@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 1,
   "chapter": "سَمِعَ",
+  "transliteratedChapter": "sami'a",
   "title": "فَعِلَ يَفْعَلُ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "hear",
         "past": "heard"
-      }
+      },
+      "transliterated": "sami'a"
     },
     {
       "arabic": {
@@ -21,7 +24,8 @@
         "ع": "ر",
         "ل": "ه"
       },
-      "english": "dislike"
+      "english": "dislike",
+      "transliterated": "kariha"
     }
   ],
   "فعل": {

@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 1,
   "chapter": "نَصَرَ",
+  "transliteratedChapter": "nasara",
   "title": "فَعَا يَفْعُوْ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ع",
         "ل": "و"
       },
-      "english": "call"
+      "english": "call",
+      "transliterated": "da'aa"
     },
     {
       "arabic": {
@@ -22,7 +25,8 @@
         "base": "forgive",
         "past": "forgave",
         "passive": "forgiven"
-      }
+      },
+      "transliterated": "'afaa"
     },
     {
       "arabic": {
@@ -30,7 +34,8 @@
         "ع": "ج",
         "ل": "و"
       },
-      "english": "hope"
+      "english": "hope",
+      "transliterated": "rajaa"
     }
   ],
   "فعل": {

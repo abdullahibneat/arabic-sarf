@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 9,
   "chapter": "افْعِلَال",
+  "transliteratedChapter": "if'ilaal",
   "title": "افْوَلَّ يَفْوَلُّ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "black",
         "prefixToBe": true
-      }
+      },
+      "transliterated": "iswadda"
     },
     {
       "arabic": {
@@ -24,7 +27,8 @@
       "english": {
         "base": "cross-eyed",
         "prefixToBe": true
-      }
+      },
+      "transliterated": "ihwalla"
     }
   ],
   "فعل": {

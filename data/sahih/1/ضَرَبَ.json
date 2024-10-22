@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 1,
   "chapter": "ضَرَبَ",
+  "transliteratedChapter": "daraba",
   "title": "فَعَلَ يَفْعِلُ",
   "root_letters": [
     {
@@ -14,7 +16,8 @@
         "base": "hit",
         "past": "hit",
         "presentContinuous": "hitting"
-      }
+      },
+      "transliterated": "daraba"
     },
     {
       "arabic": {
@@ -25,7 +28,8 @@
       "english": {
         "base": "break",
         "past": "broke"
-      }
+      },
+      "transliterated": "kasara"
     }
   ],
   "فعل": {

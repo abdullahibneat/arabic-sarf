@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 1,
   "chapter": "ضَرَبَ",
+  "transliteratedChapter": "daraba",
   "title": "فَالَ يَفِيْلُ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "sell",
         "past": "sold"
-      }
+      },
+      "transliterated": "baa'a"
     },
     {
       "arabic": {
@@ -21,7 +24,8 @@
         "ع": "ي",
         "ل": "د"
       },
-      "english": "increase"
+      "english": "increase",
+      "transliterated": "zaada"
     },
     {
       "arabic": {
@@ -29,7 +33,8 @@
         "ع": "ي",
         "ل": "ش"
       },
-      "english": "live"
+      "english": "live",
+      "transliterated": "aasha"
     }
   ],
   "فعل": {

@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 4,
   "chapter": "إِفْعَال",
+  "transliteratedChapter": "if'aal",
   "title": "أَفْعَلَ يُفْعِلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ز",
         "ل": "ل"
       },
-      "english": "reveal"
+      "english": "reveal",
+      "transliterated": "anzala"
     },
     {
       "arabic": {
@@ -21,7 +24,8 @@
       "english": {
         "base": "send",
         "past": "sent"
-      }
+      },
+      "transliterated": "arsala"
     },
     {
       "arabic": {
@@ -32,7 +36,8 @@
       "english": {
         "base": "feed",
         "past": "fed"
-      }
+      },
+      "transliterated": "at'ama"
     }
   ],
   "فعل": {

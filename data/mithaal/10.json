@@ -1,7 +1,9 @@
 {
   "type": "مثال",
+  "transliteratedType": "mithaal",
   "form": 10,
   "chapter": "اسْتِفْعَال",
+  "transliteratedChapter": "istif'aal",
   "title": "اسْتَفْعَلَ يَسْتَفْعِلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "د",
         "ل": "ع"
       },
-      "english": "place"
+      "english": "place",
+      "transliterated": "istawda'a"
     }
   ],
   "فعل": {

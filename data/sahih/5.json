@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 5,
   "chapter": "تَفَعُّل",
+  "transliteratedChapter": "tafa'ul",
   "title": "تَفَعَّلَ يَتَفَعَّلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ك",
         "ل": "ر"
       },
-      "english": "remember"
+      "english": "remember",
+      "transliterated": "tadhakkara"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "ر",
         "ل": "ك"
       },
-      "english": "move"
+      "english": "move",
+      "transliterated": "taharraka"
     },
     {
       "arabic": {
@@ -26,7 +30,8 @@
         "ع": "ب",
         "ل": "ل"
       },
-      "english": "accept"
+      "english": "accept",
+      "transliterated": "taqabbala"
     }
   ],
   "فعل": {

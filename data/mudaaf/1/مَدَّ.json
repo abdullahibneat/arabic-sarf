@@ -1,7 +1,9 @@
 {
   "type": "مضاعف",
+  "transliteratedType": "mudaaf",
   "form": 1,
   "chapter": "نَصَرَ",
+  "transliteratedChapter": "nasara",
   "title": "فَعَّ يَفُعُّ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "د",
         "ل": "د"
       },
-      "english": "extend"
+      "english": "extend",
+      "transliterated": "madda"
     }
   ],
   "فعل": {

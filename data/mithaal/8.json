@@ -1,7 +1,9 @@
 {
   "type": "مثال",
+  "transliteratedType": "mithaal",
   "form": 8,
   "chapter": "افْتِعَال",
+  "transliteratedChapter": "ifti'aal",
   "title": "اتَّعَلَ يَتَّعِلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "س",
         "ل": "ع"
       },
-      "english": "expand"
+      "english": "expand",
+      "transliterated": "ittasa'a"
     }
   ],
   "فعل": {

@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 3,
   "chapter": "مُفَاعَلَة",
+  "transliteratedChapter": "mufaa'alah",
   "title": "فَاعَى يُفَاعِيْ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "د",
         "ل": "و"
       },
-      "english": "call"
+      "english": "call",
+      "transliterated": "naadaa"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "ج",
         "ل": "و"
       },
-      "english": "whisper"
+      "english": "whisper",
+      "transliterated": "naajaa"
     }
   ],
   "فعل": {

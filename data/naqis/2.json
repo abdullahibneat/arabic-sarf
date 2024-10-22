@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 2,
   "chapter": "تَفْعِيْل",
+  "transliteratedChapter": "taf'eel",
   "title": "فَعَّى يُفَعِّيْ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ل",
         "ل": "و"
       },
-      "english": "pray"
+      "english": "pray",
+      "transliterated": "salla"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "م",
         "ل": "ي"
       },
-      "english": "name"
+      "english": "name",
+      "transliterated": "samma"
     }
   ],
   "فعل": {

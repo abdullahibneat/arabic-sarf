@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 2,
   "chapter": "تَفْعِيْل",
+  "transliteratedChapter": "taf'eel",
   "title": "فَيَّلَ يُفَيِّلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ي",
         "ل": "ر"
       },
-      "english": "change"
+      "english": "change",
+      "transliterated": "ghayyara"
     }
   ],
   "فعل": {

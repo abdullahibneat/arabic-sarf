@@ -1,7 +1,9 @@
 {
   "type": "مثال",
+  "transliteratedType": "mithaal",
   "form": 1,
   "chapter": "سَمِعَ",
+  "transliteratedChapter": "sami'a",
   "title": "فَعِلَ يَفْعَلُ",
   "root_letters": [
     {
@@ -14,7 +16,8 @@
         "base": "afraid",
         "prefixToBe": true,
         "passive": "frightened"
-      }
+      },
+      "transliterated": "wajala"
     }
   ],
   "فعل": {

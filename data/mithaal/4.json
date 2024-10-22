@@ -1,7 +1,9 @@
 {
   "type": "مثال",
+  "transliteratedType": "mithaal",
   "form": 4,
   "chapter": "إِفْعَال",
+  "transliteratedChapter": "if'aal",
   "title": "أَفْعَلَ يُفْعِلُ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "bring",
         "past": "brought"
-      }
+      },
+      "transliterated": "awrada"
     }
   ],
   "فعل": {

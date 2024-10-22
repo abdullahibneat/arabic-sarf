@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 8,
   "chapter": "افْتِعَال",
+  "transliteratedChapter": "ifti'aal",
   "title": "افْتَعَى يَفْتَعِيْ",
   "root_letters": [
     {
@@ -14,7 +16,8 @@
         "base": "choose",
         "past": "chose",
         "passive": "chosen"
-      }
+      },
+      "transliterated": "ijtabaa"
     },
     {
       "arabic": {
@@ -25,7 +28,8 @@
       "english": {
         "base": "wear",
         "past": "worn"
-      }
+      },
+      "transliterated": "irtadaa"
     }
   ],
   "فعل": {

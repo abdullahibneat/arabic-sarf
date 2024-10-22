@@ -1,7 +1,9 @@
 {
   "type": "مضاعف",
+  "transliteratedType": "mudaaf",
   "form": 10,
   "chapter": "اسْتِفْعَال",
+  "transliteratedChapter": "istif'aal",
   "title": "اسْتَفَعَّ يَسْتَفِعُّ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "settle",
         "specifically": "down"
-      }
+      },
+      "transliterated": "istaqarra"
     }
   ],
   "فعل": {

@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 1,
   "chapter": "فَتَحَ",
+  "transliteratedChapter": "fataha",
   "title": "فَعَلَ يَفْعَلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ت",
         "ل": "ح"
       },
-      "english": "open"
+      "english": "open",
+      "transliterated": "fataha"
     },
     {
       "arabic": {
@@ -23,7 +26,8 @@
         "past": "gave",
         "passive": "given",
         "specifically": "sincere advice"
-      }
+      },
+      "transliterated": "nasaha"
     }
   ],
   "فعل": {

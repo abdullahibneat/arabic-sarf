@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 8,
   "chapter": "افْتِعَال",
+  "transliteratedChapter": "ifti'aal",
   "title": "افْتَالَ يَفْتَالُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "و",
         "ل": "ج"
       },
-      "english": "need"
+      "english": "need",
+      "transliterated": "ihtaaja"
     },
     {
       "arabic": {
@@ -21,7 +24,8 @@
       "english": {
         "base": "desire",
         "passive": "wished for"
-      }
+      },
+      "transliterated": "ishtaaqa"
     }
   ],
   "فعل": {

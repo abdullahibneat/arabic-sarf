@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 2,
   "chapter": "تَفْعِيْل",
+  "transliteratedChapter": "taf'eel",
   "title": "فَعَّلَ يُفَعِّلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ذ",
         "ل": "ب"
       },
-      "english": "deny"
+      "english": "deny",
+      "transliterated": "kazzaba"
     },
     {
       "arabic": {
@@ -25,7 +28,8 @@
           "base": "someone understand",
           "passive": "to understand"
         }
-      }
+      },
+      "transliterated": "fahhama"
     },
     {
       "arabic": {
@@ -36,7 +40,8 @@
       "english": {
         "base": "heat",
         "specifically": "up"
-      }
+      },
+      "transliterated": "sakkhana"
     }
   ],
   "فعل": {

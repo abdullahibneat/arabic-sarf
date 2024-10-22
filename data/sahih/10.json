@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 10,
   "chapter": "اسْتِفْعَال",
+  "transliteratedChapter": "istif'aal",
   "title": "اسْتَفْعَلَ يَسْتَفْعِلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "د",
         "ل": "م"
       },
-      "english": "use"
+      "english": "use",
+      "transliterated": "istakhdama"
     },
     {
       "arabic": {
@@ -25,7 +28,8 @@
           "base": "forgiveness",
           "passive": "for forgiveness"
         }
-      }
+      },
+      "transliterated": "istaghfara"
     },
     {
       "arabic": {
@@ -37,7 +41,8 @@
         "base": "grab",
         "past": "grabbed",
         "presentContinuous": "grabbing"
-      }
+      },
+      "transliterated": "istamsaka"
     }
   ],
   "فعل": {

@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 6,
   "chapter": "تَفَاعُل",
+  "transliteratedChapter": "tafaa'ul",
   "title": "تَفَاعَى يَتَفَاعَى",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "exchange",
         "specifically": "gifts"
-      }
+      },
+      "transliterated": "tahaadaa"
     },
     {
       "arabic": {
@@ -24,7 +27,8 @@
       "english": {
         "base": "feign",
         "specifically": "crying"
-      }
+      },
+      "transliterated": "tabaakaa"
     },
     {
       "arabic": {
@@ -34,7 +38,8 @@
       },
       "english": {
         "base": "agree"
-      }
+      },
+      "transliterated": "taraadaa"
     }
   ],
   "فعل": {

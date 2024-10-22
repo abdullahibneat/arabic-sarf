@@ -1,7 +1,9 @@
 export type VerbChapter = {
   type: string
+  transliteratedType: string
   form: number
   chapter: string
+  transliteratedChapter: string
   title: string
   root_letters: RootLetter[]
   فعل: {
@@ -74,6 +76,7 @@ export type VerbChapter = {
 export type RootLetter = {
   arabic: { ف: string; ع: string; ل: string }
   english: EnglishVerb
+  transliterated: string
 }
 
 export type EnglishVerb =

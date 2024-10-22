@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 4,
   "chapter": "إِفْعَال",
+  "transliteratedChapter": "if'aal",
   "title": "أَفْعَى يُفْعِيْ",
   "root_letters": [
     {
@@ -17,7 +19,8 @@
           "base": "someone cry",
           "passive": "to cry"
         }
-      }
+      },
+      "transliterated": "abkaa"
     },
     {
       "arabic": {
@@ -29,7 +32,8 @@
         "base": "throw",
         "past": "threw",
         "passive": "thrown"
-      }
+      },
+      "transliterated": "alqaa"
     }
   ],
   "فعل": {

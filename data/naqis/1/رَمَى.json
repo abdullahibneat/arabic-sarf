@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 1,
   "chapter": "ضَرَبَ",
+  "transliteratedChapter": "daraba",
   "title": "فَعَى يَفْعِيْ",
   "root_letters": [
     {
@@ -14,7 +16,8 @@
         "base": "throw",
         "past": "threw",
         "passive": "thrown"
-      }
+      },
+      "transliterated": "ramaa"
     },
     {
       "arabic": {
@@ -22,7 +25,8 @@
         "ع": "ش",
         "ل": "ي"
       },
-      "english": "walk"
+      "english": "walk",
+      "transliterated": "mashaa"
     },
     {
       "arabic": {
@@ -30,7 +34,8 @@
         "ع": "د",
         "ل": "ي"
       },
-      "english": "guide"
+      "english": "guide",
+      "transliterated": "hadaa"
     }
   ],
   "فعل": {

@@ -1,7 +1,9 @@
 {
   "type": "مضاعف",
+  "transliteratedType": "mudaaf",
   "form": 4,
   "chapter": "إِفْعَال",
+  "transliteratedChapter": "if'aal",
   "title": "أَفَعَّ يُفِعُّ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ب",
         "ل": "ب"
       },
-      "english": "love"
+      "english": "love",
+      "transliterated": "ahabba"
     }
   ],
   "فعل": {

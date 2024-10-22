@@ -1,7 +1,9 @@
 {
   "type": "مضاعف",
+  "transliteratedType": "mudaaf",
   "form": 3,
   "chapter": "تَفْعِيْل",
+  "transliteratedChapter": "mufaa'alah",
   "title": "فَاعَّ يُفَاعُّ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ق",
         "ل": "ق"
       },
-      "english": "oppose"
+      "english": "oppose",
+      "transliterated": "shaaqqa"
     }
   ],
   "فعل": {

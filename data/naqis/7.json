@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 7,
   "chapter": "انْفِعَال",
+  "transliteratedChapter": "infi'aal",
   "title": "انْفَعَى يَنْفَعِيْ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ل",
         "ل": "و"
       },
-      "english": "reveal"
+      "english": "reveal",
+      "transliterated": "injalaa"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "ن",
         "ل": "و"
       },
-      "english": "curve"
+      "english": "curve",
+      "transliterated": "inhanaa"
     }
   ],
   "فعل": {

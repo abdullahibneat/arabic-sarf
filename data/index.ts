@@ -126,7 +126,14 @@ const مثال = new Map<string, VerbChapter | null | undefined>([
     {
       ...sahihForm2,
       type: 'مثال',
-      root_letters: [{ arabic: { ف: 'و', ع: 'ح', ل: 'د' }, english: 'unite' }],
+      transliteratedType: 'mithaal',
+      root_letters: [
+        {
+          arabic: { ف: 'و', ع: 'ح', ل: 'د' },
+          english: 'unite',
+          transliterated: `wahhada`,
+        },
+      ],
     },
   ],
   [
@@ -134,7 +141,14 @@ const مثال = new Map<string, VerbChapter | null | undefined>([
     {
       ...sahihForm3,
       type: 'مثال',
-      root_letters: [{ arabic: { ف: 'و', ع: 'ف', ل: 'ق' }, english: 'agree' }],
+      transliteratedType: 'mithaal',
+      root_letters: [
+        {
+          arabic: { ف: 'و', ع: 'ف', ل: 'ق' },
+          english: 'agree',
+          transliterated: `waafaqa`,
+        },
+      ],
     },
   ],
   ['4', mithaalForm4],
@@ -143,7 +157,14 @@ const مثال = new Map<string, VerbChapter | null | undefined>([
     {
       ...sahihForm5,
       type: 'مثال',
-      root_letters: [{ arabic: { ف: 'و', ع: 'ك', ل: 'ل' }, english: 'trust' }],
+      transliteratedType: 'mithaal',
+      root_letters: [
+        {
+          arabic: { ف: 'و', ع: 'ك', ل: 'ل' },
+          english: 'trust',
+          transliterated: `tawakkala`,
+        },
+      ],
     },
   ],
   [
@@ -151,6 +172,7 @@ const مثال = new Map<string, VerbChapter | null | undefined>([
     {
       ...sahihForm6,
       type: 'مثال',
+      transliteratedType: 'mithaal',
       root_letters: [
         {
           arabic: { ف: 'و', ع: 'ض', ل: 'ع' },
@@ -160,6 +182,7 @@ const مثال = new Map<string, VerbChapter | null | undefined>([
             presentContinuous: 'behaving humbly',
             passive: 'made to behave humbly',
           },
+          transliterated: `tawaada'a`,
         },
       ],
     },

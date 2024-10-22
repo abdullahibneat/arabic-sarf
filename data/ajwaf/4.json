@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 4,
   "chapter": "إِفْعَال",
+  "transliteratedChapter": "if'aal",
   "title": "أَفَالَ يُفِيْلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "و",
         "ل": "د"
       },
-      "english": "intend"
+      "english": "intend",
+      "transliterated": "araada"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "و",
         "ل": "ب"
       },
-      "english": "answer"
+      "english": "answer",
+      "transliterated": "ajaaba"
     },
     {
       "arabic": {
@@ -26,7 +30,8 @@
         "ع": "و",
         "ل": "ط"
       },
-      "english": "surround"
+      "english": "surround",
+      "transliterated": "ahaata"
     }
   ],
   "فعل": {

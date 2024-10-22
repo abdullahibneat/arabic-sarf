@@ -1,7 +1,9 @@
 {
   "type": "مضاعف",
+  "transliteratedType": "mudaaf",
   "form": 2,
   "chapter": "تَفْعِيْل",
+  "transliteratedChapter": "taf'eel",
   "title": "فَعَّلَ يُفَعِّلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ف",
         "ل": "ف"
       },
-      "english": "reduce"
+      "english": "reduce",
+      "transliterated": "khaffafa"
     }
   ],
   "فعل": {

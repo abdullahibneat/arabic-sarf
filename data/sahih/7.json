@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 7,
   "chapter": "انْفِعَال",
+  "transliteratedChapter": "infi'aal",
   "title": "انْفَعَلَ يَنْفَعِلُ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "turn",
         "specifically": "away"
-      }
+      },
+      "transliterated": "insarafa"
     },
     {
       "arabic": {
@@ -24,7 +27,8 @@
       "english": {
         "base": "divided",
         "prefixToBe": true
-      }
+      },
+      "transliterated": "inqasana"
     },
     {
       "arabic": {
@@ -35,7 +39,8 @@
       "english": {
         "base": "revealed",
         "prefixToBe": true
-      }
+      },
+      "transliterated": "inkashafa"
     }
   ],
   "فعل": {

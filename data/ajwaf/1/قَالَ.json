@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 1,
   "chapter": "نَصَرَ",
+  "transliteratedChapter": "nasara",
   "title": "فَالَ يَفُوْلُ",
   "root_letters": [
     {
@@ -14,7 +16,8 @@
         "base": "say",
         "past": "said",
         "passive": "told"
-      }
+      },
+      "transliterated": "qaala"
     }
   ],
   "فعل": {

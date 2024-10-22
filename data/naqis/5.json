@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 5,
   "chapter": "تَفَعُّل",
+  "transliteratedChapter": "tafa'ul",
   "title": "تَفَعَّى يَتَفَعَّى",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ن",
         "ل": "و"
       },
-      "english": "wish"
+      "english": "wish",
+      "transliterated": "tamannaa"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "ل",
         "ل": "و"
       },
-      "english": "manifest"
+      "english": "manifest",
+      "transliterated": "tajallaa"
     },
     {
       "arabic": {
@@ -29,7 +33,8 @@
       "english": {
         "base": "climb",
         "specifically": "over"
-      }
+      },
+      "transliterated": "takhattaa"
     }
   ],
   "فعل": {

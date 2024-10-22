@@ -1,7 +1,9 @@
 {
   "type": "مثال",
+  "transliteratedType": "mithaal",
   "form": 1,
   "chapter": "فَتَحَ",
+  "transliteratedChapter": "fataha",
   "title": "فَعَلَ يَعَلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ه",
         "ل": "ب"
       },
-      "english": "gift"
+      "english": "gift",
+      "transliterated": "wahaba"
     }
   ],
   "فعل": {

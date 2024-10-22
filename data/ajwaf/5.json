@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 5,
   "chapter": "تَفَعُّل",
+  "transliteratedChapter": "tafa'ul",
   "title": "تَفَوَّلَ يَتَفَوَّلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "و",
         "ل": "ل"
       },
-      "english": "roam"
+      "english": "roam",
+      "transliterated": "tajawwala"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "ي",
         "ل": "ب"
       },
-      "english": "perfume"
+      "english": "perfume",
+      "transliterated": "tatayyaba"
     }
   ],
   "فعل": {

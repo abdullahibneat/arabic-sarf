@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 10,
   "chapter": "اسْتِفْعَال",
+  "transliteratedChapter": "istif'aal",
   "title": "اسْتَفْعَى يَسْتَفْعِيْ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "self-sufficient",
         "prefixToBe": true
-      }
+      },
+      "transliterated": "istaghnaa"
     },
     {
       "arabic": {
@@ -26,7 +29,8 @@
         "presentContinuous": "lying",
         "passive": "lain",
         "specifically": "down"
-      }
+      },
+      "transliterated": "istalqaa"
     }
   ],
   "فعل": {

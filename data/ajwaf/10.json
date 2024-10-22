@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 10,
   "chapter": "اسْتِفْعَال",
+  "transliteratedChapter": "istif'aal",
   "title": "اسْتَفَالَ يَسْتَفِيْلُ",
   "root_letters": [
     {
@@ -17,7 +19,8 @@
           "base": "refuge",
           "passive": "for refuge"
         }
-      }
+      },
+      "transliterated": "ista'aadha"
     },
     {
       "arabic": {
@@ -28,7 +31,8 @@
       "english": {
         "base": "capable",
         "prefixToBe": true
-      }
+      },
+      "transliterated": "istataa'a"
     }
   ],
   "فعل": {

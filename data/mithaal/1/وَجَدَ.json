@@ -1,7 +1,9 @@
 {
   "type": "مثال",
+  "transliteratedType": "mithaal",
   "form": 1,
   "chapter": "ضَرَبَ",
+  "transliteratedChapter": "daraba",
   "title": "فَعَلَ يَعِلُ",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "find",
         "past": "found"
-      }
+      },
+      "transliterated": "wajada"
     }
   ],
   "فعل": {

@@ -1,7 +1,9 @@
 {
   "type": "ناقص",
+  "transliteratedType": "naqis",
   "form": 1,
   "chapter": "سَمِعَ",
+  "transliteratedChapter": "sami'a",
   "title": "فَعِيَ يَفْعَى",
   "root_letters": [
     {
@@ -13,7 +15,8 @@
       "english": {
         "base": "pleased",
         "prefixToBe": true
-      }
+      },
+      "transliterated": "radiya"
     },
     {
       "arabic": {
@@ -21,7 +24,8 @@
         "ع": "ش",
         "ل": "ي"
       },
-      "english": "fear"
+      "english": "fear",
+      "transliterated": "khashiya"
     },
     {
       "arabic": {
@@ -34,7 +38,8 @@
         "past": "forgot",
         "presentContinuous": "forgetting",
         "passive": "forgotten"
-      }
+      },
+      "transliterated": "nasiya"
     }
   ],
   "فعل": {

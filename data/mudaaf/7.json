@@ -1,7 +1,9 @@
 {
   "type": "مضاعف",
+  "transliteratedType": "mudaaf",
   "form": 7,
   "chapter": "انْفِعَال",
+  "transliteratedChapter": "infi'aal",
   "title": "انْفَعَّ يَنْفَعُّ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ل",
         "ل": "ل"
       },
-      "english": "open"
+      "english": "open",
+      "transliterated": "inhalla"
     }
   ],
   "فعل": {

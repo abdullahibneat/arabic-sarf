@@ -1,7 +1,9 @@
 {
   "type": "أجوف",
+  "transliteratedType": "ajwaf",
   "form": 1,
   "chapter": "سَمِعَ",
+  "transliteratedChapter": "sami'a",
   "title": "فَالَ يَفَالُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "و",
         "ل": "ف"
       },
-      "english": "fear"
+      "english": "fear",
+      "transliterated": "khaafa"
     },
     {
       "arabic": {
@@ -21,7 +24,8 @@
       "english": {
         "base": "sleep",
         "past": "slept"
-      }
+      },
+      "transliterated": "naama"
     },
     {
       "arabic": {
@@ -29,7 +33,8 @@
         "ع": "و",
         "ل": "ء"
       },
-      "english": "want"
+      "english": "want",
+      "transliterated": "shaa'a"
     }
   ],
   "فعل": {

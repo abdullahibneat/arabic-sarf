@@ -1,7 +1,9 @@
 {
   "type": "مضاعف",
+  "transliteratedType": "mudaaf",
   "form": 1,
   "chapter": "فَتَحَ",
+  "transliteratedChapter": "fataha",
   "title": "فَعَّ يَفَعُّ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "س",
         "ل": "س"
       },
-      "english": "touch"
+      "english": "touch",
+      "transliterated": "massa"
     }
   ],
   "فعل": {

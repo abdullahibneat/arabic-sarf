@@ -1,7 +1,9 @@
 {
   "type": "صحيح",
+  "transliteratedType": "sahih",
   "form": 3,
   "chapter": "مُفَاعَلَة",
+  "transliteratedChapter": "mufaa'alah",
   "title": "فَاعَلَ يُفَاعِلُ",
   "root_letters": [
     {
@@ -10,7 +12,8 @@
         "ع": "ه",
         "ل": "د"
       },
-      "english": "witness"
+      "english": "witness",
+      "transliterated": "shaahada"
     },
     {
       "arabic": {
@@ -18,7 +21,8 @@
         "ع": "ف",
         "ل": "ر"
       },
-      "english": "travel"
+      "english": "travel",
+      "transliterated": "saafara"
     },
     {
       "arabic": {
@@ -26,7 +30,8 @@
         "ع": "ع",
         "ل": "د"
       },
-      "english": "help"
+      "english": "help",
+      "transliterated": "saa'ada"
     }
   ],
   "فعل": {
