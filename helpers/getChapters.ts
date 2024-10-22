@@ -1,5 +1,6 @@
 import { AmrTasreef, RootLetter, VerbTasreef } from '@/data/types'
 
+import onlyAlphaNumeric from './onlyAlphaNumeric'
 import replaceRoots from '@/helpers/replaceRoots'
 import toRoman from '@/helpers/toRoman'
 import verbTypes from '@/data'
@@ -15,6 +16,7 @@ export type Chapter = {
   sarfKabeer: SarfKabeer | null
   sarfSagheer: SarfSagheer | null
   mushtaqq: Mushtaqq
+  searchable: Searchable | false
 }
 
 export type Tasreef = VerbTasreef | null
@@ -75,6 +77,38 @@ export type Mushtaqq = {
   } | null
 }
 
+export type Searchable = {
+  type: {
+    arabic: string
+    transliterated: string
+  }
+  form: {
+    number: number // 1, 2, 3, etc...
+    roman: string // II, III, IV, etc...
+    english: string // 1a, 1b, 1c, etc...
+  }
+  chapter: {
+    arabic: string // نصر, تفعيل, استفعال, etc...
+    transliterated: string // nasara, taf'eel, istif'aal, etc...
+  }
+  root_letters: {
+    arabic: string
+    transliterated: string
+  }[]
+}
+
+export const SEARCHABLE_PATHS = [
+  'searchable.type.arabic',
+  'searchable.type.transliterated',
+  'searchable.form.number',
+  'searchable.form.roman',
+  'searchable.form.english',
+  'searchable.chapter.arabic',
+  'searchable.chapter.transliterated',
+  'searchable.root_letters.arabic',
+  'searchable.root_letters.transliterated',
+]
+
 type Options = {
   mujarradHeadings?: string
   mazeedFihiNumbering?: string
@@ -99,18 +133,22 @@ const getChapters = (
 
       let form = formNumber
 
+      let romanForm = mujarrad ? 'I' : toRoman(Number(formNumber)) // II, III, IV, etc...
+      let englishForm = mujarrad ? `1${String.fromCharCode(index + 97)}` : '' // 1a, 1b, 1c, etc...
+      let arabicForm = baseChapter ? baseChapter.chapter[0] : '' // ن, ض, ف, etc...
+
       if (mujarrad) {
         if (mujarradHeadings === 'english') {
-          // 1a, 1b, 1c, etc.
-          form = `1${String.fromCharCode(index + 97)}`
+          form = englishForm
+        } else {
+          form = arabicForm
         }
       } else if (mazeedFihiNumbering === 'roman') {
-        form = toRoman(Number(form))
+        form = romanForm
       }
 
       if (baseChapter) {
         if (mujarrad && mujarradHeadings !== 'english') {
-          // ن, ض, ف, etc...
           form = baseChapter.chapter[0]
         }
       }
@@ -182,6 +220,33 @@ const getChapters = (
         sarfKabeer,
         sarfSagheer,
         mushtaqq,
+        searchable: baseChapter
+          ? {
+              type: {
+                arabic: onlyAlphaNumeric(type),
+                transliterated: onlyAlphaNumeric(
+                  baseChapter.transliteratedType,
+                ),
+              },
+              form: {
+                number: mujarrad ? 1 : Number(formNumber),
+                roman: romanForm,
+                english: englishForm,
+              },
+              chapter: {
+                arabic: onlyAlphaNumeric(baseChapter.chapter),
+                transliterated: onlyAlphaNumeric(
+                  baseChapter.transliteratedChapter,
+                ),
+              },
+              root_letters: baseChapter.root_letters.map(
+                ({ arabic: { ف, ع, ل }, transliterated }) => ({
+                  arabic: `${ف}${ع}${ل}`,
+                  transliterated: onlyAlphaNumeric(transliterated),
+                }),
+              ),
+            }
+          : false,
       }
     },
   )
