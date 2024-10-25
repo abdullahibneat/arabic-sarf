@@ -6,6 +6,7 @@ import { fontSizeAtom, themeAtom } from '@/atoms'
 import { useCallback, useEffect, useState } from 'react'
 
 import type { AppProps } from 'next/app'
+import Dialog from '@/components/Dialog'
 import Head from 'next/head'
 import Island from '@/components/Island'
 import { PostHogProvider } from 'posthog-js/react'
@@ -176,13 +177,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 
           {modals.map((modal) =>
             createPortal(
-              <dialog
-                id={modal.id}
-                onCancel={() => dismissModal(modal.id)}
-                className="m-0 h-full max-h-full w-full max-w-full items-center justify-center open:flex"
-              >
+              <Dialog id={modal.id} onCancel={() => dismissModal(modal.id)}>
                 {modal.content}
-              </dialog>,
+              </Dialog>,
               document.body,
               modal.id,
             ),
