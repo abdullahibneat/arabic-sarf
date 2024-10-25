@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import type { AppProps } from 'next/app'
 import Dialog from '@/components/Dialog'
+import GlobalSearch from '@/components/GlobalSearch'
 import Head from 'next/head'
 import Island from '@/components/Island'
 import { PostHogProvider } from 'posthog-js/react'
@@ -184,6 +185,8 @@ const App = ({ Component, pageProps }: AppProps) => {
               modal.id,
             ),
           )}
+
+          <GlobalSearch />
         </SarfContext.Provider>
       </ModalContext.Provider>
     </PostHogProvider>
