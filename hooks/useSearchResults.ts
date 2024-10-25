@@ -5,7 +5,7 @@ import onlyAlphaNumeric from '@/helpers/onlyAlphaNumeric'
 import { useMemo } from 'react'
 import useVerbTypes from './useVerbTypes'
 
-const useSearch = (search: string) => {
+const useSearchResults = (search?: string | null) => {
   const verbTypes = useVerbTypes()
 
   const chapters = useMemo(
@@ -32,6 +32,8 @@ const useSearch = (search: string) => {
      * 3. The `$or` operator is then used so that the query returns any items that contain the search term in any of the specified paths to search.
      * 4. Finally, the `$and` operator is used to filter down items that contain all the search terms in any of the specified paths to search.
      */
+    if (!search) return []
+
     const blacklist = ['form']
 
     const searchTerms = search
@@ -58,4 +60,4 @@ const useSearch = (search: string) => {
   return results
 }
 
-export default useSearch
+export default useSearchResults
