@@ -52,16 +52,16 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ### Background Colors
 
-| Light Mode           | Dark Mode               | Description                  |
-| -------------------- | ----------------------- | ---------------------------- |
-| `bg-white`           | `bg-neutral-900`        | General background           |
-| `bg-white`           | `bg-neutral-600`        | Buttons/Interactive elements |
-| `bg-zinc-50`         | `bg-neutral-800`        | Container background         |
-| `bg-zinc-100`        | `bg-neutral-800`        |                              |
-| `bg-zinc-100:hover`  | `bg-neutral-800:hover`  |                              |
-| `bg-zinc-100:active` | `bg-neutral-800:active` |                              |
-| `bg-zinc-200`        | `bg-neutral-700`        |                              |
-| `bg-zinc-300`        | `bg-neutral-600`        |                              |
+| Light Mode                          | Dark Mode        | Description                  |
+| ----------------------------------- | ---------------- | ---------------------------- |
+| `bg-white`                          | `bg-neutral-900` | General background           |
+| `bg-white`                          | `bg-neutral-600` | Buttons/Interactive elements |
+| `bg-zinc-50`                        | `bg-neutral-800` | Container background         |
+| `bg-zinc-100`                       | `bg-neutral-800` |                              |
+| `bg-zinc-100:hover`: `bg-zinc-200`  |                  |                              |
+| `bg-zinc-100:active`: `bg-zinc-300` |                  |                              |
+| `bg-zinc-200`                       | `bg-neutral-700` |                              |
+| `bg-zinc-300`                       | `bg-neutral-600` |                              |
 
 ### Border Colors
 
