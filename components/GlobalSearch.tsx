@@ -150,16 +150,18 @@ const GlobalSearch = () => {
 
   return (
     <Dialog ref={dialog} onCancel={handleCancel}>
-      <div className="flex max-h-64 w-full max-w-lg flex-col rounded-lg border-[1px] border-zinc-300 bg-white shadow-xl drop-shadow-xl">
+      <div className="flex max-h-64 w-full max-w-lg flex-col rounded-lg border-[1px] border-zinc-300 bg-white shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-zinc-900">
         <input
-          className="h-14 bg-transparent px-4 outline-none"
+          className="h-14 bg-transparent px-4 text-zinc-900 outline-none dark:text-neutral-100"
           inputMode="search"
           placeholder="Search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        {search && <div className="h-[1px] w-full bg-zinc-300" />}
+        {search && (
+          <div className="h-[1px] w-full bg-zinc-300 dark:bg-neutral-500" />
+        )}
 
         <div
           dir="rtl"
@@ -184,7 +186,7 @@ const GlobalSearch = () => {
               className={cx(
                 'global-search-selected-result',
                 twMerge(
-                  'flex h-9 shrink-0 cursor-pointer items-center rounded-md px-2 text-zinc-500 outline-none',
+                  'flex h-9 shrink-0 cursor-pointer items-center rounded-md px-2 text-zinc-500 outline-none dark:text-neutral-200',
                   index === selectedIndex && 'text-inherit',
                 ),
               )}
@@ -199,13 +201,15 @@ const GlobalSearch = () => {
           {selectedIndex > -1 && (
             <div
               ref={highlight}
-              className="absolute inset-x-4 -z-10 h-9 rounded-md bg-zinc-200"
+              className="absolute inset-x-4 -z-10 h-9 rounded-md bg-zinc-200 dark:bg-neutral-700"
               style={{ transition: 'top 250ms' }}
             />
           )}
 
           {searchResults.length === 0 && search && (
-            <p className="text-sm text-zinc-500">No results found</p>
+            <p className="text-sm text-zinc-500 dark:text-neutral-200">
+              No results found
+            </p>
           )}
         </div>
       </div>
