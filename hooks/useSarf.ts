@@ -1,5 +1,3 @@
-'use client'
-
 import { SarfContext } from '@/contexts/SarfContext'
 import { useContext } from 'react'
 

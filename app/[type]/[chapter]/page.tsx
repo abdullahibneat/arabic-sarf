@@ -1,3 +1,5 @@
+'use client'
+
 import IsmFail from '@/components/IsmFail'
 import IsmMafool from '@/components/IsmMafool'
 import Masdar from '@/components/Masdar'
