@@ -1,32 +1,18 @@
+import React, { useMemo } from 'react'
+
 import { Chapter } from '@/helpers/getChapters'
 import IsmFail from '@/components/IsmFail'
-import SarfSagheer from '@/components/SarfSagheer'
-import Tasreef from '@/components/Tasreef'
-import React, { useMemo } from 'react'
-import useSarf from '@/hooks/useSarf'
-import useVerbTypes from '@/hooks/useVerbTypes'
-import verbTypes, { audios } from '@/data'
-import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next'
 import IsmMafool from '@/components/IsmMafool'
 import Masdar from '@/components/Masdar'
+import SarfSagheer from '@/components/SarfSagheer'
 import Table from '@/components/Table'
+import Tasreef from '@/components/Tasreef'
+import { audios } from '@/data'
+import useSarf from '@/hooks/useSarf'
+import useVerbTypes from '@/hooks/useVerbTypes'
 
-export const getStaticPaths: GetStaticPaths = () => {
-  const allVerbTypes = Array.from(verbTypes.keys())
-  const paths: GetStaticPathsResult['paths'] = [{ params: { type: undefined } }]
-  for (const verbType of allVerbTypes) {
-    paths.push({ params: { type: [verbType] } })
-  }
-  return {
-    paths,
-    fallback: false,
-  }
-}
-
-export const getStaticProps = (() => ({ props: {} })) satisfies GetStaticProps
-
-const Home = () => {
-  const { sarfType, verbType } = useSarf()
+const OverviewPage = () => {
+  const { sarfType, verbType, passive, verbCase } = useSarf()
 
   const verbTypes = useVerbTypes()
 
@@ -70,7 +56,11 @@ const Home = () => {
           <h2 className="text-center">{section.name}</h2>
 
           {sarfType === 'صرف كبير' && (
-            <VerbOverview chapters={section.chapters} />
+            <VerbOverview
+              chapters={section.chapters}
+              passive={passive}
+              verbCase={verbCase}
+            />
           )}
 
           {sarfType === 'صرف صغير' && (
@@ -96,44 +86,48 @@ const Home = () => {
   )
 }
 
-export default Home
+export default OverviewPage
 
-const VerbOverview = ({ chapters }: { chapters: Chapter[] }) => {
-  const { passive, verbCase } = useSarf()
-
-  return (
-    <div className="flex w-full flex-col gap-1 overflow-x-auto overflow-y-hidden">
-      <div className="mx-auto flex gap-1">
-        {chapters.map((chapter) => (
-          <Tasreef
-            key={chapter.key}
-            name={chapter.form}
-            audio={audios.get(chapter.key)?.ماضي}
-            tasreef={chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي}
-            defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
-            disabled={verbCase ? verbCase !== 'مرفوع' : false}
-          />
-        ))}
-      </div>
-
-      <div className="mx-auto flex gap-1">
-        {chapters.map((chapter) => (
-          <Tasreef
-            key={chapter.key}
-            name={chapter.form}
-            audio={audios.get(chapter.key)?.مضارع}
-            tasreef={
-              chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.مضارع[
-                verbCase || 'مرفوع'
-              ]
-            }
-            defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
-          />
-        ))}
-      </div>
+const VerbOverview = ({
+  chapters,
+  passive,
+  verbCase,
+}: {
+  chapters: Chapter[]
+  passive?: boolean
+  verbCase?: string | null
+}) => (
+  <div className="flex w-full flex-col gap-1 overflow-x-auto overflow-y-hidden">
+    <div className="mx-auto flex gap-1">
+      {chapters.map((chapter) => (
+        <Tasreef
+          key={chapter.key}
+          name={chapter.form}
+          audio={audios.get(chapter.key)?.ماضي}
+          tasreef={chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي}
+          defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+          disabled={verbCase ? verbCase !== 'مرفوع' : false}
+        />
+      ))}
     </div>
-  )
-}
+
+    <div className="mx-auto flex gap-1">
+      {chapters.map((chapter) => (
+        <Tasreef
+          key={chapter.key}
+          name={chapter.form}
+          audio={audios.get(chapter.key)?.مضارع}
+          tasreef={
+            chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.مضارع[
+              verbCase || 'مرفوع'
+            ]
+          }
+          defaultRootLetters={chapter.rootLetters?.[0]?.arabic}
+        />
+      ))}
+    </div>
+  </div>
+)
 
 const MushtaqqOverview = ({ chapters }: { chapters: Chapter[] }) => (
   <div className="flex w-full flex-col gap-1 overflow-x-auto overflow-y-hidden">

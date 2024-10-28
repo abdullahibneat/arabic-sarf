@@ -71,16 +71,7 @@ const Island = ({
   const [showJazm] = useAtom(showJazmAtom)
   const [showNasb] = useAtom(showNasbAtom)
 
-  const md = useBreakpoint('md')
   const lg = useBreakpoint('lg')
-
-  /**
-   * Open sidebar automatically on medium/large screens
-   */
-
-  useEffect(() => {
-    if (md && !sidebarOpen) toggleSidebar()
-  }, [md])
 
   /**
    * Reset options to default when enabled settings are turned off
@@ -209,7 +200,7 @@ const Island = ({
   return (
     <div
       dir="ltr" // "rtl" doesn't work well with divide-x
-      className="fixed bottom-6 left-4 right-4 flex md:sticky md:top-[calc(100%-42px)]"
+      className="fixed bottom-6 left-4 right-4 z-10 flex md:sticky md:top-[calc(100%-42px-16px)]"
     >
       <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-300 bg-zinc-100 shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-neutral-800">
         <div className="flex divide-x overflow-x-auto dark:divide-neutral-500 [&>*]:shrink-0">

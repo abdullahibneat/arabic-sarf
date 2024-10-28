@@ -1,3 +1,5 @@
+'use client'
+
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { audioLoopAtom, audioPlaybackRateAtom } from '@/atoms'
 

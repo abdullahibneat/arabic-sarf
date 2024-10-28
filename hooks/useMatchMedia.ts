@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react'
 
 const useMatchMedia = (query: string) => {
-  const [matches, setMatches] = useState(false)
+  const [matches, setMatches] = useState<boolean | undefined>(undefined)
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const media = window.matchMedia(query)
-    const listener = () => setMatches(media.matches)
+
+    const listener = () => {
+      setMatches(media.matches)
+    }
 
     // Call listener right away so state gets updated with initial value
     listener()

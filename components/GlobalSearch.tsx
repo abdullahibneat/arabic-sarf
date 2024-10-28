@@ -2,16 +2,15 @@ import React, {
   SyntheticEvent,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react'
+import { useParams, useRouter } from 'next/navigation'
 
 import Dialog from './Dialog'
 import Link from 'next/link'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
-import { useRouter } from 'next/router'
 import useSearchResults from '@/hooks/useSearchResults'
 
 const GlobalSearch = () => {
@@ -23,28 +22,29 @@ const GlobalSearch = () => {
   const hovering = useRef(false)
 
   const router = useRouter()
+  const params = useParams()
   const searchResults = useSearchResults(search)
 
-  /**
-   * Show global search when the url contains `#search` hash
-   * This is so that when the back button is pressed, or back gesture is performed on mobile, it triggers the global search to close
-   */
-  const visible = useMemo(() => {
-    return router.asPath.split('#')[1] === 'search'
-  }, [router.asPath])
-
-  /**
-   * The following useEffect handles the DOM visibility of the global search
-   */
   useEffect(() => {
-    if (visible) {
-      dialog.current?.classList.remove('close')
-      dialog.current?.showModal()
-    } else {
-      dialog.current?.classList.add('close')
-      setTimeout(() => dialog.current?.close(), 250)
+    // Close the global search when navigating back
+    if (dialog.current?.open && window.location.hash !== '#search') {
+      close(false)
     }
-  }, [visible])
+  }, [params])
+
+  const open = useCallback(() => {
+    if (dialog.current?.open) return
+    // #search hash is used so that when the back button is pressed, or back gesture is performed on mobile, it triggers the global search to close
+    router.push('#search', { scroll: false })
+    dialog.current?.classList.remove('close')
+    dialog.current?.showModal()
+  }, [])
+
+  const close = useCallback((goBack = true) => {
+    if (goBack) router.back()
+    dialog.current?.classList.add('close')
+    setTimeout(() => dialog.current?.close(), 250)
+  }, [])
 
   useEffect(() => {
     /**
@@ -56,7 +56,7 @@ const GlobalSearch = () => {
      */
     const keyboardListener = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        router.push('#search', undefined, { scroll: false })
+        open()
         return
       }
 
@@ -133,7 +133,7 @@ const GlobalSearch = () => {
 
   const handleCancel = useCallback((e: SyntheticEvent) => {
     e.preventDefault()
-    router.replace('', undefined, { scroll: false })
+    close()
   }, [])
 
   const handleMouseEnter = useCallback(
@@ -183,6 +183,7 @@ const GlobalSearch = () => {
                   : undefined
               }
               href={`/${chapter.key}`}
+              replace={true}
               className={cx(
                 'global-search-selected-result',
                 twMerge(
