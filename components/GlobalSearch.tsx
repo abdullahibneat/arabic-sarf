@@ -156,6 +156,7 @@ const GlobalSearch = () => {
           inputMode="search"
           placeholder="Search"
           value={search}
+          onFocus={(e) => e.target.select()}
           onChange={(e) => setSearch(e.target.value)}
         />
 
