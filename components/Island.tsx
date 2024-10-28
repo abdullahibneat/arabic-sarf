@@ -73,6 +73,22 @@ const Island = ({
 
   const lg = useBreakpoint('lg')
 
+  useEffect(() => {
+    /**
+     * Global keyboard listener:
+     * - Ctrl+/: toggle sidebar
+     * - Ctrl+\: toggle sidebar
+     */
+    const keyboardListener = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === '/' || e.key === '\\')) {
+        toggleSidebar()
+        return
+      }
+    }
+    window.addEventListener('keydown', keyboardListener)
+    return () => window.removeEventListener('keydown', keyboardListener)
+  }, [])
+
   /**
    * Reset options to default when enabled settings are turned off
    */
