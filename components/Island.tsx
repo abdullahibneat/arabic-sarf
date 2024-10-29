@@ -71,7 +71,7 @@ const Island = ({
   const [showJazm] = useAtom(showJazmAtom)
   const [showNasb] = useAtom(showNasbAtom)
 
-  const lg = useBreakpoint('lg')
+  const md = useBreakpoint('md')
 
   useEffect(() => {
     /**
@@ -134,12 +134,12 @@ const Island = ({
     allSarfTypeOptions.push({ id: 'صرف كبير', label: 'صرف كبير' })
 
     // On small screens, only show the selected option, unless the active section is sarf-type
-    if (!lg && activeSection !== Section.SARF_TYPE) {
+    if (!md && activeSection !== Section.SARF_TYPE) {
       return allSarfTypeOptions.filter((option) => option.id == sarfType)
     }
 
     return allSarfTypeOptions
-  }, [showMushtaqq, showSarfSaheger, activeSection, lg, sarfType])
+  }, [showMushtaqq, showSarfSaheger, activeSection, md, sarfType])
 
   const verbCaseOptions = useMemo(() => {
     if (!showJazm && !showNasb) return []
@@ -151,13 +151,13 @@ const Island = ({
     allVerbCaseOptions.push({ id: 'مرفوع', icon: 'damma' })
 
     // On small screens, only show the selected option, unless the active section is verb-case
-    if (!lg && activeSection !== Section.VERB_CASE) {
+    if (!md && activeSection !== Section.VERB_CASE) {
       if (verbCase === null) return allVerbCaseOptions.slice(-1)
       return allVerbCaseOptions.filter((option) => option.id == verbCase)
     }
 
     return allVerbCaseOptions
-  }, [showJazm, showNasb, activeSection, lg, verbCase])
+  }, [showJazm, showNasb, activeSection, md, verbCase])
 
   const toggleSidebar = useCallback(() => {
     const sidebar = document.querySelector('aside')?.classList
@@ -177,14 +177,14 @@ const Island = ({
       }
 
       // On large screens, select the option straight away
-      if (lg || activeSection === Section.VERB_CASE) {
+      if (md || activeSection === Section.VERB_CASE) {
         selectOption()
       } else {
         // On small screens, first set this as the active section
         setActiveSection(Section.VERB_CASE)
       }
     },
-    [setVerbCase, lg, activeSection],
+    [setVerbCase, md, activeSection],
   )
 
   const handleSelectSarfType = useCallback(
@@ -195,14 +195,14 @@ const Island = ({
       }
 
       // On large screens, select the option straight away
-      if (lg || activeSection === Section.SARF_TYPE) {
+      if (md || activeSection === Section.SARF_TYPE) {
         selectOption()
       } else {
         // On small screens, first set this as the active section
         setActiveSection(Section.SARF_TYPE)
       }
     },
-    [setSarfType, lg, activeSection],
+    [setSarfType, md, activeSection],
   )
 
   const handleMajhoolChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
@@ -216,7 +216,7 @@ const Island = ({
   return (
     <div
       dir="ltr" // "rtl" doesn't work well with divide-x
-      className="fixed bottom-6 left-4 right-4 z-10 flex md:sticky md:top-[calc(100%-42px-16px)]"
+      className="fixed bottom-6 left-4 right-4 z-10 flex"
     >
       <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-300 bg-zinc-100 shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-neutral-800">
         <div className="flex divide-x overflow-x-auto dark:divide-neutral-500 [&>*]:shrink-0">
@@ -284,7 +284,7 @@ const Island = ({
             />
           </IslandSection>
 
-          {!lg && activeSection && activeSection !== Section.SIDEBAR && (
+          {!md && activeSection && activeSection !== Section.SIDEBAR && (
             <IslandSection>
               <IconButton
                 className="m-1"
@@ -317,9 +317,9 @@ const IslandSection = ({
   <div
     className={twMerge(
       cx(
-        'hidden lg:block',
+        'hidden md:block',
         (!activeSection || activeSection === name) && 'block',
-        mobileOnly && !activeSection && 'block md:hidden lg:hidden',
+        mobileOnly && !activeSection && 'block md:hidden',
       ),
     )}
     onClick={onClick}
