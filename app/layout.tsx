@@ -73,7 +73,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <html
-      className="flex h-full flex-col bg-zinc-50 p-2 text-zinc-900 dark:bg-neutral-800 dark:text-neutral-100"
+      className="flex h-full flex-col overflow-hidden bg-zinc-50 p-2 text-zinc-900 dark:bg-neutral-800 dark:text-neutral-100"
       style={{
         fontFamily: `${notoSansArabic.style.fontFamily}, ${notoSans.style.fontFamily}, sans-serif`,
         fontSize,
