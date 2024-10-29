@@ -35,7 +35,7 @@ const ChapterPage = () => {
   }, [passive, verbCase])
 
   return (
-    <div className="flex flex-col p-4 pb-20">
+    <div className="flex flex-col p-4 pb-16">
       {!chapter && <div>Not found</div>}
 
       {chapter && (
