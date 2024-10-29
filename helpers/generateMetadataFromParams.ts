@@ -16,7 +16,14 @@ const generateMetadataFromParams = async ({
   const description = generateDescription(verbType, chapter)
   const image = generateImage(verbType, chapter)
 
-  return { title, description, openGraph: { images: image } }
+  return {
+    title,
+    description,
+    openGraph: {
+      siteName: 'صرف - Arabic Morphology',
+      images: image,
+    },
+  }
 }
 
 export default generateMetadataFromParams
@@ -34,7 +41,7 @@ const generateTitle = (
   verbType?: string | null,
   chapter?: VerbChapter | null,
 ) => {
-  let titleSegments = ['Sarf - Arabic Verb Conjugations']
+  let titleSegments = ['صرف - Arabic Morphology']
   if (verbType) titleSegments.push(decodeURI(verbType))
   if (chapter) titleSegments.push(chapter.title)
   return titleSegments.join(' - ').replace(' - ', ' | ')
@@ -44,7 +51,7 @@ const generateDescription = (
   verbType?: string | null,
   chapter?: VerbChapter | null,
 ) => {
-  const fallback = `Explore an extensive collection of Arabic Sarf (Morphology) conjugations and rules. Learn Arabic verbs through tasreefs and practice chapters like nasara, daraba, and more.`
+  const fallback = `Explore an extensive collection of Sarf (صرف - Morphology) conjugations and derived nouns. Learn Arabic verbs through tasreefs and practice chapters like nasara, daraba, and more.`
 
   if (chapter) {
     switch (chapter.form) {
@@ -84,7 +91,7 @@ const generateImage = (
   verbType?: string | null,
   chapter?: VerbChapter | null,
 ) => {
-  let title = 'Sarf - Arabic Verb Conjugations'
+  let title = 'صرف - Arabic Morphology'
   if (chapter) {
     title = chapter.title
   } else if (verbType) {
