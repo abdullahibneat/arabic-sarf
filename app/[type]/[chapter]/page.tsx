@@ -35,42 +35,44 @@ const ChapterPage = () => {
   }, [passive, verbCase])
 
   return (
-    <div className="flex flex-col gap-1 p-4 pb-20">
+    <div className="flex flex-col p-4 pb-20">
       {!chapter && <div>Not found</div>}
 
       {chapter && (
-        <>
+        <div className="flex flex-col gap-1">
           <h2 className="text-center">
             {chapter.form} - {chapter.name}
           </h2>
 
           {sarfType === 'صرف كبير' && (
-            <div className="mx-auto flex gap-1">
-              <Tasreef
-                name="ماضي"
-                audio={audios.get(chapter.key)?.ماضي}
-                tasreef={
-                  chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي
-                }
-                defaultRootLetters={chapter.rootLetters[0]?.arabic}
-                disabled={madiDisabled}
-              />
-              <Tasreef
-                name="مضارع"
-                audio={audios.get(chapter.key)?.مضارع}
-                tasreef={
-                  chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.مضارع[
-                    verbCase || 'مرفوع'
-                  ]
-                }
-                defaultRootLetters={chapter.rootLetters[0]?.arabic}
-              />
-              <Tasreef
-                name="أمر"
-                tasreef={chapter.sarfKabeer?.أمر}
-                defaultRootLetters={chapter.rootLetters[0]?.arabic}
-                disabled={amrDisabled}
-              />
+            <div className="flex w-full flex-col gap-1 overflow-x-auto overflow-y-hidden">
+              <div className="mx-auto flex gap-1">
+                <Tasreef
+                  name="ماضي"
+                  audio={audios.get(chapter.key)?.ماضي}
+                  tasreef={
+                    chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.ماضي
+                  }
+                  defaultRootLetters={chapter.rootLetters[0]?.arabic}
+                  disabled={madiDisabled}
+                />
+                <Tasreef
+                  name="مضارع"
+                  audio={audios.get(chapter.key)?.مضارع}
+                  tasreef={
+                    chapter.sarfKabeer?.[passive ? 'مجهول' : 'معروف']?.مضارع[
+                      verbCase || 'مرفوع'
+                    ]
+                  }
+                  defaultRootLetters={chapter.rootLetters[0]?.arabic}
+                />
+                <Tasreef
+                  name="أمر"
+                  tasreef={chapter.sarfKabeer?.أمر}
+                  defaultRootLetters={chapter.rootLetters[0]?.arabic}
+                  disabled={amrDisabled}
+                />
+              </div>
             </div>
           )}
 
@@ -99,7 +101,7 @@ const ChapterPage = () => {
               />
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   )
