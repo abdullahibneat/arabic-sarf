@@ -149,8 +149,8 @@ const GlobalSearch = () => {
   }, [])
 
   return (
-    <Dialog ref={dialog} onCancel={handleCancel}>
-      <div className="flex max-h-64 w-full max-w-lg flex-col rounded-lg border-[1px] border-zinc-300 bg-white shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-zinc-900">
+    <Dialog id="global-search" ref={dialog} onCancel={handleCancel}>
+      <div className="flex max-h-64 w-10/12 max-w-lg flex-col rounded-lg border-[1px] border-zinc-300 bg-white shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-zinc-900">
         <input
           className="h-14 bg-transparent px-4 text-zinc-900 outline-none dark:text-neutral-100"
           inputMode="search"

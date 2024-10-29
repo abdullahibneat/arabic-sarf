@@ -9,6 +9,7 @@ import { Suspense, useCallback, useState } from 'react'
 import Dialog from '@/components/Dialog'
 import GlobalSearch from '@/components/GlobalSearch'
 import Island from '@/components/Island'
+import PageHeader from '@/components/PageHeader'
 import PosthogPageViewTracker from '@/posthog/PosthogPageViewTracker'
 import PosthogProvider from '@/posthog/PosthogProvider'
 import { SarfContext } from '@/contexts/SarfContext'
@@ -100,6 +101,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                     dir="rtl"
                     className="relative flex w-0 flex-grow flex-col rounded-lg bg-white dark:bg-neutral-900"
                   >
+                    <PageHeader />
+
                     <div className="absolute inset-0 overflow-auto">
                       {children}
                     </div>

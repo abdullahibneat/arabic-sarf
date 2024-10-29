@@ -6,6 +6,7 @@ import { Chapter } from '@/helpers/getChapters'
 import IsmFail from '@/components/IsmFail'
 import IsmMafool from '@/components/IsmMafool'
 import Masdar from '@/components/Masdar'
+import PageTitle from '@/components/PageTitle'
 import SarfSagheer from '@/components/SarfSagheer'
 import Table from '@/components/Table'
 import Tasreef from '@/components/Tasreef'
@@ -50,12 +51,12 @@ const OverviewPage = () => {
   }, [verbTypes, verbType])
 
   return (
-    <div className="flex flex-col gap-8 p-4 pb-16">
+    <div className="flex flex-col gap-8 px-4 pb-16">
       {sections.length === 0 && <div>Not found</div>}
 
       {sections.map((section) => (
         <div key={section.key} className="flex flex-col gap-1">
-          <h2 className="text-center">{section.name}</h2>
+          <PageTitle>{section.name}</PageTitle>
 
           {sarfType === 'صرف كبير' && (
             <VerbOverview

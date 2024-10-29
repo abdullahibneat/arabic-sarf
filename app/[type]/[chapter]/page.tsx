@@ -3,6 +3,7 @@
 import IsmFail from '@/components/IsmFail'
 import IsmMafool from '@/components/IsmMafool'
 import Masdar from '@/components/Masdar'
+import PageTitle from '@/components/PageTitle'
 import SarfSagheer from '@/components/SarfSagheer'
 import Tasreef from '@/components/Tasreef'
 import { audios } from '@/data'
@@ -35,14 +36,12 @@ const ChapterPage = () => {
   }, [passive, verbCase])
 
   return (
-    <div className="flex flex-col p-4 pb-16">
+    <div className="flex flex-col px-4 pb-16">
       {!chapter && <div>Not found</div>}
 
       {chapter && (
         <div className="flex flex-col gap-1">
-          <h2 className="text-center">
-            {chapter.form} - {chapter.name}
-          </h2>
+          <PageTitle>{`${chapter.form} - ${chapter.name}`}</PageTitle>
 
           {sarfType === 'صرف كبير' && (
             <div className="flex w-full flex-col gap-1 overflow-x-auto overflow-y-hidden">
