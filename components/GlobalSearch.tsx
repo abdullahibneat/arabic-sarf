@@ -11,6 +11,7 @@ import Dialog from './Dialog'
 import Link from 'next/link'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
+import useOnClickOutside from '@/hooks/useOnClickOutside'
 import useSearchResults from '@/hooks/useSearchResults'
 
 const GlobalSearch = () => {
@@ -18,6 +19,7 @@ const GlobalSearch = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const dialog = useRef<HTMLDialogElement>(null)
+  const input = useRef<HTMLInputElement>(null)
   const highlight = useRef<HTMLDivElement>(null)
   const hovering = useRef(false)
 
@@ -31,6 +33,14 @@ const GlobalSearch = () => {
       close(false)
     }
   }, [params])
+
+  /**
+   * Close the global search when clicking outside of the search input
+   */
+  useOnClickOutside(input, () => {
+    if (!dialog.current?.open) return
+    close()
+  })
 
   const open = useCallback(() => {
     if (dialog.current?.open) return
@@ -152,6 +162,7 @@ const GlobalSearch = () => {
     <Dialog id="global-search" ref={dialog} onCancel={handleCancel}>
       <div className="flex max-h-64 w-10/12 max-w-lg flex-col rounded-lg border-[1px] border-zinc-300 bg-white shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-zinc-900">
         <input
+          ref={input}
           className="h-14 bg-transparent px-4 text-zinc-900 outline-none dark:text-neutral-100"
           inputMode="search"
           placeholder="Search"
