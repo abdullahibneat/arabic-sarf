@@ -11,6 +11,7 @@ import Dialog from './Dialog'
 import Link from 'next/link'
 import cx from 'classix'
 import { twMerge } from 'tailwind-merge'
+import useOnClickOutside from '@/hooks/useOnClickOutside'
 import useSearchResults from '@/hooks/useSearchResults'
 
 const GlobalSearch = () => {
@@ -18,12 +19,21 @@ const GlobalSearch = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const dialog = useRef<HTMLDialogElement>(null)
+  const content = useRef<HTMLDivElement>(null)
   const highlight = useRef<HTMLDivElement>(null)
   const hovering = useRef(false)
 
   const router = useRouter()
   const params = useParams()
   const searchResults = useSearchResults(search)
+
+  useOnClickOutside(content, (e) => {
+    // This `if` stataement is used to prevent closing when user clicks outside of the dialog (e.g. clicks on the global search button)
+    if (!dialog.current?.contains(e.target as Node)) {
+      return
+    }
+    close()
+  })
 
   useEffect(() => {
     // Close the global search when navigating back
@@ -149,8 +159,16 @@ const GlobalSearch = () => {
   }, [])
 
   return (
-    <Dialog id="global-search" ref={dialog} onCancel={handleCancel}>
-      <div className="flex max-h-64 w-10/12 max-w-lg flex-col rounded-lg border-[1px] border-zinc-300 bg-white shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-zinc-900">
+    <Dialog
+      id="global-search"
+      ref={dialog}
+      className="p-12"
+      onCancel={handleCancel}
+    >
+      <div
+        ref={content}
+        className="flex max-h-64 w-full max-w-lg flex-col rounded-lg border-[1px] border-zinc-300 bg-white shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-zinc-900"
+      >
         <input
           className="h-14 bg-transparent px-4 text-zinc-900 outline-none dark:text-neutral-100"
           inputMode="search"
