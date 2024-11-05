@@ -9,6 +9,7 @@ import {
   showNasbAtom,
   showSarfSahegerAtom,
   tasreefDisplayModeAtom,
+  tasreefPronounsAtom,
 } from '@/atoms'
 import { useCallback, useMemo } from 'react'
 
@@ -20,6 +21,7 @@ export type Preset = {
     tasreefDisplayMode: string
     mujarradHeadings: string
     mazeedFihiNumbering: string
+    tasreefPronouns: string
     enabledVerbTypes: string[]
     showMazeedFihi: boolean
     showSarfSaheger: boolean
@@ -38,6 +40,7 @@ const usePresets = () => {
   const [mazeedFihiNumbering, setMazeedFihiNumbering] = useAtom(
     mazeedFihiNumberingAtom,
   )
+  const [tasreefPronouns, setTasreefPronouns] = useAtom(tasreefPronounsAtom)
   const [enabledVerbTypes, setEnabledVerbTypes] = useAtom(enabledVerbTypesAtom)
   const [showMazeedFihi, setShowMazeedFihi] = useAtom(showMazeedFihiAtom)
   const [showSarfSaheger, setShowSarfSaheger] = useAtom(showSarfSahegerAtom)
@@ -52,6 +55,7 @@ const usePresets = () => {
         tasreefDisplayMode === preset.tasreefDisplayMode &&
         mujarradHeadings === preset.mujarradHeadings &&
         mazeedFihiNumbering === preset.mazeedFihiNumbering &&
+        tasreefPronouns === preset.tasreefPronouns &&
         [...enabledVerbTypes].sort().join(',') ===
           [...preset.enabledVerbTypes].sort().join(',') &&
         showMazeedFihi === preset.showMazeedFihi &&
@@ -83,6 +87,7 @@ const usePresets = () => {
       setTasreefDisplayMode(preset.preset.tasreefDisplayMode)
       setMujarradHeadings(preset.preset.mujarradHeadings)
       setMazeedFihiNumbering(preset.preset.mazeedFihiNumbering)
+      setTasreefPronouns(preset.preset.tasreefPronouns)
       setEnabledVerbTypes(preset.preset.enabledVerbTypes)
       setShowMazeedFihi(preset.preset.showMazeedFihi)
       setShowSarfSaheger(preset.preset.showSarfSaheger)
@@ -108,6 +113,7 @@ export const presets: Preset[] = [
       tasreefDisplayMode: 'list',
       mujarradHeadings: 'english',
       mazeedFihiNumbering: 'english',
+      tasreefPronouns: 'numeric',
       enabledVerbTypes: ['صحيح'],
       showMazeedFihi: false,
       showSarfSaheger: false,
@@ -123,6 +129,7 @@ export const presets: Preset[] = [
       tasreefDisplayMode: 'list',
       mujarradHeadings: 'english',
       mazeedFihiNumbering: 'english',
+      tasreefPronouns: 'numeric',
       enabledVerbTypes: ['صحيح', 'أجوف', 'ناقص', 'مثال', 'مضاعف'],
       showMazeedFihi: true,
       showSarfSaheger: true,

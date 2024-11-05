@@ -23,6 +23,8 @@ export const mazeedFihiNumberingAtom = atomWithStorage(
   'roman',
 )
 
+export const tasreefPronounsAtom = atomWithStorage('tasreefPronouns', 'numeric')
+
 export const enabledVerbTypesAtom = atomWithStorage(
   'enabledVerbTypes',
   Array.from(verbTypes.keys()),

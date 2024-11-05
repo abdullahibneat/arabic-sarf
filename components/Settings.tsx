@@ -13,6 +13,7 @@ import {
   showRootLetterEditorAtom,
   showSarfSahegerAtom,
   tasreefDisplayModeAtom,
+  tasreefPronounsAtom,
   themeAtom,
 } from '@/atoms'
 import usePresets, { presets } from '@/hooks/usePresets'
@@ -34,6 +35,7 @@ const Settings = () => {
   const [mazeedFihiNumbering, setMazeedFihiNumbering] = useAtom(
     mazeedFihiNumberingAtom,
   )
+  const [tasreefPronouns, setTasreefPronouns] = useAtom(tasreefPronounsAtom)
   const [enabledVerbTypes, setEnabledVerbTypes] = useAtom(enabledVerbTypesAtom)
   const [showMazeedFihi, setShowMazeedFihi] = useAtom(showMazeedFihiAtom)
   const [showSarfSaheger, setShowSarfSaheger] = useAtom(showSarfSahegerAtom)
@@ -89,6 +91,16 @@ const Settings = () => {
       setMazeedFihiNumbering(option.id)
       posthog.capture('Mazeed Fihi Numbering Changed', {
         mazeedFihiNumbering: option.id,
+      })
+    },
+    [],
+  )
+
+  const handleTasreefPronounsChange = useCallback(
+    (option: SegmentedOption<string>) => {
+      setTasreefPronouns(option.id)
+      posthog.capture('Tasreef Pronouns Changed', {
+        tasreefPronouns: option.id,
       })
     },
     [],
@@ -258,6 +270,19 @@ const Settings = () => {
           ]}
           selectedId={mazeedFihiNumbering}
           onSelectOption={handleMazeedFihiNumberingChange}
+        />
+      </FieldWrapper>
+
+      <FieldWrapper title="Tasreef pronouns">
+        <Radio
+          name="tasreef-pronouns"
+          options={[
+            { id: 'hidden', label: 'Hidden' },
+            { id: 'numeric', label: 'Numeric (1, 2, 3)' },
+            { id: 'arabic', label: 'Arabic (هو, هما, هم)' },
+          ]}
+          selectedId={tasreefPronouns}
+          onSelectOption={handleTasreefPronounsChange}
         />
       </FieldWrapper>
 
