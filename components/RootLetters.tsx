@@ -61,16 +61,10 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
     if (isUsingCustomRootLetters) setRootLetters?.(customRootLetters)
   }, [isUsingCustomRootLetters, customRootLetters])
 
-  useOnClickOutside(dropdownRef, (e) => {
+  useOnClickOutside(dropdownRef, () => {
     /**
      * Close the dropdown when the user clicks outside of it.
      */
-
-    // This `if` stataement is used to prevent closing when user clicks inside the dropdown (e.g. selects an option)
-    if (buttonRef.current?.contains(e.target as Node)) {
-      return
-    }
-
     setOpen(false)
   })
 
