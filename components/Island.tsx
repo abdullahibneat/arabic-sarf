@@ -80,7 +80,7 @@ const Island = ({
      * - Ctrl+\: toggle sidebar
      */
     const keyboardListener = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && (e.key === '/' || e.key === '\\')) {
+      if (e.key === '/' || e.key === '\\') {
         toggleSidebar()
         return
       }
