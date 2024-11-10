@@ -1,217 +1,53 @@
-import {
+import React, {
   ChangeEventHandler,
   useCallback,
-  useEffect,
   useMemo,
   useState,
 } from 'react'
 import Segmented, { SegmentedOption } from './Segmented'
-import {
-  showJazmAtom,
-  showMajhoolAtom,
-  showMushtaqqAtom,
-  showNasbAtom,
-  showSarfSahegerAtom,
-} from '@/atoms'
 
 import IconButton from './IconButton'
-import RootLetters from './RootLetters'
-import cx from 'classix'
-import posthog from 'posthog-js'
-import { twMerge } from 'tailwind-merge'
-import { useAtom } from 'jotai'
 import useBreakpoint from '@/hooks/useBreakpoint'
 
-enum Section {
-  SIDEBAR = 'sidebar',
-  VERB_CASE = 'verb-case',
-  MAJHOOL = 'majhool',
-  VERB = 'verb',
-  SARF_TYPE = 'sarf-type',
+export type IslandProps = {
+  sections: IslandSectionProps[]
 }
 
-type IslandProps = {
-  sarfType?: string
-  verbCase?: string | null
-  passive?: boolean
-  rootLetters?: { ف?: string; ع?: string; ل?: string } | null
-  setSarfType?: (sarfType: string | ((sarfType: string) => string)) => void
-  setVerbCase?: (
-    verbCase: string | null | ((verbCase: string | null) => string | null),
-  ) => void
-  setPassive?: (passive: boolean | ((passive: boolean) => boolean)) => void
-  setRootLetters?: (
-    rootLetters:
-      | { ف?: string; ع?: string; ل?: string }
-      | null
-      | ((
-          rootLetters: { ف?: string; ع?: string; ل?: string } | null,
-        ) => { ف?: string; ع?: string; ل?: string } | null),
-  ) => void
-}
+export type IslandSectionType = 'segmented' | 'toggle' | 'custom'
 
-const Island = ({
-  sarfType,
-  verbCase,
-  passive,
-  rootLetters,
-  setSarfType,
-  setVerbCase,
-  setPassive,
-  setRootLetters,
-}: IslandProps) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState<Section | null>(null)
+export type IslandSectionProps = {
+  key: string
+  type: IslandSectionType
+} & (
+  | {
+      type: 'segmented'
+      options: SegmentedOption[]
+      selectedId?: string | null
+      onSelectOption?: (option: SegmentedOption) => void
+    }
+  | {
+      type: 'toggle'
+      label: string
+      checked?: boolean
+      onChange?: (checked: boolean) => void
+    }
+  | {
+      type: 'custom'
+      children: (props: {
+        setActiveSection: (
+          activeSection:
+            | string
+            | null
+            | ((activeSection: string | null) => string | null),
+        ) => void
+      }) => React.ReactNode
+    }
+)
 
-  const [showMushtaqq] = useAtom(showMushtaqqAtom)
-  const [showSarfSaheger] = useAtom(showSarfSahegerAtom)
-
-  const [showMajhool] = useAtom(showMajhoolAtom)
-
-  const [showJazm] = useAtom(showJazmAtom)
-  const [showNasb] = useAtom(showNasbAtom)
+const Island = ({ sections }: IslandProps) => {
+  const [activeSection, setActiveSection] = useState<string | null>(null)
 
   const md = useBreakpoint('md')
-
-  useEffect(() => {
-    /**
-     * Global keyboard listener:
-     * - Ctrl+/: toggle sidebar
-     * - Ctrl+\: toggle sidebar
-     */
-    const keyboardListener = (e: KeyboardEvent) => {
-      if (e.key === '/' || e.key === '\\') {
-        toggleSidebar()
-        return
-      }
-    }
-    window.addEventListener('keydown', keyboardListener)
-    return () => window.removeEventListener('keydown', keyboardListener)
-  }, [])
-
-  /**
-   * Reset options to default when enabled settings are turned off
-   */
-
-  useEffect(() => {
-    if (!showMushtaqq && sarfType === 'مشتق') {
-      setSarfType?.('صرف كبير')
-    }
-  }, [showMushtaqq, sarfType, setSarfType])
-
-  useEffect(() => {
-    if (!showSarfSaheger && sarfType === 'صرف صغير') {
-      setSarfType?.('صرف كبير')
-    }
-  }, [showSarfSaheger, sarfType, setSarfType])
-
-  useEffect(() => {
-    if (!showMajhool && passive) {
-      setPassive?.(false)
-    }
-  }, [showMajhool, passive, setPassive])
-
-  useEffect(() => {
-    if (!showJazm && verbCase === 'مجزوم') {
-      setVerbCase?.(null)
-    }
-  }, [showJazm, verbCase, setVerbCase])
-
-  useEffect(() => {
-    if (!showNasb && verbCase === 'منصوب') {
-      setVerbCase?.(null)
-    }
-  }, [showNasb, verbCase, setVerbCase])
-
-  const sarfTypeOptions = useMemo(() => {
-    if (!showMushtaqq && !showSarfSaheger) return []
-
-    const allSarfTypeOptions: SegmentedOption[] = []
-
-    if (showMushtaqq) allSarfTypeOptions.push({ id: 'مشتق', label: 'مشتق' })
-    if (showSarfSaheger)
-      allSarfTypeOptions.push({ id: 'صرف صغير', label: 'صرف صغير' })
-    allSarfTypeOptions.push({ id: 'صرف كبير', label: 'صرف كبير' })
-
-    // On small screens, only show the selected option, unless the active section is sarf-type
-    if (!md && activeSection !== Section.SARF_TYPE) {
-      return allSarfTypeOptions.filter((option) => option.id == sarfType)
-    }
-
-    return allSarfTypeOptions
-  }, [showMushtaqq, showSarfSaheger, activeSection, md, sarfType])
-
-  const verbCaseOptions = useMemo(() => {
-    if (!showJazm && !showNasb) return []
-
-    const allVerbCaseOptions: SegmentedOption[] = []
-
-    if (showJazm) allVerbCaseOptions.push({ id: 'مجزوم', icon: 'sukoon' })
-    if (showNasb) allVerbCaseOptions.push({ id: 'منصوب', icon: 'fatha' })
-    allVerbCaseOptions.push({ id: 'مرفوع', icon: 'damma' })
-
-    // On small screens, only show the selected option, unless the active section is verb-case
-    if (!md && activeSection !== Section.VERB_CASE) {
-      if (verbCase === null) return allVerbCaseOptions.slice(-1)
-      return allVerbCaseOptions.filter((option) => option.id == verbCase)
-    }
-
-    return allVerbCaseOptions
-  }, [showJazm, showNasb, activeSection, md, verbCase])
-
-  const toggleSidebar = useCallback(() => {
-    const sidebar = document.querySelector('aside')?.classList
-    const currentlyOpen = sidebar?.contains('open') || false
-    setActiveSection(currentlyOpen ? null : Section.SIDEBAR)
-    setSidebarOpen(!currentlyOpen)
-    sidebar?.toggle('open')
-  }, [])
-
-  const handleSelectVerbCase = useCallback(
-    (option: SegmentedOption) => {
-      const selectOption = () => {
-        setVerbCase?.((currentOption) =>
-          currentOption === option.id ? null : option.id,
-        )
-        posthog.capture('Verb Case', { verbCase: option.id })
-      }
-
-      // On large screens, select the option straight away
-      if (md || activeSection === Section.VERB_CASE) {
-        selectOption()
-      } else {
-        // On small screens, first set this as the active section
-        setActiveSection(Section.VERB_CASE)
-      }
-    },
-    [setVerbCase, md, activeSection],
-  )
-
-  const handleSelectSarfType = useCallback(
-    (option: SegmentedOption) => {
-      const selectOption = () => {
-        setSarfType?.(option.id)
-        posthog.capture('Sarf Type', { sarfType: option.id })
-      }
-
-      // On large screens, select the option straight away
-      if (md || activeSection === Section.SARF_TYPE) {
-        selectOption()
-      } else {
-        // On small screens, first set this as the active section
-        setActiveSection(Section.SARF_TYPE)
-      }
-    },
-    [setSarfType, md, activeSection],
-  )
-
-  const handleMajhoolChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-    (e) => {
-      setPassive?.(e.target.checked)
-      posthog.capture('Majhool', { showMajhool: e.target.checked })
-    },
-    [],
-  )
 
   return (
     <div
@@ -220,78 +56,24 @@ const Island = ({
     >
       <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-300 bg-zinc-100 shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-neutral-800">
         <div className="flex divide-x overflow-x-auto dark:divide-neutral-500 [&>*]:shrink-0">
-          {sarfTypeOptions.length > 0 && (
+          {sections.map((section) => (
             <IslandSection
-              name={Section.SARF_TYPE}
+              key={section.key}
+              section={section}
               activeSection={activeSection}
-            >
-              <Segmented
-                options={sarfTypeOptions}
-                selectedId={sarfType}
-                onSelectOption={handleSelectSarfType}
-              />
-            </IslandSection>
-          )}
-
-          <IslandSection name={Section.VERB} activeSection={activeSection}>
-            <RootLetters
-              rootLetters={rootLetters}
-              setRootLetters={setRootLetters}
+              setActiveSection={setActiveSection}
+              md={md}
             />
-          </IslandSection>
+          ))}
 
-          {sarfType === 'صرف كبير' && showMajhool && (
-            <IslandSection name={Section.MAJHOOL} activeSection={activeSection}>
-              <div className="flex p-1">
-                <input
-                  id={Section.MAJHOOL}
-                  name={Section.MAJHOOL}
-                  type="checkbox"
-                  checked={passive}
-                  className="appearance-none [&:checked+label]:bg-white [&:checked+label]:dark:bg-neutral-600"
-                  onChange={handleMajhoolChange}
-                />
-                <label
-                  htmlFor={Section.MAJHOOL}
-                  className="cursor-pointer select-none rounded-md px-2 py-1"
-                  style={{ transition: 'background-color 250ms' }}
-                >
-                  مجهول
-                </label>
-              </div>
-            </IslandSection>
-          )}
-
-          {sarfType === 'صرف كبير' && verbCaseOptions.length > 0 && (
-            <IslandSection
-              name={Section.VERB_CASE}
-              activeSection={activeSection}
-            >
-              <Segmented
-                options={verbCaseOptions}
-                selectedId={verbCase}
-                onSelectOption={handleSelectVerbCase}
-              />
-            </IslandSection>
-          )}
-
-          <IslandSection name={Section.SIDEBAR} activeSection={activeSection}>
-            <IconButton
-              className="m-1"
-              name="sidebar"
-              rotate={sidebarOpen ? 0 : 180}
-              onClick={toggleSidebar}
-            />
-          </IslandSection>
-
-          {!md && activeSection && activeSection !== Section.SIDEBAR && (
-            <IslandSection>
+          {!md && activeSection && (
+            <div>
               <IconButton
                 className="m-1"
                 name="close"
                 onClick={() => setActiveSection(null)}
               />
-            </IslandSection>
+            </div>
           )}
         </div>
       </div>
@@ -302,28 +84,95 @@ const Island = ({
 export default Island
 
 const IslandSection = ({
-  name,
-  mobileOnly,
+  section,
   activeSection,
-  onClick,
-  children,
+  setActiveSection,
+  md,
 }: {
-  name?: Section
-  mobileOnly?: boolean
+  section: IslandSectionProps
   activeSection?: string | null
-  children: React.ReactNode
-  onClick?: () => void
-}) => (
-  <div
-    className={twMerge(
-      cx(
-        'hidden md:block',
-        (!activeSection || activeSection === name) && 'block',
-        mobileOnly && !activeSection && 'block md:hidden',
-      ),
-    )}
-    onClick={onClick}
-  >
-    {children}
-  </div>
-)
+  setActiveSection: (
+    activeSection:
+      | string
+      | null
+      | ((activeSection: string | null) => string | null),
+  ) => void
+  md?: boolean
+}) => {
+  const segmentedOptions = useMemo<SegmentedOption[]>(() => {
+    if (section.type !== 'segmented') return []
+    // On large screens, show all options
+    if (md) return section.options
+    // On small screens, only show all options if this section is active...
+    if (activeSection === section.key) return section.options
+    // ...otherwise, only show the selected option, or the first option if none is selected
+    return section.selectedId
+      ? section.options.filter((option) => option.id == section.selectedId)
+      : section.options.slice(0, 1)
+  }, [section, md, activeSection])
+
+  const handleSelectSegmentedOption = useCallback(
+    (option: SegmentedOption) => {
+      if (section.type !== 'segmented') return
+
+      const selectOption = () => {
+        section.onSelectOption?.(option)
+      }
+
+      // On large screens, select the option straight away
+      if (md || activeSection === section.key) {
+        selectOption()
+      } else {
+        // On small screens, first set this as the active section
+        setActiveSection(section.key)
+      }
+    },
+    [section, md, activeSection],
+  )
+
+  const handleToggleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+    (e) => {
+      if (section.type !== 'toggle') return
+      section.onChange?.(e.target.checked)
+    },
+    [section],
+  )
+
+  if (!md && activeSection && activeSection !== section.key) {
+    return null
+  }
+
+  return (
+    <div>
+      {section.type === 'segmented' && (
+        <Segmented
+          options={segmentedOptions}
+          selectedId={section.selectedId}
+          onSelectOption={handleSelectSegmentedOption}
+        />
+      )}
+
+      {section.type === 'toggle' && (
+        <div className="flex p-1">
+          <input
+            id={section.key}
+            name={section.key}
+            type="checkbox"
+            checked={section.checked}
+            className="appearance-none [&:checked+label]:bg-white [&:checked+label]:dark:bg-neutral-600"
+            onChange={handleToggleChange}
+          />
+          <label
+            htmlFor={section.key}
+            className="cursor-pointer select-none rounded-md px-2 py-1"
+            style={{ transition: 'background-color 250ms' }}
+          >
+            مجهول
+          </label>
+        </div>
+      )}
+
+      {section.type === 'custom' && section.children({ setActiveSection })}
+    </div>
+  )
+}

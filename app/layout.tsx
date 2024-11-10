@@ -8,11 +8,11 @@ import { Suspense, useCallback, useState } from 'react'
 
 import Dialog from '@/components/Dialog'
 import GlobalSearch from '@/components/GlobalSearch'
-import Island from '@/components/Island'
 import PageHeader from '@/components/PageHeader'
 import PosthogPageViewTracker from '@/posthog/PosthogPageViewTracker'
 import PosthogProvider from '@/posthog/PosthogProvider'
 import { SarfContext } from '@/contexts/SarfContext'
+import SarfIsland from '@/components/SarfIsland'
 import Sidebar from '@/components/Sidebar'
 import ThemeProvider from '@/components/ThemeProvider'
 import { fontSizeAtom } from '@/atoms'
@@ -107,7 +107,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                       {children}
                     </div>
 
-                    <Island
+                    <SarfIsland
                       sarfType={sarfType}
                       verbCase={verbCase}
                       passive={passive}
