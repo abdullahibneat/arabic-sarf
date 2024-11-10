@@ -1,5 +1,6 @@
 import Chevron from './Chevron'
 import Close from './Close'
+import Flashcards from './Flashcards'
 import Loop from './Loop'
 import Pause from './Pause'
 import Play from './Play'
@@ -11,6 +12,7 @@ import Settings from './Settings'
 const smallIcons = {
   chevron: Chevron,
   close: Close,
+  flashcards: Flashcards,
   loop: Loop,
   play: Play,
   pause: Pause,
