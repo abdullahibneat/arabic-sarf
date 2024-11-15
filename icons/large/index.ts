@@ -1,3 +1,4 @@
+import Chevron from './Chevron'
 import Close from './Close'
 import Damma from './Damma'
 import Fatha from './Fatha'
@@ -8,6 +9,7 @@ import Sidebar from './Sidebar'
 import Sukoon from './Sukoon'
 
 const largeIcons = {
+  chevron: Chevron,
   close: Close,
   damma: Damma,
   fatha: Fatha,
