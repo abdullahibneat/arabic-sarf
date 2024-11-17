@@ -36,6 +36,8 @@ const Flashcard = React.forwardRef<HTMLDivElement, FlashcardProps>(
             'h-full max-h-96 w-full max-w-80',
             'bg-zinc-100 dark:bg-neutral-800',
             'rounded-lg border-[1px] border-zinc-300 dark:border-neutral-500',
+            // Fix for <Swiper /> component not swiping on mobile
+            'touch-none',
           ),
         )}
         style={{
@@ -50,7 +52,7 @@ const Flashcard = React.forwardRef<HTMLDivElement, FlashcardProps>(
         {children}
 
         <div
-          className="absolute inset-0 flex flex-col overflow-auto bg-neutral-800 text-neutral-100 dark:bg-zinc-50 dark:text-zinc-900"
+          className="absolute inset-0 flex touch-none flex-col overflow-auto bg-neutral-800 text-neutral-100 dark:bg-zinc-50 dark:text-zinc-900"
           style={{
             clipPath: `circle(${expanded ? 150 : 0}% at calc(100% - 32px) calc(100% - 32px))`,
             transition: 'clip-path 250ms',
