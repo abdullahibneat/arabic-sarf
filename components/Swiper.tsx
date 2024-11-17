@@ -15,30 +15,46 @@ export type SwiperProps<T extends { key: string }> = {
   renderItem: SwipeableProps<T>['renderItem']
 }
 
+export const SWIPER_BATCH_SIZE = 10
+
 const Swiper = <T extends { key: string }>({
   className,
   items,
   renderItem,
 }: SwiperProps<T>) => {
-  const [keys, setKeys] = useState<string[]>([])
+  const [index, setIndex] = useState(0)
 
-  useEffect(() => {
-    setKeys(items.map((item) => item.key))
-  }, [items])
+  /**
+   * Ensure only 10 items are rendered at a time
+   */
+  const batchItems = useMemo(() => {
+    if (items.length <= 1) return items
+
+    const currentItem = items.at(index) ?? items[0]
+    const currentIndex = items.indexOf(currentItem)
+    const previousItem = items.at(currentIndex - 1)
+
+    const nextItems = [currentItem]
+
+    let i = currentIndex + 1
+
+    while (nextItems.length < SWIPER_BATCH_SIZE - 1) {
+      const next = items.at(i++ % items.length)
+      if (!next || next === currentItem) break
+      nextItems.push(next)
+    }
+
+    if (previousItem) nextItems.push(previousItem)
+
+    return nextItems
+  }, [items, index])
 
   const next = useCallback(() => {
-    setKeys((keys) => {
-      const [first, ...rest] = keys
-      return rest.concat(first)
-    })
+    setIndex((index) => index + 1)
   }, [])
 
   const prev = useCallback(() => {
-    setKeys((keys) => {
-      const last = keys[keys.length - 1]
-      const rest = keys.slice(0, -1)
-      return [last, ...rest]
-    })
+    setIndex((index) => index - 1)
   }, [])
 
   return (
@@ -46,18 +62,15 @@ const Swiper = <T extends { key: string }>({
       <IconButton name="chevron" rotate={-90} onClick={next} />
 
       <div className="grid h-full w-full place-items-center items-center">
-        {items.map((item, i) => {
-          const zIndex = keys.toReversed().indexOf(item.key)
-          return (
-            <Swipeable
-              key={`item-${i}`}
-              item={item}
-              zIndex={zIndex}
-              renderItem={renderItem}
-              onSwipe={next}
-            />
-          )
-        })}
+        {batchItems.map((item, i) => (
+          <Swipeable
+            key={item.key}
+            item={item}
+            zIndex={batchItems.length - i}
+            renderItem={renderItem}
+            onSwipe={next}
+          />
+        ))}
       </div>
 
       <IconButton name="chevron" rotate={90} onClick={prev} />

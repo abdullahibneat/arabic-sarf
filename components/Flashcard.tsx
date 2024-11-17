@@ -11,12 +11,20 @@ export type FlashcardProps = React.DetailedHTMLProps<
   HTMLDivElement
 > & {
   term: React.ReactNode
+  animateDrop?: boolean
   animationDelay?: number
 }
 
 const Flashcard = React.forwardRef<HTMLDivElement, FlashcardProps>(
   (
-    { className, term, animationDelay = 0, children, ...props }: FlashcardProps,
+    {
+      className,
+      term,
+      animateDrop,
+      animationDelay = 0,
+      children,
+      ...props
+    }: FlashcardProps,
     ref,
   ) => {
     const [expanded, setExpanded] = useState(false)
@@ -42,11 +50,13 @@ const Flashcard = React.forwardRef<HTMLDivElement, FlashcardProps>(
         )}
         style={{
           ...props.style,
-          animation: 'card-drop 750ms ease-out forwards',
-          animationDelay: `${animationDelay}ms`,
+          animation: animateDrop
+            ? 'card-drop 750ms ease-out forwards'
+            : undefined,
+          animationDelay: animateDrop ? `${animationDelay}ms` : undefined,
           // Match initial translate value from `card-drop` animation.
           // This is so that cards are off-screen from the start
-          translate: '0 -100vh',
+          translate: animateDrop ? '0 -100vh' : undefined,
         }}
       >
         {children}
@@ -63,7 +73,13 @@ const Flashcard = React.forwardRef<HTMLDivElement, FlashcardProps>(
 
         <IconButton
           name={expanded ? 'close' : 'book'}
-          className="absolute bottom-4 right-4 bg-zinc-300 dark:bg-neutral-600"
+          className={twMerge(
+            cx(
+              'absolute bottom-4 right-4',
+              expanded &&
+                'text-neutral-100 hover:bg-neutral-700 active:bg-neutral-600 dark:text-zinc-900 dark:hover:bg-zinc-200 dark:active:bg-zinc-300',
+            ),
+          )}
           onClick={toggle}
         />
       </div>

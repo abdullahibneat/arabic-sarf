@@ -1,15 +1,26 @@
 'use client'
 
+import Swiper, { SWIPER_BATCH_SIZE } from '@/components/Swiper'
+import { useEffect, useMemo, useState } from 'react'
+
 import { Chapter } from '@/helpers/getChapters'
 import Flashcard from '@/components/Flashcard'
 import PageTitle from '@/components/PageTitle'
-import Swiper from '@/components/Swiper'
 import generateFlashcards from '@/helpers/generateFlashcards'
-import { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
 import useVerbTypes from '@/hooks/useVerbTypes'
 
 const FlashcardsPage = () => {
+  const [animateDrop, setAnimateDrop] = useState(true)
+
+  /**
+   * Disable animation after 2 seconds
+   * This is so that when new flascards are rendered, they don't animate in
+   */
+  useEffect(() => {
+    setTimeout(() => setAnimateDrop(false), 2000)
+  }, [])
+
   const { verbType, verbChapter, rootLetters } = useSarf()
 
   const verbTypes = useVerbTypes()
@@ -52,7 +63,8 @@ const FlashcardsPage = () => {
           <Flashcard
             ref={ref}
             {...props}
-            animationDelay={Math.ceil((zIndex * 750) / flashcards.length)}
+            animateDrop={animateDrop}
+            animationDelay={Math.ceil((zIndex * 750) / SWIPER_BATCH_SIZE)}
             term={
               <div className="flex flex-1 flex-col items-center justify-center">
                 <h2>{item.term}</h2>
