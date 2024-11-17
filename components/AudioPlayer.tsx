@@ -22,6 +22,8 @@ const AudioPlayer = ({ src }: AudioPlayerProps) => {
 
   useEffect(() => {
     audio.current = new Audio(src || undefined)
+    // Only download audio metadata on first load, instead of entire file
+    audio.current.preload = 'metadata'
 
     audio.current.addEventListener('timeupdate', () => {
       if (audio.current)
