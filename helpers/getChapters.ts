@@ -19,18 +19,16 @@ export type Chapter = {
   searchable: Searchable | false
 }
 
-export type Tasreef = VerbTasreef | null
-
 export type SarfKabeer = {
   معروف: {
-    ماضي: Tasreef
-    مضارع: Record<string, Tasreef>
+    ماضي: VerbTasreef
+    مضارع: Record<string, VerbTasreef>
   }
   مجهول: {
-    ماضي: Tasreef
-    مضارع: Record<string, Tasreef>
+    ماضي: VerbTasreef
+    مضارع: Record<string, VerbTasreef>
   } | null
-  أمر: AmrTasreef | null
+  أمر: AmrTasreef
 }
 
 export type SarfSagheer = {
