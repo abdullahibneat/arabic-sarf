@@ -32,9 +32,11 @@ const generateFlashcards = (
 
   const flashcards: Flashcard[] = []
 
+  let index = 0
+
   const generateFlashcard = (binya: string, pronoun: string, term: string) => {
     flashcards.push({
-      key: String(flashcards.length),
+      key: `${chapter.key}/${binya}/${pronoun}/${++index}`,
       term,
       definition: {
         rootLetters: [

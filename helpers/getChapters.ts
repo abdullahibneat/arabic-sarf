@@ -133,7 +133,8 @@ const getChapters = (
 
       let romanForm = mujarrad ? 'I' : toRoman(Number(formNumber)) // II, III, IV, etc...
       let englishForm = mujarrad ? `1${String.fromCharCode(index + 97)}` : '' // 1a, 1b, 1c, etc...
-      let arabicForm = baseChapter ? baseChapter.chapter[0] : '' // ن, ض, ف, etc...
+      let arabicForm =
+        baseChapter && mujarrad ? baseChapter.chapter[0] : romanForm // ن, ض, ف, etc...
 
       if (mujarrad) {
         if (mujarradHeadings === 'english') {
@@ -208,7 +209,7 @@ const getChapters = (
       }
 
       return {
-        key: `${type}/${formNumber}`,
+        key: `${type}/${arabicForm}`,
         type,
         form,
         name: chapter?.title || 'N/A',
