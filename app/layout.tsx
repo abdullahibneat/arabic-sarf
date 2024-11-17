@@ -5,6 +5,7 @@ import '@/styles/globals.css'
 import { Modal, ModalContext } from '@/contexts/ModalContext'
 import { Noto_Sans, Noto_Sans_Arabic } from 'next/font/google'
 import { Suspense, useCallback, useState } from 'react'
+import { useParams, usePathname } from 'next/navigation'
 
 import Dialog from '@/components/Dialog'
 import GlobalSearch from '@/components/GlobalSearch'
@@ -17,7 +18,6 @@ import Sidebar from '@/components/Sidebar'
 import ThemeProvider from '@/components/ThemeProvider'
 import { fontSizeAtom } from '@/atoms'
 import { useAtom } from 'jotai'
-import { useParams } from 'next/navigation'
 
 const notoSansArabic = Noto_Sans_Arabic({
   subsets: ['arabic'],
@@ -44,6 +44,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const [fontSize] = useAtom(fontSizeAtom)
 
   const { type, chapter } = useParams()
+
+  const pathname = usePathname()
 
   /**
    * Modal helpers
@@ -107,16 +109,18 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                       {children}
                     </div>
 
-                    <SarfIsland
-                      sarfType={sarfType}
-                      verbCase={verbCase}
-                      passive={passive}
-                      rootLetters={rootLetters}
-                      setSarfType={setSarfType}
-                      setVerbCase={setVerbCase}
-                      setPassive={setPassive}
-                      setRootLetters={setRootLetters}
-                    />
+                    {!pathname.endsWith('/flashcards') && (
+                      <SarfIsland
+                        sarfType={sarfType}
+                        verbCase={verbCase}
+                        passive={passive}
+                        rootLetters={rootLetters}
+                        setSarfType={setSarfType}
+                        setVerbCase={setVerbCase}
+                        setPassive={setPassive}
+                        setRootLetters={setRootLetters}
+                      />
+                    )}
                   </main>
 
                   <Sidebar />
