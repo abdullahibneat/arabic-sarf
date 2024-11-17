@@ -112,3 +112,12 @@ dialog.close::backdrop {
     background-color: transparent;
   }
 }
+
+@keyframes card-drop {
+  0% {
+    translate: 0 -100vh;
+  }
+  100% {
+    translate: 0 0;
+  }
+}
