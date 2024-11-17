@@ -162,7 +162,7 @@ const GlobalSearch = () => {
     <Dialog
       id="global-search"
       ref={dialog}
-      className="p-12"
+      className="items-start p-12 lg:items-center"
       onCancel={handleCancel}
     >
       <div
