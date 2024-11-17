@@ -24,6 +24,9 @@ const config = {
     },
   },
   plugins: [],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 } satisfies Config
 
 export default config
