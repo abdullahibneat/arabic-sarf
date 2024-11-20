@@ -7,6 +7,7 @@ import PageTitle from '@/components/PageTitle'
 import SarfSagheer from '@/components/SarfSagheer'
 import Tasreef from '@/components/Tasreef'
 import { audios } from '@/data'
+import toArabicVerbType from '@/helpers/toArabicVerbType'
 import { useMemo } from 'react'
 import useSarf from '@/hooks/useSarf'
 import useVerbTypes from '@/hooks/useVerbTypes'
@@ -18,7 +19,7 @@ const ChapterPage = () => {
 
   const chapter = useMemo(() => {
     if (!verbType) return null
-    const chapters = verbTypes[verbType] || []
+    const chapters = verbTypes[toArabicVerbType(verbType)] || []
     return chapters.find(
       (chapter) => chapter.key === `${verbType}/${verbChapter}`,
     )

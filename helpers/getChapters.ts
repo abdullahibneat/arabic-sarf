@@ -2,6 +2,7 @@ import { AmrTasreef, RootLetter, VerbTasreef } from '@/data/types'
 
 import onlyAlphaNumeric from './onlyAlphaNumeric'
 import replaceRoots from '@/helpers/replaceRoots'
+import toEnglishVerbType from './toEnglishVerbType'
 import toRoman from '@/helpers/toRoman'
 import verbTypes from '@/data'
 
@@ -209,7 +210,7 @@ const getChapters = (
       }
 
       return {
-        key: `${type}/${arabicForm}`,
+        key: `${toEnglishVerbType(type)}/${mujarrad ? baseChapter?.transliteratedChapter : formNumber}`,
         type,
         form,
         name: chapter?.title || 'N/A',

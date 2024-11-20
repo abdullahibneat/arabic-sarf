@@ -11,6 +11,7 @@ import SarfSagheer from '@/components/SarfSagheer'
 import Table from '@/components/Table'
 import Tasreef from '@/components/Tasreef'
 import { audios } from '@/data'
+import toEnglishVerbType from '@/helpers/toEnglishVerbType'
 import useSarf from '@/hooks/useSarf'
 import useVerbTypes from '@/hooks/useVerbTypes'
 
@@ -28,7 +29,7 @@ const OverviewPage = () => {
 
     for (const [type, chapters] of Object.entries(verbTypes)) {
       // If viewing a single verb type (e.g. صحيح), only show that type
-      if (verbType && type !== verbType) continue
+      if (verbType && toEnglishVerbType(type) !== verbType) continue
 
       for (const chapter of chapters) {
         const sectionKey = `${type}-${chapter.mazeedFihi ? 'mazeed-fihi' : 'mujarrad'}`

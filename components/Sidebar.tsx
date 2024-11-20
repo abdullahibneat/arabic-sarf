@@ -6,6 +6,7 @@ import Settings from './Settings'
 import SidebarGroup from './SidebarGroup'
 import cx from 'classix'
 import posthog from 'posthog-js'
+import toEnglishVerbType from '@/helpers/toEnglishVerbType'
 import { twMerge } from 'tailwind-merge'
 import { usePathname } from 'next/navigation'
 import useVerbTypes from '@/hooks/useVerbTypes'
@@ -80,7 +81,7 @@ const Sidebar = () => {
               <SidebarGroup
                 key={type}
                 name={type}
-                href={`/${type}`}
+                href={`/${toEnglishVerbType(type)}`}
                 pathname={pathname}
                 items={chapters.map((chapter) => ({
                   href: `/${chapter.key}`,

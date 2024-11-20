@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { VerbChapter } from '@/data/types'
 import replaceRoots from '@/helpers/replaceRoots'
+import toArabicVerbType from './toArabicVerbType'
 import verbTypes from '@/data'
 
 const generateMetadataFromParams = async ({
@@ -30,9 +31,13 @@ export default generateMetadataFromParams
 
 const getChapter = (verbType?: string | null, verbChapter?: string | null) => {
   if (!verbType) return null
-  const chapters = verbTypes.get(decodeURI(verbType))
+  const chapters = verbTypes.get(toArabicVerbType(verbType))?.values()
   if (!chapters) return null
-  const chapter = chapters.get(decodeURI(verbChapter || ''))
+  const chapter = Array.from(chapters).find(
+    (chapter) =>
+      chapter?.transliteratedChapter === verbChapter ||
+      chapter?.form === Number(verbChapter),
+  )
   if (!chapter) return null
   return replaceRoots(chapter, chapter.root_letters[0].arabic)
 }
@@ -42,7 +47,7 @@ const generateTitle = (
   chapter?: VerbChapter | null,
 ) => {
   let titleSegments = ['صرف - Arabic Morphology']
-  if (verbType) titleSegments.push(decodeURI(verbType))
+  if (verbType) titleSegments.push(toArabicVerbType(verbType))
   if (chapter) titleSegments.push(chapter.title)
   return titleSegments.join(' - ').replace(' - ', ' | ')
 }
@@ -79,7 +84,7 @@ const generateDescription = (
         return `Form X (10) verbs, also known as "baab istif'aal" (باب اسْتِفْعَال), begin with the prefix "ist" (اِسْتَ) in the past tense (ماضي), like ${chapter.title}`
     }
   } else if (verbType) {
-    const verbTypeDescription = verbTypeDescriptions[decodeURI(verbType)]
+    const verbTypeDescription = verbTypeDescriptions[toArabicVerbType(verbType)]
     if (!verbTypeDescription) return fallback
     return `${verbTypeDescription.text}, like ${verbTypeDescription.example}`
   }
@@ -95,10 +100,10 @@ const generateImage = (
   if (chapter) {
     title = chapter.title
   } else if (verbType) {
-    title = decodeURI(verbType)
+    title = toArabicVerbType(verbType)
   }
   // TODO - Cusotm image generation: https://nextjs.org/docs/app/building-your-application/optimizing/metadata#dynamic-image-generation
-  return `https://og.tailgraph.com/og?title=${encodeURI(title)}&titleTailwind=text-gray-900%20font-bold%20text-6xl&titleFontFamily=Noto%20Sans%20Arabic&bgTailwind=bg-white`
+  return `https://og.tailgraph.com/og?title=${title}&titleTailwind=text-gray-900%20font-bold%20text-6xl&titleFontFamily=Noto%20Sans%20Arabic&bgTailwind=bg-white`
 }
 
 const verbTypeDescriptions: Record<

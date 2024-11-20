@@ -91,8 +91,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               >
                 <SarfContext.Provider
                   value={{
-                    verbType: !type ? null : decodeURI(String(type)),
-                    verbChapter: !chapter ? null : decodeURI(String(chapter)),
+                    verbType: !type ? null : String(type),
+                    verbChapter: !chapter ? null : String(chapter),
                     verbCase,
                     sarfType,
                     passive,

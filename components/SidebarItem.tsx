@@ -16,7 +16,7 @@ const SidebarItem = ({
   pre,
   children,
 }: SidebarItemProps) => {
-  const isActive = useMemo(() => decodeURI(pathname) === href, [pathname, href])
+  const isActive = useMemo(() => pathname === href, [pathname, href])
 
   return (
     <Link

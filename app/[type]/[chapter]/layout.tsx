@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import generateMetadataFromParams from '@/helpers/generateMetadataFromParams'
+import toEnglishVerbType from '@/helpers/toEnglishVerbType'
 import verbTypes from '@/data'
 
 export const generateMetadata = async ({
@@ -13,7 +14,9 @@ export const generateMetadata = async ({
 export const generateStaticParams = () => {
   const routes: Array<{ type: string; chapter: string }> = []
   verbTypes.forEach((chapters, type) => {
-    chapters.forEach((_, chapter) => routes.push({ type, chapter }))
+    chapters.forEach((_, chapter) =>
+      routes.push({ type: toEnglishVerbType(type), chapter }),
+    )
   })
   return routes
 }

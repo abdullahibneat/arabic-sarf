@@ -7,6 +7,7 @@ import { Chapter } from '@/helpers/getChapters'
 import Flashcard from '@/components/Flashcard'
 import PageTitle from '@/components/PageTitle'
 import generateFlashcards from '@/helpers/generateFlashcards'
+import toEnglishVerbType from '@/helpers/toEnglishVerbType'
 import useSarf from '@/hooks/useSarf'
 import useVerbTypes from '@/hooks/useVerbTypes'
 
@@ -30,7 +31,7 @@ const FlashcardsPage = () => {
 
     for (const [type, chapters] of Object.entries(verbTypes)) {
       // If viewing a single verb type (e.g. صحيح), only show that type
-      if (verbType && type !== verbType) continue
+      if (verbType && toEnglishVerbType(type) !== verbType) continue
       if (verbChapter) {
         // If viewing a single chapter (e.g. نصر), only show that chapter
         const chapter = chapters.find(
