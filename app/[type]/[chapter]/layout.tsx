@@ -14,8 +14,14 @@ export const generateMetadata = async ({
 export const generateStaticParams = () => {
   const routes: Array<{ type: string; chapter: string }> = []
   verbTypes.forEach((chapters, type) => {
-    chapters.forEach((_, chapter) =>
-      routes.push({ type: toEnglishVerbType(type), chapter }),
+    chapters.forEach((chapter) =>
+      routes.push({
+        type: toEnglishVerbType(type),
+        chapter:
+          chapter?.form === 1
+            ? String(chapter.transliteratedChapter)
+            : String(chapter?.form),
+      }),
     )
   })
   return routes
