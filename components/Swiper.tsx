@@ -84,7 +84,7 @@ type SwipeableProps<T> = {
   item: T
   zIndex: number
   renderItem: (
-    ref: React.RefObject<HTMLDivElement>,
+    ref: React.RefObject<HTMLDivElement | null>,
     item: T,
     props: {
       onPointerDown: PointerEventHandler
