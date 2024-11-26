@@ -1,3 +1,4 @@
+import toArabicVerbType from '@/helpers/toArabicVerbType'
 import { useMemo } from 'react'
 import useSarf from './useSarf'
 import useVerbTypes from './useVerbTypes'
@@ -9,7 +10,7 @@ const useRootLetters = () => {
 
   const chapter = useMemo(() => {
     if (!verbType) return null
-    const chapters = verbTypes[verbType] || []
+    const chapters = verbTypes[toArabicVerbType(verbType)] || []
     return chapters.find(
       (chapter) => chapter.key === `${verbType}/${verbChapter}`,
     )
