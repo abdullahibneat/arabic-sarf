@@ -14,7 +14,8 @@
     "incremental": true,
     "noUnusedLocals": true,
     "paths": { "@/*": ["./*"] },
-    "plugins": [{ "name": "next" }]
+    "plugins": [{ "name": "next" }],
+    "target": "ES2017"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
