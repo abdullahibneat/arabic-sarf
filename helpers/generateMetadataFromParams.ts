@@ -46,7 +46,7 @@ const generateTitle = (
   verbType?: string | null,
   chapter?: VerbChapter | null,
 ) => {
-  let titleSegments = ['صرف - Arabic Morphology']
+  const titleSegments = ['صرف - Arabic Morphology']
   if (verbType) titleSegments.push(toArabicVerbType(verbType))
   if (chapter) titleSegments.push(chapter.title)
   return titleSegments.join(' - ').replace(' - ', ' | ')

@@ -1,6 +1,6 @@
 import replace from './replace'
 
-const replaceRoots = <T extends Object>(
+const replaceRoots = <T extends object>(
   obj: T,
   rootLetters?: { ف?: string; ع?: string; ل?: string } | null,
 ): T => {

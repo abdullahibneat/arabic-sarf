@@ -1,11 +1,11 @@
-const replace = <T extends Object>(
+const replace = <T extends object>(
   obj: T,
   searchValue: string | RegExp,
   replaceValue: Record<string, string | undefined>,
 ) => {
   const ret = JSON.parse(JSON.stringify(obj)) as T
 
-  for (let $key of Object.keys(ret)) {
+  for (const $key of Object.keys(ret)) {
     const key = $key as keyof T
 
     const value = ret[key]
