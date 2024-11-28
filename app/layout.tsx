@@ -4,7 +4,7 @@ import '@/styles/globals.css'
 
 import { Modal, ModalContext } from '@/contexts/ModalContext'
 import { Noto_Sans, Noto_Sans_Arabic } from 'next/font/google'
-import { Suspense, useCallback, useState } from 'react'
+import { Suspense, useCallback, useEffect, useState } from 'react'
 import { useParams, usePathname } from 'next/navigation'
 
 import Dialog from '@/components/Dialog'
@@ -46,6 +46,25 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const { type, chapter } = useParams()
 
   const pathname = usePathname()
+
+  /**
+   * Service Worker
+   */
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('sw.js')
+        .then((registration) => {
+          console.log(
+            'Service Worker registered with scope:',
+            registration.scope,
+          )
+        })
+        .catch((error) => {
+          console.error('Service Worker registration failed:', error)
+        })
+    }
+  }, [])
 
   /**
    * Modal helpers
