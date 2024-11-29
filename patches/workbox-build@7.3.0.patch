@@ -7,7 +7,7 @@ index c142f5945f7d06c16a1c009568e15e1c10233888..718545807874518cc205a2db022c78cf
              disableDevLogs,
              importScripts,
 -            manifestEntries,
-+            manifestEntries: manifestEntries.map(({ url, revision }) => ({ url: encodeURI(url), revision })),
++            manifestEntries: manifestEntries.filter(({ url }) => url !== '404.html').map(({ url, revision }) => ({ url: encodeURI(url), revision })),
              navigateFallback,
              navigateFallbackDenylist,
              navigateFallbackAllowlist,
