@@ -51,7 +51,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
    * Service Worker
    */
   useEffect(() => {
-    if ('serviceWorker' in navigator && process.env.NODE_ENV !== 'development') {
+    if (
+      'serviceWorker' in navigator &&
+      process.env.NODE_ENV !== 'development'
+    ) {
       navigator.serviceWorker
         .register('/sw.js')
         .then((registration) => {
