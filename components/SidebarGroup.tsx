@@ -26,6 +26,7 @@ const SidebarGroup = ({ name, href, pathname, items }: SidebarGroupProps) => {
   return (
     <div onClick={open}>
       <SidebarItem
+        sticky
         href={href}
         pathname={pathname}
         pre={

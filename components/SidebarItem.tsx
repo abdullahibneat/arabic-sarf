@@ -4,6 +4,7 @@ import Link from 'next/link'
 import cx from 'classix'
 
 export type SidebarItemProps = {
+  sticky?: boolean
   href: string
   pathname?: string
   pre?: React.ReactNode
@@ -11,6 +12,7 @@ export type SidebarItemProps = {
 }
 
 const SidebarItem = ({
+  sticky,
   href,
   pathname = '',
   pre,
@@ -24,7 +26,8 @@ const SidebarItem = ({
       href={href}
       draggable={false}
       className={cx(
-        'flex h-9 select-none items-center rounded-md border border-transparent px-2 font-medium',
+        'flex h-9 select-none items-center rounded-md border border-transparent bg-zinc-50 px-2 font-medium dark:bg-neutral-800',
+        sticky && 'sticky top-0 z-10',
         isActive &&
           'border-zinc-300 bg-white dark:border-neutral-500 dark:bg-neutral-600',
         !isActive &&
