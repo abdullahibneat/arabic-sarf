@@ -6,16 +6,14 @@ import {
   showNasbAtom,
   showSarfSahegerAtom,
 } from '@/atoms'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 
-import IconButton from './IconButton'
 import RootLetters from './RootLetters'
 import { SegmentedOption } from './Segmented'
 import posthog from 'posthog-js'
 import { useAtom } from 'jotai'
 
 enum Section {
-  SIDEBAR = 'sidebar',
   VERB_CASE = 'verb-case',
   MAJHOOL = 'majhool',
   VERB = 'verb',
@@ -52,8 +50,6 @@ const SarfIsland = ({
   setPassive,
   setRootLetters,
 }: SarfIslandProps) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-
   const [showMushtaqq] = useAtom(showMushtaqqAtom)
   const [showSarfSaheger] = useAtom(showSarfSahegerAtom)
 
@@ -61,22 +57,6 @@ const SarfIsland = ({
 
   const [showJazm] = useAtom(showJazmAtom)
   const [showNasb] = useAtom(showNasbAtom)
-
-  useEffect(() => {
-    /**
-     * Global keyboard listener:
-     * - Ctrl+/: toggle sidebar
-     * - Ctrl+\: toggle sidebar
-     */
-    const keyboardListener = (e: KeyboardEvent) => {
-      if (e.key === '/' || e.key === '\\') {
-        toggleSidebar()
-        return
-      }
-    }
-    window.addEventListener('keydown', keyboardListener)
-    return () => window.removeEventListener('keydown', keyboardListener)
-  }, [])
 
   /**
    * Reset options to default when enabled settings are turned off
@@ -136,13 +116,6 @@ const SarfIsland = ({
 
     return $verbCaseOptions
   }, [showJazm, showNasb])
-
-  const toggleSidebar = useCallback(() => {
-    const sidebar = document.querySelector('aside')?.classList
-    const currentlyOpen = sidebar?.contains('open') || false
-    setSidebarOpen(!currentlyOpen)
-    sidebar?.toggle('open')
-  }, [])
 
   const handleSelectVerbCase = useCallback((option: SegmentedOption) => {
     setVerbCase?.((currentOption) =>
@@ -205,19 +178,6 @@ const SarfIsland = ({
       })
     }
 
-    $sections.push({
-      key: Section.SIDEBAR,
-      type: 'custom',
-      children: () => (
-        <IconButton
-          className="m-1"
-          name="sidebar"
-          rotate={sidebarOpen ? 0 : 180}
-          onClick={toggleSidebar}
-        />
-      ),
-    })
-
     return $sections
   }, [
     sarfTypeOptions.length,
@@ -226,7 +186,6 @@ const SarfIsland = ({
     passive,
     verbCaseOptions.length,
     verbCase,
-    sidebarOpen,
   ])
 
   return <Island sections={sections} />
