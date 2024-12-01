@@ -49,9 +49,9 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
 
   useEffect(() => {
     /**
-     * Reset root letters when changing page
+     * Reset root letters when not using locked custom root letters
      */
-    if (!persist) reset()
+    if (!isUsingCustomRootLetters || !persist) reset()
   }, [availableRootLetters])
 
   useEffect(() => {
@@ -138,7 +138,7 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
         setRootLetters?.(availableRootLetters[0] || null)
       }
     },
-    [persist, rootLetters, setRootLetters],
+    [rootLetters, setRootLetters],
   )
 
   return (
@@ -210,27 +210,23 @@ const RootLetters = ({ rootLetters, setRootLetters }: Props) => {
             ))}
           </div>
 
-          <div className="flex h-8 items-center gap-2 px-2">
-            <label
-              htmlFor="persist-root-letters"
-              className="flex-1 cursor-pointer select-none text-sm"
-            >
-              Lock
-            </label>
-            <input
-              id="persist-root-letters"
-              type="checkbox"
-              className="accent-zinc-900 dark:accent-neutral-300"
-              checked={persist}
-              onChange={(e) => enablePersist(e.target.checked)}
-            />
-          </div>
-
-          <div className="flex h-8 cursor-pointer items-center gap-2 px-2">
-            <button className="select-none text-sm underline" onClick={reset}>
-              Reset
-            </button>
-          </div>
+          {isUsingCustomRootLetters && (
+            <div className="flex h-8 items-center gap-2 px-2">
+              <label
+                htmlFor="persist-root-letters"
+                className="flex-1 cursor-pointer select-none text-sm"
+              >
+                Lock
+              </label>
+              <input
+                id="persist-root-letters"
+                type="checkbox"
+                className="accent-zinc-900 dark:accent-neutral-300"
+                checked={persist}
+                onChange={(e) => enablePersist(e.target.checked)}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>
