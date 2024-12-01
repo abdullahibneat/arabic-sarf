@@ -31,7 +31,7 @@ const notoSans = Noto_Sans({
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const [sarfType, setSarfType] = useState('صرف كبير')
-  const [verbCase, setVerbCase] = useState<string | null>(null)
+  const [verbCase, setVerbCase] = useState<string>('مرفوع')
   const [passive, setPassive] = useState(false)
   const [rootLetters, setRootLetters] = useState<{
     ف?: string

@@ -26,9 +26,7 @@ type SarfIslandProps = {
   passive?: boolean
   rootLetters?: { ف?: string; ع?: string; ل?: string } | null
   setSarfType?: (sarfType: string | ((sarfType: string) => string)) => void
-  setVerbCase?: (
-    verbCase: string | null | ((verbCase: string | null) => string | null),
-  ) => void
+  setVerbCase?: (verbCase: string | ((verbCase: string) => string)) => void
   setPassive?: (passive: boolean | ((passive: boolean) => boolean)) => void
   setRootLetters?: (
     rootLetters:
@@ -82,13 +80,13 @@ const SarfIsland = ({
 
   useEffect(() => {
     if (!showJazm && verbCase === 'مجزوم') {
-      setVerbCase?.(null)
+      setVerbCase?.('مرفوع')
     }
   }, [showJazm, verbCase, setVerbCase])
 
   useEffect(() => {
     if (!showNasb && verbCase === 'منصوب') {
-      setVerbCase?.(null)
+      setVerbCase?.('مرفوع')
     }
   }, [showNasb, verbCase, setVerbCase])
 
@@ -118,9 +116,7 @@ const SarfIsland = ({
   }, [showJazm, showNasb])
 
   const handleSelectVerbCase = useCallback((option: SegmentedOption) => {
-    setVerbCase?.((currentOption) =>
-      currentOption === option.id ? null : option.id,
-    )
+    setVerbCase?.(option.id)
     posthog.capture('Verb Case', { verbCase: option.id })
   }, [])
 
