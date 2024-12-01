@@ -151,7 +151,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                     <Dialog
                       key={modal.id}
                       id={modal.id}
-                      onCancel={() => dismissModal(modal.id)}
+                      onCancel={(e) => {
+                        e.preventDefault()
+                        dismissModal(modal.id)
+                      }}
                     >
                       {modal.content}
                     </Dialog>
