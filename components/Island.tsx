@@ -7,6 +7,8 @@ import React, {
 import Segmented, { SegmentedOption } from './Segmented'
 
 import IconButton from './IconButton'
+import cx from 'classix'
+import { twMerge } from 'tailwind-merge'
 import useBreakpoint from '@/hooks/useBreakpoint'
 
 export type IslandProps = {
@@ -153,22 +155,27 @@ const IslandSection = ({
       )}
 
       {section.type === 'toggle' && (
-        <div className="flex p-1">
+        <div
+          className={cx(
+            twMerge(
+              'm-1 flex cursor-pointer select-none gap-1 rounded-md px-2 py-1',
+              section.checked && 'bg-white dark:bg-neutral-600',
+            ),
+          )}
+          style={{ transition: 'background-color 250ms' }}
+        >
+          <label htmlFor={section.key} className="cursor-pointer">
+            {section.label}
+          </label>
+
           <input
             id={section.key}
             name={section.key}
             type="checkbox"
             checked={section.checked}
-            className="appearance-none [&:checked+label]:bg-white [&:checked+label]:dark:bg-neutral-600"
+            className="cursor-pointer accent-zinc-900 dark:accent-neutral-300"
             onChange={handleToggleChange}
           />
-          <label
-            htmlFor={section.key}
-            className="cursor-pointer select-none rounded-md px-2 py-1"
-            style={{ transition: 'background-color 250ms' }}
-          >
-            مجهول
-          </label>
         </div>
       )}
 
