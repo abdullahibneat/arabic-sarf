@@ -187,7 +187,7 @@ const Settings = () => {
   }, [])
 
   return (
-    <div className="flex flex-col gap-8 pb-4">
+    <div className="flex flex-col gap-2 p-2">
       <FieldWrapper title="Theme">
         <Segmented
           options={
