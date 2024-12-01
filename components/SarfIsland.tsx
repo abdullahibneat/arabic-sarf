@@ -125,9 +125,9 @@ const SarfIsland = ({
     posthog.capture('Sarf Type', { sarfType: option.id })
   }, [])
 
-  const handleMajhoolChange = useCallback((checked: boolean) => {
-    setPassive?.(checked)
-    posthog.capture('Majhool', { showMajhool: checked })
+  const handleMajhoolChange = useCallback((option: SegmentedOption) => {
+    setPassive?.(option.id === 'مجهول')
+    posthog.capture('Majhool', { showMajhool: option.id === 'مجهول' })
   }, [])
 
   const sections = useMemo(() => {
@@ -157,10 +157,13 @@ const SarfIsland = ({
     if (sarfType === 'صرف كبير' && showMajhool) {
       $sections.push({
         key: Section.MAJHOOL,
-        type: 'toggle',
-        label: 'مجهول',
-        checked: passive,
-        onChange: handleMajhoolChange,
+        type: 'segmented',
+        options: [
+          { id: 'مجهول', label: 'مجهول' },
+          { id: 'معروف', label: 'معروف' },
+        ],
+        selectedId: passive ? 'مجهول' : 'معروف',
+        onSelectOption: handleMajhoolChange,
       })
     }
 
