@@ -3,10 +3,13 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import IconButton from './IconButton'
 import Link from 'next/link'
+import useSettingsModal from '@/hooks/useSettingsModal'
 
 const PageHeader = () => {
   const router = useRouter()
   const pathname = usePathname()
+
+  const { openSettings } = useSettingsModal()
 
   useEffect(() => {
     /**
@@ -49,6 +52,7 @@ const PageHeader = () => {
 
       <div className="flex-1" />
 
+      <IconButton size="small" name="settings" onClick={openSettings} />
       {pathname.endsWith('/flashcards') ? (
         <IconButton size="small" name="close" onClick={goBack} />
       ) : (

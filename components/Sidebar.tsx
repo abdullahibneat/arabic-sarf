@@ -1,29 +1,13 @@
-import { useCallback, useState } from 'react'
-
-import IconButton from './IconButton'
 import Link from 'next/link'
-import Settings from './Settings'
 import SidebarGroup from './SidebarGroup'
-import cx from 'classix'
-import posthog from 'posthog-js'
 import toEnglishVerbType from '@/helpers/toEnglishVerbType'
-import { twMerge } from 'tailwind-merge'
 import { usePathname } from 'next/navigation'
 import useVerbTypes from '@/hooks/useVerbTypes'
 
 const Sidebar = () => {
-  const [showSettings, setShowSettings] = useState(false)
-
   const verbTypes = useVerbTypes()
 
   const pathname = usePathname()
-
-  const toggleSettings = useCallback(() => {
-    setShowSettings((showSettings) => {
-      if (!showSettings) posthog.capture('Open Settings')
-      return !showSettings
-    })
-  }, [])
 
   return (
     <aside
@@ -41,41 +25,9 @@ const Sidebar = () => {
             </div>
             <span className="flex-grow text-xl font-bold">صرف</span>
           </Link>
-
-          <div className="flex-1" />
-
-          <IconButton
-            className="text-zinc-300 hover:text-zinc-500 dark:text-neutral-400 dark:hover:text-neutral-200"
-            size="small"
-            name={showSettings ? 'close' : 'settings'}
-            onClick={toggleSettings}
-          />
         </div>
 
-        <div
-          className={twMerge(
-            cx(
-              'flex h-0 flex-col overflow-auto',
-              showSettings ? 'flex-grow' : 'flex-grow-0',
-            ),
-          )}
-          style={{ transition: 'flex-grow 250ms' }}
-        >
-          <div className="ml-4 mr-2 flex flex-1 flex-col gap-2 rounded-lg bg-white p-4 pb-16 dark:bg-neutral-900">
-            <h2 className="text-sm font-bold">Settings</h2>
-            <Settings />
-          </div>
-        </div>
-
-        <div
-          className={twMerge(
-            cx(
-              'flex h-0 flex-col overflow-auto',
-              showSettings ? 'flex-grow-0' : 'flex-grow',
-            ),
-          )}
-          style={{ transition: 'flex-grow 250ms' }}
-        >
+        <div className="flex h-0 flex-grow flex-col overflow-auto">
           <div className="flex flex-1 flex-col gap-2 px-4 pb-16">
             {Object.entries(verbTypes).map(([type, chapters]) => (
               <SidebarGroup
