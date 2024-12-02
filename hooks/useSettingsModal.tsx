@@ -12,7 +12,7 @@ const useSettingsModal = () => {
       content: (
         <Modal
           title="Settings"
-          style={{ maxHeight: '80%', maxWidth: 500 }}
+          className="m-4 max-h-[80%] max-w-lg"
           onClose={() => modals.dismiss('settings')}
         >
           <Settings />

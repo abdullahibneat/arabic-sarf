@@ -1,10 +1,12 @@
 import IconButton from './IconButton'
+import cx from 'classix'
+import { twMerge } from 'tailwind-merge'
 import useOnClickOutside from '@/hooks/useOnClickOutside'
 import { useRef } from 'react'
 
 export type ModalProps = {
   title: string
-  style?: React.CSSProperties
+  className?: string
   children: React.ReactNode
   closeOnClickOutside?: boolean
   onClose?: () => void
@@ -12,7 +14,7 @@ export type ModalProps = {
 
 const Modal = ({
   title,
-  style,
+  className,
   children,
   closeOnClickOutside = true,
   onClose,
@@ -26,8 +28,12 @@ const Modal = ({
   return (
     <div
       ref={modal}
-      className="flex h-full w-full flex-col rounded-lg bg-zinc-50 p-2 text-zinc-900 dark:bg-neutral-800 dark:text-neutral-100"
-      style={style}
+      className={twMerge(
+        cx(
+          'flex h-full w-full flex-col rounded-lg bg-zinc-50 p-2 text-zinc-900 dark:bg-neutral-800 dark:text-neutral-100',
+          className,
+        ),
+      )}
     >
       <div className="relative flex h-10 items-center gap-2 px-2">
         <h2 className="absolute inset-x-0 text-center">{title}</h2>
