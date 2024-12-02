@@ -30,7 +30,7 @@ const Swiper = <T extends { key: string }>({
   const batchItems = useMemo(() => {
     if (items.length <= 1) return items
 
-    const currentItem = items.at(index) ?? items[0]
+    const currentItem = items.at(index % items.length) ?? items[0]
     const currentIndex = items.indexOf(currentItem)
     const previousItem = items.at(currentIndex - 1)
 
