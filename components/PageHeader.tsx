@@ -14,11 +14,15 @@ const PageHeader = () => {
   useEffect(() => {
     /**
      * Global keyboard listener:
-     * - Ctrl+/: toggle sidebar
      * - Ctrl+\: toggle sidebar
+     * - Ctrl+S: toggle sidebar
+     * - Ctrl+B: toggle sidebar
      */
     const keyboardListener = (e: KeyboardEvent) => {
-      if (e.key === '/' || e.key === '\\') {
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        (e.key === '\\' || e.key === 's' || e.key === 'b')
+      ) {
         toggleSidebar()
         return
       }

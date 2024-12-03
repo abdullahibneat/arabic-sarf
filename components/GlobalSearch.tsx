@@ -59,13 +59,15 @@ const GlobalSearch = () => {
   useEffect(() => {
     /**
      * Global keyboard listener:
+     * - Forward slash: open global search
      * - Ctrl+K: open global search
      * - ArrowUp: select previous chapter
      * - ArrowDown: select next chapter
      * - Enter: navigate to selected chapter
      */
     const keyboardListener = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      if (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key === 'k')) {
+        e.preventDefault() // Fix for forward slash being typed in the input
         open()
         return
       }
