@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge'
 
 export type SegmentedOption<T = string> = {
   id: T
-  shortLabel?: string
+  title?: string
 } & (
   | {
       label: string
@@ -31,6 +31,7 @@ const Segmented = <T,>({
       'icon' in option ? (
         <IconButton
           key={String(option.id)}
+          title={option.title}
           className={twMerge(
             cx(
               'flex min-w-8 cursor-pointer select-none justify-center rounded-md py-1',
@@ -44,6 +45,7 @@ const Segmented = <T,>({
       ) : (
         <button
           key={String(option.id)}
+          title={option.title}
           className={twMerge(
             cx(
               'flex min-w-8 cursor-pointer select-none justify-center rounded-md py-1',

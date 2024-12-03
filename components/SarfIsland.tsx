@@ -108,9 +108,11 @@ const SarfIsland = ({
 
     const $verbCaseOptions: SegmentedOption[] = []
 
-    if (showJazm) $verbCaseOptions.push({ id: 'مجزوم', icon: 'sukoon' })
-    if (showNasb) $verbCaseOptions.push({ id: 'منصوب', icon: 'fatha' })
-    $verbCaseOptions.push({ id: 'مرفوع', icon: 'damma' })
+    if (showJazm)
+      $verbCaseOptions.push({ id: 'مجزوم', icon: 'sukoon', title: 'مجزوم' })
+    if (showNasb)
+      $verbCaseOptions.push({ id: 'منصوب', icon: 'fatha', title: 'منصوب' })
+    $verbCaseOptions.push({ id: 'مرفوع', icon: 'damma', title: 'مرفوع' })
 
     return $verbCaseOptions
   }, [showJazm, showNasb])
