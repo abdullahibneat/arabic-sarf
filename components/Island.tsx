@@ -1,5 +1,6 @@
 import React, {
   ChangeEventHandler,
+  HTMLAttributes,
   useCallback,
   useMemo,
   useState,
@@ -47,52 +48,89 @@ export type IslandSectionProps = {
 )
 
 const Island = ({ sections }: IslandProps) => {
-  const [activeSection, setActiveSection] = useState<string | null>(null)
+  const [activeSectionKey, setActiveSectionKey] = useState<string | null>(null)
+
+  const activeSection = useMemo(
+    () => sections.find((section) => section.key === activeSectionKey),
+    [sections, activeSectionKey],
+  )
 
   const md = useBreakpoint('md')
 
   return (
-    <div
-      dir="ltr" // "rtl" doesn't work well with divide-x
-      className="fixed bottom-6 left-4 right-4 z-10 flex"
-    >
-      <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-300 bg-zinc-100 shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-neutral-800">
-        <div className="flex divide-x overflow-x-auto dark:divide-neutral-500 [&>*]:shrink-0">
-          {sections.map((section) => (
-            <IslandSection
-              key={section.key}
-              section={section}
-              activeSection={activeSection}
-              setActiveSection={setActiveSection}
-              md={md}
-            />
-          ))}
+    <>
+      <IslandWrapper
+        className={!md && activeSection ? 'bottom-4 opacity-75' : undefined}
+        style={{ transition: 'bottom 250ms, opacity 250ms' }}
+      >
+        {sections.map((section) => (
+          <IslandSection
+            key={section.key}
+            section={section}
+            setActiveSection={setActiveSectionKey}
+            md={md}
+          />
+        ))}
+      </IslandWrapper>
 
-          {!md && activeSection && (
-            <div>
-              <IconButton
-                className="m-1"
-                name="close"
-                onClick={() => setActiveSection(null)}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+      {/* The following Island is only used on mobile for when a section is opened */}
+      {!md && activeSection && (
+        <IslandWrapper
+          style={{
+            animation: 'slideIn 250ms forwards',
+            transition: 'transform 250ms, opacity 250ms',
+          }}
+        >
+          <IslandSection
+            md // Force section to be open on mobile
+            key={activeSection.key}
+            section={activeSection}
+            setActiveSection={setActiveSectionKey}
+          />
+
+          <div>
+            <IconButton
+              className="m-1"
+              name="close"
+              onClick={() => setActiveSectionKey(null)}
+            />
+          </div>
+        </IslandWrapper>
+      )}
+    </>
   )
 }
 
 export default Island
 
+const IslandWrapper = ({
+  className,
+  children,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) => (
+  <div
+    {...props}
+    className={twMerge(
+      cx('fixed bottom-6 left-4 right-4 z-10 flex', className),
+    )}
+  >
+    <div className="mx-auto max-w-full rounded-md border-[1px] border-zinc-300 bg-zinc-100 shadow-xl drop-shadow-xl dark:border-neutral-500 dark:bg-neutral-800">
+      <div
+        dir="ltr" // "rtl" doesn't work well with divide-x
+        className="flex divide-x overflow-x-auto dark:divide-neutral-500 [&>*]:shrink-0"
+      >
+        {children}
+      </div>
+    </div>
+  </div>
+)
+
 const IslandSection = ({
   section,
-  activeSection,
   setActiveSection,
   md,
 }: {
   section: IslandSectionProps
-  activeSection?: string | null
   setActiveSection: (
     activeSection:
       | string
@@ -105,13 +143,11 @@ const IslandSection = ({
     if (section.type !== 'segmented') return []
     // On large screens, show all options
     if (md) return section.options
-    // On small screens, only show all options if this section is active...
-    if (activeSection === section.key) return section.options
-    // ...otherwise, only show the selected option, or the first option if none is selected
+    // On small screens, only show the selected option, or the first option if none is selected
     return section.selectedId
       ? section.options.filter((option) => option.id == section.selectedId)
       : section.options.slice(0, 1)
-  }, [section, md, activeSection])
+  }, [section, md])
 
   const handleSelectSegmentedOption = useCallback(
     (option: SegmentedOption) => {
@@ -122,14 +158,14 @@ const IslandSection = ({
       }
 
       // On large screens, select the option straight away
-      if (md || activeSection === section.key) {
+      if (md) {
         selectOption()
       } else {
         // On small screens, first set this as the active section
         setActiveSection(section.key)
       }
     },
-    [section, md, activeSection],
+    [section, md],
   )
 
   const handleToggleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
@@ -139,10 +175,6 @@ const IslandSection = ({
     },
     [section],
   )
-
-  if (!md && activeSection && activeSection !== section.key) {
-    return null
-  }
 
   return (
     <div>
